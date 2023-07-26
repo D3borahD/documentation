@@ -1,0 +1,9 @@
+@import "../../styles/colors.scss";
+
+:host{
+  width: 272px;
+  height: calc(100vh - 96px) ;
+  background-color: $light2;
+  display: block;
+  padding: 1em;
+}

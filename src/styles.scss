@@ -1,6 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @import "styles/colors";
 
+//fonts
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@300;400;700&family=Ubuntu+Mono:ital@0;1&display=swap');
+
+
+.lato {
+  font-family:'Lato', sans-serif;
+}
+
+.oswald {
+  font-family: 'Oswald', sans-serif;
+}
+
+.ubuntu {
+  font-family: 'Ubuntu Mono', monospace;
+}
+
 
 // General
 *,
@@ -28,7 +44,13 @@ router-outlet {
   margin: .5em;
 }
 
-
+.code-bloc {
+  background-color: $dark;
+  color: $light;
+  padding: .5em;
+  border-radius: 10px;
+  font-family: 'Ubuntu Mono', monospace;
+}
 
 
 // Flex
@@ -44,6 +66,10 @@ router-outlet {
 .px-1 {
   padding-left: 1em;
   padding-right: 1em;
+}
+.px-2 {
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 // Margin

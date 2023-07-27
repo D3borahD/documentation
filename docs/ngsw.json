@@ -1,0 +1,87 @@
+{
+  "configVersion": 1,
+  "timestamp": 1690467416112,
+  "index": "/documentation/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/documentation/index.html",
+        "/documentation/main.de6c8fd40c369420.js",
+        "/documentation/manifest.webmanifest",
+        "/documentation/polyfills.5ec9225fdc91c96e.js",
+        "/documentation/runtime.96982dc8a66e0589.js",
+        "/documentation/styles.0a02f88d3ac7b653.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/documentation/assets/angular.png",
+        "/documentation/assets/folder_icon.png",
+        "/documentation/assets/github.png",
+        "/documentation/assets/icons/icon-128x128.png",
+        "/documentation/assets/icons/icon-144x144.png",
+        "/documentation/assets/icons/icon-152x152.png",
+        "/documentation/assets/icons/icon-192x192.png",
+        "/documentation/assets/icons/icon-384x384.png",
+        "/documentation/assets/icons/icon-512x512.png",
+        "/documentation/assets/icons/icon-72x72.png",
+        "/documentation/assets/icons/icon-92x92.png",
+        "/documentation/assets/images/github/github-page.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/documentation/assets/angular.png": "e923f709e903342c81e01e892de91c308549fd0c",
+    "/documentation/assets/folder_icon.png": "9946b0398a2eb91e06b98ab55a57e0eb7dd9dcfc",
+    "/documentation/assets/github.png": "b270ef156f28f06f2e18afb0ad10cd24c886feb3",
+    "/documentation/assets/icons/icon-128x128.png": "5af8bf019565972a340e50b3df3f3be83dcc8eb6",
+    "/documentation/assets/icons/icon-144x144.png": "5880e5368c9249d62a8ede6890d4a23ddea0ecc9",
+    "/documentation/assets/icons/icon-152x152.png": "29f97656b858ac761546cfca0826feffece91644",
+    "/documentation/assets/icons/icon-192x192.png": "309c3ab9214d4891521b8b389fbb53e64de6e18e",
+    "/documentation/assets/icons/icon-384x384.png": "d6829fbe3954002fae43144f3214227c75f06870",
+    "/documentation/assets/icons/icon-512x512.png": "9946b0398a2eb91e06b98ab55a57e0eb7dd9dcfc",
+    "/documentation/assets/icons/icon-72x72.png": "a41c86abcd02a134d2aefac7fe8a4cf45036a918",
+    "/documentation/assets/icons/icon-92x92.png": "ea0904a17842659dbd2caf75b259994d56d1351d",
+    "/documentation/assets/images/github/github-page.png": "85747f13504920b15ec6bff6fda0050bd73a1111",
+    "/documentation/index.html": "bf1fb929e6b19426dfcce1069acf9d3f8edf08a4",
+    "/documentation/main.de6c8fd40c369420.js": "49fdb2a03b173ab49f91b01da2aa1a0e03cb6df7",
+    "/documentation/manifest.webmanifest": "24433896c7cc16f117b043a370827a7e9b519fa2",
+    "/documentation/polyfills.5ec9225fdc91c96e.js": "4dda76ca7c069fd3b33f88af626eb9869c4194bc",
+    "/documentation/runtime.96982dc8a66e0589.js": "73b9d0b29d30fad2195a7484149d8494368a5167",
+    "/documentation/styles.0a02f88d3ac7b653.css": "f2e9f6fcdafa8cf16216d913757ca5251314fb36"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

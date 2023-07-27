@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import "styles/colors";
+@import "src/styles/colors";
+
 
 //fonts
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@300;400;700&family=Ubuntu+Mono:ital@0;1&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@300;400;700&family=Roboto:wght@300;400;700&family=Ubuntu+Mono:ital@0;1&display=swap');
 
 .lato {
   font-family:'Lato', sans-serif;
@@ -16,6 +16,11 @@
 .ubuntu {
   font-family: 'Ubuntu Mono', monospace;
 }
+
+.roboto-light {
+  font-family: 'Roboto', sans-serif;
+}
+
 
 
 // General
@@ -31,11 +36,38 @@ body {
   padding: 0;
   height: 100vh;
   width: 100vw;
-  background-color: #f3f3f8;
+  background-color: $light;
+  font-family: 'Lato', sans-serif;
 }
 
 router-outlet {
   display: none;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+span {
+  font-weight: bold;
+}
+.underline {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: $dark;
+}
+a {
+  font-weight: bold;
+}
+
+app-angular,
+app-github {
+  height: calc(100vh - 96px);
+  width: 100%;
+  display: block;
+  overflow: scroll;
 }
 
 .techno-logo {
@@ -44,25 +76,35 @@ router-outlet {
   margin: .5em;
 }
 
+.change-my-color {
+  fill: green;
+}
+
 .code-bloc {
   background-color: $dark;
   color: $light;
   padding: .5em;
   border-radius: 10px;
   font-family: 'Ubuntu Mono', monospace;
+  margin: 1em 0;
+  padding: 1em 2em;
 }
 
+.definition {
+  background-color: $light2;
+  padding: 1em;
+  border-radius: 10px;
+}
 
 // Flex
 .d-flex {
   display: flex;
 }
-.text-center {
+.align-center {
   align-items: center;
 }
 
 // Padding
-
 .px-1 {
   padding-left: 1em;
   padding-right: 1em;
@@ -73,7 +115,6 @@ router-outlet {
 }
 
 // Margin
-
 .mx-1 {
   margin-left: 1em;
   margin-right: 1em;
@@ -85,9 +126,10 @@ router-outlet {
   margin-top: 1em;
 }
 
-// List
-
-li {
-  list-style: none;
+.p-sticky {
+  position: sticky;
+  top: 0;
 }
+
+
 

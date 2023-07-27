@@ -9,6 +9,7 @@ import { AngularComponent } from './components/angular/angular.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { GithubComponent } from './components/github/github.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { IntoductionComponent } from './components/angular/components/intoduction/intoduction.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     HeaderComponent,
     SidebarComponent,
     AngularComponent,
-    GithubComponent
+    GithubComponent,
+    IntoductionComponent
   ],
   imports: [
     BrowserModule,

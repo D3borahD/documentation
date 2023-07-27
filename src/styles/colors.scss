@@ -6,6 +6,25 @@ $light: #f3f3f8;
 
 $comment-code: #90909b;
 
+// Angular
+$red: #de1e12;
+$yellow: #fcbf2e;
+
+
 .comment-code {
   color: $comment-code;
+}
+
+.bg-light {
+  background-color: $light;
+}
+
+.angular-gradient {
+  background: -webkit-linear-gradient(90deg, $yellow 0%, $red 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.angular-red {
+  color: $red;
 }

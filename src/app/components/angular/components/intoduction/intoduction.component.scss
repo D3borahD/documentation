@@ -1,0 +1,12 @@
+@import "src/styles/colors.scss";
+
+:host{
+  display: block;
+  margin: 0 4em;
+}
+
+a:hover {
+  background: -webkit-linear-gradient(90deg, $yellow 0%, $red 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

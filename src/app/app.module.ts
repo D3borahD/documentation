@@ -9,7 +9,9 @@ import { AngularComponent } from './components/angular/angular.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { GithubComponent } from './components/github/github.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { IntoductionComponent } from './components/angular/components/intoduction/intoduction.component';
+import { AngularIntroductionComponent } from './components/angular/components/angular-introduction/angular-introduction.component';
+import { ComponentComponent } from './components/angular/components/component/component.component';
+import { AngularExercicesComponent } from './components/angular/components/angular-exercices/angular-exercices.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { IntoductionComponent } from './components/angular/components/intoductio
     SidebarComponent,
     AngularComponent,
     GithubComponent,
-    IntoductionComponent
+    AngularIntroductionComponent,
+    ComponentComponent,
+    AngularExercicesComponent
   ],
   imports: [
     BrowserModule,

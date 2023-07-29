@@ -1,0 +1,84 @@
+<h2 class="angular-gradient-text">Introduction</h2>
+
+<p>Angular est un <span class="angular-red">framework</span> JavaScript qui permet de développer des <span class="angular-red">SPA</span> (Single Page Application).</p>
+<div class="definition">
+  <span class="underline"><i class="fa-solid fa-circle-info angular-gradient-text"></i> Définitions :</span>
+  <p><span class="angular-red">SPA :</span> application qui tournent dans <span class="angular-red" >une seule page HTML</span> grâce au Javascript.</p>
+  <p><span class="angular-red">Framework :</span> ensemble d'outils et de composants à partir desquels on peut développer des applications.</p>
+</div>
+
+<p>Angular passe par <span class="angular-red">3 langages</span> principaux :</p>
+<ul>
+  <li>HTML</li>
+  <li>SCSS</li>
+  <li>TypeScript : permet un typage strict</li>
+</ul>
+
+<p>Les avantages d'Angular :</p>
+<ul>
+  <li><span class="angular-red">Framework</span>  complet (pas besoin de librairie supplémentaire</li>
+  <li>Permet de mettre en place les <span class="angular-red">bonnes pratiques</span></li>
+  <li>Conçu pour fonctionner avec <span class="angular-red">TypeScript</span></li>
+</ul>
+
+<h3 class="angular-gradient-text">Les dépendances</h3>
+<ul>
+  <li><a href="https://nodejs.org/fr">Node</a> </li>
+  <li>Npm</li>
+</ul>
+
+<div class="definition">
+  <span class="underline"><i class="fa-solid fa-circle-info angular-gradient-text"></i> Définitions :  </span>
+  <p> <span class="angular-red">LTS</span> (Long Term Support) : une version stable spécifique qui bénéficiera de support pendant plus longtemps qu'une version standard.</p>
+</div>
+
+<h3 class="angular-gradient-text">Installer le CLI</h3>
+
+<div class="definition">
+ <p><i class="fa-solid fa-circle-info angular-gradient-text"></i> <span class="angular-red"> CLI : </span>Command Line Interface</p>
+  <p>⚠️ Sous MAC : possible erreur de gestion de droits. <a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally">DOC</a></p>
+</div>
+<pre class="code-bloc">
+  <code>
+    <span class="comment-code">// install le CLI de manière générale</span>
+    npm i -g @angular/cli
+
+    <span class="comment-code">// version</span>
+    ng v
+
+    <span class="angular-gradient-text">=> ng correspond au CLI d'Angular</span>
+  </code>
+</pre>
+
+<h3 class="angular-gradient-text">Nouvelle application</h3>
+
+<pre class="code-bloc">
+  <code>
+    <span class="comment-code">// install le projet dans le <i class="fa-solid fa-folder-open angular-gradient-text"></i> dossier dans lequel on se trouve</span>
+    ng new mon-projet --directory ./
+
+    <span class="comment-code">// install le projet et crée un nouveau <i class="fa-solid fa-folder-open angular-gradient-text"></i> dossier avec le nom du projet</span>
+    ng new mon-projet  --style=scss --skip-tests=true
+
+    <span class="angular-gradient-text"><i class="fa-solid fa-flag"></i> flag : --style</span>
+
+    <span class="comment-code">// lancer le serveur de développement</span>
+    ng serve --o
+
+    <span class="comment-code">// l'application s'ouvre à l'adresse : </span>
+    localhost:4200
+
+    <span class="angular-gradient-text"><i class="fa-solid fa-flag"></i> --o</span> permet d'ouvrir l'application dans le navigateur
+  </code>
+ <!-- <p> app-root = app-component</p>-->
+</pre>
+
+<div class="text-center" >
+  <i class="fa-solid fa-circle-arrow-left angular-gradient-text fs-1_5 mx-1"></i>
+  <i class="fa-solid fa-circle-arrow-right angular-gradient-text fs-1_5 mx-1"></i>
+</div>
+
+
+
+
+

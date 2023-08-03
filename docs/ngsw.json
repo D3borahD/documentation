@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1690620609704,
+  "timestamp": 1691051479764,
   "index": "/documentation/index.html",
   "assetGroups": [
     {
@@ -12,11 +12,11 @@
       },
       "urls": [
         "/documentation/index.html",
-        "/documentation/main.9442a5068b8485fc.js",
+        "/documentation/main.edb58d4b3dfbe974.js",
         "/documentation/manifest.webmanifest",
         "/documentation/polyfills.5ec9225fdc91c96e.js",
         "/documentation/runtime.96982dc8a66e0589.js",
-        "/documentation/styles.2931c4e6f5956640.css"
+        "/documentation/styles.5850705e30742843.css"
       ],
       "patterns": []
     },
@@ -39,6 +39,7 @@
         "/documentation/assets/icons/icon-512x512.png",
         "/documentation/assets/icons/icon-72x72.png",
         "/documentation/assets/icons/icon-92x92.png",
+        "/documentation/assets/images/chatbot.png",
         "/documentation/assets/images/github/github-page.png"
       ],
       "patterns": []
@@ -57,13 +58,14 @@
     "/documentation/assets/icons/icon-512x512.png": "9946b0398a2eb91e06b98ab55a57e0eb7dd9dcfc",
     "/documentation/assets/icons/icon-72x72.png": "a41c86abcd02a134d2aefac7fe8a4cf45036a918",
     "/documentation/assets/icons/icon-92x92.png": "ea0904a17842659dbd2caf75b259994d56d1351d",
+    "/documentation/assets/images/chatbot.png": "f18356534fc792cb77e37da578daa2cb0ff4f9e8",
     "/documentation/assets/images/github/github-page.png": "85747f13504920b15ec6bff6fda0050bd73a1111",
-    "/documentation/index.html": "4b2a05b8ae1f0da8e050e7de3fa3b665e08a7c9e",
-    "/documentation/main.9442a5068b8485fc.js": "651d9de2fd8a6ab3ca58581a9af1e81146a23cc1",
+    "/documentation/index.html": "af6bd58f48a8ab4a47df29d7a9d1f6421c99c20e",
+    "/documentation/main.edb58d4b3dfbe974.js": "7420244b17bb6af8dbaf30200de69502034dfdd1",
     "/documentation/manifest.webmanifest": "24433896c7cc16f117b043a370827a7e9b519fa2",
     "/documentation/polyfills.5ec9225fdc91c96e.js": "4dda76ca7c069fd3b33f88af626eb9869c4194bc",
     "/documentation/runtime.96982dc8a66e0589.js": "73b9d0b29d30fad2195a7484149d8494368a5167",
-    "/documentation/styles.2931c4e6f5956640.css": "3e47544c70a6f6535273cf87fc372ee523d4cda2"
+    "/documentation/styles.5850705e30742843.css": "8f85f93439bd5bed9352dc298c1d7bd26ad9f26f"
   },
   "navigationUrls": [
     {

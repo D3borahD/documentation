@@ -8,17 +8,23 @@
 .lato {
   font-family:'Lato', sans-serif;
 }
-
 .oswald {
   font-family: 'Oswald', sans-serif;
 }
-
 .ubuntu {
   font-family: 'Ubuntu Mono', monospace;
 }
-
 .roboto-light {
   font-family: 'Roboto', sans-serif;
+}
+
+// Font size
+.fs-1_5 {
+  font-size: 1.5em;
+}
+
+.text-center {
+  text-align: center;
 }
 
 
@@ -62,6 +68,7 @@ a {
   font-weight: bold;
 }
 
+// Theme
 app-angular,
 app-github {
   height: calc(100vh - 96px);
@@ -70,24 +77,39 @@ app-github {
   overflow: scroll;
 }
 
+//
+app-intoduction,
+app-component,
+app-angular-exercices {
+  display: block;
+  margin: 0 4em;
+}
+
 .techno-logo {
   height: 52px;
   width: 52px;
   margin: .5em;
 }
 
-.change-my-color {
-  fill: green;
+.bot {
+  width: 60px;
+  border-radius: 50px;
+  position: absolute;
+  right: 20px;
+}
+
+
+
+code {
+  line-height: 1.5em;
 }
 
 .code-bloc {
   background-color: $dark;
   color: $light;
-  padding: .5em;
   border-radius: 10px;
   font-family: 'Ubuntu Mono', monospace;
-  margin: 1em 0;
-  padding: 1em 2em;
+  overflow-x: auto;
 }
 
 .definition {
@@ -115,6 +137,7 @@ app-github {
 }
 
 // Margin
+
 .mx-1 {
   margin-left: 1em;
   margin-right: 1em;

@@ -9,8 +9,8 @@
 <p>Pour initialiser les propriétés en suivant les "best practices Angular", on utilise la méthode <span class="angular-gradient-text">ngOnInit()</span>.</p>
 <p>Pour l'utiliser, il faut implémenter l'<span class="angular-gradient-text">interface OnInit</span></p>
 
-  <pre class="code-bloc">
-    <code>
+  <pre>
+    <code class="language-typescript">
       import <span>&lbrace;</span> Component, OnInit} from '@angular/core';
 
       @Component(<span>&lbrace;</span>
@@ -20,10 +20,10 @@
       })
       export class PostComponent implements OnInit <span>&lbrace;</span>
 
-        <span class="comment-code">//Propriétés
+        //Propriétés
         // on crée un attribut de class en associant le nom de l'attribut à son type
         // ! => bang : non-null assertion operator = signify que l'opérande est non nul et non indéfini
-        //l'opération x! produit une valeur du type de x avec null et undefined exclus</span>
+        //l'opération x! produit une valeur du type de x avec null et undefined exclus
         public title!: string;
         public description!:string;
         public createdDate!: Date;
@@ -46,8 +46,8 @@
 </div>
 
 <h3 class="angular-gradient-text">Afficher des valeurs avec l'interpolation</h3>
-<pre class="code-bloc">
-  <code>
+<pre>
+  <code class="language-html">
     <span>{{</span> title }}
     <span><</span>img src ="<span>{{</span> imageUrl }}" alt="<span>{{</span> title }}">
   </code>
@@ -56,8 +56,8 @@
 <h3 class="angular-gradient-text">Afficher des valeurs avec la liaison par attribut (attribut binding)</h3>
 <p>Préférable si la propriété n'est pas un string (number)</p>
 
-<pre class="code-bloc">
-  <code>
+<pre>
+  <code class="">
     <span><</span>img [src]="imageUrl" [alt]="title">
   </code>
 </pre>

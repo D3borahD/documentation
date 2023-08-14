@@ -6,7 +6,7 @@
 <p>Un composant est réutilisable.</p>
 
 <h3 class="angular-gradient-text">Créer un composant</h3>
-<pre class="code-bloc">
+<pre>
   <code>
     ng generate component mon-composant
 
@@ -22,9 +22,9 @@
   <li>spec : <i class="fa-solid fa-file angular-gradient-text"></i> fichier de test</li>
 </ul>
 
-<pre class="code-bloc">
-  <code>
-    <span class="comment-code">// TS</span>
+<pre>
+  <code class="language-typescript">
+  // TS
     import <span>&lbrace;</span> Component } from '@angular/core';
 
     @Component(<span>&lbrace;</span>
@@ -37,7 +37,7 @@
       title = 'Mon post'
     }
 
-    <span class="comment-code">// HTML</span>
+    // HTML
     <span>&lbrace;</span><span>&lbrace;</span> title }}
   </code>
 </pre>
@@ -53,22 +53,19 @@
   <p>Lorsque l'on déclare un <span class="angular-gradient-text">attribut de classe</span> il n'est pas précédé de <span class="angular-gradient-text">let, const, ...</span></p>
 </div>
 
-
-
-
 <p>Pour être utilisé, un composant doit être déclaré dans <i class="fa-solid fa-file angular-gradient-text"></i> app.module.ts</p>
 <p><span class="angular-gradient-text">app-module.ts</span> est le module principal de l'application.</p>
 
 
-<pre class="code-bloc">
-  <code>
+<pre>
+  <code class="language-typescript">
     import <span>&lbrace;</span> NgModule } from '@angular/core';
     import <span>&lbrace;</span> BrowserModule } from '@angular/platform-browser';
 
     import <span>&lbrace;</span> AppComponent } from './app.component';
     import <span>&lbrace;</span> PostComponent } from './post/post.component';
 
-  @NgModule(<span>&lbrace;</span>
+    @NgModule(<span>&lbrace;</span>
       declarations: [
         AppComponent,
         <span class="angular-gradient-text">MonComponent,</span>
@@ -78,8 +75,8 @@
       ],
       providers: [],
       bootstrap: [AppComponent]
-  })
-  export class AppModule <span>&lbrace;</span> }
+    })
+    export class AppModule <span>&lbrace;</span> }
   </code>
 </pre>
 

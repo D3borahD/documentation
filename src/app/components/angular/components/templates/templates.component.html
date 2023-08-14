@@ -9,35 +9,36 @@
 <p>Pour initialiser les propriétés en suivant les "best practices Angular", on utilise la méthode <span class="angular-gradient-text">ngOnInit()</span>.</p>
 <p>Pour l'utiliser, il faut implémenter l'<span class="angular-gradient-text">interface OnInit</span></p>
 
-  <pre>
-    <code class="language-typescript">
-      import <span>&lbrace;</span> Component, OnInit} from '@angular/core';
+<pre>
+  <span class="label">TypeScript</span>
+  <code class="language-typescript">
+    import <span>&lbrace;</span> Component, OnInit} from '@angular/core';
 
-      @Component(<span>&lbrace;</span>
+    @Component(<span>&lbrace;</span>
         selector: 'app-post',
         templateUrl: './post.component.html',
         styleUrls: ['./post.component.scss']
-      })
-      export class PostComponent implements OnInit <span>&lbrace;</span>
+    })
+    export class PostComponent implements OnInit <span>&lbrace;</span>
 
-        //Propriétés
-        // on crée un attribut de class en associant le nom de l'attribut à son type
-        // ! => bang : non-null assertion operator = signify que l'opérande est non nul et non indéfini
-        //l'opération x! produit une valeur du type de x avec null et undefined exclus
-        public title!: string;
-        public description!:string;
-        public createdDate!: Date;
-        public like!: number;
+      // Propriétés
+      // On crée un attribut de class en associant le nom de l'attribut à son type
+      // ! => bang : non-null assertion operator = signify que l'opérande est non nul et non indéfini
+      // L'opération x! produit une valeur du type de x avec null et undefined exclus
+      public title!: string;
+      public description!:string;
+      public createdDate!: Date;
+      public like!: number;
 
-        ngOnInit() <span>&lbrace;</span>
-          this.title = 'Chippie';
-          this.description = 'encore en train de dormir ...';
-          this.createdDate = new Date();
-          this.like = 6;
-        }
+      ngOnInit() <span>&lbrace;</span>
+        this.title = 'Chippie';
+        this.description = 'encore en train de dormir ...';
+        this.createdDate = new Date();
+        this.like = 6;
       }
+    }
     </code>
-  </pre>
+</pre>
 
 <div class="definition">
   <i class="fa-solid fa-circle-info angular-gradient-text"></i>
@@ -47,6 +48,7 @@
 
 <h3 class="angular-gradient-text">Afficher des valeurs avec l'interpolation</h3>
 <pre>
+  <span class="label">HTML</span>
   <code class="language-html">
     <span>{{</span> title }}
     <span><</span>img src ="<span>{{</span> imageUrl }}" alt="<span>{{</span> title }}">
@@ -57,7 +59,8 @@
 <p>Préférable si la propriété n'est pas un string (number)</p>
 
 <pre>
-  <code class="">
+  <span class="label">HTML</span>
+  <code class="language-html">
     <span><</span>img [src]="imageUrl" [alt]="title">
   </code>
 </pre>

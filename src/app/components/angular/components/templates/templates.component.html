@@ -14,11 +14,11 @@
       import <span>&lbrace;</span> Component, OnInit} from '@angular/core';
 
       @Component(<span>&lbrace;</span>
-        selector: 'app-face-snap',
-        templateUrl: './face-snap.component.html',
-        styleUrls: ['./face-snap.component.scss']
+        selector: 'app-post',
+        templateUrl: './post.component.html',
+        styleUrls: ['./post.component.scss']
       })
-      export class FaceSnapComponent implements OnInit <span>&lbrace;</span>
+      export class PostComponent implements OnInit <span>&lbrace;</span>
 
         <span class="comment-code">//Propriétés
         // on crée un attribut de class en associant le nom de l'attribut à son type
@@ -27,13 +27,13 @@
         public title!: string;
         public description!:string;
         public createdDate!: Date;
-        public snaps!: number;
+        public like!: number;
 
         ngOnInit() <span>&lbrace;</span>
           this.title = 'Chippie';
           this.description = 'encore en train de dormir ...';
           this.createdDate = new Date();
-          this.snaps = 6;
+          this.like = 6;
         }
       }
     </code>
@@ -63,3 +63,11 @@
 </pre>
 
 <h3 class="angular-gradient-text">Réagir aux évènement (Template statements)</h3>
+
+<p>Ajouter une <span class="angular-gradient-text">méthode</span> :</p>
+
+
+<div class="definition mt-1">
+  <i class="fa-solid fa-circle-info angular-gradient-text"></i>
+  <p>Le nom de la méthode qui commence par <span class="angular-gradient-text">on</span> signale qu'elle répond à un <span class="angular-gradient-text">évènement</span></p>
+</div>

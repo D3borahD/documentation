@@ -13,6 +13,8 @@ import { AngularIntroductionComponent } from './components/angular/components/an
 import { ComponentComponent } from './components/angular/components/component/component.component';
 import { AngularExercicesComponent } from './components/angular/components/angular-exercices/angular-exercices.component';
 import {TemplatesComponent} from "./components/angular/components/templates/templates.component";
+import { AlgorithmsComponent } from './components/algorithms/algorithms.component';
+import { Chap1Component } from './components/algorithms/chap1/chap1.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import {TemplatesComponent} from "./components/angular/components/templates/temp
     AngularIntroductionComponent,
     ComponentComponent,
     AngularExercicesComponent,
-    TemplatesComponent
+    TemplatesComponent,
+    AlgorithmsComponent,
+    Chap1Component
   ],
   imports: [
     BrowserModule,

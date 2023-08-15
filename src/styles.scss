@@ -72,18 +72,21 @@ a {
 
 // Theme
 app-angular,
-app-github {
+app-github,
+app-algorithms{
   height: calc(100vh - 96px);
   width: 100%;
   display: block;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 // Component
 app-intoduction,
 app-component,
 app-angular-exercices,
-app-templates{
+app-templates,
+app-chap1,
+{
   display: block;
   margin: 0 4em;
 }
@@ -93,6 +96,17 @@ app-templates{
   height: 52px;
   width: 52px;
   margin: .5em;
+}
+
+.algo_icon {
+  position: relative;
+  border-radius: 50%;
+  img {
+    position: absolute;
+    top:5px;
+    left:5px;
+    width: 80%;
+  }
 }
 
 .bot {
@@ -113,7 +127,7 @@ pre {
 }
 .label {
   position: absolute;
-  color: lightgray;
+  color: $light2;
   right: 25px;
   top: 45px;
   font-size: 11px;

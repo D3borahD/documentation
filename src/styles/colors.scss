@@ -1,35 +1,25 @@
 // Color
 $dark: #010115;
-
 $light2: #e8e8f4;
 $light: #f3f3f8;
 
-$comment-code: #90909b;
-
-// Angular
 $red: #de1e12;
 $yellow: #fcbf2e;
+
 $purple: #BF25FFFF;
 $blue: #2069FFFF;
-
-
-
-.comment-code {
-  color: $comment-code;
-}
+$green: #25FF6FFF;
 
 .bg-light {
   background-color: $light;
 }
 
-// g-red-orange-text
 .angular-gradient-text {
   background: -webkit-linear-gradient(90deg, $yellow 0%, $red 60%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-// g-red-orange
 .angular-gradient {
   background-image: linear-gradient(90deg, $yellow 0%, $red 60%);
 }
@@ -38,9 +28,21 @@ $blue: #2069FFFF;
 .angular-red {
   color: $red;
 }
+.blue {
+  color: $blue;
+}
 
 // g-purple-blue
 .github-color {
  /* background: linear-gradient(0deg, rgba(46,252,108,1) 0%, rgba(18,94,222,1) 80%);*/
   background: linear-gradient(0deg, $purple 0%, $blue 90%);
+}
+
+.algo-gradient  {
+  background-image: linear-gradient(0deg, $green 0%, $blue 90%);
+}
+.algo-gradient-text {
+  background: -webkit-linear-gradient(90deg, $green 0%, $blue 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

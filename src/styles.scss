@@ -124,7 +124,9 @@ code {
 }
 pre {
   position: relative;
+  margin: 0;
 }
+
 .label {
   position: absolute;
   color: $light2;
@@ -132,6 +134,27 @@ pre {
   top: 45px;
   font-size: 11px;
 }
+.file-name {
+  position: absolute;
+  color: $light2;
+  left: 25px;
+  top: 15px;
+  font-size: 11px;
+  z-index: 0;
+}
+.file-name:before {
+  content: '';
+  height:40px;
+  width: 200px;
+  background-color: #002451;
+  border-radius: 10px 10px 0 0 ;
+  position: absolute;
+  top: -15px;
+  left: -25px;
+  z-index: -1;
+}
+
+
 
 .definition {
   background-color: $light2;

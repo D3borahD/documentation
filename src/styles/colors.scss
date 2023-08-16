@@ -13,6 +13,12 @@ $green: #25FF6FFF;
 .bg-light {
   background-color: $light;
 }
+.bg-dark {
+  background-color: $dark;
+}
+.light {
+  color: $light
+}
 
 .angular-gradient-text {
   background: -webkit-linear-gradient(90deg, $yellow 0%, $red 60%);

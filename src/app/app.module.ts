@@ -12,6 +12,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularIntroductionComponent } from './components/angular/components/angular-introduction/angular-introduction.component';
 import { ComponentComponent } from './components/angular/components/component/component.component';
 import { AngularExercicesComponent } from './components/angular/components/angular-exercices/angular-exercices.component';
+import {TemplatesComponent} from "./components/angular/components/templates/templates.component";
+import { AlgorithmsComponent } from './components/algorithms/algorithms.component';
+import { Chap1Component } from './components/algorithms/chap1/chap1.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { AngularExercicesComponent } from './components/angular/components/angul
     GithubComponent,
     AngularIntroductionComponent,
     ComponentComponent,
-    AngularExercicesComponent
+    AngularExercicesComponent,
+    TemplatesComponent,
+    AlgorithmsComponent,
+    Chap1Component
   ],
   imports: [
     BrowserModule,

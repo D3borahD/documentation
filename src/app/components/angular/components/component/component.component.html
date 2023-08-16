@@ -6,7 +6,8 @@
 <p>Un composant est réutilisable.</p>
 
 <h3 class="angular-gradient-text">Créer un composant</h3>
-<pre class="code-bloc">
+<pre>
+  <span class="label">Bash</span>
   <code>
     ng generate component mon-composant
 
@@ -22,23 +23,23 @@
   <li>spec : <i class="fa-solid fa-file angular-gradient-text"></i> fichier de test</li>
 </ul>
 
-<pre class="code-bloc">
-  <code>
-    <span class="comment-code">// TS</span>
-    import <span>&lbrace;</span> Component } from '@angular/core';
+<pre>
+  <span class="label">TypeScript</span>
+  <code class="language-typescript">
+    import &#123; Component } from '@angular/core';
 
-    @Component(<span>&lbrace;</span>
+    @Component(&#123;
       selector: 'app-component',
       templateUrl: './component.component.html',
       styleUrls: ['./component.component.scss']
     })
 
-    export class AngularIntroductionComponent &lbrace;
+    export class AngularIntroductionComponent &#123;
       title = 'Mon post'
     }
 
-    <span class="comment-code">// HTML</span>
-    <span>&lbrace;</span><span>&lbrace;</span> title }}
+    // HTML
+    &#123;<span>&#123;</span> title }}
   </code>
 </pre>
 <div class="definition">
@@ -53,32 +54,31 @@
   <p>Lorsque l'on déclare un <span class="angular-gradient-text">attribut de classe</span> il n'est pas précédé de <span class="angular-gradient-text">let, const, ...</span></p>
 </div>
 
-
-
-
 <p>Pour être utilisé, un composant doit être déclaré dans <i class="fa-solid fa-file angular-gradient-text"></i> app.module.ts</p>
 <p><span class="angular-gradient-text">app-module.ts</span> est le module principal de l'application.</p>
 
-<pre class="code-bloc">
-  <code>
-    import <span>&lbrace;</span> NgModule } from '@angular/core';
-    import <span>&lbrace;</span> BrowserModule } from '@angular/platform-browser';
 
-    import <span>&lbrace;</span> AppComponent } from './app.component';
-    import <span>&lbrace;</span> FaceSnapComponent } from './face-snap/face-snap.component';
+<pre>
+  <span class="label">TypeScript</span>
+  <code class="language-typescript">
+    import &#123; NgModule } from '@angular/core';
+    import &#123; BrowserModule } from '@angular/platform-browser';
 
-  @NgModule(<span>&lbrace;</span>
+    import &#123; AppComponent } from './app.component';
+    import &#123; PostComponent } from './post/post.component';
+
+    @NgModule(&#123;
       declarations: [
         AppComponent,
-        <span class="angular-gradient-text">MonComponent,</span>
+        MonComponent,
       ],
       imports: [
         BrowserModule
       ],
       providers: [],
       bootstrap: [AppComponent]
-  })
-  export class AppModule <span>&lbrace;</span> }
+    })
+    export class AppModule &#123; }
   </code>
 </pre>
 

@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "src/styles/colors";
 
-
 //fonts
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@300;400;700&family=Roboto:wght@300;400;700&family=Ubuntu+Mono:ital@0;1&display=swap');
 
@@ -27,7 +26,10 @@
   text-align: center;
 }
 
-
+// position
+.z-index-1{
+  z-index: 1;
+}
 
 // General
 *,
@@ -70,25 +72,41 @@ a {
 
 // Theme
 app-angular,
-app-github {
+app-github,
+app-algorithms{
   height: calc(100vh - 96px);
   width: 100%;
   display: block;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
-//
+// Component
 app-intoduction,
 app-component,
-app-angular-exercices {
+app-angular-exercices,
+app-templates,
+app-chap1,
+{
   display: block;
   margin: 0 4em;
 }
 
+// Elements
 .techno-logo {
   height: 52px;
   width: 52px;
   margin: .5em;
+}
+
+.algo_icon {
+  position: relative;
+  border-radius: 50%;
+  img {
+    position: absolute;
+    top:5px;
+    left:5px;
+    width: 80%;
+  }
 }
 
 .bot {
@@ -96,21 +114,47 @@ app-angular-exercices {
   border-radius: 50px;
   position: absolute;
   right: 20px;
+  z-index: 1;
 }
-
-
 
 code {
   line-height: 1.5em;
+  border-radius: 10px;
+  white-space: pre-wrap;
+}
+pre {
+  position: relative;
+  margin: 0;
 }
 
-.code-bloc {
-  background-color: $dark;
-  color: $light;
-  border-radius: 10px;
-  font-family: 'Ubuntu Mono', monospace;
-  overflow-x: auto;
+.label {
+  position: absolute;
+  color: $light2;
+  right: 25px;
+  top: 45px;
+  font-size: 11px;
 }
+.file-name {
+  position: absolute;
+  color: $light2;
+  left: 25px;
+  top: 15px;
+  font-size: 11px;
+  z-index: 0;
+}
+.file-name:before {
+  content: '';
+  height:40px;
+  width: 200px;
+  background-color: #002451;
+  border-radius: 10px 10px 0 0 ;
+  position: absolute;
+  top: -15px;
+  left: -25px;
+  z-index: -1;
+}
+
+
 
 .definition {
   background-color: $light2;
@@ -137,7 +181,6 @@ code {
 }
 
 // Margin
-
 .mx-1 {
   margin-left: 1em;
   margin-right: 1em;

@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1691051479764,
+  "timestamp": 1692202883697,
   "index": "/documentation/index.html",
   "assetGroups": [
     {
@@ -12,11 +12,11 @@
       },
       "urls": [
         "/documentation/index.html",
-        "/documentation/main.edb58d4b3dfbe974.js",
+        "/documentation/main.639a959ef143947f.js",
         "/documentation/manifest.webmanifest",
         "/documentation/polyfills.5ec9225fdc91c96e.js",
         "/documentation/runtime.96982dc8a66e0589.js",
-        "/documentation/styles.5850705e30742843.css"
+        "/documentation/styles.263244f82343f4af.css"
       ],
       "patterns": []
     },
@@ -39,6 +39,9 @@
         "/documentation/assets/icons/icon-512x512.png",
         "/documentation/assets/icons/icon-72x72.png",
         "/documentation/assets/icons/icon-92x92.png",
+        "/documentation/assets/images/algorithms_icon.png",
+        "/documentation/assets/images/algorithms_icon2.png",
+        "/documentation/assets/images/algorithms_icon3.png",
         "/documentation/assets/images/chatbot.png",
         "/documentation/assets/images/github/github-page.png"
       ],
@@ -58,14 +61,17 @@
     "/documentation/assets/icons/icon-512x512.png": "9946b0398a2eb91e06b98ab55a57e0eb7dd9dcfc",
     "/documentation/assets/icons/icon-72x72.png": "a41c86abcd02a134d2aefac7fe8a4cf45036a918",
     "/documentation/assets/icons/icon-92x92.png": "ea0904a17842659dbd2caf75b259994d56d1351d",
+    "/documentation/assets/images/algorithms_icon.png": "eb4024b403031f78c06e1861ff5d3c2c16e4ff7d",
+    "/documentation/assets/images/algorithms_icon2.png": "c263a2430e7dfd49cb57e88322f597fa72141a1e",
+    "/documentation/assets/images/algorithms_icon3.png": "b0086fd3c3c8aea1dac87fd8e0c0e68ec58039a5",
     "/documentation/assets/images/chatbot.png": "f18356534fc792cb77e37da578daa2cb0ff4f9e8",
     "/documentation/assets/images/github/github-page.png": "85747f13504920b15ec6bff6fda0050bd73a1111",
-    "/documentation/index.html": "af6bd58f48a8ab4a47df29d7a9d1f6421c99c20e",
-    "/documentation/main.edb58d4b3dfbe974.js": "7420244b17bb6af8dbaf30200de69502034dfdd1",
+    "/documentation/index.html": "5be3532ae567f0ffd9e8b0880c96fc1cf06b576d",
+    "/documentation/main.639a959ef143947f.js": "ef7f3c3d7cd0e58d936c00d0ea8f0bb4ecede7dd",
     "/documentation/manifest.webmanifest": "24433896c7cc16f117b043a370827a7e9b519fa2",
     "/documentation/polyfills.5ec9225fdc91c96e.js": "4dda76ca7c069fd3b33f88af626eb9869c4194bc",
     "/documentation/runtime.96982dc8a66e0589.js": "73b9d0b29d30fad2195a7484149d8494368a5167",
-    "/documentation/styles.5850705e30742843.css": "8f85f93439bd5bed9352dc298c1d7bd26ad9f26f"
+    "/documentation/styles.263244f82343f4af.css": "03445bff01d11013410aa46c4fa75931b6ca0c8f"
   },
   "navigationUrls": [
     {

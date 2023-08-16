@@ -38,39 +38,45 @@
  <p><i class="fa-solid fa-circle-info angular-gradient-text"></i> <span class="angular-red"> CLI : </span>Command Line Interface</p>
   <p>⚠️ Sous MAC : possible erreur de gestion de droits. <a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally">DOC</a></p>
 </div>
-<pre class="code-bloc">
-  <code>
-    <span class="comment-code">// install le CLI de manière générale</span>
+
+<div >
+
+
+
+<pre>
+ <span class="label">Bash</span>
+  <code class="langage-bash">
+    // install le CLI de manière générale
     npm i -g @angular/cli
 
-    <span class="comment-code">// version</span>
+    // version
     ng v
 
-    <span class="angular-gradient-text">=> ng correspond au CLI d'Angular</span>
+    => ng correspond au CLI d'Angular
   </code>
 </pre>
 
-<h3 class="angular-gradient-text">Nouvelle application</h3>
 
-<pre class="code-bloc">
-  <code>
-    <span class="comment-code">// install le projet dans le <i class="fa-solid fa-folder-open angular-gradient-text"></i> dossier dans lequel on se trouve</span>
+<h3 class="angular-gradient-text">Nouvelle application</h3>
+<pre>
+  <span class="label">Bash</span>
+  <code class="langage-bash">
+    // install le projet dans le dossier dans lequel on se trouve
     ng new mon-projet --directory ./
 
-    <span class="comment-code">// install le projet et crée un nouveau <i class="fa-solid fa-folder-open angular-gradient-text"></i> dossier avec le nom du projet</span>
+    // install le projet et crée un nouveau dossier avec le nom du projet
     ng new mon-projet  --style=scss --skip-tests=true
 
-    <span class="angular-gradient-text"><i class="fa-solid fa-flag"></i> flag : --style</span>
+    'flag' : --style
 
-    <span class="comment-code">// lancer le serveur de développement</span>
+    // lancer le serveur de développement
     ng serve --o
 
-    <span class="comment-code">// l'application s'ouvre à l'adresse : </span>
+    // l'application s'ouvre à l'adresse :
     localhost:4200
 
-    <span class="angular-gradient-text"><i class="fa-solid fa-flag"></i> --o</span> permet d'ouvrir l'application dans le navigateur
+    '--o' permet d'ouvrir l'application dans le navigateur
   </code>
- <!-- <p> app-root = app-component</p>-->
 </pre>
 
 <div class="text-center" >

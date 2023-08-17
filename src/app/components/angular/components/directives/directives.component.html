@@ -1,0 +1,23 @@
+<h2 class="angular-gradient-text">Directives</h2>
+<p>Les directives structurelles changent le DOM en ajoutant ou supprimant des éléments.</p>
+<p>Angular fournit un ensemble de directives structurelles comme NgIF, NgForOf, NgSwitch en d'autres.</p>
+
+<h3 class="angular-gradient-text">Syntaxe</h3>
+<pre>
+  <label class="label">html</label>
+  <code class="language-html">
+    <span><</span>p *ngIf="post.location">Localisation : <span>{{</span>post.location}}<span><</span>/p>
+     <span><</span>!--possibilité de faire un filtre-->
+    <span><</span>p *ngIf="post.location === 'Paris">Localisation : <span>{{</span>post.location}}<span><</span>/p>
+  </code>
+</pre>
+<p>Angular crée un élément <span><</span>ng-template> et applique la directive *ngIf. Le reste de la <span><</span>div> est placé à l'intérieur</p>
+<pre>
+  <label class="label">html</label>
+  <code class="language-html">
+   <span><</span>ng-template [ngIf]="post.location">
+      <div class="name"><span>{{</span>post.location}}</div>
+      <div class="name"><span>{{</span>post.location}}</div>
+    <span><</span>/ng-template>
+  </code>
+</pre>

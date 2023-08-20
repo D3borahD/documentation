@@ -16,6 +16,7 @@ import {TemplatesComponent} from "./components/angular/components/templates/temp
 import { AlgorithmsComponent } from './components/algorithms/algorithms.component';
 import { Chap1Component } from './components/algorithms/chap1/chap1.component';
 import { DirectivesComponent } from './components/angular/components/directives/directives.component';
+import { PipesComponent } from './components/angular/components/pipes/pipes.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { DirectivesComponent } from './components/angular/components/directives/
     TemplatesComponent,
     AlgorithmsComponent,
     Chap1Component,
-    DirectivesComponent
+    DirectivesComponent,
+    PipesComponent
   ],
   imports: [
     BrowserModule,

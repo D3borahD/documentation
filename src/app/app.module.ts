@@ -15,6 +15,7 @@ import { AngularExercicesComponent } from './components/angular/components/angul
 import {TemplatesComponent} from "./components/angular/components/templates/templates.component";
 import { AlgorithmsComponent } from './components/algorithms/algorithms.component';
 import { Chap1Component } from './components/algorithms/chap1/chap1.component';
+import { DirectivesComponent } from './components/angular/components/directives/directives.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { Chap1Component } from './components/algorithms/chap1/chap1.component';
     AngularExercicesComponent,
     TemplatesComponent,
     AlgorithmsComponent,
-    Chap1Component
+    Chap1Component,
+    DirectivesComponent
   ],
   imports: [
     BrowserModule,

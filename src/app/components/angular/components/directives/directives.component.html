@@ -1,0 +1,85 @@
+<h2 class="angular-gradient-text">Directives</h2>
+
+<p>Les directives sont des classes qui ajouent des comportement aux éléments</p>
+
+<h3>Les directives d'attributs</h3>
+
+<p>Les directives d'attributs écoutent et modifient le comportement d'autres éléments, attributs, propriétés et component html</p>
+
+<ul>
+  <li>NgClass => ajoute et supprime un ensemble de class CSS </li>
+  <li>NgStyle => ajoute et supprime un ensemble de style HTML</li>
+  <li>NgModel => ajoute une liaison de données bidirectionnelle à un élément de formulaire HTML</li>
+</ul>
+
+<h4 class="angular-gradient-text">NgClass</h4>
+
+<p>Ajouter ou supprimer des classes simultanément avec ngClass</p>
+
+<p class="angular-gradient-text">Utiliser ngClass avec une expression</p>
+
+<pre>
+  <label class="label">HTML</label>
+  <code class="language-html">
+     <span><</span>div [ngClass]="isSpecial ? 'special' : ''">This div is special <span><</span>/div>
+  </code>
+</pre>
+
+<p class="angular-gradient-text">Utiliser ngClass avec une méthode</p>
+
+<p>...</p>
+
+<h4 class="angular-gradient-text">NgStyle</h4>
+
+<p>On utilise ngStyle pour définir plusieurs styles in line simultanément, en fonction de l'état du component</p>
+
+<pre>
+  <label class="label">HTML</label>
+  <code class="language-html">
+   <span><</span>span [ngStyle]="&#123; color: 'rgb(0, ' + faceSnap.snaps + ', 0)' }">🤌 <span>{{</span> faceSnap.snaps }}<span><</span>/span>
+  </code>
+</pre>
+
+
+<h3>Les directives structurelles</h3>
+
+<p>Les directives structurelles changent le DOM en ajoutant ou supprimant des éléments.</p>
+<p>Angular fournit un ensemble de directives structurelles comme NgIF, NgForOf, NgSwitch en d'autres.</p>
+
+<h3 class="angular-gradient-text">Syntaxe</h3>
+<pre>
+  <label class="label">html</label>
+  <code class="language-html">
+    <span><</span>p *ngIf="post.location">Localisation : <span>{{</span>post.location}}<span><</span>/p>
+     <span><</span>!--possibilité de faire un filtre-->
+    <span><</span>p *ngIf="post.location === 'Paris">Localisation : <span>{{</span>post.location}}<span><</span>/p>
+  </code>
+</pre>
+<p>Angular crée un élément <span><</span>ng-template> et applique la directive *ngIf. Le reste de la <span><</span>div> est placé à l'intérieur</p>
+<pre>
+  <label class="label">html</label>
+  <code class="language-html">
+   <span><</span>ng-template [ngIf]="post.location">
+      <div class="name"><span>{{</span>post.location}}</div>
+    <span><</span>/ng-template>
+  </code>
+</pre>
+
+
+<pre>
+  <label class="label">html</label>
+  <code class="language-html" ngNonBindable>
+   <span><</span>div *ngFor="let hero of heroes;
+                    let i=index;
+                    let odd=odd;
+                    trackBy: trackById"
+                    [class.odd]="odd">
+      (<span>{{</span>i}}) <span>{{</span>hero.name}}
+   <span><</span>/div>
+  </code>
+</pre>
+
+<div class="definition">
+  <p>Une seule directive structurelle par élément</p>
+  <p>Placer le *ngIf sur un élément conteneur qui encapsule l'élément *ngFor.</p>
+</div>

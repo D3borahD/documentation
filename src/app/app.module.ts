@@ -17,6 +17,7 @@ import { AlgorithmsComponent } from './components/algorithms/algorithms.componen
 import { Chap1Component } from './components/algorithms/chap1/chap1.component';
 import { DirectivesComponent } from './components/angular/components/directives/directives.component';
 import { PipesComponent } from './components/angular/components/pipes/pipes.component';
+import { ServicesComponent } from './components/angular/components/services/services.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PipesComponent } from './components/angular/components/pipes/pipes.comp
     AlgorithmsComponent,
     Chap1Component,
     DirectivesComponent,
-    PipesComponent
+    PipesComponent,
+    ServicesComponent
   ],
   imports: [
     BrowserModule,

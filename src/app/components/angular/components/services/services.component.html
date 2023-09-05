@@ -1,0 +1,125 @@
+<h2 class="angular-gradient-text">Les services</h2>
+<p>Ils permettent de :</p>
+<ul>
+  <li>mieux organiser l'application</li>
+  <li>éviter de se répéter</li>
+  <li>avoir toujours des données à jour</li>
+  <li>centraliser les données</li>
+</ul>
+
+<p>Générer un service : </p>
+<pre>
+   <label class="label">BASH</label>
+  <code>
+    ng g s nom-de-mon-service
+  </code>
+</pre>
+
+<p>Un service est une class, pour le déclarer on utilise le décorateur @Injectable()</p>
+
+<pre>
+  <label class="label">TS</label>
+  <code>
+    import &#123; Injectable } from '@angular/core';
+
+    // décorateur
+    @Injectable(&#123;
+        // permet d'enregistrer le service à la racine du projet.
+        providedIn: 'root'
+    })
+    export class PostsService &#123;
+
+        constructor() &#123; }
+    }
+  </code>
+</pre>
+
+<p>Les services n'ont pas de méthode ngOnInit() car ils ne sont pas instantiés de la même manière que les composants.</p>
+<p>Pour utiliser un service dans un component, il faut utiliser le système d'injection de dépendances fournit par Angular.</p>
+<p>Il faut passer un argument du type service au constructor du component, Angular met à disposition la bonne instance du service</p>
+
+
+<pre>
+  <label class="label">TS</label>
+  <code>
+    import &#123;PostsService} from "../../services/posts.service";
+    //...
+    export class PostListComponent implements OnInit &#123;
+
+      public posts!: PostModel[];
+
+      constructor(
+      // ajouter un modificateur d"accès (private) à un argument du constructor crée une propriété avec ce nom dans la classe. On a donc accès au service via la propriété PostsService
+        private postsService: PostsService
+      )
+    &#123; }
+
+    ngOnInit(): void  &#123;
+      this.posts = this.postsService.posts
+    }
+  </code>
+</pre>
+
+<div class="definition">
+  <i></i>
+  <p>On préfère "private" pour les injections de service, car ça empêche le template du component d'y accéder directement.</p>
+  <p>Donner au template un accès aux injections serait un anti-pattern Angular.</p>
+</div>
+
+<pre>
+  <label class="label">service.TS</label>
+  <code>
+    // création d'une méthode
+    // ne pas oublier de préciser le type de retour (: PostModel[])
+    public getAllPosts(): PostModel[]&#123;
+      return this.posts
+    }
+
+    public  getPostById(postId:number): PostModel &#123;
+      const post = this.posts.find(post => post.id === postId)
+      if (!post)&#123;
+        throw new Error('Post not found')
+      } else &#123;
+        return post
+      }
+    }
+
+    // ici on utilise un literal type
+    public likePostById(postId:number, isLiked: 'like' | 'unlike'): void &#123;
+      const post = this.getPostById(postId)
+      isLiked ==='like' ? post.like++ : post.like--
+    }
+  </code>
+</pre>
+
+<pre>
+  <label class="label">TS</label>
+  <code>
+    ngOnInit(): void &#123;
+      // utilisation de la méthode
+      this.posts = this.postsService.getAllPosts()
+    }
+  </code>
+</pre>
+
+<pre>
+  <label class="file-name">📄 post.component.ts</label>
+  <code>
+    onLike() &#123;
+    if(this.liked === false) &#123;
+      this.postService.likePostById(this.post.id, 'like')
+      this.liked = true
+    } else &#123;
+      this.postService.likePostById(this.post.id, 'unlike')
+      this.liked = false
+    }
+  }
+  </code>
+</pre>
+
+<div class="definition">
+  <p>Ce genre d'architecture <span class="angular-red">modulaire</span> est l'un des gros points forts d'Angular</p>
+</div>
+
+
+

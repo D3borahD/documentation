@@ -18,6 +18,7 @@ import { Chap1Component } from './components/algorithms/chap1/chap1.component';
 import { DirectivesComponent } from './components/angular/components/directives/directives.component';
 import { PipesComponent } from './components/angular/components/pipes/pipes.component';
 import { ServicesComponent } from './components/angular/components/services/services.component';
+import { RoutingComponent } from './components/angular/components/routing/routing.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ServicesComponent } from './components/angular/components/services/serv
     Chap1Component,
     DirectivesComponent,
     PipesComponent,
-    ServicesComponent
+    ServicesComponent,
+    RoutingComponent
   ],
   imports: [
     BrowserModule,

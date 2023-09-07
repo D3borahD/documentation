@@ -1,0 +1,123 @@
+<h2 class="angular-gradient-text">Routing et navigation</h2>
+<p>Les Single Page Applications permettent une meilleure performance car il n'y a pas besoin de demander, recevoir puis afficher une nouvelle page HTML à chaque chagement d'URL. Avec Angular, chaque URL correspond un component, et Angular remplace le component actif sans émettre de requête au serveur.</p>
+
+<p>Ajouter un module de routing au dossier app : app-routing.module.ts</p>
+
+<pre>
+  <label class="file-name">app-routing.module.ts</label>
+  <code>
+    import &#123; NgModule} from "@angular/core";
+    import &#123; RouterModule, Routes} from "@angular/router";
+    import &#123; PostListComponent} from "./components/post-list/post-list.component";
+    import &#123; PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+
+    const routes: Routes = [
+      // Permet de lier les routes aux components
+      &#123; path: 'posts', component: PostListComponent},
+      // redirection
+      &#123; path: '', redirectTo: '/posts', pathMatch:'full'},
+      // wild card 404
+      &#123; path: '**', component: PageNotFoundComponent }
+    ]
+
+    @NgModule(
+      &#123;
+        // permet d'enregistrer les routes dans l'application
+        imports: [
+          // on indique que les routes de ce fichier sont à la racine de l'application
+          RouterModule.forRoot(routes)
+        ],
+        // on export le routeur configuré
+        exports:[
+          RouterModule
+        ]
+      }
+    )
+
+    export class AppRoutingModule &#123;}
+
+  </code>
+</pre>
+
+<p>Puis ajouter le router-outlet</p>
+
+<pre>
+  <label class="file-name">app-component.html</label>
+  <code>
+    &lt;app-header>&lt;/app-header>
+    &lt;router-outlet>&lt;/router-outlet>
+  </code>
+</pre>
+
+<h2>RouterLink (HTML)</h2>
+
+<pre>
+  <label class="label">HTML</label>
+  <code>
+    &lt;nav class="navigation d-flex f-column m-1">
+      // routerLinlk : indique la route,
+      // routerLinkActive : permet de mettre en avant le lien actif
+      // [routerLinkActiveOptions]=" &#123;exact: true}" : nécessaire pour différencier les enfants de la route
+      &lt;a routerLink="posts" routerLinkActive="active" [routerLinkActiveOptions]=" &#123;exact: true}">&lt;i class="fa-solid fa-house fa-lg ">&lt;/i>&lt;/a>
+      &lt;a routerLink="user" routerLinkActive="active" [routerLinkActiveOptions]=" &#123;exact: true}">&lt;i class="fa-solid fa-circle-user fa-lg">&lt;/i>&lt;/a>
+    &lt;/nav>
+  </code>
+</pre>
+
+<div class="definition">
+  <p><span class="red">routerLink</span> est une <span class="red">directive</span></p>
+</div>
+
+<h2>Naviger avec le Router (TS)</h2>
+
+<pre>
+  <label class="label">HTML</label>
+  <code>
+    &lt;button (click)="onContinue()">Continuer vers les posts&lt;/button>
+  </code>
+</pre>
+
+<pre>
+  <label class="label">TS</label>
+  <code>
+    import &#123; Router } from '@angular/router';
+    //...
+    // injecter le router
+    constructor(private router: Router) &#123; }
+
+    onContinue() &#123;
+      this.router.navigateByUrl('posts');
+    }
+  </code>
+</pre>
+
+<h2>Activer les routes avec ActivatedRoute</h2>
+
+<p>Permet de créer des routes avec un paramètre (id) pour visualiser un seul post</p>
+
+<pre>
+  <label class="label"></label>
+  <code>
+    export class SinglePostComponent implements OnInit &#123;
+
+    public post!: PostModel;
+    public liked:boolean=false
+    public saved:boolean=false
+
+    constructor(private postService: PostsService,
+                private route: ActivatedRoute) &#123;}
+
+  ngOnInit(): void &#123;
+    // les paramètres d'une route sont de type string.
+    // '+' est un type cast qui transforme une string en number
+    // cast = changer le type d'une variable
+    const postId = +this.route.snapshot.params['id']
+    this.post = this.postService.getPostById(postId)
+  }
+  </code>
+</pre>
+
+<div class="definition">
+  Pour realiser un lien de retour (page précédente), il ne faut pas oublier le / avant le chemin. Sinon Angular l'ajoute à la suite de la route.
+  localhost:4200/post/3/post
+</div>

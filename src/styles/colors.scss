@@ -43,6 +43,12 @@ $green: #25FF6FFF;
  /* background: linear-gradient(0deg, rgba(46,252,108,1) 0%, rgba(18,94,222,1) 80%);*/
   background: linear-gradient(0deg, $purple 0%, $blue 90%);
 }
+.github-gradient-text {
+  /* background: linear-gradient(0deg, rgba(46,252,108,1) 0%, rgba(18,94,222,1) 80%);*/
+  background: linear-gradient(0deg, $purple 0%, $blue 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .algo-gradient  {
   background-image: linear-gradient(0deg, $green 0%, $blue 90%);

@@ -1,7 +1,7 @@
 @import "src/styles/colors";
 
 :host{
-  width: 272px;
+  width: 250px;
   height: calc(100vh - 96px) ;
   background-color: $light2;
   display: block;
@@ -15,4 +15,7 @@ li {
 
 ul {
   padding: 0;
+}
+a {
+  text-decoration: none;
 }

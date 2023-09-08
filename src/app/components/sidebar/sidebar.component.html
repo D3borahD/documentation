@@ -1,13 +1,4 @@
-<ul>
-  <li><a routerLink="angular/introduction" routerLinkActive="angular-red">Introduction </a></li>
-  <li><a routerLink="angular/component" routerLinkActive="angular-red">Component </a></li>
-  <li><a routerLink="angular/template" routerLinkActive="angular-red">Template</a></li>
-  <li><a routerLink="angular/directives" routerLinkActive="angular-red">Directives</a></li>
-  <li><a routerLink="angular/pipes" routerLinkActive="angular-red">Pipes</a></li>
-  <li><a routerLink="angular/services" routerLinkActive="angular-red">Services</a></li>
-  <li><a routerLink="angular/routing" routerLinkActive="angular-red">Routing</a></li>
-
-  <li><a routerLink="angular/exercices" routerLinkActive="active">Mise en pratique</a></li>
+<ul *ngFor="let item of items">
+  <li> <a routerLink="angular/{{item}}" routerLinkActive="angular-red">{{item | titlecase}}</a></li>
 </ul>
-
 <!--link to hosting angular on github pages-->

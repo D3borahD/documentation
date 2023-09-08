@@ -48,7 +48,6 @@ import { RoutingComponent } from './components/angular/components/routing/routin
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-
   ],
   providers: [],
   bootstrap: [AppComponent]

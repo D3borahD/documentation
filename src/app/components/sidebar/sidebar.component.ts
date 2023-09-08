@@ -9,11 +9,15 @@ import {Component, Input, OnInit} from '@angular/core';
 export class SidebarComponent implements OnInit{
 
   public items!: string[]
-  @Input() parentData!: string
+
+  // data depuis BODY
   @Input() currentPath!: string
 
   ngOnInit(): void{
 
+    console.log('current path : ', this.currentPath)
+
+    if(this.currentPath === 'angular'){
       this.items  = [
         'introduction',
         'component',
@@ -24,5 +28,15 @@ export class SidebarComponent implements OnInit{
         'routing',
         'exercices'
       ]
+    } else if (this.currentPath === 'github'){
+      this.items  = [
+        'github page',
+      ]
+    } else  if (this.currentPath === 'algorithmique'){
+      this.items  = [
+        'chapitre 1 : Le rôle de l\'algorithmiques',
+      ]
+    }
+
   }
 }

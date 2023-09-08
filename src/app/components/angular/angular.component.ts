@@ -14,7 +14,6 @@ export class AngularComponent {
   constructor(private router: Router) {}
 
   ngOnInit():void {
-    
     console.log('this route :  ANGULAR COMPONENT', this.router.url)
   }
 

@@ -8,10 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BodyComponent implements OnInit{
 
-  @Input() data!: string
-
-  // à dynamiser 
-  public url: string='test'
+  // à dynamiser
+  // data vers sidebar
+  public url: string='angular'
 
 
 

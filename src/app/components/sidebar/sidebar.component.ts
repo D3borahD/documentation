@@ -7,9 +7,10 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 
 export class SidebarComponent implements OnInit{
-  
+
   public items!: string[]
   @Input() parentData!: string
+  @Input() currentPath!: string
 
   ngOnInit(): void{
 
@@ -23,8 +24,5 @@ export class SidebarComponent implements OnInit{
         'routing',
         'exercices'
       ]
-   
-    
-   
   }
 }

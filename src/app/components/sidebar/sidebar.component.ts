@@ -1,7 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-
-
-
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,25 +7,24 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class SidebarComponent implements OnInit{
-
+  
   public items!: string[]
-
+  @Input() parentData!: string
 
   ngOnInit(): void{
 
-    this.items  = [
-      'introduction',
-      'component',
-      'template',
-      'directives',
-      'pipes',
-      'services',
-      'routing',
-      'exercices'
-    ]
-
+      this.items  = [
+        'introduction',
+        'component',
+        'template',
+        'directives',
+        'pipes',
+        'services',
+        'routing',
+        'exercices'
+      ]
+   
+    
+   
   }
-
-
-
 }

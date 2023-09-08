@@ -19,6 +19,7 @@ import { DirectivesComponent } from './components/angular/components/directives/
 import { PipesComponent } from './components/angular/components/pipes/pipes.component';
 import { ServicesComponent } from './components/angular/components/services/services.component';
 import { RoutingComponent } from './components/angular/components/routing/routing.component';
+import { BodyComponent } from './body/body.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { RoutingComponent } from './components/angular/components/routing/routin
     DirectivesComponent,
     PipesComponent,
     ServicesComponent,
-    RoutingComponent
+    RoutingComponent,
+    BodyComponent,
   ],
   imports: [
     BrowserModule,

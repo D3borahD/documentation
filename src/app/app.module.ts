@@ -19,6 +19,8 @@ import { DirectivesComponent } from './components/angular/components/directives/
 import { PipesComponent } from './components/angular/components/pipes/pipes.component';
 import { ServicesComponent } from './components/angular/components/services/services.component';
 import { RoutingComponent } from './components/angular/components/routing/routing.component';
+import { BodyComponent } from './body/body.component';
+import { ObservablesComponent } from './components/angular/components/observables/observables.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { RoutingComponent } from './components/angular/components/routing/routin
     DirectivesComponent,
     PipesComponent,
     ServicesComponent,
-    RoutingComponent
+    RoutingComponent,
+    BodyComponent,
+    ObservablesComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,6 @@ import { RoutingComponent } from './components/angular/components/routing/routin
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-
   ],
   providers: [],
   bootstrap: [AppComponent]

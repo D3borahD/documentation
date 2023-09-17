@@ -48,9 +48,6 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-
-
-
 router-outlet {
   display: none;
 }
@@ -92,6 +89,7 @@ app-directives,
 app-pipes,
 app-services,
 app-routing,
+app-observables,
 //algo
 app-chap1,
 //github

@@ -12,6 +12,7 @@ import {DirectivesComponent} from "./components/angular/components/directives/di
 import {PipesComponent} from "./components/angular/components/pipes/pipes.component";
 import {ServicesComponent} from "./components/angular/components/services/services.component";
 import {RoutingComponent} from "./components/angular/components/routing/routing.component";
+import { ObservablesComponent } from "./components/angular/components/observables/observables.component";
 
 const routes: Routes = [
   { path: '', component: AngularComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
       {path: 'pipes', component: PipesComponent },
       {path: 'services', component: ServicesComponent },
       {path: 'routing', component: RoutingComponent },
+      {path: 'observables', component: ObservablesComponent },
       {path: 'exercices', component: AngularExercicesComponent },
     ]
   },

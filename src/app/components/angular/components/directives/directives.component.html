@@ -36,7 +36,7 @@
 <pre>
   <label class="label">HTML</label>
   <code class="language-html">
-   <span><</span>span [ngStyle]="&#123; color: 'rgb(0, ' + faceSnap.snaps + ', 0)' }">🤌 <span>{{</span> faceSnap.snaps }}<span><</span>/span>
+   <span><</span>span [ngStyle]="&#123; color: 'rgb(0, ' + faceSnap.snaps + ', 0)' &#125;">🤌 <span>{{</span> faceSnap.snaps &#125;&#125;<span><</span>/span>
   </code>
 </pre>
 
@@ -49,9 +49,9 @@
 <pre>
   <label class="label">html</label>
   <code class="language-html">
-    <span><</span>p *ngIf="post.location">Localisation : <span>{{</span>post.location}}<span><</span>/p>
+    <span><</span>p *ngIf="post.location">Localisation : <span>{{</span>post.location&#125;&#125;<span><</span>/p>
      <span><</span>!--possibilité de faire un filtre-->
-    <span><</span>p *ngIf="post.location === 'Paris">Localisation : <span>{{</span>post.location}}<span><</span>/p>
+    <span><</span>p *ngIf="post.location === 'Paris">Localisation : <span>{{</span>post.location&#125;&#125;<span><</span>/p>
   </code>
 </pre>
 <p>Angular crée un élément <span><</span>ng-template> et applique la directive *ngIf. Le reste de la <span><</span>div> est placé à l'intérieur</p>
@@ -59,7 +59,7 @@
   <label class="label">html</label>
   <code class="language-html">
    <span><</span>ng-template [ngIf]="post.location">
-      <div class="name"><span>{{</span>post.location}}</div>
+      <div class="name"><span>{{</span>post.location&#125;&#125;</div>
     <span><</span>/ng-template>
   </code>
 </pre>
@@ -73,7 +73,7 @@
                     let odd=odd;
                     trackBy: trackById"
                     [class.odd]="odd">
-      (<span>{{</span>i}}) <span>{{</span>hero.name}}
+      (<span>{{</span>i&#125;&#125;) <span>{{</span>hero.name&#125;&#125;
    <span><</span>/div>
   </code>
 </pre>

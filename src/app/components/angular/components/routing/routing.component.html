@@ -6,21 +6,21 @@
 <pre>
   <label class="file-name">app-routing.module.ts</label>
   <code>
-    import &#123; NgModule} from "@angular/core";
-    import &#123; RouterModule, Routes} from "@angular/router";
-    import &#123; PostListComponent} from "./components/post-list/post-list.component";
-    import &#123; PageNotFoundComponent} from "./page-not-found/page-not-found.component";
+    import &#123; NgModule&#125; from "&#64;angular/core";
+    import &#123; RouterModule, Routes&#125; from "&#64;angular/router";
+    import &#123; PostListComponent&#125; from "./components/post-list/post-list.component";
+    import &#123; PageNotFoundComponent&#125; from "./page-not-found/page-not-found.component";
 
     const routes: Routes = [
       // Permet de lier les routes aux components
-      &#123; path: 'posts', component: PostListComponent},
+      &#123; path: 'posts', component: PostListComponent&#125;,
       // redirection
-      &#123; path: '', redirectTo: '/posts', pathMatch:'full'},
+      &#123; path: '', redirectTo: '/posts', pathMatch:'full'&#125;,
       // wild card 404
-      &#123; path: '**', component: PageNotFoundComponent }
+      &#123; path: '**', component: PageNotFoundComponent &#125;
     ]
 
-    @NgModule(
+    &#64;NgModule(
       &#123;
         // permet d'enregistrer les routes dans l'application
         imports: [
@@ -31,10 +31,10 @@
         exports:[
           RouterModule
         ]
-      }
+      &#125;
     )
 
-    export class AppRoutingModule &#123;}
+    export class AppRoutingModule &#123;&#125;
 
   </code>
 </pre>
@@ -57,9 +57,9 @@
     &lt;nav class="navigation d-flex f-column m-1">
       // routerLinlk : indique la route,
       // routerLinkActive : permet de mettre en avant le lien actif
-      // [routerLinkActiveOptions]=" &#123;exact: true}" : nécessaire pour différencier les enfants de la route
-      &lt;a routerLink="posts" routerLinkActive="active" [routerLinkActiveOptions]=" &#123;exact: true}">&lt;i class="fa-solid fa-house fa-lg ">&lt;/i>&lt;/a>
-      &lt;a routerLink="user" routerLinkActive="active" [routerLinkActiveOptions]=" &#123;exact: true}">&lt;i class="fa-solid fa-circle-user fa-lg">&lt;/i>&lt;/a>
+      // [routerLinkActiveOptions]=" &#123;exact: true&#125;" : nécessaire pour différencier les enfants de la route
+      &lt;a routerLink="posts" routerLinkActive="active" [routerLinkActiveOptions]=" &#123;exact: true&#125;">&lt;i class="fa-solid fa-house fa-lg ">&lt;/i>&lt;/a>
+      &lt;a routerLink="user" routerLinkActive="active" [routerLinkActiveOptions]=" &#123;exact: true&#125;">&lt;i class="fa-solid fa-circle-user fa-lg">&lt;/i>&lt;/a>
     &lt;/nav>
   </code>
 </pre>
@@ -80,14 +80,14 @@
 <pre>
   <label class="label">TS</label>
   <code>
-    import &#123; Router } from '@angular/router';
+    import &#123; Router &#125; from '&#64;angular/router';
     //...
     // injecter le router
-    constructor(private router: Router) &#123; }
+    constructor(private router: Router) &#123; &#125;
 
     onContinue() &#123;
       this.router.navigateByUrl('posts');
-    }
+    &#125;
   </code>
 </pre>
 
@@ -105,7 +105,7 @@
     public saved:boolean=false
 
     constructor(private postService: PostsService,
-                private route: ActivatedRoute) &#123;}
+                private route: ActivatedRoute) &#123;&#125;
 
   ngOnInit(): void &#123;
     // les paramètres d'une route sont de type string.
@@ -113,7 +113,7 @@
     // cast = changer le type d'une variable
     const postId = +this.route.snapshot.params['id']
     this.post = this.postService.getPostById(postId)
-  }
+  &#125;
   </code>
 </pre>
 

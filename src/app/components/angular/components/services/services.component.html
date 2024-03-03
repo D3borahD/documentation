@@ -15,22 +15,22 @@
   </code>
 </pre>
 
-<p>Un service est une class, pour le déclarer on utilise le décorateur @Injectable()</p>
+<p>Un service est une class, pour le déclarer on utilise le décorateur &#64;Injectable()</p>
 
 <pre>
   <label class="label">TS</label>
   <code>
-    import &#123; Injectable } from '@angular/core';
+    import &#123; Injectable &#125; from '&#64;angular/core';
 
     // décorateur
-    @Injectable(&#123;
+    &#64;Injectable(&#123;
         // permet d'enregistrer le service à la racine du projet.
         providedIn: 'root'
-    })
+    &#125;)
     export class PostsService &#123;
 
-        constructor() &#123; }
-    }
+        constructor() &#123; &#125;
+    &#125;
   </code>
 </pre>
 
@@ -42,7 +42,7 @@
 <pre>
   <label class="label">TS</label>
   <code>
-    import &#123;PostsService} from "../../services/posts.service";
+    import &#123;PostsService&#125; from "../../services/posts.service";
     //...
     export class PostListComponent implements OnInit &#123;
 
@@ -52,11 +52,11 @@
       // ajouter un modificateur d"accès (private) à un argument du constructor crée une propriété avec ce nom dans la classe. On a donc accès au service via la propriété PostsService
         private postsService: PostsService
       )
-    &#123; }
+    &#123; &#125;
 
     ngOnInit(): void  &#123;
       this.posts = this.postsService.posts
-    }
+    &#125;
   </code>
 </pre>
 
@@ -73,22 +73,22 @@
     // ne pas oublier de préciser le type de retour (: PostModel[])
     public getAllPosts(): PostModel[]&#123;
       return this.posts
-    }
+    &#125;
 
     public  getPostById(postId:number): PostModel &#123;
       const post = this.posts.find(post => post.id === postId)
       if (!post)&#123;
         throw new Error('Post not found')
-      } else &#123;
+      &#125; else &#123;
         return post
-      }
-    }
+      &#125;
+    &#125;
 
     // ici on utilise un literal type
     public likePostById(postId:number, isLiked: 'like' | 'unlike'): void &#123;
       const post = this.getPostById(postId)
       isLiked ==='like' ? post.like++ : post.like--
-    }
+    &#125;
   </code>
 </pre>
 
@@ -98,7 +98,7 @@
     ngOnInit(): void &#123;
       // utilisation de la méthode
       this.posts = this.postsService.getAllPosts()
-    }
+    &#125;
   </code>
 </pre>
 
@@ -109,11 +109,11 @@
     if(this.liked === false) &#123;
       this.postService.likePostById(this.post.id, 'like')
       this.liked = true
-    } else &#123;
+    &#125; else &#123;
       this.postService.likePostById(this.post.id, 'unlike')
       this.liked = false
-    }
-  }
+    &#125;
+  &#125;
   </code>
 </pre>
 

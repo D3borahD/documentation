@@ -21,18 +21,18 @@
 <pre>
   <label class="file-name">📄 app.module.ts</label>
   <code class="language-typescript">
-    import &#123;LOCALE_ID, NgModule} from '@angular/core';
+    import &#123;LOCALE_ID, NgModule&#125; from '&#64;angular/core';
 
-    import &#123; registerLocaleData } from '@angular/common';
-    import * as fr from '@angular/common/locales/fr';
+    import &#123; registerLocaleData &#125; from '&#64;angular/common';
+    import * as fr from '&#64;angular/common/locales/fr';
 
-    providers: &#91;&#123;provide: LOCALE_ID, useValue: 'fr-FR' }],
+    providers: &#91;&#123;provide: LOCALE_ID, useValue: 'fr-FR' &#125;],
 
     export class AppModule &#123;
       constructor() &#123;
         registerLocaleData(fr.default);
-      }
-    }
+      &#125;
+    &#125;
   </code>
 </pre>
 
@@ -41,22 +41,22 @@
 <pre>
   <label class="label">HTML</label>
   <code class="language-html">
-    &#60;p><span>{{</span> 4346234.36 | number }}&#60;/p>  &#60;!--4346234,36-->
+    &#60;p><span>{{</span> 4346234.36 | number &#125;&#125;&#60;/p>  &#60;!--4346234,36-->
 
     &#60;!--entier le plus proche-->
-    &#60;p><span>{{</span> 4346234.36 | number: '1.0-0' }}&#60;/p>
+    &#60;p><span>{{</span> 4346234.36 | number: '1.0-0' &#125;&#125;&#60;/p>
 
     &#60;!--un chiffre après la ,-->
-    &#60;p><span>{{</span> 4346234.36 | number: '1.0-1' }}&#60;/p>
+    &#60;p><span>{{</span> 4346234.36 | number: '1.0-1' &#125;&#125;&#60;/p>
 
-    &#60;p><span>{{</span> 0.336 | percent }}&#60;/p>  &#60;!-- 34% -->
+    &#60;p><span>{{</span> 0.336 | percent &#125;&#125;&#60;/p>  &#60;!-- 34% -->
 
-    &#60;p><span>{{</span> 0.336 | percent: '1.0-1' }}&#60;/p>  &#60;!-- 33,6% -->
+    &#60;p><span>{{</span> 0.336 | percent: '1.0-1' &#125;&#125;&#60;/p>  &#60;!-- 33,6% -->
 
-    &#60;p><span>{{</span> 344.36 | currency }}&#60;/p>  &#60;!-- 344,36 $US -->
+    &#60;p><span>{{</span> 344.36 | currency &#125;&#125;&#60;/p>  &#60;!-- 344,36 $US -->
 
-    &#60;p><span>{{</span> 344.36 | currency: 'EUR' }}&#60;/p>  &#60;!-- 344,36 € -->
+    &#60;p><span>{{</span> 344.36 | currency: 'EUR' &#125;&#125;&#60;/p>  &#60;!-- 344,36 € -->
 
-    &#60;p><span>{{</span> 344.36 | currency: 'EUR' : 'code' }}&#60;/p>  &#60;!-- 344,36 EUR -->
+    &#60;p><span>{{</span> 344.36 | currency: 'EUR' : 'code' &#125;&#125;&#60;/p>  &#60;!-- 344,36 EUR -->
   </code>
 </pre>

@@ -1,15 +1,19 @@
 import { Component, EventEmitter, Output} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-angular',
+  standalone: true,
   templateUrl: './angular.component.html',
+  imports: [
+    RouterOutlet
+  ],
   styleUrls: ['./angular.component.scss']
 })
 export class AngularComponent {
 
   public routerUrl:string = this.router.url
-  
+
 
   constructor(private router: Router) {}
 

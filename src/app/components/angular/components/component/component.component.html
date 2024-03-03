@@ -26,26 +26,26 @@
 <pre>
   <span class="label">TypeScript</span>
   <code class="language-typescript">
-    import &#123; Component } from '@angular/core';
+    import &#123; Component &#125; from '&#64;angular/core';
 
-    @Component(&#123;
+    &#64;Component(&#123;
       selector: 'app-component',
       templateUrl: './component.component.html',
       styleUrls: ['./component.component.scss']
-    })
+    &#125;)
 
     export class AngularIntroductionComponent &#123;
       title = 'Mon post'
-    }
+    &#125;
 
     // HTML
-    &#123;<span>&#123;</span> title }}
+    &#123;<span>&#123;</span> title &#125;&#125;
   </code>
 </pre>
 <div class="definition">
   <i class="fa-solid fa-circle-info red-yellow-txt"></i>
-  <p>La classe est déclarée avec un décorateur <span class="red-yellow-txt">@Component</span></p>
-  <p>Un <span class="red-yellow-txt">@Décorateur</span> permet d'apporter des <span class="red-yellow-txt">modifications</span> à une classe.</p>
+  <p>La classe est déclarée avec un décorateur <span class="red-yellow-txt">&#64;Component</span></p>
+  <p>Un <span class="red-yellow-txt">&#64;Décorateur</span> permet d'apporter des <span class="red-yellow-txt">modifications</span> à une classe.</p>
 </div>
 
 <div class="definition mt-1">
@@ -61,13 +61,13 @@
 <pre>
   <span class="label">TypeScript</span>
   <code class="language-typescript">
-    import &#123; NgModule } from '@angular/core';
-    import &#123; BrowserModule } from '@angular/platform-browser';
+    import &#123; NgModule &#125; from '&#64;angular/core';
+    import &#123; BrowserModule &#125; from '&#64;angular/platform-browser';
 
-    import &#123; AppComponent } from './app.component';
-    import &#123; PostComponent } from './post/post.component';
+    import &#123; AppComponent &#125; from './app.component';
+    import &#123; PostComponent &#125; from './post/post.component';
 
-    @NgModule(&#123;
+    &#64;NgModule(&#123;
       declarations: [
         AppComponent,
         MonComponent,
@@ -77,8 +77,8 @@
       ],
       providers: [],
       bootstrap: [AppComponent]
-    })
-    export class AppModule &#123; }
+    &#125;)
+    export class AppModule &#123; &#125;
   </code>
 </pre>
 

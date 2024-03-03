@@ -12,13 +12,13 @@
 <pre>
   <span class="label">TypeScript</span>
   <code class="language-typescript">
-    import &#123; Component, OnInit} from '@angular/core';
+    import &#123; Component, OnInit&#125; from '&#64;angular/core';
 
-    @Component(&#123;
+    &#64;Component(&#123;
         selector: 'app-post',
         templateUrl: './post.component.html',
         styleUrls: ['./post.component.scss']
-    })
+    &#125;)
     export class PostComponent implements OnInit &#123;
 
       // Propriétés
@@ -35,8 +35,8 @@
         this.description = 'encore en train de dormir ...';
         this.createdDate = new Date();
         this.like = 6;
-      }
-    }
+      &#125;
+    &#125;
     </code>
 </pre>
 
@@ -50,8 +50,8 @@
 <pre>
   <span class="label">HTML</span>
   <code class="language-html">
-    <span>{{</span> title }}
-    <span><</span>img src ="<span>{{</span> imageUrl }}" alt="<span>{{</span> title }}">
+    <span>{{</span> title &#125;&#125;
+    <span><</span>img src ="<span>{{</span> imageUrl &#125;&#125;" alt="<span>{{</span> title &#125;&#125;">
   </code>
 </pre>
 
@@ -83,11 +83,11 @@
       if(this.liked === false) <span>&lbrace;</span>
         this.like++
         this.liked = true
-      } else <span>&lbrace;</span>
+      &#125; else <span>&lbrace;</span>
         this.like--
         this.liked = false
-      }
-    }
+      &#125;
+    &#125;
   </code>
 </pre>
 <p>Le nom de la méthode qui commence par <span class="red">on</span> signale qu'elle répond à un <span class="red">évènement</span></p>
@@ -117,24 +117,24 @@
         public createdDate:Date,
         public img:string,
         public like:number
-      ) &#123;}
-}
+      ) &#123;&#125;
+&#125;
   </code>
 </pre>
-<p>Le <span class="red">décorateur @Input()</span> dans un component ou une directive enfant signifie que la propriété peut recevoir sa valeur depuis son component parent.</p>
-<p>Pour utiliser <span class="red">@Input()</span>, il faut configurer le parent et l'enfant.</p>
+<p>Le <span class="red">décorateur &#64;Input()</span> dans un component ou une directive enfant signifie que la propriété peut recevoir sa valeur depuis son component parent.</p>
+<p>Pour utiliser <span class="red">&#64;Input()</span>, il faut configurer le parent et l'enfant.</p>
 <h4 class="red-yellow-txt">Configurer le component enfant : </h4>
 <pre>
   <label class="file-name">📄 enfant.component.ts</label>
   <code class="language-typescript">
     // Importer Input
-    import &#123;Component, Input, OnInit} from '@angular/core';
-    import &#123;PostModel} from "../../models/post.model";
+    import &#123;Component, Input, OnInit&#125; from '&#64;angular/core';
+    import &#123;PostModel&#125; from "../../models/post.model";
 
     export class PostComponent implements OnInit &#123;
-      // Ajouter @Input à la propriété
-      @Input() post!: PostModel;
-    }
+      // Ajouter &#64;Input à la propriété
+      &#64;Input() post!: PostModel;
+    &#125;
   </code>
 </pre>
 <h4 class="red-yellow-txt">Configurer le component parent : </h4>

@@ -1,6 +1,7 @@
 # PersonalDocumentation
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.9.
+Angular Version : 17
 
 # ToDO 
 -[ ] Highlight.js in Angular 2+ on dynamic content

@@ -14,7 +14,7 @@ import {ServicesComponent} from "./components/angular/components/services/servic
 import {RoutingComponent} from "./components/angular/components/routing/routing.component";
 import { ObservablesComponent } from "./components/angular/components/observables/observables.component";
 
-const routes: Routes = [
+/*const routes: Routes = [
   { path: '', component: AngularComponent},
 
   { path: 'angular', component: AngularComponent,
@@ -46,4 +46,4 @@ const routes: Routes = [
     ]
   }
 )
-export class AppRoutingModule {}
+export class AppRoutingModule {}*/

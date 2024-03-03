@@ -1,7 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {RouterOutlet} from "@angular/router";
-import { AngularComponent } from './components/angular/angular.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { GithubComponent } from './components/github/github.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -17,7 +16,7 @@ import { ObservablesComponent } from './components/angular/components/observable
 
 @NgModule({
   declarations: [
-    AngularComponent,
+
     GithubComponent,
     AngularIntroductionComponent,
     ComponentComponent,

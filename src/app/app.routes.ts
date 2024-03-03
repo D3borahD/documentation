@@ -13,6 +13,7 @@ import {ObservablesComponent} from "./components/angular/components/observables/
 import {AngularExercicesComponent} from "./components/angular/components/angular-exercices/angular-exercices.component";
 import {GithubComponent} from "./components/github/github.component";
 import {AlgorithmsComponent} from "./components/algorithms/algorithms.component";
+import {Chap1Component} from "./components/algorithms/chap1/chap1.component";
 
 export const routes: Routes = [
   { path: '', component: AngularComponent},
@@ -34,5 +35,11 @@ export const routes: Routes = [
 
   { path: 'github', component: GithubComponent},
 
-  { path: 'algorithms', component: AlgorithmsComponent},
+  { path: 'algorithms', component: AlgorithmsComponent,
+    children:[
+      {path: '', redirectTo: 'chap1', pathMatch:'full'},
+      {path: 'chap1', component: Chap1Component },
+
+    ]
+  },
 ];

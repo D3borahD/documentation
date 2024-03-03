@@ -1,8 +1,17 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {NgForOf, TitleCasePipe} from "@angular/common";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'app-sidebar',
+  standalone: true,
   templateUrl: './sidebar.component.html',
+  imports: [
+    NgForOf,
+    RouterLink,
+    RouterLinkActive,
+    TitleCasePipe
+  ],
   styleUrls: ['./sidebar.component.scss']
 })
 

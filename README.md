@@ -1,7 +1,7 @@
 # PersonalDocumentation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.9.
-Angular Version : 17
+![Static Badge](https://img.shields.io/badge/Angular-v17-red?style=flat) ![Static Badge](https://img.shields.io/badge/Node-v20.11.0-green?style=flat)
+
 
 # ToDO 
 -[ ] Highlight.js in Angular 2+ on dynamic content

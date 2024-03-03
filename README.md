@@ -12,7 +12,7 @@ https://adevsolvedit.com/1002/highlightjs-in-angular-2-on-dynamic-content
 
 Run `npm start` for a dev server. 
 
-Navigate to `http://localhost:4200/` (open with `npm start` command0)
+Navigate to `http://localhost:4200/` (open with `npm start` command)
 
 The application will automatically reload if you change any of the source files.
 

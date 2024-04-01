@@ -20,9 +20,9 @@ export class BodyComponent implements OnInit{
   public url: string='angular'
 
 
-
+  @Input() currentPath!: string
   ngOnInit():void {
-    // mauvais path
+
 
   }
 

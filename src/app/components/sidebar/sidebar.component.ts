@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit{
 
   ngOnInit(): void{
 
-   // console.log('current path : ', this.currentPath)
+    console.log('current path : ', this.currentPath)
 
     if(this.currentPath === 'angular'){
       this.items  = [

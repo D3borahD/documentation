@@ -17,8 +17,13 @@ import {SidebarComponent} from "./components/sidebar/sidebar.component";
 })
 export class AppComponent {
 
-  public url: string='angular'
+  public url: string='change moi'
+  //test: string= 'change moi'
   ngOnInit():void {
+  }
+
+  addItem(newItem: string) {
+    this.url = newItem;
   }
 
 

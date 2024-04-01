@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
@@ -12,5 +12,11 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
+  @Output() newItemEvent = new EventEmitter<string>();
+  newUrl:string = ""
+  getPath(menuValue:string) {
+    this.newUrl = menuValue
+    this.newItemEvent.emit(menuValue);
+    console.log('je suis une url du header : ', this.newItemEvent)
+  }
 }

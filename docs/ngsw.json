@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1694096238404,
+  "timestamp": 1711954915960,
   "index": "/documentation/index.html",
   "assetGroups": [
     {
@@ -12,11 +12,11 @@
       },
       "urls": [
         "/documentation/index.html",
-        "/documentation/main.b8c26530a8f9bfb7.js",
+        "/documentation/main.094ecb37bbaa3821.js",
         "/documentation/manifest.webmanifest",
-        "/documentation/polyfills.5ec9225fdc91c96e.js",
-        "/documentation/runtime.96982dc8a66e0589.js",
-        "/documentation/styles.24563c1d196bc9b3.css"
+        "/documentation/polyfills.e318d2140d9742e2.js",
+        "/documentation/runtime.ea55b6014784e308.js",
+        "/documentation/styles.95fb89f671ea789c.css"
       ],
       "patterns": []
     },
@@ -68,12 +68,12 @@
     "/documentation/assets/images/algorithms_icon3.png": "b0086fd3c3c8aea1dac87fd8e0c0e68ec58039a5",
     "/documentation/assets/images/chatbot.png": "f18356534fc792cb77e37da578daa2cb0ff4f9e8",
     "/documentation/assets/images/github/github-page.png": "85747f13504920b15ec6bff6fda0050bd73a1111",
-    "/documentation/index.html": "9d5222505dbaa469cb59ae8710dbf346a43b0df4",
-    "/documentation/main.b8c26530a8f9bfb7.js": "03b3e63de66b049f954ee4a232cba44238fa2fa0",
+    "/documentation/index.html": "60e95b230ecab63ab63ac0ba5313d76039fa0af9",
+    "/documentation/main.094ecb37bbaa3821.js": "80326652a72b6c1073640f36200b5c47e994babd",
     "/documentation/manifest.webmanifest": "24433896c7cc16f117b043a370827a7e9b519fa2",
-    "/documentation/polyfills.5ec9225fdc91c96e.js": "4dda76ca7c069fd3b33f88af626eb9869c4194bc",
-    "/documentation/runtime.96982dc8a66e0589.js": "73b9d0b29d30fad2195a7484149d8494368a5167",
-    "/documentation/styles.24563c1d196bc9b3.css": "d113324f0c0e467768895e2b6879484e53f32eff"
+    "/documentation/polyfills.e318d2140d9742e2.js": "513bd856b4df0e0cfcb51743432c474055a01507",
+    "/documentation/runtime.ea55b6014784e308.js": "c38d9cf5db17f81e0760a3293c5205c410a43421",
+    "/documentation/styles.95fb89f671ea789c.css": "b758688ae768d1a47b187500f35ebbf8283b0411"
   },
   "navigationUrls": [
     {

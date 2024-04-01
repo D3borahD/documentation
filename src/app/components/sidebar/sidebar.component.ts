@@ -22,11 +22,9 @@ export class SidebarComponent implements OnInit{
   // data depuis BODY
   @Input() currentPath!: string
 
-  ngOnInit(): void{
-
+  ngOnChanges(){
     console.log('current path : ', this.currentPath)
-
-    if(this.currentPath === 'angular'){
+    if(this.currentPath === 'Angular'){
       this.items  = [
         'introduction',
         'component',
@@ -38,15 +36,21 @@ export class SidebarComponent implements OnInit{
         'observables',
         'exercices'
       ]
-    } else if (this.currentPath === 'github'){
+    } else if (this.currentPath === 'Github'){
       this.items  = [
         'github page',
       ]
-    } else  if (this.currentPath === 'algorithmique'){
+    } else  if (this.currentPath === 'Algorithmique'){
       this.items  = [
         'chapitre 1 : Le rôle de l\'algorithmiques',
       ]
     }
 
   }
+
+  ngOnInit(): void{
+
+    console.log('current path : ', this.currentPath)
+
+    }
 }

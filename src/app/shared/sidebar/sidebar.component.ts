@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NgClass, NgForOf, TitleCasePipe} from "@angular/common";
+import {Component, OnInit} from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {ILinkMenu} from "@app/shared/sidebar/models/linkMenu";
+import {TitleCasePipe} from "@angular/common";
 
 @Component({
   selector: 'app-sidebar',
@@ -10,16 +10,12 @@ import {ILinkMenu} from "@app/shared/sidebar/models/linkMenu";
   imports: [
     RouterLink,
     RouterLinkActive,
-    NgClass,
+    TitleCasePipe,
   ],
   styleUrls: ['./sidebar.component.scss']
 })
 
 export class SidebarComponent implements OnInit{
-
-  public isActive = false;
-  public baseColor = 'white'
-  public subMenusColor = 'submenu'
 
   public menu:ILinkMenu[]=
     [
@@ -27,105 +23,85 @@ export class SidebarComponent implements OnInit{
       id: 0,
       path:'angular',
       title : 'Angular',
-      color: 'pink-purple-txt',
       isOpen: false,
       chapter:[
         {
           path:'angular/introduction',
-          title : 'introduction',
-          color: 'pink-purple-txt'},
+          title : 'introduction'},
         {
           path:'angular/component',
-          title : 'component',
-          color: 'pink-purple-txt'},
+          title : 'component'},
         {
           path:'angular/template',
-          title : 'template',
-          color: 'pink-purple-txt'},
+          title : 'template'},
         {
           path:'angular/directives',
-          title : 'directives',
-          color: 'pink-purple-txt'},
+          title : 'directives'},
         {
           path:'angular/pipes',
-          title : 'pipes',
-          color: 'pink-purple-txt'},
+          title : 'pipes'},
         {
           path:'angular/services',
-          title : 'services',
-          color: 'pink-purple-txt'},
+          title : 'services'},
         {
           path:'angular/routing',
-          title : 'routing',
-          color: 'pink-purple-txt'},
+          title : 'routing'},
         {
           path:'angular/observables',
-          title : 'observables',
-          color: 'pink-purple-txt'},
+          title : 'observables'},
         {
           path:'angular/exercices',
-          title : 'exercices',
-          color: 'pink-purple-txt'},
+          title : 'exercices'},
       ]
     },
     {id: 1,
       path:'cSharp',
       title : 'C#',
-      color: 'blue-purple-txt',
       isOpen: false,
       chapter:[
         /*{
           path:'introduction',
-          title : 'introduction',
-          color: 'blue-purple-txt'},*/
+          title : 'introduction'},*/
       ]},
     {
       id: 2,
       path:'github',
       title : 'Github',
-      color: 'blue-purple-txt',
       isOpen: false,
       chapter:[
        /* {
           path:'introduction',
-          title : 'introduction',
-          color: 'blue-purple-txt"'},*/
+          title : 'introduction'},*/
       ]},
     {
       id: 3,
       path:'algorithms',
       title : 'Algorithme',
-      color: 'blue-green-txt',
       isOpen: false,
       chapter:[
        /* {
           path:'introduction',
-          title : 'introduction',
-          color: 'blue-green-txt'},*/
+          title : 'introduction'},*/
       ]},
     {
       id: 4,
       path:'software',
       title : 'Software Craft',
-      color: 'blue-purple-txt',
       isOpen: false,
       chapter:[
        /* {
           path:'introduction',
-          title : 'introduction',
-          color: 'blue-purple-txt'},*/
+          title : 'introduction'},*/
       ]},
     {
       id: 5,
       path:'english',
       title : 'English',
-      color: 'blue-green-txt',
       isOpen: false,
       chapter:[
        /* {
           path:'introduction',
-          title : 'introduction',
-          color: 'blue-green-txt'},*/
+          title : 'introduction'},*/
       ]},
   ]
 

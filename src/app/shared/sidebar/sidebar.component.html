@@ -4,7 +4,7 @@
      <li
        class="d-flex space-between"
        routerLink="{{t.path}}"
-       routerLinkActive="{{t.color}}"
+       routerLinkActive="pink-purple-txt"
        (click)="toggleSubmenu(t.id)">
          <div class="d-flex">
            <span class="highlight"></span>
@@ -16,12 +16,11 @@
       @if (t.isOpen){
         <ul class="mx-1">
           @for (c of t.chapter; track c.title){
-            <li routerLink="{{c.path}}"
-                routerLinkActive="{{subMenusColor}}"
+            <li class="submenuPadding-05" routerLink="{{c.path}}"
+                routerLinkActive="submenuActive"
                 [routerLinkActiveOptions]="{ exact: true }"
                 >
-              {{c.title}}
-
+              {{c.title | titlecase}}
             </li>
           }
         </ul>

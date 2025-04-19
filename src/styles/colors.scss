@@ -18,6 +18,8 @@ $blue: #2069FFFF;
 $green: #25FF6FFF;
 $bluepurplegradient: linear-gradient(0deg, $purple 0%, $blue 90%);
 
+$pinkPurple-gradient: linear-gradient(0deg, $pink 0%, $purple 90%);
+
 .bg-light {
   background-color: $light;
 }

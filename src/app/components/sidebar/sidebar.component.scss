@@ -3,19 +3,23 @@
 :host{
   width: 250px;
   height: calc(100vh - 96px) ;
-  background-color: $light2;
+  background-color: $dark;
   display: block;
   padding: 1em;
+
 }
 
 li {
   list-style: none;
   margin-bottom: .5em;
+  color: white;
 }
 
 ul {
   padding: 0;
+  color: white;
 }
 a {
   text-decoration: none;
+  color: $light;
 }

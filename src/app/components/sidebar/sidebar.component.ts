@@ -63,4 +63,8 @@ export class SidebarComponent implements OnInit{
     console.log('current path : ', this.currentPath)
 
     }
+
+  getPath(angular: string) {
+    
+  }
 }

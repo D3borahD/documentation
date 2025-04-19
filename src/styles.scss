@@ -38,6 +38,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url("/assets/images/Designer.png");
+}
+
 html,
 body {
   margin: 0;
@@ -46,6 +50,7 @@ body {
   width: 100%;
   background-color: $light;
   font-family: 'Lato', sans-serif;
+
 }
 
 router-outlet {

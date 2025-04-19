@@ -137,6 +137,25 @@ app-chap1,
   }
 }
 
+// chapter
+app-introduction,
+app-component,
+app-templates,
+app-directives,
+app-pipes,
+app-services,
+app-routing,
+app-observables,
+app-angular-exercices,{
+  background-color: rgba($dark, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 1em;
+  color:$light;
+  border-radius: 8px;
+}
+
+
 .bot {
   width: 60px;
   border-radius: 50px;

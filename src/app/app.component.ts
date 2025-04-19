@@ -1,23 +1,15 @@
 import { Component } from '@angular/core';
 import { BodyComponent } from './body/body.component';
-import {HeaderComponent} from "./components/header/header.component";
-
+import {HeaderComponent} from "./shared/header/header.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     BodyComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-
-
-  ngOnInit():void {
-  }
-
-
-}
+export class AppComponent {}

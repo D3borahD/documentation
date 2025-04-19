@@ -1,9 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
-@import "src/styles/colors";
+@import "colors";
 
 //fonts
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@300;400;700&family=Roboto:wght@300;400;700&family=Ubuntu+Mono:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif+JP:wght@200..900&display=swap');
 
+// global font
+$noto: 'Noto Serif', serif;
+.noto {
+  font-family: 'Noto Serif', serif;
+}
+
+$inter:'Inter', serif;
+.inter {
+  font-family: 'Inter', serif;
+}
+
+// code font
 .lato {
   font-family:'Lato', sans-serif;
 }
@@ -38,6 +50,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url("/assets/images/background.png");
+}
+
 html,
 body {
   margin: 0;
@@ -45,7 +61,7 @@ body {
   height: 100vh;
   width: 100%;
   background-color: $light;
-  font-family: 'Lato', sans-serif;
+  font-family: $inter;
 }
 
 router-outlet {
@@ -53,7 +69,7 @@ router-outlet {
 }
 
 h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
+  font-family: $noto;
 }
 
 span {
@@ -64,10 +80,14 @@ span {
 }
 
 a{
-  color: $dark;
-}
-a {
+  color: $light;
   font-weight: bold;
+}
+
+.blur {
+  background-color: rgba($dark, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 // Theme
@@ -116,6 +136,25 @@ app-chap1,
     width: 80%;
   }
 }
+
+// chapter
+app-introduction,
+app-component,
+app-templates,
+app-directives,
+app-pipes,
+app-services,
+app-routing,
+app-observables,
+app-angular-exercices,{
+  background-color: rgba($dark, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  padding: 1em;
+  color:$light;
+  border-radius: 8px;
+}
+
 
 .bot {
   width: 60px;
@@ -166,12 +205,22 @@ pre {
   background-color: $light2;
   padding: 1em;
   border-radius: 10px;
+  color: $dark;
 }
 
 // Flex
 .d-flex {
   display: flex;
 }
+
+.flex-colonme {
+  flex-direction: column;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
 .align-center {
   align-items: center;
 }
@@ -206,6 +255,14 @@ pre {
   position: sticky;
   top: 0;
 }
+
+.highlight {
+  display: block;
+  height: 100%;
+  width: 2px;
+  margin-right: .5em;
+}
+
 
 
 

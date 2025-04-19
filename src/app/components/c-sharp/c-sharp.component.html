@@ -1,0 +1,161 @@
+<!--
+<h1>Partie 3 : Tester l'implémentation d'une nouvelle fonctionnalité</h1>
+<h2>Identifier les différents types de tests</h2>
+<p>Il existe plusieurs types de tests, qu'on peut répartir en 2 catégories : </p>
+<ul>
+  <li>Les tests manuels : très coûteux et rébarbatifs;</li>
+  <li>Les tests automatiques : pour faire gagner du temps en vérifiant automatiquement et très rapidement toutes les fonctionnalités de l'application.</li>
+</ul>
+
+<p>Le <a href="https://cftl.fr/">Comité Français des Tests Logiciels</a> identifie 4 niveaux de tests :</p>
+<ul>
+  <li>Les tests unitaires permetten de tester un comportement, ou un bout de code, isolé de ses dépendances;</li>
+  <li>Les tests d'intégration permettent de vérifier que tous les bouts de code isolés fonctionnent bien ensemble;</li>
+  <li>Les tests système permettent de tester l'application toute entière;</li>
+  <li>Les tests d'acceptation permettent de s'assurer que l'application répond bien au besoin fonctionnel.</li>
+</ul>
+<h3>Les tests unitaires et les tests d'intégration</h3>
+<p>Les tests unitaires sont les plus simples à développer et doivent pouvoir s'exécuter très rapidement afin d'avoir un retour rapide.</p>
+<p>Il fait faire en sorte que la portion de code à tester soit réduite et qu'elle soit isolée de ses dépendance.</p>
+<br>
+<p>Les tests d'intégrations permettent de vérifier que tout fonctionne bien ensemble.</p>
+<p>Ils permettent de tester les dépendances que l'on est capable de maîtriser (une base de données, des fichiers). Par contre, il faudra toujours bouchonner les dépendances sur lesquelles nous n'avons pas la main (faire appel à un service tiers de météo)</p>
+<div class="definition">
+<p>Bouchonner une fépendance est une pratique permettant de remplacer une dépendance que l'on ne maîtrise pas par un faux comportement sur lequel on a la main.</p>
+</div>
+
+<p>Les tests système et d'acceptation vont encore plus loin et permettent de s'assurer que l'application complère et déployée dans les même conditiond qu'en production fonctionne comme on le souhaite.</p>
+
+<h3>La pyramide des tests</h3>
+<div class="diagram">
+  <div class="pyramid">
+  <div class="triangle">
+    <div>
+      <p>(10%)</p>
+      <p>Tests d'interface</p>
+      <p>Tests de bout en bout</p>
+    </div>
+    <div>
+      <p>(20%)</p>
+      <p>Tests d'intégration</p>
+    </div>
+    <div>
+      <p>(70%)</p>
+      <p>Tests unitaires</p>
+    </div>
+  </div>
+  <div class="bottum-diagram">
+    <div class="double-arrow">
+      <span class="left-arrow"></span>
+      <span class="arrow"></span>
+      <span class="right-arrow"></span>
+
+    </div>
+    <p>Quantité de tests</p>
+  </div>
+  </div>
+<div class="left-diagram">
+  <p>Coût</p>
+  <span class="arrow-up"></span>
+  <span class="body-arrow"></span>
+</div>
+</div>
+
+<div class="definition">
+  <p>Un test d'interface consiste à manipuler directement l'interface d'un logiciel comme un utilisateur le ferait.</p>
+  <p>En général, on se sert d'un test d'interface pour exécuter un test de bout en bout, qui va permettre de valider une fonctionnalité complète (test d'acceptation</p>
+</div>
+
+<h2>Les principes du Test-Driven Development (TDD)</h2>
+
+<p>Le développement dirigé par les tests.</p>
+<p>On commence par écrire le test qui vérifie le fonctionnement de la nouvelle fonctionnalité.</p>
+<p>Ensuite, la fonctionnalité est développée pour que le test soit validé.</p>
+<p>On travail par cycle itératifs : </p>
+<ul>
+  <li>écrire le minimum de code possible pour faire passer le test;</li>
+  <li>enrichir la base de tests avec un nouveau test;</li>
+  <li>écrire le minimum de code pour faire passer le test;</li>
+  <li>…</li>
+</ul>
+<P>Cette pratique vient de Kent Beck, l'un des signataires du Manifeste Agile.</P>
+
+<h3>Les étapes du cycle du TDD</h3>
+<ol>
+  <li>écrire un test</li>
+  <li>exécuter le test : il doit échouer</li>
+  <li>écrire le minimum de code</li>
+  <li>refactorer le code : simplifier, mieux écrire, rendre générique. On retire les dupplications, on renomme les variables, méthodes, classes, … afin que le code soit propre et exprime clairement l'intention. On peut séparer les responsabilités, extraire des patrons de conception, …</li>
+  <li>on recommence à l'étape 1</li>
+</ol>
+
+&lt;!&ndash;graph tdd&ndash;&gt;
+<div class="illustration-tdd">
+  <div class="z-index-1 p-absolute red">
+    <img src="./assets/images/tdd/red.png">
+    <p>Écrire un test qui échoue</p>
+  </div>
+    <div class="red-progress-bar"></div>
+
+  <div class="bottom">
+
+    <div class="z-index-1 p-absolute blue">
+      <img src="./assets/images/tdd/refactor.png">
+      <p>Refactorer le code</p>
+    </div>
+
+
+    <div class="z-index-1 p-absolute green">
+      <img src="./assets/images/tdd/green.png">
+      <p>Écrire le code pour faire passer le test</p>
+    </div>
+
+  </div>
+
+</div>
+
+<h3>Les bénéfices du TDD</h3>
+<p>Grâce au TDD, le design d'une classe ou d'un code émerge de lui-même. Le travail se fait d'abord sur le contrat et ensuite sur l'implémentation.</p>
+<p>Selon les études, le code est de meilleure qualité et les développeurs sont plus productifs.</p>
+
+<div class="definition">
+  <p>écrire le minimum de code permet de respecter les bonnes pratiques KISS et YAGNI</p>
+  <ul>
+    <li>KISS (Keep It Simple Stupid) : incite à garder le code simple</li>
+    <li>YAGNI (You ain't gonna need it) : ne pas anticiper les besoins.</li>
+  </ul>
+</div>
+
+<div class="definition">
+  <h2>Reférences : </h2>
+
+  <ul>
+    <h3>OpenClassrooms</h3>
+    <li>  <a href="https://openclassrooms.com/fr/courses/5641591-testez-votre-application-c"> Testez votre application C# </a>
+    </li>
+    <h3>Wikipédia</h3>
+    <li><a href="https://fr.wikipedia.org/wiki/YAGNI">YAGNI</a></li>
+  </ul>
+</div>
+
+<div class="definition">
+  <h4>YAGNI</h4>
+  <p>(You ain't gonna need it) : ne pas anticiper les besoins.</p>
+  <p>Selon ceux qui prônent l'approche YAGNI, la tentation d'écrire du code qui n'est pas nécessaire à l'instant présent, mais pourrait l'être dans le futur, entraîne les inconvénients suivants : </p>
+  <ul>
+    <li>Les temps nécessaire est pris sur l'ajout, le test ou l'amélioration de fonctionnalités immédiatement nécessaires.</li>
+    <li>Les fonctionnalités supplémentaires doivent être débugguées, documentées et entretenues;</li>
+    <li>Toute nouvelle fonctionnalité impose des contraintes sur ce qui peut être fait dans le futur, donc une fonctionnalité inutile pour l'instant risque la possibilité d'un conflit avec une future fonctionnalité nécéssaire;</li>
+    <li>Tant que la nouvelle fonctionnalité n'est pas réellement nécessaire, il est difficile de définir complètement ce qu'elle doit faire, et comment la tester. Si cette nouvelle fonctionnalité n'est pas correctement définie et testée, elle risque de ne pas fonctionner correctement lorsqu'elle sera un jour nécessaire.</li>
+    <li>Elle entraîne l'écriture de code inutilement long, lent ou gaspillant des ressources. Le logiciel grossit et devient plus compliqué;</li>
+    <li>En l'absence de spécifications et d'un contrôle de version, la fonctionnalité peut être inconnue des programmeurs qui pourraient s'en servir;</li>
+    <li>Ajouter une nouvelle fonctionnalité peut suggérer d'autres nouveautés. Si ces fonctionnalités sont réalisées à leur tour, cela peut entraîner un effet boule de neige.</li>
+  </ul>
+  <h5>Critiques</h5>
+  <p>L'ajout de fonctionnalités particulièrement structurantes à un logiciel déjà existant peut parfois s'avérer escessivement complexe.Que la présence de cette fonctionnalité ait été anticipée dès la première version du logiciel peut donc, malgré un potentiel surcoût initial, s'avérer moins couteux que si elle avait été totalement ignorée.</p>
+  <p>Une analyse par fonctionnalité est donc généralement nécessaire pour éviter les problèmes que pourrait engendrer une application trop naïve du principe YAGNI.</p>
+</div>
+
+
+
+-->

@@ -1,0 +1,32 @@
+<nav>
+  <ul>
+    @for (t of menu; track t.id){
+     <li
+       class="d-flex space-between"
+       routerLink="{{t.path}}"
+       routerLinkActive="pink-purple-txt"
+       (click)="toggleSubmenu(t.id)">
+         <div class="d-flex">
+           <span class="highlight"></span>
+          {{t.title}}
+         </div>
+           <i class="fa-solid fa-chevron-down" [class.fa-rotate-90]="!t.isOpen"></i>
+     </li>
+
+      @if (t.isOpen){
+        <ul class="mx-1">
+          @for (c of t.chapter; track c.title){
+            <li class="submenuPadding-05" routerLink="{{c.path}}"
+                routerLinkActive="submenuActive"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >
+              {{c.title | titlecase}}
+            </li>
+          }
+        </ul>
+      }
+    }
+  </ul>
+
+
+</nav>

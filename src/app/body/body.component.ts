@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {SidebarComponent} from "../components/sidebar/sidebar.component";
+import {SidebarComponent} from "../shared/sidebar/sidebar.component";
 import {RouterOutlet} from "@angular/router";
-
 
 @Component({
   selector: 'app-body',
@@ -19,12 +18,7 @@ export class BodyComponent implements OnInit{
   // data vers sidebar
   public url: string='angular'
 
-
-
+  @Input() currentPath!: string
   ngOnInit():void {
-    // mauvais path
-
   }
-
-
 }

@@ -1,13 +1,13 @@
-<h2 class="red-yellow-txt">Templates</h2>
+<h2 class="pink-purple-txt">Templates</h2>
 
 <p>En Angular, il y a 2 façons principales d'exploiter une donnée venant du TypeScript dans le Template.</p>
 <ul>
-  <li class="red-yellow-txt">String interpolation</li>
-  <li class="red-yellow-txt">Attribute binding</li>
+  <li class="pink-purple-txt">String interpolation</li>
+  <li class="pink-purple-txt">Attribute binding</li>
 </ul>
 
-<p>Pour initialiser les propriétés en suivant les "best practices Angular", on utilise la méthode <span class="red-yellow-txt">ngOnInit()</span>.</p>
-<p>Pour l'utiliser, il faut implémenter l'<span class="red-yellow-txt">interface OnInit</span></p>
+<p>Pour initialiser les propriétés en suivant les "best practices Angular", on utilise la méthode <span class="pink-purple-txt">ngOnInit()</span>.</p>
+<p>Pour l'utiliser, il faut implémenter l'<span class="pink-purple-txt">interface OnInit</span></p>
 
 <pre>
   <span class="label">TypeScript</span>
@@ -41,12 +41,12 @@
 </pre>
 
 <div class="definition">
-  <i class="fa-solid fa-circle-info red-yellow-txt"></i>
-  <p>La méthode <span class="red-yellow-txt">ngOnInit()</span> est appelée automatiquement par Angular au moment de la <span class="red-yellow-txt">création de chaque instance</span> du composant.</p>
+  <i class="fa-solid fa-circle-info pink-purple-txt"></i>
+  <p>La méthode <span class="pink-purple-txt">ngOnInit()</span> est appelée automatiquement par Angular au moment de la <span class="pink-purple-txt">création de chaque instance</span> du composant.</p>
   <p>Elle permet d'initialiser des propriétés</p>
 </div>
 
-<h3 class="red-yellow-txt">Afficher des valeurs avec l'interpolation</h3>
+<h3 class="pink-purple-txt">Afficher des valeurs avec l'interpolation</h3>
 <pre>
   <span class="label">HTML</span>
   <code class="language-html">
@@ -55,7 +55,7 @@
   </code>
 </pre>
 
-<h3 class="red-yellow-txt">Afficher des valeurs avec la liaison par attribut (attribut binding)</h3>
+<h3 class="pink-purple-txt">Afficher des valeurs avec la liaison par attribut (attribut binding)</h3>
 <p>Préférable si la propriété n'est pas un string (number)</p>
 
 <pre>
@@ -65,7 +65,7 @@
   </code>
 </pre>
 
-<h3 class="red-yellow-txt">Réagir aux évènement (Template statements)</h3>
+<h3 class="pink-purple-txt">Réagir aux évènement (Template statements)</h3>
 
 <p>Ce sont des méthodes ou propriétés que l'on utilise dans le HTML pour répondre à un évènement.</p>
 <pre>
@@ -90,17 +90,17 @@
     &#125;
   </code>
 </pre>
-<p>Le nom de la méthode qui commence par <span class="red">on</span> signale qu'elle répond à un <span class="red">évènement</span></p>
+<p>Le nom de la méthode qui commence par <span class="pink-purple-txt">on</span> signale qu'elle répond à un <span class="pink-purple-txt">évènement</span></p>
 
-<p>Quand l'utilisateur click sur le bouton, Angular appelle la méthode <span class="red">onLike()</span> dans la class du composant.</p>
+<p>Quand l'utilisateur click sur le bouton, Angular appelle la méthode <span class="pink-purple-txt">onLike()</span> dans la class du composant.</p>
 
 <div class="definition">
   <p>La réponse aux évènements est un aspect du flux de données unidirectionnel d'Angular.</p>
 </div>
 
-<h3 class="red-yellow-txt">Envoyer des données à un component enfant</h3>
+<h3 class="pink-purple-txt">Envoyer des données à un component enfant</h3>
 
-<p>Angular permet d'ajouter des <span class="red">propriétés personnalisées</span> aux components de manière à pouvoir les injecter <span class="red">depuis le component parent</span>.</p>
+<p>Angular permet d'ajouter des <span class="pink-purple-txt">propriétés personnalisées</span> aux components de manière à pouvoir les injecter <span class="pink-purple-txt">depuis le component parent</span>.</p>
 
 <p>Créer un type personnalisé sous forme de classe : </p>
 
@@ -121,9 +121,9 @@
 &#125;
   </code>
 </pre>
-<p>Le <span class="red">décorateur &#64;Input()</span> dans un component ou une directive enfant signifie que la propriété peut recevoir sa valeur depuis son component parent.</p>
-<p>Pour utiliser <span class="red">&#64;Input()</span>, il faut configurer le parent et l'enfant.</p>
-<h4 class="red-yellow-txt">Configurer le component enfant : </h4>
+<p>Le <span class="pink-purple-txt">décorateur &#64;Input()</span> dans un component ou une directive enfant signifie que la propriété peut recevoir sa valeur depuis son component parent.</p>
+<p>Pour utiliser <span class="pink-purple-txt">&#64;Input()</span>, il faut configurer le parent et l'enfant.</p>
+<h4 class="pink-purple-txt">Configurer le component enfant : </h4>
 <pre>
   <label class="file-name">📄 enfant.component.ts</label>
   <code class="language-typescript">
@@ -137,7 +137,7 @@
     &#125;
   </code>
 </pre>
-<h4 class="red-yellow-txt">Configurer le component parent : </h4>
+<h4 class="pink-purple-txt">Configurer le component parent : </h4>
 <pre>
   <label class="file-name">📄 parent.component.html</label>
   <code class="language-html">

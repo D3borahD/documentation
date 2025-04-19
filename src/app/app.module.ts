@@ -1,5 +1,6 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
 
@@ -11,6 +12,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    ReactiveFormsModule,
   ],
 })
 export class AppModule { }

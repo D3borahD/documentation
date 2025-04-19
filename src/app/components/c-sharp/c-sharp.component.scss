@@ -1,0 +1,182 @@
+@import "colors";
+
+:host{
+  display: block;
+  width: 100%;
+  height: calc(100vh - 96px);
+}
+
+.diagram{
+  width: 100%;
+  height: 600px;
+  text-align: center;
+  display: flex;
+}
+.pyramid{
+  width: 800px;
+}
+
+.triangle {
+  background-image: $bluepurplegradient;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  height: 500px;
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: $light;
+  div{
+    border-bottom: solid 5px $light;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.bottum-diagram{
+  display: block;
+  justify-content: center;
+  position: relative;
+  height: 100px;
+  width: 100%;
+}
+
+.double-arrow{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.left-diagram{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-arrow{
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-right:15px solid $dark;
+  display: block;
+}
+
+.arrow{
+  height: 5px;
+  width: 100%;
+  background-color: $dark;
+  display: block;
+}
+
+.right-arrow {
+  width: 0;
+  height: 0px;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  display: block;
+  border-left: 15px solid $dark;
+}
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid $dark;
+}
+.body-arrow{
+  width: 5px;
+  height:400px;
+  height:420px;
+  height:420px;
+  background-color: $dark;
+  display: block;
+}
+
+.illustration-tdd{
+  position: relative;
+  margin: auto;
+  padding: 50px;
+height: 500px;
+  width: 500px;
+  background-color: #e7ebf1;
+  border-radius: 20px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  img{
+    width: 125px;
+    height: 125px;
+  }
+  .bottom{
+    display: flex;
+    justify-content: space-around;
+    img{
+      margin: 50px 100px 0 100px;
+    }
+  }
+
+}
+
+.p-absolute{
+  position: absolute;
+}
+.red{
+  top:50px
+}
+.green{
+  top: 230px;
+  left: 230px;
+  color: green;
+}
+.blue{
+  top: 230px;
+  left: -80px;
+}
+
+.red-progress-bar {
+  width: 325px;
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  height: 325px;
+  transform: rotate(25deg);
+  border-radius: 80%;
+  font-size: 3em;
+  font-weight: bold;
+  background:
+     conic-gradient(
+          red 0deg 60deg,
+          transparent 60deg 125deg,
+          green 125deg 185deg,
+          transparent 185deg 245deg,
+          blue 245deg 300deg,
+          transparent 300deg 360deg
+      );
+  &::before{
+    content: "";
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    background-color: #e7ebf1;
+  }
+  &::after{
+    content: "TDD";
+    position: absolute;
+    transform: rotate(-25deg);
+    top:40%;
+    left:35%;
+  }
+}
+
+
+

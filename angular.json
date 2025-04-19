@@ -30,9 +30,13 @@
               "src/assets",
               "src/manifest.webmanifest"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles"]
+            },
             "styles": [
               "src/styles.scss"
             ],
+
             "scripts": [],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"

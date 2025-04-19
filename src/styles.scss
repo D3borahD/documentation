@@ -81,8 +81,6 @@ span {
 
 a{
   color: $light;
-}
-a {
   font-weight: bold;
 }
 
@@ -191,7 +189,6 @@ pre {
   color: $dark;
 }
 
-
 // Flex
 .d-flex {
   display: flex;
@@ -199,6 +196,10 @@ pre {
 
 .flex-colonme {
   flex-direction: column;
+}
+
+.space-between {
+  justify-content: space-between;
 }
 
 .align-center {
@@ -235,6 +236,14 @@ pre {
   position: sticky;
   top: 0;
 }
+
+.highlight {
+  display: block;
+  height: 100%;
+  width: 2px;
+  margin-right: .5em;
+}
+
 
 
 

@@ -1,9 +1,33 @@
 <nav>
   <ul>
-    <li routerLink="angular" routerLinkActive="pink-purple-txt">Angular</li>
-    <li routerLink="cSharp" routerLinkActive="blue-purple-txt">C#</li>
-    <li routerLink="github" routerLinkActive="blue-purple-txt">Github</li>
-    <li routerLink="algorithms" routerLinkActive="blue-green-txt">Algorithmiques</li>
-    <li routerLink="english" routerLinkActive="blue-green-txt" >Anglais</li>
+    @for (t of menu; track t.id){
+     <li
+       class="d-flex space-between"
+       routerLink="{{t.path}}"
+       routerLinkActive="{{t.color}}"
+       (click)="toggleSubmenu(t.id)">
+         <div class="d-flex">
+           <span class="highlight"></span>
+          {{t.title}}
+         </div>
+           <i class="fa-solid fa-chevron-down" [class.fa-rotate-90]="!t.isOpen"></i>
+     </li>
+
+      @if (t.isOpen){
+        <ul class="mx-1">
+          @for (c of t.chapter; track c.title){
+            <li routerLink="{{c.path}}"
+                routerLinkActive="{{subMenusColor}}"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >
+              {{c.title}}
+
+            </li>
+          }
+        </ul>
+      }
+    }
   </ul>
+
+
 </nav>

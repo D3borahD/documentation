@@ -1,4 +1,10 @@
-@import "src/styles/colors";
+@import "/styles/colors";
+
+:host{
+  display: block;
+  width: 100%;
+  height: calc(100vh - 96px);
+}
 
 .diagram{
   width: 100%;

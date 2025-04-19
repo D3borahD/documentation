@@ -4,6 +4,21 @@
 //fonts
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@300;400;700&family=Roboto:wght@300;400;700&family=Ubuntu+Mono:ital@0;1&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Serif+JP:wght@200..900&display=swap');
+
+
+// global font
+$noto: 'Noto Serif', serif;
+.noto {
+  font-family: 'Noto Serif', serif;
+}
+
+$inter:'Inter', serif;
+.inter {
+  font-family: 'Inter', serif;
+}
+
+// code font
 .lato {
   font-family:'Lato', sans-serif;
 }
@@ -22,6 +37,8 @@
   font-size: 1.5em;
 }
 
+
+
 .text-center {
   text-align: center;
 }
@@ -39,7 +56,7 @@
 }
 
 body {
-  background-image: url("/assets/images/Designer.png");
+  background-image: url("/assets/images/background.png");
 }
 
 html,
@@ -49,8 +66,7 @@ body {
   height: 100vh;
   width: 100%;
   background-color: $light;
-  font-family: 'Lato', sans-serif;
-
+  font-family: $inter;
 }
 
 router-outlet {
@@ -58,7 +74,7 @@ router-outlet {
 }
 
 h1, h2, h3 {
-  font-family: 'Oswald', sans-serif;
+  font-family: $noto;
 }
 
 span {
@@ -177,6 +193,11 @@ pre {
 .d-flex {
   display: flex;
 }
+
+.flex-colonme {
+  flex-direction: column;
+}
+
 .align-center {
   align-items: center;
 }

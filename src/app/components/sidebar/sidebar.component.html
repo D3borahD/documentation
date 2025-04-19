@@ -1,16 +1,9 @@
-<nav class="">
-  <li class="mr-1" routerLink="angular" routerLinkActive="red-yellow-text" (click)="getPath('Angular')" >Angular</li>
-  <li class="mx-1" routerLink="cSharp" routerLinkActive="blue-purple-txt" (click)="getPath('CSharp')">C#</li>
-  <li class="mx-1" routerLink="github" routerLinkActive="blue-purple-txt" (click)="getPath('Github')">Github</li>
-  <li class="mx-1" routerLink="algorithms" routerLinkActive="blue-green-txt" (click)="getPath('Algorithmique')">Algorithmiques</li>
-  <li class="mx-1" routerLink="english" routerLinkActive="blue-green-txt" (click)="getPath('English')">Anglais</li>
-
-  <!-- <li class="mx-1">Design</li>
-  <li class="mx-1">CSS</li>-->
+<nav>
+  <ul>
+    <li routerLink="angular" routerLinkActive="pink-purple-txt">Angular</li>
+    <li routerLink="cSharp" routerLinkActive="blue-purple-txt">C#</li>
+    <li routerLink="github" routerLinkActive="blue-purple-txt">Github</li>
+    <li routerLink="algorithms" routerLinkActive="blue-green-txt">Algorithmiques</li>
+    <li routerLink="english" routerLinkActive="blue-green-txt" >Anglais</li>
+  </ul>
 </nav>
-
-
-<ul *ngFor="let item of items">
-  <li> <a routerLink="angular/{{item}}" routerLinkActive="red">{{item | titlecase}}</a></li>
-</ul>
-<!--link to hosting angular on github pages-->

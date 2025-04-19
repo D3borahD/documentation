@@ -14,9 +14,12 @@ import {AngularExercicesComponent} from "./components/angular/components/angular
 import {GithubComponent} from "./components/github/github.component";
 import {AlgorithmsComponent} from "./components/algorithms/algorithms.component";
 import {Chap1Component} from "./components/algorithms/chap1/chap1.component";
+import {EnglishComponent} from "./components/english/english.component";
+import {CSharpComponent} from "./components/c-sharp/c-sharp.component";
 
 export const routes: Routes = [
   { path: '', component: AngularComponent},
+  {path: '', redirectTo: 'introduction', pathMatch:'full'},
 
   { path: 'angular', component: AngularComponent,
     children:[
@@ -42,4 +45,7 @@ export const routes: Routes = [
 
     ]
   },
+
+  { path: 'english', component: EnglishComponent},
+  { path: 'cSharp', component: CSharpComponent},
 ];

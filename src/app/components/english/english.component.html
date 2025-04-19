@@ -1,0 +1,18 @@
+<p>english works!</p>
+
+
+
+<form [formGroup]="vocabularyForm" (ngSubmit)="onSubmit()">
+  <label for="fr" >french : </label>
+  <input id="fr" type="text" formControlName="french">
+
+  <label for="en" >english : </label>
+  <input id="en" type="text" formControlName="english">
+
+  <p>Complete the form to enable button.</p>
+  <button type="submit" [disabled]="!vocabularyForm.valid">Submit</button>
+
+</form>
+
+
+

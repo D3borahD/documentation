@@ -45,6 +45,16 @@ export class SidebarComponent implements OnInit{
         'chapitre 1 : Le rôle de l\'algorithmiques',
       ]
     }
+    else  if (this.currentPath === 'CSharp'){
+      this.items  = [
+        'csharp menu',
+      ]
+    }
+    else  if (this.currentPath === 'English'){
+      this.items  = [
+        'anglais menu',
+      ]
+    }
 
   }
 

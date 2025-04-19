@@ -9,6 +9,7 @@ $yellow: #fcbf2e;
 $purple: #BF25FFFF;
 $blue: #2069FFFF;
 $green: #25FF6FFF;
+$bluepurplegradient: linear-gradient(0deg, $purple 0%, $blue 90%);
 
 .bg-light {
   background-color: $light;

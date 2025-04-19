@@ -3,6 +3,9 @@ $dark: #010115;
 $light2: #e8e8f4;
 $light: #f3f3f8;
 
+$blue-dark: #002451;
+
+
 $red: #de1e12;
 $yellow: #fcbf2e;
 $pink: #FA30C5;
@@ -31,6 +34,9 @@ $bluepurplegradient: linear-gradient(0deg, $purple 0%, $blue 90%);
   -webkit-text-fill-color: transparent;
 }
 
+.pink-purple {
+  background-image: linear-gradient(90deg, $pink 0%, $purple 60%);
+}
 
 .red-yellow-txt {
   background: -webkit-linear-gradient(90deg, $yellow 0%, $red 60%);

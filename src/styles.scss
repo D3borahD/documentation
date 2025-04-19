@@ -34,8 +34,6 @@ $inter:'Inter', serif;
   font-size: 1.5em;
 }
 
-
-
 .text-center {
   text-align: center;
 }
@@ -82,10 +80,16 @@ span {
 }
 
 a{
-  color: $dark;
+  color: $light;
 }
 a {
   font-weight: bold;
+}
+
+.blur {
+  background-color: rgba($blue-dark, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
 // Theme
@@ -184,7 +188,9 @@ pre {
   background-color: $light2;
   padding: 1em;
   border-radius: 10px;
+  color: $dark;
 }
+
 
 // Flex
 .d-flex {

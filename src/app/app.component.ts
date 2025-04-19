@@ -3,7 +3,6 @@ import { BodyComponent } from './body/body.component';
 import {HeaderComponent} from "./components/header/header.component";
 import {SidebarComponent} from "./components/sidebar/sidebar.component";
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -16,15 +15,5 @@ import {SidebarComponent} from "./components/sidebar/sidebar.component";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  public url: string='change moi'
-  //test: string= 'change moi'
-  ngOnInit():void {
-  }
-
-  addItem(newItem: string) {
-    this.url = newItem;
-  }
-
 
 }

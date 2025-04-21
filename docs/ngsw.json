@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1745138847118,
+  "timestamp": 1745246279100,
   "index": "/documentation/index.html",
   "assetGroups": [
     {
@@ -11,6 +11,7 @@
         "ignoreVary": true
       },
       "urls": [
+        "/documentation/favicon.ico",
         "/documentation/index.html",
         "/documentation/main.bf814c271afbf820.js",
         "/documentation/manifest.webmanifest",
@@ -82,6 +83,7 @@
     "/documentation/assets/images/tdd/refactor.png": "799edc7544734946a77ad4b1b9ef36d40bb8fea0",
     "/documentation/assets/kitsuneIcon.png": "465a81988b418908a9a17317bb9f45d2ad4bc170",
     "/documentation/background.1f54cc06728697c5.png": "6f611647fe0cc76c6e6b16a75c75c6c90f5ad769",
+    "/documentation/favicon.ico": "465a81988b418908a9a17317bb9f45d2ad4bc170",
     "/documentation/index.html": "a5d9c7cef74ffe917b6e084e2144d3badcf5aa67",
     "/documentation/main.bf814c271afbf820.js": "e5c948ed584dba1b5c6295f6c6f0227236aa0544",
     "/documentation/manifest.webmanifest": "24433896c7cc16f117b043a370827a7e9b519fa2",

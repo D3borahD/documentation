@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1745223984180,
+  "timestamp": 1745224526940,
   "index": "/DigitalGarden/index.html",
   "assetGroups": [
     {
@@ -82,7 +82,7 @@
     "/DigitalGarden/assets/images/tdd/refactor.png": "799edc7544734946a77ad4b1b9ef36d40bb8fea0",
     "/DigitalGarden/assets/kitsuneIcon.png": "465a81988b418908a9a17317bb9f45d2ad4bc170",
     "/DigitalGarden/background.1f54cc06728697c5.png": "6f611647fe0cc76c6e6b16a75c75c6c90f5ad769",
-    "/DigitalGarden/index.html": "ef2a7f0573523f40c7886bffdf1487007642dcc1",
+    "/DigitalGarden/index.html": "671ec3dce4e523d490c9b47b6bce8c58ee600615",
     "/DigitalGarden/main.fe41dbf77b3635a5.js": "69069d044cb9c86bf4cb2c091d1cb6421a88202f",
     "/DigitalGarden/manifest.webmanifest": "24433896c7cc16f117b043a370827a7e9b519fa2",
     "/DigitalGarden/polyfills.186156cb05a76de2.js": "30e5f2a285468271fe9181cd52482603c41c0112",

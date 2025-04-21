@@ -1,0 +1,100 @@
+<h2 class="pink-purple-txt">Anatomie d'un component</h2>
+<h3 class="pink-purple-txt mb-0">Mise à jour du style</h3>
+<pre>
+ <span class="label">CSS</span>
+  <code class="langage-css">
+    :host &#123;
+      color: bleu;
+     &#125;
+  </code>
+</pre>
+
+<h3 class="pink-purple-txt mb-0">Interpolation</h3>
+
+<pre>
+ <span class="label">HTML</span>
+  <code class="langage-html">
+    &#123;<span>&#123;</span>  &#125;&#125;
+  </code>
+</pre>
+<ul>
+  <li>Permet d'afficher du texte dynamique</li>
+  <li>Appel de fonction</li>
+  <li>Écrire des expression : &#123;<span>&#123;</span> 1 + 1 &#125;&#125; </li>
+</ul>
+
+<h3 class="pink-purple-txt mb-0">Selector</h3>
+<pre>
+ <span class="label">HTML</span>
+  <code class="langage-html">
+    < app-user />
+  </code>
+</pre>
+
+<h3 class="pink-purple-txt mb-0">Utilisation des components</h3>
+<pre>
+ <span class="label">CSS</span>
+  <code class="langage-css">
+    &#64;Component(&#123;
+      selector: 'app-user',
+      template: `userName`,
+      imports: [UserComponent]
+      &#125;)
+
+    // on appel le component dans le template et on l'importe dans le Ts
+
+    &#64;Component(&#123;
+      selector: 'app-root',
+      template: `< app-user / >`,
+      imports: [UserComponent]
+      &#125;)
+  </code>
+</pre>
+
+<h2 class="pink-purple-txt mb-0">&#64;if</h2>
+
+<div class="d-flex code-side-by-side">
+  <pre>
+    <span class="label">HTML</span>
+    <code class="langage-html">
+      &#64;if (isLoggedIn) &#123;
+        <p>Welcome back, Friend!</p>
+      &#125;
+    </code>
+  </pre>
+
+  <pre>
+    <span class="label">TS</span>
+    <code class="langage-ts">
+      class AppComponent &#123;
+        isLoggedIn = true;
+      &#125;
+    </code>
+  </pre>
+</div>
+
+<h2 class="pink-purple-txt mb-0">&#64;for</h2>
+
+<div class="d-flex code-side-by-side">
+  <pre>
+    <span class="label">HTML</span>
+    <code class="langage-html">
+      &#64;for (os of operatingSystems; track os.id) &#123;
+      &#123;<span>&#123;</span> os.name &#125;&#125;
+      &#125;
+    </code>
+  </pre>
+
+  <pre>
+    <span class="label">TS</span>
+    <code class="langage-ts">
+      export class AppComponent &#123;
+      operatingSystems = [
+        &#123;id: 'win', name: 'Windows'&#125;,
+        &#123;id: 'osx', name: 'MacOS'&#125;,
+        &#123;id: 'linux', name: 'Linux'&#125;
+        ];
+      &#125;
+    </code>
+  </pre>
+</div>

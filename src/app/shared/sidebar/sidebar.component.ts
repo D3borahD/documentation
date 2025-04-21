@@ -29,6 +29,9 @@ export class SidebarComponent implements OnInit{
           path:'angular/introduction',
           title : 'introduction'},
         {
+          path:'angular/tutorial',
+          title : 'tutorial'},
+        {
           path:'angular/component',
           title : 'component'},
         {

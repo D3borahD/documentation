@@ -11,6 +11,7 @@
         "ignoreVary": true
       },
       "urls": [
+        "/documentation/favicon.ico",
         "/documentation/index.html",
         "/documentation/main.545f919498ffaf96.js",
         "/documentation/manifest.webmanifest",

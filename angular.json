@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "personal_documentation": {
+    "digital-garden": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "personal_documentation:build:production"
+              "buildTarget": "digital-garden:build:production"
             },
             "development": {
-              "buildTarget": "personal_documentation:build:development"
+              "buildTarget": "digital-garden:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "personal_documentation:build"
+            "buildTarget": "digital-garden:build"
           }
         },
         "test": {

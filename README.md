@@ -1,4 +1,4 @@
-# Digital Garden
+# PersonalDocumentation
 
 ![Static Badge](https://img.shields.io/badge/Angular-v17-red?style=flat) ![Static Badge](https://img.shields.io/badge/Node-v20.11.0-green?style=flat)
 

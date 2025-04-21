@@ -16,6 +16,7 @@ import {AlgorithmsComponent} from "./components/algorithms/algorithms.component"
 import {Chap1Component} from "./components/algorithms/chap1/chap1.component";
 import {EnglishComponent} from "./components/english/english.component";
 import {CSharpComponent} from "./components/c-sharp/c-sharp.component";
+import {TutorialComponent} from "@app/components/angular/components/tutorial/tutorial.component";
 
 export const routes: Routes = [
   { path: '', component: AngularComponent},
@@ -25,6 +26,7 @@ export const routes: Routes = [
     children:[
       {path: '', redirectTo: 'introduction', pathMatch:'full'},
       {path: 'introduction', component: AngularIntroductionComponent },
+      {path: 'tutorial', component: TutorialComponent },
       {path: 'component', component: ComponentComponent },
       {path: 'template', component: TemplatesComponent },
       {path: 'directives', component: DirectivesComponent },

@@ -100,25 +100,6 @@ app-algorithms{
   overflow-y: scroll;
 }
 
-// Component
-app-intoduction,
-app-component,
-app-angular-exercices,
-app-templates,
-app-directives,
-app-pipes,
-app-services,
-app-routing,
-app-observables,
-//algo
-app-chap1,
-//github
-/*app-github,*/
-{
-  display: block;
-  margin: 0 4em;
-}
-
 // Elements
 .techno-logo {
   height: 52px;
@@ -139,6 +120,7 @@ app-chap1,
 
 // chapter
 app-introduction,
+app-tutorial,
 app-component,
 app-templates,
 app-directives,
@@ -153,8 +135,9 @@ app-angular-exercices,{
   padding: 1em;
   color:$light;
   border-radius: 8px;
+  display: block;
+  margin: 0 4em;
 }
-
 
 .bot {
   width: 60px;
@@ -246,6 +229,9 @@ pre {
 .mt-1 {
   margin-top: 1em;
 }
+.mb-0{
+  margin-bottom: 0;
+}
 
 .my-2 {
   margin: 2em 0 2em 0;
@@ -262,7 +248,3 @@ pre {
   width: 2px;
   margin-right: .5em;
 }
-
-
-
-

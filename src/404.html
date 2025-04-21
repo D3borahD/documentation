@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page non trouvée</title>
+  <script>
+    (function() {
+      var path = window.location.pathname + window.location.search + window.location.hash;
+      var newPath = path.replace(/\/([^?]+)(\?.*)?$/, '/?/$1$2');
+      window.location.replace(newPath);
+    })();
+  </script>
+</head>
+<body>
+<h1>Page non trouvée</h1>
+</body>
+</html>

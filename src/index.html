@@ -9,7 +9,12 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.4.0/css/all.css"/>
   <meta name="theme-color" content="#1976d2">
-
+  <script>
+    if (window.location.search && window.location.search.includes('/')) {
+      var path = window.location.search.substring(2);
+      window.history.replaceState({}, '', path);
+    }
+  </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/tomorrow-night-blue.min.css">
 </head>
 <body>

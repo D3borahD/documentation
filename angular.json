@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "digital-garden": {
+    "documentation": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,8 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/digital-garden/",
-            "outputPath": "dist/digital-garden",
+            "baseHref": "/documentation/",
+            "outputPath": "dist/documentation",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "digital-garden:build:production"
+              "buildTarget": "documentation:build:production"
             },
             "development": {
-              "buildTarget": "digital-garden:build:development"
+              "buildTarget": "documentation:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "digital-garden:build"
+            "buildTarget": "documentation:build"
           }
         },
         "test": {

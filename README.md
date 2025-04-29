@@ -21,10 +21,16 @@ The application will automatically reload if you change any of the source files.
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+**Requirement** : 
+```
+ng add angular-cli-ghpages
+```
+
 ### To hosting on Github pages 
  ```
- ng build --output-path docs --base-href /documentation/
+ ng build --base-href /documentation/ && npx angular-cli-ghpages --dir=dist/documentation
  ```
+Deployment on gh-pages branch
 
 ## Running unit tests
 

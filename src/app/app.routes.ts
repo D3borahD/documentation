@@ -15,7 +15,6 @@ import {GithubComponent} from "./components/github/github.component";
 import {AlgorithmsComponent} from "./components/algorithms/algorithms.component";
 import {Chap1Component} from "./components/algorithms/chap1/chap1.component";
 import {EnglishComponent} from "./components/english/english.component";
-import {CSharpComponent} from "./components/c-sharp/c-sharp.component";
 import {TutorialComponent} from "@app/components/angular/components/tutorial/tutorial.component";
 
 export const routes: Routes = [
@@ -47,7 +46,5 @@ export const routes: Routes = [
 
     ]
   },
-
   { path: 'english', component: EnglishComponent},
-  { path: 'cSharp', component: CSharpComponent},
 ];

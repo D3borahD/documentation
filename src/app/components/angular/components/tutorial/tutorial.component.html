@@ -98,3 +98,138 @@
     </code>
   </pre>
 </div>
+
+<h2 class="pink-purple-txt mb-0">Property binding []</h2>
+
+<p>Permet de set la valeur des propriétés et des attributs</p>
+
+<pre>
+    <span class="label">HTML</span>
+    <code class="langage-html">
+       	&lt;img alt="photo" &lbrack;src&rbrack;="imageURL"&gt;
+    </code>
+</pre>
+
+<h2 class="pink-purple-txt mb-0">Event binding ()</h2>
+
+<div class="d-flex code-side-by-side">
+  <pre>
+      <span class="label">HTML</span>
+      <code class="langage-html">
+          &lt;button (click)="greet()"&gt;
+      </code>
+  </pre>
+
+  <pre>
+      <span class="label">TS</span>
+      <code class="langage-typescript">
+          greet()&lbrace;
+            console.log("Hello")
+        &rbrace;
+      </code>
+  </pre>
+</div>
+
+<h2 class="pink-purple-txt mb-0">Communication entre composants</h2>
+
+<h3 class="pink-purple-txt mb-0">&#64;Input</h3>
+
+<p>Component Parent :</p>
+<pre>
+  <span class="label">HTML</span>
+  <code class="langage-html">
+    &lt;app-user occupation ="Angular"&gt; &lt;/app-user&gt;
+  </code>
+</pre>
+
+<p>Component Enfant :</p>
+<div class="d-flex code-side-by-side">
+  <pre>
+    <span class="label">HTML</span>
+    <code class="langage-html">
+      &lt;p&gt;Langage is : &#123;<span>&#123;</span> occupation &#125;&#125; &lt;/p&gt;
+
+
+    </code>
+  </pre>
+
+  <pre>
+    <span class="label">TS</span>
+    <code class="langage-typescript">
+      &#64;Input() occupation = '';
+    </code>
+  </pre>
+</div>
+
+<h3 class="pink-purple-txt mb-0">&#64;Output</h3>
+
+<p>Component Enfant :</p>
+<div class="d-flex code-side-by-side">
+  <pre>
+    <span class="label">HTML</span>
+    <code class="langage-html">
+      &lt;button class="btn" (click)="addItem()"&gt;Add Item&lt;/button&gt;
+    </code>
+  </pre>
+
+  <pre>
+    <span class="label">TS</span>
+    <code class="langage-typescript">
+      &#64;Output() addItemEvent = new EventEmitter&lt;number&gt;();
+      count:number = 0
+
+      addItem() &lbrace;
+      this.count++
+      this.addItemEvent.emit(this.count);
+      &rbrace;
+    </code>
+  </pre>
+</div>
+<p>Component Parent :</p>
+<div class="d-flex code-side-by-side">
+  <pre>
+    <span class="label">HTML</span>
+    <code class="langage-html">
+      &lt;button class="btn" (click)="addItem()"&gt;Add Item&lt;/button&gt;
+
+      &lt;app-child (addItemEvent)="addItem($event)" /&gt;
+      &lt;p&gt;🐢 all the way down &#123;<span>&#123;</span>items&#125;&#125;&lt;/p&gt;
+    </code>
+  </pre>
+
+  <pre>
+    <span class="label">TS</span>
+    <code class="langage-typescript">
+      items = 0;
+
+      addItem(item: number) &lbrace;
+          this.items = item;
+      &rbrace;
+    </code>
+  </pre>
+</div>
+
+<h3 class="pink-purple-txt mb-0">Affichage différée &#64;defer</h3>
+
+<pre>
+    <span class="label">HTML</span>
+    <code class="langage-html">
+      &lt;div&gt;
+        &lt;h1&gt;How I feel about Angular&lt;/h1&gt;
+        &lt;article&gt;
+          &lt;p&gt;I can't express enough how much I enjoy working with Angular.
+          &lt;/p&gt;
+        &lt;/article&gt;
+
+          &#64;defer &#123;
+            &lt;comments /&gt;
+          &#125;
+          &#64;placeholder &#123;
+            &lt;p&gt;Future comments&lt;/p&gt;
+          &#125;
+          &#64;loading (minimum 2s) &#123;
+            &lt;p&gt;Loading comments...&lt;/p&gt;
+          &#125;
+      &lt;/div&gt;
+    </code>
+  </pre>

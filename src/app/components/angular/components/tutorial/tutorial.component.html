@@ -209,7 +209,7 @@
   </pre>
 </div>
 
-<h3 class="pink-purple-txt mb-0">Affichage différée &#64;defer</h3>
+<h2 class="pink-purple-txt mb-0">Affichage différée &#64;defer</h2>
 
 <pre>
     <span class="label">HTML</span>
@@ -232,4 +232,60 @@
           &#125;
       &lt;/div&gt;
     </code>
-  </pre>
+</pre>
+
+<h2 class="pink-purple-txt mb-0">Optimiser les images</h2>
+
+<p>Elles peuvent être une contribution majeur aux problèmes de performances d'un site.</p>
+<p>Site de référence : <a href="https://web.dev/explore/learn-core-web-vitals?hl=fr">Core Web Vitals</a></p>
+<p>On utilise la directive : NgOptimizedImage pour être sur que les images sont chargées efficacement.</p>
+
+<pre>
+    <span class="label">TS</span>
+    <code class="langage-typescript">
+      import &#123; NgOptimizedImage &#125; from '&#64;angular/common';
+
+      &#64;Component(&#123;
+        imports: [NgOptimizedImage],
+        ...
+        &#125;)
+    </code>
+</pre>
+
+<pre>
+    <span class="label">HTML</span>
+    <code class="langage-html">
+      &lt;img ngSrc="/assets/logo.svg" alt="Angular logo" width="32" height="32" /&gt;
+      &lt;img [ngSrc]="/assets/logo.svg" alt="Angular logo" fill /&gt;
+    </code>
+</pre>
+
+<p><a href="https://web.dev/articles/cls?hl=fr">Cumulative Layout Shift</a> : nécessite d'ajouter la largeur et la hauteur des images.</p>
+
+<div class="definition">
+  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> Note :  </span>
+
+  <p>Dans les situations où on ne veut pas spécifier de taille fixe, on peut utiliser l'attribut <span class="pink-purple-txt">fill</span>. Pour une image background par exemple.</p>
+  <p>Pour la propriété <span class="pink-purple-txt">fill</span>, le parent doit avoir un style de position : <span class="pink-purple-txt">relative, fixed, absolute</span></p>
+</div>
+
+<h3>Prioriser les images importantes</h3>
+
+<p>Une des plus importantes optimisations pour la performance de chargement est de donner la priorité aux images susceptible d'être l'<a
+  href="https://web.dev/articles/optimize-lcp?hl=fr">L'élément LCP</a>, c'est à dire le plus grand à l'écran lors du chargement de la page</p>
+
+<pre>
+    <span class="label">HTML</span>
+    <code class="langage-html">
+      &lt;img ngSrc="/assets/logo.svg" alt="Angular logo" width="32" height="32" priority /&gt;
+    </code>
+</pre>
+
+<h3>Utiliser un loader d'image</h3>
+
+<pre>
+    <span class="label">TS</span>
+    <code class="langage-ts">
+      providers: [  provideImgixLoader('https://my.base.url/'),]
+    </code>
+</pre>

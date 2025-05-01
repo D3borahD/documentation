@@ -269,10 +269,10 @@
   <p>Pour la propriété <span class="pink-purple-txt">fill</span>, le parent doit avoir un style de position : <span class="pink-purple-txt">relative, fixed, absolute</span></p>
 </div>
 
-<h3>Prioriser les images importantes</h3>
+<h3 class="pink-purple-txt mb-0">Prioriser les images importantes</h3>
 
 <p>Une des plus importantes optimisations pour la performance de chargement est de donner la priorité aux images susceptible d'être l'<a
-  href="https://web.dev/articles/optimize-lcp?hl=fr">L'élément LCP</a>, c'est à dire le plus grand à l'écran lors du chargement de la page</p>
+  href="https://web.dev/articles/optimize-lcp?hl=fr">élément LCP</a>, c'est à dire le plus grand à l'écran lors du chargement de la page</p>
 
 <pre>
     <span class="label">HTML</span>
@@ -281,7 +281,7 @@
     </code>
 </pre>
 
-<h3>Utiliser un loader d'image</h3>
+<h3 class="pink-purple-txt mb-0">Utiliser un loader d'image</h3>
 
 <pre>
     <span class="label">TS</span>
@@ -289,3 +289,112 @@
       providers: [  provideImgixLoader('https://my.base.url/'),]
     </code>
 </pre>
+
+<h2 class="pink-purple-txt mb-0">Routing</h2>
+
+<h3 class="pink-purple-txt mb-0">Activer le routing</h3>
+
+<p>Créer un fichier app.routes.ts.</p>
+<pre>
+    <span class="label">TS</span>
+    <code class="langage-ts">
+      import &#123; Routes&#125;  from '&#64;angular/router';
+
+      export const routes: Routes = [];
+    </code>
+</pre>
+
+<p>Ajouter le routing au provider dans app.config.ts.</p>
+
+<pre>
+    <span class="label">TS</span>
+    <code class="langage-ts">
+      import &#123; ApplicationConfig &#125; from '&#64;angular/core';
+      import &#123; provideRouter &#125; from '&#64;angular/router';
+      import &#123; routes &#125; from './app.routes';
+
+      export const appConfig: ApplicationConfig = &#123;
+        providers: [provideRouter(routes)],
+      &#125;;
+    </code>
+</pre>
+
+<p>Importer RouterOutlet dans le component</p>
+
+<pre>
+    <span class="label">TS</span>
+    <code class="langage-ts">
+      import &#123;  RouterOutlet &#125; from '&#64;angular/router';
+
+      &#64;component(&#123;
+        ...
+        template: `
+        &lt;nav&gt;
+          &lt;a href="/"&gt;Home&lt;/a&gt;
+          |
+          &lt;a href="/user"&gt;User&lt;/a&gt;
+        &lt;/nav&gt;
+        &lt;router-outlet /&gt;
+        `,
+
+        imports: [RouterOutlet],
+        &#125; )
+
+      export class AppComponent &#123; &#125;
+    </code>
+</pre>
+
+<h3 class="pink-purple-txt mb-0">Définir une route</h3>
+
+<p>Dans app.routes.ts</p>
+
+<pre>
+    <span class="label">TS</span>
+    <code class="langage-ts">
+      import &#123; Routes &#125; from '&#64;angular/router';
+      import &#123; HomeComponent &#125; from './home/home.component';
+
+      export const routes: Routes = [
+        &#123;
+          path: '',
+          title: 'App Home Page',
+          component: HomeComponent,
+        &#125;,
+      ];
+    </code>
+</pre>
+
+<h3 class="pink-purple-txt mb-0">Utiliser RouterLink pour la navigation</h3>
+
+<p>Importer RouterLink et l'ajouter au template.</p>
+
+<pre>
+    <span class="label">TS</span>
+    <code class="langage-ts">
+      import &#123; Routes &#125; from '&#64;angular/router';
+      import &#123; HomeComponent &#125; from './home/home.component';
+
+      export const routes: Routes = [
+        &#123;
+          path: '',
+          title: 'App Home Page',
+          component: HomeComponent,
+        &#125;,
+      ];
+
+
+      import &#123; RouterLink, RouterOutlet &#125; from '&#64;angular/router';
+
+      &#64;Component(&#123;
+        ...
+        template: `
+        ...
+        &lt;a routerLink="/"&gt;Home&lt;/a&gt;
+        &lt;a routerLink="/user">User&lt;/a&gt;
+        ...
+        `,
+        imports: [RouterLink, RouterOutlet],
+        &#125;)
+    </code>
+</pre>
+

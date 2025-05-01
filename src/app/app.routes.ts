@@ -18,33 +18,99 @@ import {EnglishComponent} from "./components/english/english.component";
 import {TutorialComponent} from "@app/components/angular/components/tutorial/tutorial.component";
 
 export const routes: Routes = [
-  { path: '', component: AngularComponent},
-  {path: '', redirectTo: 'introduction', pathMatch:'full'},
-
-  { path: 'angular', component: AngularComponent,
+  {
+    path: '',
+    component: AngularComponent
+  },
+  {
+    path: '',
+    redirectTo: 'introduction',
+    pathMatch:'full'
+  },
+  {
+    path: 'angular',
+    component: AngularComponent,
     children:[
-      {path: '', redirectTo: 'introduction', pathMatch:'full'},
-      {path: 'introduction', component: AngularIntroductionComponent },
-      {path: 'tutorial', component: TutorialComponent },
-      {path: 'component', component: ComponentComponent },
-      {path: 'template', component: TemplatesComponent },
-      {path: 'directives', component: DirectivesComponent },
-      {path: 'pipes', component: PipesComponent },
-      {path: 'services', component: ServicesComponent },
-      {path: 'routing', component: RoutingComponent },
-      {path: 'observables', component: ObservablesComponent },
-      {path: 'exercices', component: AngularExercicesComponent },
+      {
+        path: '',
+        redirectTo: 'introduction',
+        pathMatch:'full'
+      },
+      {
+        path: 'introduction',
+        title: 'Introduction',
+        component: AngularIntroductionComponent
+      },
+      {
+        path: 'tutorial',
+        title: 'Tutorial',
+        component: TutorialComponent
+      },
+      {
+        path: 'component',
+        title: 'Component',
+        component: ComponentComponent
+      },
+      {
+        path: 'template',
+        title: 'Template',
+        component: TemplatesComponent
+      },
+      {
+        path: 'directives',
+        title: 'Directives',
+        component: DirectivesComponent
+      },
+      {
+        path: 'pipes',
+        title: 'Pipes',
+        component: PipesComponent
+      },
+      {
+        path: 'services',
+        title: 'Services',
+        component: ServicesComponent
+      },
+      {
+        path: 'routing',
+        component: RoutingComponent
+      },
+      {
+        path: 'observables',
+        title: 'Observables',
+        component: ObservablesComponent
+      },
+      {
+        path: 'exercices',
+        title: 'Exercices',
+        component: AngularExercicesComponent
+      },
     ]
   },
-
-  { path: 'github', component: GithubComponent},
-
-  { path: 'algorithms', component: AlgorithmsComponent,
+  {
+    path: 'github',
+    title: 'Github',
+    component: GithubComponent
+  },
+  {
+    path: 'algorithms',
+    title: 'Algorithms',
+    component: AlgorithmsComponent,
     children:[
-      {path: '', redirectTo: 'chap1', pathMatch:'full'},
-      {path: 'chap1', component: Chap1Component },
-
+      {
+        path: '',
+        redirectTo: 'chap1',
+        pathMatch:'full'
+      },
+      {
+        path: 'chap1',
+        component: Chap1Component
+      },
     ]
   },
-  { path: 'english', component: EnglishComponent},
+  {
+    path: 'english',
+    title: 'English',
+    component: EnglishComponent
+  },
 ];

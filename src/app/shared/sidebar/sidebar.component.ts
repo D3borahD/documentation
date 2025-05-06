@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {RouterLink, RouterLinkActive} from "@angular/router";
 import {ILinkMenu} from "@app/shared/sidebar/models/linkMenu";
 import {TitleCasePipe} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,7 @@ import {TitleCasePipe} from "@angular/common";
     RouterLink,
     RouterLinkActive,
     TitleCasePipe,
+    FormsModule,
   ],
   styleUrls: ['./sidebar.component.scss']
 })
@@ -107,6 +109,7 @@ export class SidebarComponent implements OnInit{
           title : 'introduction'},*/
       ]},
   ]
+  currentPath= '';
 
   ngOnInit(): void{}
 

@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, model, OnChanges, OnInit, output, Output} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
-import {TitleComponent} from "@app/shared/title/title.component";
+import {ITitle} from "@app/shared/models/ITitle";
 
 @Component({
   selector: 'app-angular',
@@ -8,23 +8,17 @@ import {TitleComponent} from "@app/shared/title/title.component";
   templateUrl: './angular.component.html',
   imports: [
     RouterOutlet,
-    TitleComponent
+
   ],
   styleUrls: ['./angular.component.scss']
 })
-export class AngularComponent {
-
-  public title: string = 'Angular';
-
+export class AngularComponent implements OnInit {
   public routerUrl:string = this.router.url
-
 
   constructor(private router: Router) {}
 
-  ngOnInit():void {
-    console.log('this route :  ANGULAR COMPONENT', this.router.url)
+  ngOnInit() {
+    console.log('je suis angular component path : ' + this.routerUrl)
   }
-
-
 
 }

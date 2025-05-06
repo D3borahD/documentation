@@ -75,4 +75,25 @@
   </code>
 </pre>
 
+<h3>Problème de route pour les images</h3>
 
+<p>L'architecture d'Angular à été modifié dans les versions plus récentes (V17)</p>
+
+<p>Soit il faut mettre les images dans le dossier "public", comme indiqué dans le fichier angular.json</p>
+<p>Soit modifier ce fichier</p>
+
+<pre>
+  <span class="label">json</span>
+  <code class="langage-json">
+    // angular.json
+    "assets": [
+      &#123;
+      "glob": "**/*",
+      "input": "src/assets",
+      "output": "/assets/"
+      // cette ligne est pour la pwa
+      "src/manifest.webmanifest"
+       &#125;
+     ],
+  </code>
+</pre>

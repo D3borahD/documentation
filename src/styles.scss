@@ -103,8 +103,6 @@ a:hover {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-
-
 // Elements
 .techno-logo {
   height: 52px;
@@ -128,7 +126,7 @@ app-angular,
 app-github,
 app-algorithms,
 app-software-craft {
-  height: calc(100vh - 96px);
+  height: calc(100vh - 96px - 100px);
   width: 100%;
   display: block;
   overflow-y: scroll;

@@ -1,16 +1,20 @@
 import { Component, EventEmitter, Output} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
+import {TitleComponent} from "@app/shared/title/title.component";
 
 @Component({
   selector: 'app-angular',
   standalone: true,
   templateUrl: './angular.component.html',
   imports: [
-    RouterOutlet
+    RouterOutlet,
+    TitleComponent
   ],
   styleUrls: ['./angular.component.scss']
 })
 export class AngularComponent {
+
+  public title: string = 'Angular';
 
   public routerUrl:string = this.router.url
 

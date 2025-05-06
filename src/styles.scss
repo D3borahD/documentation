@@ -73,8 +73,11 @@ router-outlet {
   display: none;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: $noto;
+  background: -webkit-linear-gradient(90deg, $pink 0%, $purple 100% ) ;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 span {
@@ -88,6 +91,11 @@ a{
   color: $light;
   font-weight: bold;
 }
+a:hover {
+  background: -webkit-linear-gradient(90deg, $pink 0%, $purple 100% ) ;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .blur {
   background-color: rgba($dark, 0.7);
@@ -95,15 +103,7 @@ a{
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 }
 
-// Theme
-app-angular,
-app-github,
-app-algorithms{
-  height: calc(100vh - 96px);
-  width: 100%;
-  display: block;
-  overflow-y: scroll;
-}
+
 
 // Elements
 .techno-logo {
@@ -123,6 +123,18 @@ app-algorithms{
   }
 }
 
+// Theme
+app-angular,
+app-github,
+app-algorithms,
+app-software-craft {
+  height: calc(100vh - 96px);
+  width: 100%;
+  display: block;
+  overflow-y: scroll;
+}
+
+
 // chapter
 app-introduction,
 app-tutorial,
@@ -133,7 +145,13 @@ app-pipes,
 app-services,
 app-routing,
 app-observables,
-app-angular-exercices,{
+app-angular-exercices,
+app-introduction-software-craft,
+app-english,
+app-algorithms,
+app-github-page
+{
+  width: calc(100% - 130px);
   background-color: rgba($dark, 0.7);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

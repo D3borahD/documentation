@@ -16,6 +16,11 @@ import {AlgorithmsComponent} from "./components/algorithms/algorithms.component"
 import {Chap1Component} from "./components/algorithms/chap1/chap1.component";
 import {EnglishComponent} from "./components/english/english.component";
 import {TutorialComponent} from "@app/components/angular/components/tutorial/tutorial.component";
+import {SoftwareCraftComponent} from "@app/components/software-craft/software-craft.component";
+import {
+  IntroductionSoftwareCraftComponent
+} from "@app/components/software-craft/introduction-software-craft/introduction-software-craft.component";
+import {GithubPageComponent} from "@app/components/github/github-page/github-page.component";
 
 export const routes: Routes = [
   {
@@ -90,7 +95,20 @@ export const routes: Routes = [
   {
     path: 'github',
     title: 'Github',
-    component: GithubComponent
+    component: GithubComponent,
+    children:[
+      {
+        path: '',
+        redirectTo: 'introduction',
+        pathMatch:'full'
+      },
+      {
+        path: 'introduction',
+        title: 'Introduction',
+        component: GithubPageComponent
+      }
+    ]
+
   },
   {
     path: 'algorithms',
@@ -112,5 +130,22 @@ export const routes: Routes = [
     path: 'english',
     title: 'English',
     component: EnglishComponent
+  },
+  {
+    path: 'softwareCraft',
+    title: 'Software Craft',
+    component: SoftwareCraftComponent,
+    children:[
+      {
+        path: '',
+        redirectTo: 'introduction',
+        pathMatch:'full'
+      },
+      {
+        path: 'introduction',
+        title: 'Introduction',
+        component: IntroductionSoftwareCraftComponent
+      }
+    ]
   },
 ];

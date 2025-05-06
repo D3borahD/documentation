@@ -88,7 +88,7 @@ export class SidebarComponent implements OnInit{
       ]},
     {
       id: 4,
-      path:'software',
+      path:'softwareCraft',
       title : 'Software Craft',
       isOpen: false,
       chapter:[

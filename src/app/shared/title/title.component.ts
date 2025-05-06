@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, input, Input, InputSignal, Output} from '@angular/core';
 import {RouterOutlet} from "@angular/router";
+import {ITitle} from "@app/shared/models/ITitle";
 
 @Component({
   selector: 'app-title',
@@ -11,6 +12,9 @@ import {RouterOutlet} from "@angular/router";
   styleUrl: './title.component.scss'
 })
 export class TitleComponent {
+
+  titleModel: InputSignal<ITitle>  = input.required();
+
 
 
 }

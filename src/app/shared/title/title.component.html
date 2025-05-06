@@ -1,6 +1,6 @@
 <div class="d-flex align-center p-sticky z-index-1 blur">
-  <img class="techno-logo" src="./assets/angular.png" alt="logo">
-  <h1 class="text-center">Angular</h1>
+  <img class="techno-logo" [src]="titleModel().imgUrl" [alt]="titleModel().alt">
+  <h1 class="text-center">{{ titleModel().title }}</h1>
   <img class="bot blue-purple" src="./assets/images/chatbot.png">
 </div>
 

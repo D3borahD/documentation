@@ -21,6 +21,7 @@ import {
   IntroductionSoftwareCraftComponent
 } from "@app/components/software-craft/introduction-software-craft/introduction-software-craft.component";
 import {GithubPageComponent} from "@app/components/github/github-page/github-page.component";
+import {PartOneComponent} from "@app/components/software-craft/part-one/part-one.component";
 
 export const routes: Routes = [
   {
@@ -145,6 +146,11 @@ export const routes: Routes = [
         path: 'introduction',
         title: 'Introduction',
         component: IntroductionSoftwareCraftComponent
+      },
+      {
+        path: 'partone',
+        title: 'Partie 1',
+        component: PartOneComponent
       }
     ]
   },

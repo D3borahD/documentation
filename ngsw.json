@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1746080736388,
+  "timestamp": 1747205750836,
   "index": "/documentation/index.html",
   "assetGroups": [
     {
@@ -12,11 +12,11 @@
       },
       "urls": [
         "/documentation/index.html",
-        "/documentation/main.a30663801d88df0c.js",
+        "/documentation/main.2bf1040cbd4c625c.js",
         "/documentation/manifest.webmanifest",
         "/documentation/polyfills.9922939526cf25de.js",
         "/documentation/runtime.4136917a75eca587.js",
-        "/documentation/styles.311ffe6449d4efae.css"
+        "/documentation/styles.a03aca9ad3e73230.css"
       ],
       "patterns": []
     },
@@ -47,6 +47,8 @@
         "/documentation/assets/images/background.png",
         "/documentation/assets/images/chatbot.png",
         "/documentation/assets/images/github/github-page.png",
+        "/documentation/assets/images/softwareCraftIcon.png",
+        "/documentation/assets/images/tdd.png",
         "/documentation/assets/images/tdd/green.png",
         "/documentation/assets/images/tdd/red.png",
         "/documentation/assets/images/tdd/refactor.png",
@@ -61,7 +63,7 @@
     "/documentation/assets/Screenshot 2025-04-19 at 10-27-36 Home • Angular.png": "0b6e0a7da669050d43ffb2ad3336b060f4ac7daf",
     "/documentation/assets/angular.png": "c933805165b5fde3d1e5d6eb2cf69c53620e2b84",
     "/documentation/assets/folder_icon.png": "9946b0398a2eb91e06b98ab55a57e0eb7dd9dcfc",
-    "/documentation/assets/github.png": "b270ef156f28f06f2e18afb0ad10cd24c886feb3",
+    "/documentation/assets/github.png": "968a913e8e4160b87e2be72ff7bbad021edc8925",
     "/documentation/assets/icons/icon-128x128.png": "5af8bf019565972a340e50b3df3f3be83dcc8eb6",
     "/documentation/assets/icons/icon-144x144.png": "5880e5368c9249d62a8ede6890d4a23ddea0ecc9",
     "/documentation/assets/icons/icon-152x152.png": "29f97656b858ac761546cfca0826feffece91644",
@@ -77,17 +79,19 @@
     "/documentation/assets/images/background.png": "6f611647fe0cc76c6e6b16a75c75c6c90f5ad769",
     "/documentation/assets/images/chatbot.png": "f18356534fc792cb77e37da578daa2cb0ff4f9e8",
     "/documentation/assets/images/github/github-page.png": "85747f13504920b15ec6bff6fda0050bd73a1111",
+    "/documentation/assets/images/softwareCraftIcon.png": "69c666fa63180ab3b8eafed9af76aac100c3501c",
+    "/documentation/assets/images/tdd.png": "09086da7f502902eda902775e2362bb07840198e",
     "/documentation/assets/images/tdd/green.png": "d55e6c95a709c6b5f0094df9b6ff2b7478e2875c",
     "/documentation/assets/images/tdd/red.png": "070a3223733b5ba8fa9a0f88fdc4ce7ab0ba6871",
     "/documentation/assets/images/tdd/refactor.png": "799edc7544734946a77ad4b1b9ef36d40bb8fea0",
     "/documentation/assets/kitsuneIcon.png": "465a81988b418908a9a17317bb9f45d2ad4bc170",
     "/documentation/background.1f54cc06728697c5.png": "6f611647fe0cc76c6e6b16a75c75c6c90f5ad769",
-    "/documentation/index.html": "c53bb3cccc76e31e6407c1ac13a0b5b6fb18eff0",
-    "/documentation/main.a30663801d88df0c.js": "2c5f49519c18f14bd52ef0176092412695b7f206",
+    "/documentation/index.html": "21e3e67992e1c8b7ab158170d88f69d166367516",
+    "/documentation/main.2bf1040cbd4c625c.js": "74f10b9d0533d76632368390d975b36a54578e47",
     "/documentation/manifest.webmanifest": "24433896c7cc16f117b043a370827a7e9b519fa2",
     "/documentation/polyfills.9922939526cf25de.js": "116f280f4e19d0a58980c56f360f4290af8605b0",
     "/documentation/runtime.4136917a75eca587.js": "b85b5a37fdb229fc0a9e58e4bce5989a9d1e3f51",
-    "/documentation/styles.311ffe6449d4efae.css": "5c2e09db3da27857453b1d6f3ac4a6529b0b826e"
+    "/documentation/styles.a03aca9ad3e73230.css": "865909abdefe337763e0aa42e04f3cb928921a8e"
   },
   "navigationUrls": [
     {

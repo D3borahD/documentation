@@ -128,4 +128,65 @@
 
 <h3>Les atelier de spécification</h3>
 <p>3 personnes autour d'une ou plusieurs US = co-construction.</p>
+
+<h3>Automatisation des scénarios</h3>
+
+<p>Les scénarios concrets dans le langage métier ont l'avantage de bien se prêter à l'automatisation dans les outils</p>
+
+<h4>La syntaxe de Gherkin</h4>
+<p>Les scénarios clés et les scénarios additionnels peuvent être rédigés de façon plus formelle dans la syntaxe de Gherkin (= cornichon) dans un fichier txt nommé "fichier de features".</p>
+<p>Chaque fichier a un thème précis, exemple : "Comportement concernant les remises client sur les livres en Europe."</p>
+<p><span class="pink-purple-txt">Première rubrique : </span>Feature qui décrit l'intention générale, au format US :</p>
+
+<div class="definition">
+  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> FEATURE :</span>
+  <p><span class="pink-purple-txt">FEATURE : </span>Offrir des remises aux clients fidèles</p>
+  <p><span class="pink-purple-txt">AFIN</span> d'encourager les clients à revenir acheter,</p>
+  <p><span class="pink-purple-txt">EN TANT QUE</span> vendeur de livres</p>
+  <p><span class="pink-purple-txt">JE SOUHAITE</span> offrir des remises de prix aux clients fidèles</p>
+</div>
+
+<p>La feature a pour but de documentation, elle est complétée des règles métiers.</p>
+
+<h4>Reste du fichier</h4>
+<p>Une succession d'exemple</p>
+<p>Attention, les deux points font parti des mots-clés</p>
+
+<div class="definition">
+  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> Exemple :</span>
+  <p><span class="pink-purple-txt">Exemple : </span>Aucune remise avec 2 articles en deçà de 50€ d'achat.</p>
+  <p><span class="pink-purple-txt">GIVEN </span>Un panier avec 2 articles pour un total de 49€</p>
+  <p><span class="pink-purple-txt">WHEN </span>Le client consulte son panier</p>
+  <p><span class="pink-purple-txt">THEN </span>Le total n'inclut aucune remise.</p>
+</div>
+<p>Les mots clés sont : GIVEN, WHEN, THEN, AND, BUT</p>
+<p>Ces features files sont ajoutés au contrôle de source (GIT) dans la même version que le code correspondant à la même fonction.</p>
+
+<h4>Les outils</h4>
+
+<p>Cucumber, Specflow, Behat et Robot Framework.</p>
+<p>Ils analysent chaque ligne de chaque fichier de feature, et pour chaque ligne ils déclenchent des portions de code correspondants,
+  que l'on appelle <span class="pink-purple-txt">step definition</span></p>
+<p>Chaque step definition est une fonction.</p>
+
+<h4>Living documentation</h4>
+
+<p>Les fichiers de features sont regroupés dans des répertoires par zone fonctionnelle. Exemple : /VENTE/REMISES.</p>
+<p>L'intention de chaque feature est exprimée en langage métier.</p>
+<p>Les répertoires et sous répertoires constituent ainsi les chapitres d'une documentation rédigée en langage métier.</p>
+<p>L'automatisation des exemples directement comme des tests avec des assertions permet de détecter aussitôt que le comportement
+  du code ne correspond plus au comportement attendu.</p>
+<p>Certaines régressions signalent alors aussitôt, l'oubli de mise à jour des exemples correspondants dans le fichier de feature.</p>
+<p>C'est donc un moyen de garantir que ces exemples automatisés sont une documentation vivante et à jour tant que les tests sont tous en succès.</p>
+<p>Tagger les scénarios, pour mieux les rechercher ou les exécuter.</p>
+<p>Ajouter des outils pour rendre les features et les résultats accessibles aux non développeurs sous forme de rapport ou de site web intéractif (<a
+  href="https://www.picklesdoc.com/">Pickles Living Documentation</a>, ou <a href="https://github.com/Arnauld/tzatziki/blob/master/README.md">Tzatziki</a> qui permet de produire un pdf.</p>
+
+<h3>Un effort, beaucoup de bénéfices</h3>
+
+
 <p>en cours ...</p>
+
+<p>ATTENTION ... le component partone n'est pas cablé
+  http://localhost:4200/documentation/softwareCraft/partone
+</p>

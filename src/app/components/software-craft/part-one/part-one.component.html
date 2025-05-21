@@ -43,7 +43,8 @@
 </ul>
 
 <h3>L'importance d'être exemplaire</h3>
-<p><span class="pink-purple-txt">La théorie de la vitre brisée</span> : Si une vitre est cassée et n'est pas réparée, toutes les autres vitres connaîtront bientôt le même sort</p>
+<p><span class="pink-purple-txt">La théorie de la vitre brisée</span> : Si une vitre est cassée et n'est pas réparée,
+  toutes les autres vitres connaîtront bientôt le même sort</p>
 <p>Tolérance 0</p>
 <p><span class="pink-purple-txt">Règle du Boy Scout</span> : laisser le code dans un meilleur état que celui trouvé.</p>
 
@@ -100,7 +101,8 @@
     &#125;
   </code>
 </pre>
-<p>Organisation du code du plus grand (le problème principal, fonction public), vers le plus petit (sous problème, fonction private)</p>
+<p>Organisation du code du plus grand (le problème principal, fonction public), vers le plus petit (sous problème,
+  fonction private)</p>
 <p>Aspect visuel : </p>
 <ul>
   <li>1 ou 2 niveaux d'indentation maximum (si plus c'est qu'un refactor est nécessaire.</li>
@@ -124,7 +126,8 @@
 
 <h2>Les spécifications agiles avec le développement dirigé par le comportement (BDD)</h2>
 
-<p>Associer les personnes qui savent quoi construire (PO) avec celles qui savent comment (Dév) + testeur ou responsable qualité.</p>
+<p>Associer les personnes qui savent quoi construire (PO) avec celles qui savent comment (Dév) + testeur ou responsable
+  qualité.</p>
 
 <h3>Les atelier de spécification</h3>
 <p>3 personnes autour d'une ou plusieurs US = co-construction.</p>
@@ -134,7 +137,8 @@
 <p>Les scénarios concrets dans le langage métier ont l'avantage de bien se prêter à l'automatisation dans les outils</p>
 
 <h4>La syntaxe de Gherkin</h4>
-<p>Les scénarios clés et les scénarios additionnels peuvent être rédigés de façon plus formelle dans la syntaxe de Gherkin (= cornichon) dans un fichier txt nommé "fichier de features".</p>
+<p>Les scénarios clés et les scénarios additionnels peuvent être rédigés de façon plus formelle dans la syntaxe de
+  Gherkin (= cornichon) dans un fichier txt nommé "fichier de features".</p>
 <p>Chaque fichier a un thème précis, exemple : "Comportement concernant les remises client sur les livres en Europe."</p>
 <p><span class="pink-purple-txt">Première rubrique : </span>Feature qui décrit l'intention générale, au format US :</p>
 
@@ -148,7 +152,7 @@
 
 <p>La feature a pour but de documentation, elle est complétée des règles métiers.</p>
 
-<h4>Reste du fichier</h4>
+<p><span class="pink-purple-txt">Reste du fichier</span></p>
 <p>Une succession d'exemple</p>
 <p>Attention, les deux points font parti des mots-clés</p>
 
@@ -160,12 +164,14 @@
   <p><span class="pink-purple-txt">THEN </span>Le total n'inclut aucune remise.</p>
 </div>
 <p>Les mots clés sont : GIVEN, WHEN, THEN, AND, BUT</p>
-<p>Ces features files sont ajoutés au contrôle de source (GIT) dans la même version que le code correspondant à la même fonction.</p>
+<p>Ces features files sont ajoutés au contrôle de source (GIT) dans la même version que le code correspondant à la même
+  fonction.</p>
 
 <h4>Les outils</h4>
 
 <p>Cucumber, Specflow, Behat et Robot Framework.</p>
-<p>Ils analysent chaque ligne de chaque fichier de feature, et pour chaque ligne ils déclenchent des portions de code correspondants,
+<p>Ils analysent chaque ligne de chaque fichier de feature, et pour chaque ligne ils déclenchent des portions de code
+  correspondants,
   que l'on appelle <span class="pink-purple-txt">step definition</span></p>
 <p>Chaque step definition est une fonction.</p>
 
@@ -174,16 +180,133 @@
 <p>Les fichiers de features sont regroupés dans des répertoires par zone fonctionnelle. Exemple : /VENTE/REMISES.</p>
 <p>L'intention de chaque feature est exprimée en langage métier.</p>
 <p>Les répertoires et sous répertoires constituent ainsi les chapitres d'une documentation rédigée en langage métier.</p>
-<p>L'automatisation des exemples directement comme des tests avec des assertions permet de détecter aussitôt que le comportement
+<p>L'automatisation des exemples directement comme des tests avec des assertions permet de détecter aussitôt que le
+  comportement
   du code ne correspond plus au comportement attendu.</p>
-<p>Certaines régressions signalent alors aussitôt, l'oubli de mise à jour des exemples correspondants dans le fichier de feature.</p>
-<p>C'est donc un moyen de garantir que ces exemples automatisés sont une documentation vivante et à jour tant que les tests sont tous en succès.</p>
+<p>Certaines régressions signalent alors aussitôt, l'oubli de mise à jour des exemples correspondants dans le fichier de
+  feature.</p>
+<p>C'est donc un moyen de garantir que ces exemples automatisés sont une documentation vivante et à jour tant que les
+  tests sont tous en succès.</p>
 <p>Tagger les scénarios, pour mieux les rechercher ou les exécuter.</p>
-<p>Ajouter des outils pour rendre les features et les résultats accessibles aux non développeurs sous forme de rapport ou de site web intéractif (<a
-  href="https://www.picklesdoc.com/">Pickles Living Documentation</a>, ou <a href="https://github.com/Arnauld/tzatziki/blob/master/README.md">Tzatziki</a> qui permet de produire un pdf.</p>
+<p>Ajouter des outils pour rendre les features et les résultats accessibles aux non développeurs sous forme de rapport
+  ou de site web intéractif (<a
+  href="https://www.picklesdoc.com/">Pickles Living Documentation</a>), ou
+  <a href="https://github.com/Arnauld/tzatziki/blob/master/README.md">Tzatziki</a> qui permet de produire un pdf.</p>
 
 <h3>Un effort, beaucoup de bénéfices</h3>
 
+<p>En récapitulatif, il s'avère qu'une seule et même activité, qui consiste à avoir des conversations concernant les
+  besoins entre 3 ou plus personnes,
+  en langage métier, avec des exemples concrets et auto-suffisants, complétée de son automatisation, apporte à l
+  'équipe : </p>
+<ul>
+  <li>la compréhension partagée entre tous;</li>
+  <li>les critères d'acceptation pour déterminer l'avancement des développements;</li>
+  <li>les tests de non-régression avec une bonne couverture et garantie toujours à jour si les tests sont en succès.</li>
+</ul>
+<p>C'est donc une pratique avec un retour sur investissement attractif. Le temps investi dans la mise en oeuvre et dans
+  le soin appliqué aux scénarios
+  se retrouvera largement rentabilisé dans la durée.</p>
+
+<h3>Techniques complémentaires</h3>
+
+<p>Les intentions mentionnées jusqu'à présent butent parfois sur des difficultés lors de la mise en oeuvre. Plutôt que
+de céder, il convient au contraire de trouver des solutions parfois originales, pour concilier tous les objectifs.</p>
+
+<h4>Scénarios tabulaires</h4>
+<p>Parfois, certains scénarios sont très répétitifs, avec pour seules variations quelques changements de valeurs.</p>
+<p>Il est possible de les regrouper dans un scénario unique qui sert de gabarit, avec des variables à la place des
+  détails concrets,
+et avec un tableau associé qui liste les jeux de valeurs, en indiquant un jeu de valeur par ligne : </p>
+
+<div class="definition">
+  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> FEATURE :</span>
+  <p><span class="pink-purple-txt">Scenario Outline : </span>Remise par montant d'achat et status</p>
+  <p><span class="pink-purple-txt">Given</span> un client de status &lt;start&gt;</p>
+  <p><span class="pink-purple-txt">When</span> il commande pour &lt;montant&gt;€ d'achat</p>
+  <p><span class="pink-purple-txt">Then</span> il voit une remise de &lt;remise&gt;€</p>
+  <pre>
+    <code class="langage-c#">
+      <p><span>Exemple :</span></p>
+      <p>| status  | montant | remise  |</p>
+      <p>|   NEW   |   49    |    0    |</p>
+      <p>|   NEW   |   50    |   2,50  |</p>
+      <p>|   VIP   |   50    |    5    |</p>
+    </code>
+  </pre>
+</div>
+<p><span class="pink-purple-txt">Attention</span> à ne pas abuser de ce format, il ne doit pas devenir le choix par
+  défaut</p>
+
+<h4>Section background</h4>
+<p>Il arrive que plusieurs exemples partagent les mêmes pré-requis. Il est possible de les regrouper dans une rubrique
+  qui s'applique à tous les scénarios. Cette rubrique de préambule signifie : "Sauf mention contraire, nous supposons
+  dans tout ce qui suit que ... (liste des prérequis).</p>
+<p>Les outils d'automatisation supportent cette syntaxe sous la forme d'une section de type "background.</p>
+
+<h4>Persona</h4>
+<p>Il est fréquent de manipuler des concepts avec de nombreux attributs (utilisateurs, clients, ...).
+Le concept peut parfois avoir jusqu'à 240 attributs.</p>
+<p>La plupart du temps, seuls quelques-uns de ces attributs sont importants pour un scénario donnée.</p>
+<p>Exemple : si le scénario concerne la fidélité, seuls les attributs "date de création" et "status premium"
+  sont nécessaires à mentionner explicitement dans les scénarios.</p>
+<p>On peut parler de cas en faisant référence à des archétypes de clients.</p>
+<p>Exemple : Serge, directeur général à Paris, passionné de golf.</p>
+<p>Les personas sont des clichés qui résument des groupes de clients.</p>
+<p>Définir les personas au préalable, par exemple dans une section préambule, permet de les utiliser dans les scénarios
+pour décrire des comportements de façon précise et concise.</p>
+<p>Le persona s'applique également à des concepts non humain : "dossier prêt-à-porter", "dossier sur mesure".</p>
+
+<h4>Datasets et test data builders</h4>
+<p>Parfois, définir explicitement la totalité de ce qui est prérequis pour un scénario semble insurmontable (calculer
+  des statistiques ou un reporting sur de grands volume de données.</p>
+<p>La solution est d'admettre que nous restons capables, entre collègues, de parler de façon succincte de ce qui
+importe dans ces gros ensembles de données. En découvrant les termes que l'on utilise déjà dans nos conversations.</p>
+
+<div class="definition">
+  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> EXEMPLE :</span>
+  <p><span class="pink-purple-txt">Étant donné </span>un historique de vente sur 24 mois constant à 25000€ par mois,</p>
+  <p><span class="pink-purple-txt">alors ... </span></p>
+</div>
+
+<p>Dans les outils d'automatisation, ces approches deviennent des builders (pattern builder, appliqués aux test,
+  c'est-à-dire des "test data builder") ou des chargements de fichier à partir des paramètres définis dans les clauses
+de type Given des scénarios.</p>
+
+<p>Dans chacun des cas, c'est bien l'utilisation du langage métier sui est la clé, pour rendre facilement manipulables
+les concepts qui ne le sont pas toujours pas leur taille ou leur complexité.</p>
+
+<h3>Démarrer BDD</h3>
+<p>BDD est une pratique qui nécessite pour démarrer que de rassembler des personnes de bonne volonté dans un atelier de
+spécifications et en essayant d'appliquer les pratiques.</p>
+<p>Dans un contexte de systèmes hérités (legacy), où le code n'est souvent plus lisible et où les comportements métiers
+  sont parfois obscurs, alors introduire des scénarios automatisés en langage métier permet de documenter les
+  comportements.</p>
+<p>On appelle ces scénarios des "tests de caractérisation", car ils décrivent le comportement existant du système.</p>
+<p>Ces scénarios ou tests sont précieux car ils permettront le cas échéant de réécrire le système dans une nouvelle
+  technologie tout en étant capables de retrouver la couverture fonctionnelle originale, et cela à moindre risque.</p>
+
+<h2>Collaborer efficacement avec le pair et mob programming</h2>
+
+<p>Collaborer, c'est avant tout réussir à plusieurs ce qu'on ne saurait faire seul ou obtenir un résultat bien meilleur
+  à plusieurs que tout seul.</p>
+<p>Cela amène de nombreux bénéfices, la qualité et la vitesse des développements, l'harmonisation des compétences
+la réduction du nombre d'anomalies, l'accompagnement des équipiers face aux changements, ou encore le partage des
+connaissances.</p>
+
+<h3>Le binômage (pair programming)</h3>
+<p>Travailler à 2 sur une seule machine. Le travail d'équipe peut s'envisager de manière synchrone ou asynchrone.</p>
+<p>Le partage des tâches pour travailler en parallèle est un travail asynchrone.</p>
+<p>Binômer est une manière de travailler synchrone. On utilise aussi les termes : pair programming, pairing, pairer.</p>
+<p>Le binômage est souvent confondu avec d'autres activités, comme : </p>
+<ul>
+  <li>travailler à 2 ou collaborer, lorsque l'on travaille ensemble mais sur des machines différentes ;</li>
+  <li>travailler en observant son partenaire sans toucher le clavier ni prendre part, même en oralement, à la réalisation ;</li>
+  <li>être accompagné pour monter en compétence sur un sujet où tout a été déjà préparé, sans rôle d'exploitation ni implication.</li>
+</ul>
+<p>On confond souvent binômer et travailler à 2, mais bibômer suppose un ensemble de compétences spécifiques.</p>
+
+<h3>Comment binômer ? </h3>
 
 <p>en cours ...</p>
 

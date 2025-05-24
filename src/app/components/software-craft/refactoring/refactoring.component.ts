@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './refactoring.component.html',
-  styleUrl: './refactoring.component.scss'
 })
 export class RefactoringComponent {
 

@@ -8,7 +8,6 @@ import {Router, RouterOutlet} from '@angular/router';
   imports: [
     RouterOutlet
   ],
-  styleUrls: ['./github.component.scss']
 })
 export class GithubComponent {
 

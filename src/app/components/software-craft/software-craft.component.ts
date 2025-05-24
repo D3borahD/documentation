@@ -10,7 +10,6 @@ import {PairProgrammingComponent} from "@app/components/software-craft/pair-prog
     PairProgrammingComponent
   ],
   templateUrl: './software-craft.component.html',
-  styleUrl: './software-craft.component.scss'
 })
 export class SoftwareCraftComponent {
 

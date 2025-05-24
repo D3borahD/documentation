@@ -7,10 +7,8 @@ import {ITitle} from "@app/shared/models/ITitle";
   standalone: true,
   templateUrl: './angular.component.html',
   imports: [
-    RouterOutlet,
-
+    RouterOutlet
   ],
-  styleUrls: ['./angular.component.scss']
 })
 export class AngularComponent implements OnInit {
   public routerUrl:string = this.router.url

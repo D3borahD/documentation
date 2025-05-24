@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-directives',
   templateUrl: './directives.component.html',
   standalone: true,
-  styleUrls: ['./directives.component.scss']
 })
 export class DirectivesComponent {
 

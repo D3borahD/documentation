@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './clean-code.component.html',
-  styleUrl: './clean-code.component.scss'
 })
 export class CleanCodeComponent {
 

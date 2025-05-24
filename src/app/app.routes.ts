@@ -25,6 +25,7 @@ import {TddComponent} from "@app/components/software-craft/tdd/tdd.component";
 import {CleanCodeComponent} from "@app/components/software-craft/clean-code/clean-code.component";
 import {PairProgrammingComponent} from "@app/components/software-craft/pair-programming/pair-programming.component";
 import {RefactoringComponent} from "@app/components/software-craft/refactoring/refactoring.component";
+import {BddComponent} from "@app/components/software-craft/bdd/bdd.component";
 
 export const routes: Routes = [
   {
@@ -159,6 +160,11 @@ export const routes: Routes = [
         path: 'clean-code',
         title: 'Clean code',
         component: CleanCodeComponent
+      },
+      {
+        path: 'bdd',
+        title: 'BDD',
+        component: BddComponent
       },
       {
         path: 'pair-programming',

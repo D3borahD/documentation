@@ -104,6 +104,9 @@ export class SidebarComponent implements OnInit{
           path:'softwareCraft/clean-code',
           title : 'Clean Code'},
         {
+          path:'softwareCraft/bdd',
+          title : 'BDD'},
+        {
           path:'softwareCraft/pair-programming',
           title : 'Pair Programming'},
         {

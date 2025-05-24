@@ -21,7 +21,10 @@ import {
   IntroductionSoftwareCraftComponent
 } from "@app/components/software-craft/introduction-software-craft/introduction-software-craft.component";
 import {GithubPageComponent} from "@app/components/github/github-page/github-page.component";
-import {PartOneComponent} from "@app/components/software-craft/part-one/part-one.component";
+import {TddComponent} from "@app/components/software-craft/tdd/tdd.component";
+import {CleanCodeComponent} from "@app/components/software-craft/clean-code/clean-code.component";
+import {PairProgrammingComponent} from "@app/components/software-craft/pair-programming/pair-programming.component";
+import {RefactoringComponent} from "@app/components/software-craft/refactoring/refactoring.component";
 
 export const routes: Routes = [
   {
@@ -148,10 +151,25 @@ export const routes: Routes = [
         component: IntroductionSoftwareCraftComponent
       },
       {
-        path: 'partone',
-        title: 'Partie 1',
-        component: PartOneComponent
-      }
+        path: 'tdd',
+        title: 'TDD',
+        component: TddComponent
+      },
+      {
+        path: 'clean-code',
+        title: 'Clean code',
+        component: CleanCodeComponent
+      },
+      {
+        path: 'pair-programming',
+        title: 'Pair programming',
+        component: PairProgrammingComponent
+      },
+      {
+        path: 'refactoring',
+        title: 'Refactoring',
+        component: RefactoringComponent
+      },
     ]
   },
 ];

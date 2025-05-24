@@ -94,9 +94,21 @@ export class SidebarComponent implements OnInit{
       title : 'Software Craft',
       isOpen: false,
       chapter:[
-       /* {
-          path:'introduction',
-          title : 'introduction'},*/
+        {
+          path:'softwareCraft/introduction',
+          title : 'introduction'},
+        {
+          path:'softwareCraft/tdd',
+          title : 'TDD'},
+        {
+          path:'softwareCraft/clean-code',
+          title : 'Clean Code'},
+        {
+          path:'softwareCraft/pair-programming',
+          title : 'Pair Programming'},
+        {
+          path:'softwareCraft/refactoring',
+          title : 'Refactoring'},
       ]},
     {
       id: 5,

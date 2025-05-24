@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-pipes',
   templateUrl: './pipes.component.html',
   standalone: true,
-  styleUrls: ['./pipes.component.scss']
 })
 export class PipesComponent {
 

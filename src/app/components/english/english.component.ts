@@ -13,7 +13,6 @@ interface Word {
     ReactiveFormsModule
   ],
   templateUrl: './english.component.html',
-  styleUrl: './english.component.scss'
 })
 
 export class EnglishComponent {

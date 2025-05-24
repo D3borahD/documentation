@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './introduction-software-craft.component.html',
-  styleUrl: './introduction-software-craft.component.scss'
 })
 export class IntroductionSoftwareCraftComponent {
 

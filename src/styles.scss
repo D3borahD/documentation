@@ -273,3 +273,10 @@ pre {
   width: 2px;
   margin-right: .5em;
 }
+
+.code-side-by-side{
+  pre{
+    min-width: 400px;
+    margin-right: 1em;
+  }
+}

@@ -9,7 +9,6 @@ import {Router, RouterOutlet} from '@angular/router';
     RouterOutlet
   ],
   templateUrl: './algorithms.component.html',
-  styleUrls: ['./algorithms.component.scss']
 })
 export class AlgorithmsComponent {
 

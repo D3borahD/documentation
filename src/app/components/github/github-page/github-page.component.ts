@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './github-page.component.html',
-  styleUrl: './github-page.component.scss'
 })
 export class GithubPageComponent {
 

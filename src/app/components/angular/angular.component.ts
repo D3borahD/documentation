@@ -12,6 +12,7 @@ import {ITitle} from "@app/shared/models/ITitle";
 })
 export class AngularComponent implements OnInit {
   public routerUrl:string = this.router.url
+  public title:string = 'Angular'
 
   constructor(private router: Router) {}
 

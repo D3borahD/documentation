@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SidebarComponent} from "../shared/sidebar/sidebar.component";
-import {RouterOutlet} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
 import {TitleComponent} from "@app/shared/title/title.component";
 import {ITitle} from "@app/shared/models/ITitle";
 import {FormsModule} from "@angular/forms";
@@ -17,13 +17,19 @@ import {FormsModule} from "@angular/forms";
   ],
   styleUrls: ['./body.component.scss']
 })
-export class BodyComponent{
+export class BodyComponent implements OnInit {
 
   public titleModel: ITitle = {
     title : 'Angular',
     imgUrl : 'assets/angular.png',
     alt: 'logo Angular'
   };
+
+  constructor(private router: Router) {}
+
+  ngOnInit() {
+    console.log('je suis le chemin body:' + this.router.url);
+  }
 
   // à dynamiser
   // data vers sidebar

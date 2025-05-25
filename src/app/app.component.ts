@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { BodyComponent } from './body/body.component';
 import { HeaderComponent } from "./shared/header/header.component";
 
@@ -11,4 +11,6 @@ import { HeaderComponent } from "./shared/header/header.component";
   ],
   templateUrl: './app.component.html'
 })
-export class AppComponent {}
+export class AppComponent {
+
+}

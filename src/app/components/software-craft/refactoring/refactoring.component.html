@@ -1,1 +1,79 @@
-<p>refactoring works!</p>
+<h3>Transformer le code pour l'améliorer</h3>
+<p>Le rendre plus  lisible, plus facile à maintenir et propice à accueillir des évolutions.</p>
+<p>Il est étroitement lié à la présence d'une couverture de tests suffisamment solide pour garantir que les amélioration
+  du code se feront en toute sécurité.</p>
+
+<h3>Le code : une matière en perpétuelle transformation</h3>
+<p>Au fur et à mesure que nous renforçons nos connaissances, qu'elles soient propres au métier ou techniques, nous pouvons
+les mettre à profit pour des améliorations successives du code. C'esr donc un processus itératif de raffinage du code.</p>
+<p>Ne jamais laisser du code dans un moins bon état que celui dans lequel on l'a récupéré.</p>
+<p>Un développeur est plus utile pour trouver des solutions nouvelles et à veiller à la qualité de son propre code, plutôt
+qu'à s'acharner à décrypter le code de ses prédécesseurs.</p>
+
+<h3>Le refactoring comme antidote de la dette technique</h3>
+<p>Le terme de dette technique emprunte au domaine de la finance, comme toute dette, elle doit être remboursée, dans le
+cas contraire, on court progressivement à la faillite du projet. Plus on tarde à rembourser, plus les intérêts coûtent
+cher.</p>
+
+<h3>Les freins au refactoring</h3>
+<ul>
+  <li>Il est considéré comme un poste de coût par le client. Mais c'est une vision à court-termiste.</li>
+  <li>Les développeurs ont peur de provoquer des régressions.</li>
+  <li>Les équipes peuvent s'interdire d'en faire afin de ne pas perdre de temps invisible pour le client.</li>
+  <li>Dans certaines équipes, la culture  de la qualité de code est absente.</li>
+  <li>Manque d'envie de faire des efforts, manque de connaissances ou de savoir faire</li>
+</ul>
+
+<h3>Un principe fondateur : exprimer l'intention</h3>
+<p>A la lecture du code, on ne devrait pas avoir à deviner ce que les contributeurs ont cherché à faire. Si c'est le cas,
+c'est un déficit d'expression de l'intention. Il faut alors la renforcer au moyen du refactoring.</p>
+<p>L'impression que tout est mélangé, que le code fait plein de choses en même temps, ou que chaque morceau de code est
+trop lié aux autres, constitue également une difficulté majeure dans la compréhension d'une base de code.</p>
+
+<h3>Principes méthodologiques de refactoring</h3>
+<p>Une pratique efficace et pertinente du refactoring nécessite de :</p>
+<ul>
+  <li> <span class="pink-purple-txt">savoir reconnaître quand un refactoring est nécessaire :</span> cela passe par une
+  maîtrise des principes du Clean Code (SOLIDE, loi Demeter, KISS, YAGNI, ...) et une capacité à identifier leurs
+  violations, ainsi qu'à reconnaître les "code smells" les plus fréquents.</li>
+  <li><span class="pink-purple-txt">Connaître les patterns de refactoring les plus courants :</span> renommage, extraction
+  (classes, méthodes, variables, ...) pour le découpage, inline et combinaison extract-inline, déplacement, changement
+    de signature ; à l'inverse, savoir reconnaître quand un refactoring peut se montrer contre-productif ou prématuré.</li>
+  <li><span class="pink-purple-txt">maîtriser les outils et notamment l'IDE : </span>connaître ses possibilités et
+    différentes astuces offertes pour gagner en fluidité, en productivité et en robustesse de la pratique.</li>
+</ul>
+
+<h3>Les tests comme prérequis à tous refactoring</h3>
+
+<h3>Transformer par petits pas sûrs</h3>
+<p>Les bénéfices sont multiples</p>
+<ul>
+  <li>les étapes sont petites, ce qui libère de la charge mentale;</li>
+  <li>en cas d'échec, signalé grâce aux tests, on peut défaire facilement ce qu'on vient de modifier.</li>
+</ul>
+<p>Pour travailler de cette façon, il est important de comprendre et de maîtriser les différents patterns de refactoring.
+ <span class="pink-purple-txt">Martin Fowler : Livre Refactoring</span></p>
+<p>Connaître les raccourcis de l'IDE, ses capacités en terme de refactoring et les gains de productivité offerts constitue
+un atout indispensable.</p>
+<p>Pour progresser dans une pratique fluide et efficace du refactoring, il est important de s'imposer la règle essentielle
+des <span class="pink-purple-txt">changements non cassants</span>, c'est-à-dire tout changement qui permet au code de
+continuer à fonctionner.</p>
+
+<h3>Patterns de refactoring : La boîte à outils</h3>
+<h4>Renommage :</h4>
+<p>Il peut s'appliquer à l'ensemble des éléments nommés du code : Classes, variables, constantes, attributs, méthodes,
+  paramètres.</p>
+<p>Les éléments non nommés : les expressions, les blocs de code, les fonctions anonymes ou lambda ne sont pas directement
+éligibles à ce patterns, il faudra au préalable faire une extraction.</p>
+<ul>
+  <li>Identifier l'élément à renommer ;</li>
+  <li>Chercher toutes les occurrences dans le code ;</li>
+  <li>Modifier le nom de l'élément et de toutes ces occurrences ;</li>
+  <li>Relancer les tests.</li>
+</ul>
+<p>Il faut s'assurer que l'élément renommé n'est pas référencé à l'intérieur d'une chaîne de caractères (par exemple
+lorsqu'on pratique l'invocation dynamique) ou dans un commentaire.</p>
+
+<h4>Extraction</h4>
+
+<p>En cours ...</p>

@@ -75,5 +75,206 @@ continuer à fonctionner.</p>
 lorsqu'on pratique l'invocation dynamique) ou dans un commentaire.</p>
 
 <h4>Extraction</h4>
+<p>L'Extraction du code répond à de multiple besoins :</p>
+<ul>
+  <li>Découper le code en unités plus petites ;</li>
+  <li>Offrir une opportunité de nommer un bloc de code ;</li>
+  <li>Renforcer les abstractions ;</li>
+  <li>Réduire la duplication (lorsque le code extrait apparaît à de multiples reprises.</li>
+</ul>
+<p>L'ensemble contribue à améliorer l'expression de l'intention et à rendre le code plus évolutif.</p>
+<p>L'extraction se décline sous les formes suivantes : fonctions/méthodes, variables, attributs, constantes.</p>
+<p>Ce pattern s'applique de façon progressive : une expression qui en premier lieu est extraite en variable, puis en
+méthode, puis en classe. Cela contribue au respect du Principe de Responsabilité unique : d'abord on réduit la taille
+de la méthode, puis de la classe initiale en créant une nouvelle classe.</p>
+<ul>
+  <li><span class="pink-purple-txt">Cas de code dupliqué :</span></li>
+  <p>Question à se poser : Si je dois changer du code à un endroit, faut-il le changer également
+    dans les autres  occurrences de ce code ?</p>
+  <p>Si la réponse est oui, alors il faut probablement refactorer le code.</p>
+  <p>Le refactoring Extract avec l'option de remplacer toutes les occurrences permet de retirer cette duplication
+  instantanément.</p>
+  <p>Tout règle métier ne doit être écrite qu'une seule fois.</p>
+  <p>A l'inverse, refactorer du code technique, est souvent utile, mais il faut veiller à ne pas pousser l'abstraction
+  trop loin : trop de généricité peut, rendre le code moins facile à comprendre, et le rendre moins évolutif parce qu'il
+  devient utilisé par beaucoup de monde.</p>
+  <p>Il est important de faire attention à ce qui ressemble à de la duplication mais qui n'en est pas. Parfois, deux
+  morceau de code ne sont pas identique, mais similaire. D'autres fois, les codes sont identiques, mais opèrent dans des
+   contextes ou à des niveaux d'abstraction différents.</p>
+  <li><span class="pink-purple-txt">Cas particulier : magic value (string/number)</span></li>
+  <p>Le code ne devrait pas utiliser directement des littéraux numériques ou textuels pour lesquels on risque de perdre
+  l'intention.</p>
+  <pre>
+ <span class="label">C#</span>
+  <code class="langage-c#">
+    if (label.length() > 40) &#123;
+      //
+    &#125;
 
-<p>En cours ...</p>
+    if (label.length() > MAX_LABEL_LENGTH) &#123;
+      //
+    &#125;
+  </code>
+</pre>
+</ul>
+<p>Le refactoring automatisé "Extract Constant" permet d'effectuer cette transformation.</p>
+<p>On pourrait également extraire la valeur magique dans une variable ou une méthode, en fonction de la portée et la
+réutilisabilité souhaitée.</p>
+
+<h4>Inversion de lignes</h4>
+<p>Remplace avantageusement le copier/coller et facilite : </p>
+<ul>
+  <li>le découpage en regroupant les lignes de code par unité logiques, préalablement à l'extraction par exemple</li>
+  <li>le renommage en affinant la compréhension du rôle de certaines variables.</li>
+</ul>
+<p>L'inversion de méthodes permet de réorganiser l'ordre des méthodes dans une classe, pour en faciliter la lecture
+(clean code).</p>
+
+<h4>Réécriture d'instructions conditionnelles</h4>
+<ul>
+  <li>en inversant la condition et les deux branches du if;</li>
+  <li>en transformant un if/else en ternaire, ou inversement;</li>
+  <li>en s'appuyant sur l'algèbre de Boole (notamment des lois de De Morgan) pour améliorer les conditions complexes;</li>
+  <li>en fusionnant plusieurs if en un seul, en cas de duplication dans les blocs de if/else;</li>
+  <li>en faisant évoluer une succession de if vers un switch lorsque c'est possible.</li>
+</ul>
+<p>Ces transformations automatique de l'IDE, sont motivées par le gain en lisibilité et plus spécifiquement pour les
+raisons suivantes :</p>
+<ul>
+  <li>maintenir un seul niveau d'indentation;</li>
+  <li>échouer ou renvoyer une valeur le plus tôt possible (principe de fail fast);</li>
+  <li>réduire la duplication.</li>
+</ul>
+
+<h4>Réécriture de boucles</h4>
+<p>Les algorithmes de traitement des collections, lorsqu'ils sont écrits dans un style procédural, offrent peu de lisibilité :</p>
+<pre>
+ <span class="label">C#</span>
+  <code class="langage-c#">
+    List&lt;Student&gt; students = studentRepository.findAll();
+    List&lt;String&gt; masterStudentNames = new ArrayList();
+
+    for (Student student : students)  &#123;
+      if (student.getGrade() == Grade.MASTER)&#123;
+        masterStudentNames.add()student.getName());
+      &#125;
+    &#125;
+    return masterStudentNames;
+  </code>
+</pre>
+<p>On se retrouve avec plusieurs niveaux d'indentation, on a besoin d'une variable intermédiaire et les responsabilités
+entre le parcours, le filtrage et la transformation sont mal délimitées. Dans un style plus fonctionnel on aurait le code
+suivant : </p>
+<pre>
+ <span class="label">C#</span>
+  <code class="langage-c#">
+    studentRepository.findAll().stream()
+      .filter(student -> student.getGrade() == Grade.MASTER)
+      .map(Student::getName())
+      .collect(Collectors.toList());
+  </code>
+</pre>
+<p>On exprime ce qui doit être fait (filtrer les étudiants titulaire d'un master et projeter leur nom). Plutôt que
+comment on le fait (avec la boucle for)</p>
+<p>Dans certaines situation, le code impératif d'une boucle ne se prête pas à une réécriture plus déclarative : le code
+peut être trop long et provoquer des effets de bord.</p>
+<p>La présence d'une boucle reste une indication sur la nécessité d'extraire le bloc à l'intérieur de la boucle dans une
+nouvelle méthode : on distingue l'opération unitaire de l'opération sur un ensemble. A noter que le code d'une boucle
+ne s'y prête pas toujours, notamment lorsque chaque itération modifie plusieurs états (on cherchera alors à renforcer
+la cohésion d'ensemble en les regroupant dans un seul objet).</p>
+
+<h4>Changement de signature</h4>
+<p>Les opérations les plus courantes :</p>
+<ul>
+  <li>Revoir l'ordre des paramètres : du plus essentiel au plus optionnel, du plus significatif au moins important;</li>
+  <li>Homogénéiser l'ordre des paramètres sur plusieurs appels imbriqués pour réduire la charge mentale à la lecture;</li>
+  <li>Regrouper les paramètres en fonction de la cohésion fonctionnelle, en créant si nécessaire des abstractions sous
+  la forme de nouveaux types.</li>
+</ul>
+
+<h4>Déplacement</h4>
+<p>Son rôle est de redéfinir les responsabilités des classes en déplaçant certaines de leurs méthodes et propriétés. Si
+une classe à plusieurs responsabilités, on peut la séparer en deux classes et déplacer les méthodes d'une classe à l'autre.</p>
+<p>On peut aussi définir une classe mère qui pourra être réutilisée et déplacer les propriétés de la classe fille vers
+la classe mère.</p>
+
+<h4>Inlining</h4>
+<p>Consiste à réinsérer un morceau de code référencé aux endroits qui y font référence. Ainsi les occurrences de la
+référence au code seront substituées directement par le code référencé.</p>
+
+<h3>Refactoring vers des design patterns</h3>
+<p>Une succession de conditions suffisamment nombreuses (if ou switch) peut se refactorer vers le pattern Stratégie.</p>
+<p>Des boucles peuvent se refactorer vers le pattern Composite.</p>
+<p>Des vérifications de non-null peuvent se refactorer vers le pattern Null Object.</p>
+
+<h3>Combinaison de patterns</h3>
+<h4>Un refactoring pour préparer le suivant</h4>
+<p>Extraire des variables locales, nommés, permet de préparer le terrain pour l'IDE qui va proposer d'emblée la signature
+la plus pertinente pour une extraction de méthode.</p>
+<p>Rassembler tous les return d'une méthode dans une variable locale temporaire afin de permettre un Extract Method par
+l'IDE, avant de finalement effacer cette variable locale.</p>
+
+<h4>Dégrader pour améliorer</h4>
+<p>Permet de le considérer sous une autre perspective avec une compréhension nouvelle.</p>
+<ul>
+  <li><span class="pink-purple-txt">Inline + extract method</span></li>
+  <p>L'étape inline dégrade le code, en rassemblant tous le code dans un même fragment trop gros et avec trop de
+    responsabilité, mais cela permet de faire facilement l'inventaire de toutes ces responsabilités afin de mieux les
+  extraire dans les étapes "extract".</p>
+  <li><span class="pink-purple-txt">Extraction de fonction/inlining</span></li>
+  <p>Lorsqu'il faut réécrire des occurrences multiples d'un même code, cette combinaison offre une alternative plus
+  sécurisée et efficace que le rechercher/remplacer. Elle consiste à : </p>
+  <ul>
+    <li>Identifier le code à remplacer;</li>
+    <li>Extraire toutes les occurrences de ce code dans une méthode;</li>
+    <li>Retravailler le code dans la méthode ainsi extraite; </li>
+    <li>Une fois terminé, "inliner" la méthode en remplaçant toutes les occurrences.</li>
+  </ul>
+  <p>L'extraction fournit un buffer temporaire de réécriture du code plus sûr que le rechercher/remplacer qui travaille
+  directement au niveau textuel, ce qui peut se révéler dangereux. Avec une combinaison "extraction + inline", on travail
+  au niveau du modèle logique du code, ce qui garantit une réécriture correcte d'un point de vue sémantique.</p>
+</ul>
+
+<h3>Situations nécessitant du refactoring </h3>
+<p>Méthode trop longue, code trop complexe, trop de paramètres d'une méthode ou trop de données membres d'une classe, ...</p>
+
+<h4>Code dans le code</h4>
+<p>Présence de script SQL (Linq) dans le code objet (C#).</p>
+<p>L'IDE n'est pas à l'aise avec cet autre langage et considère son code comme du vulgaire texte, excluant toute possibilité
+de refactoring automatique. S'ajoute à cette difficulté l'absence fréquente de tests (code qui mobilise des ressources
+  externes comme la bdd et par nature difficile à mocker.</p>
+<p>On essaiera dans la mesure du possible de limiter au strict nécessaire les inclusions d'autres langages, en se
+tournant vers les possibilités offertes par le langage principal (utilisation des fonctionnalités de mapping
+  objet-relationnel)</p>
+
+<h4>Code avec modification d'état</h4>
+<p>Un code qui modifie une ou plusieurs variables extérieures (paramètres d'entrée, attributs d'une classe, variables
+ globales) peut être considéré comme un code avec modification d'état.</p>
+<p>Ce code ayant des intéractions avec l'extérieur, il est plus difficile de prévoir les impacts d'une réécriture.</p>
+<p>Au contraire, un code qui est écrit comme une fonction pure, c'est-à-dire que pour chaque ensemble de paramètres
+en entrée on attend une valeur en sortie bien déterminée, est beaucoup plus facile à tester et donc à réécrire.</p>
+<p>La difficulté est plus élevée si on multiplie le nombre de variable extérieures et que ces dernières sont éloignées
+entre elles.</p>
+<p>Pour avancer, on cherchera dans un premier temps à rapprocher leur définition de l'endroit où elles sont réellement
+utilisées. On pourra aussi rendre leur périmètre plus local, en en faisant une copie dans une variable locale, ou encore
+regrouper les variables dans un objet de contexte qui pourra être passé en paramètre. L'objectif est de rendre ce code plus
+propice à l'extraction de méthodes.</p>
+
+<h3>Refactorer aussi le code de test</h3>
+<p>C'est le point d'entrée pour un nouvel arrivant, il peut offrir une valeur documentaire élevée. Si il est bien fait
+on arrive à comprendre facilement les fonctionnalités de l'application.</p>
+<ul>
+  <li>Renforcer la clarté de l'intention du test;</li>
+  <li>Délimiter des parties du test suivant le pattern AAA;</li>
+  <li>Faciliter la maintenabilité du test.</li>
+</ul>
+<p>D'une manière générale, une User Storie est représenté dans le nom de la classe de test, alors que les noms de méthodes
+décrivent la règle de gestion voire l'exemple testé.</p>
+<ul>
+  <li>Bien nommer les tests;</li>
+  <li>Ne pas faire de tests trop gros;</li>
+  <li>Eviter de mélanger les niveaux d'abstraction;</li>
+  <li>Favoriser la réutilisation (notamment pour initialiser le contexte);</li>
+  <li>Maîtriser l'IDE pour nous faciliter la tâche et notamment générer les classes et méthodes du code de production au
+  fil de l'eau.</li>
+</ul>

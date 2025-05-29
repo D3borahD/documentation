@@ -4,52 +4,56 @@
 
 <h3>1. Programmer comme un exercice de communication</h3>
 <div class="definition">
-  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> Citation :</span>
+  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i>Citation :</span>
   <p>"Un bon programmeur écrit du code que les humains peuvent comprendre." Martin FOWLER</p>
 </div>
-<p><span>Clean code :</span></p>
+<p><span class="pink-purple-txt">Clean code :</span></p>
 <ul>
-  <li>code lisible</li>
-  <li>facile à maintenir</li>
-  <li>sans bug</li>
+  <li>Code lisible;</li>
+  <li>Facile à maintenir;</li>
+  <li>Sans bug.</li>
 </ul>
 
-<h3>L'importance d'être exemplaire</h3>
+<h3>2. L'importance d'être exemplaire</h3>
 <p><span class="pink-purple-txt">La théorie de la vitre brisée</span> : Si une vitre est cassée et n'est pas réparée,
   toutes les autres vitres connaîtront bientôt le même sort</p>
 <p>Tolérance 0</p>
-<p><span class="pink-purple-txt">Règle du Boy Scout</span> : laisser le code dans un meilleur état que celui trouvé.</p>
 
-<h3>2. Principes essentiels pour un code lisible et évolutif</h3>
+<div class="definition">
+  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i>Règle du Boy Scout :</span>
+  <p>Laisser le code dans un meilleur état que celui trouvé.</p>
+</div>
+
+<h3>3. Principes essentiels pour un code lisible et évolutif</h3>
 <p>Rester simple et aller à l'essentiel.</p>
 <ul>
-  <li>KISS</li>
-  <li>YAGNI</li>
+  <li>KISS;</li>
+  <li>YAGNI.</li>
 </ul>
 <p>4 règles simples pour un design simple :</p>
 <ul>
-  <li>Passer les tests.</li>
-  <li>Réveler l'intention (améliorer le nommage) : un code claire et facile à comprendre.</li>
-  <li>Éviter la duplication : DRY.</li>
+  <li>Passer les tests;</li>
+  <li>Réveler l'intention (améliorer le nommage) : un code claire et facile à comprendre;</li>
+  <li>Éviter la duplication : DRY;</li>
   <li>Rester petit et ne conserver que ce qui est important.</li>
 </ul>
 
-<h3>3. Exprimer l'intention</h3>
+<h3>4. Exprimer l'intention</h3>
 <p>L'art du nommage :</p>
 <ul>
-  <li>Éviter les acronymes.</li>
-  <li>Éviter les termes fourre-tout (data, info, manager)</li>
-  <li>Utiliser des noms communs pour les classes, des verbes pour les fonctions</li>
+  <li>Éviter les acronymes;</li>
+  <li>Éviter les termes fourre-tout (data, info, manager);</li>
+  <li>Utiliser des noms communs pour les classes, des verbes pour les fonctions.</li>
 </ul>
 <p>C'est un processus itératif.</p>
 
-<h3>Structurer le code</h3>
+<h3>5. Structurer le code</h3>
 <p>L'art du storytelling</p>
 
-<h3>4. Découper les fonctions</h3>
-<p>Séparer les responsabilités</p>
-<p>Séparer les niveau d'abstraction</p>
-<p>Exemple : condition pour être électeur en France</p>
+<h3>6. Découper les fonctions</h3>
+<p>Séparer les responsabilités.</p>
+<p>Séparer les niveau d'abstraction.</p>
+<p>Exemple : Condition pour être électeur en France</p>
 
 <pre>
  <span class="label">C#</span>
@@ -74,25 +78,25 @@
   </code>
 </pre>
 <p>Organisation du code du plus grand (le problème principal, fonction public), vers le plus petit (sous problème,
-  fonction private)</p>
+  fonction private).</p>
 <p>Aspect visuel : </p>
 <ul>
-  <li>1 ou 2 niveaux d'indentation maximum (si plus c'est qu'un refactor est nécessaire.</li>
-  <li>Pas de défilement horizontal (des lignes de code simples, utiliser les retours à la ligne)</li>
+  <li>1 ou 2 niveaux d'indentation maximum (si plus c'est qu'un refactor est nécessaire;</li>
+  <li>Pas de défilement horizontal (des lignes de code simples, utiliser les retours à la ligne).</li>
 </ul>
 
-<h3>Commentaires avec modération</h3>
+<h3>7. Commentaires avec modération</h3>
 <div class="definition">
   <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> Citation :</span>
   <p>"Don't comment bad code - Rewrite it" - Brian KERNIGHAN</p>
 </div>
 <p>Les commentaires utiles : </p>
 <ul>
-  <li>Signaler une subtilité.</li>
-  <li>Marquer les problèmes à résoudre dans le code - TODO / FIXME</li>
-  <li>Apposer des mentions légales (openSource)</li>
+  <li>Signaler une subtilité;</li>
+  <li>Marquer les problèmes à résoudre dans le code - TODO / FIXME;</li>
+  <li>Apposer des mentions légales (openSource).</li>
 </ul>
 
-<h3>5. DRY</h3>
-<h3>6. La propreté du code aussi pour les tests</h3>
+<h3>8. DRY</h3>
+<h3>9. La propreté du code aussi pour les tests</h3>
 

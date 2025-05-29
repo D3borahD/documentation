@@ -16,13 +16,12 @@
 <p>Chaque fichier a un thème précis, exemple : "Comportement concernant les remises client sur les livres en Europe."</p>
 <p><span class="pink-purple-txt">Première rubrique : </span>Feature qui décrit l'intention générale, au format US :</p>
 
-<div class="definition">
-  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> FEATURE :</span>
-  <p><span class="pink-purple-txt">FEATURE : </span>Offrir des remises aux clients fidèles</p>
-  <p><span class="pink-purple-txt">AFIN</span> d'encourager les clients à revenir acheter,</p>
-  <p><span class="pink-purple-txt">EN TANT QUE</span> vendeur de livres,</p>
-  <p><span class="pink-purple-txt">JE SOUHAITE</span> offrir des remises de prix aux clients fidèles.</p>
-</div>
+<app-callout-section title="Feature">
+    <p><span class="pink-purple-txt">FEATURE : </span>Offrir des remises aux clients fidèles</p>
+    <p><span class="pink-purple-txt">AFIN</span> d'encourager les clients à revenir acheter,</p>
+    <p><span class="pink-purple-txt">EN TANT QUE</span> vendeur de livres,</p>
+    <p><span class="pink-purple-txt">JE SOUHAITE</span> offrir des remises de prix aux clients fidèles.</p>
+</app-callout-section>
 
 <p>La feature a pour but de documentation, elle est complétée des règles métiers.</p>
 
@@ -30,13 +29,13 @@
 <p>Une succession d'exemple.</p>
 <p>Attention, les deux points font parti des mots-clés.</p>
 
-<div class="definition">
-  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> Exemple :</span>
-  <p><span class="pink-purple-txt">Exemple : </span>Aucune remise avec 2 articles en deçà de 50€ d'achat.</p>
-  <p><span class="pink-purple-txt">GIVEN </span>un panier avec 2 articles pour un total de 49€;</p>
-  <p><span class="pink-purple-txt">WHEN </span>le client consulte son panier;</p>
-  <p><span class="pink-purple-txt">THEN </span>le total n'inclut aucune remise.</p>
-</div>
+<app-callout-section title="Exemple">
+    <p><span class="pink-purple-txt">Exemple : </span>Aucune remise avec 2 articles en deçà de 50€ d'achat.</p>
+    <p><span class="pink-purple-txt">GIVEN </span>un panier avec 2 articles pour un total de 49€;</p>
+    <p><span class="pink-purple-txt">WHEN </span>le client consulte son panier;</p>
+    <p><span class="pink-purple-txt">THEN </span>le total n'inclut aucune remise.</p>
+</app-callout-section>
+
 <p>Les mots clés sont : GIVEN, WHEN, THEN, AND, BUT</p>
 <p>Ces features files sont ajoutés au contrôle de source (GIT) dans la même version que le code correspondant à la même
   fonction.</p>
@@ -93,13 +92,12 @@
   détails concrets,
   et avec un tableau associé qui liste les jeux de valeurs, en indiquant un jeu de valeur par ligne : </p>
 
-<div class="definition">
-  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> FEATURE :</span>
-  <p><span class="pink-purple-txt">Scenario Outline : </span>Remise par montant d'achat et status</p>
-  <p><span class="pink-purple-txt">Given</span> un client de status &lt;start&gt;</p>
-  <p><span class="pink-purple-txt">When</span> il commande pour &lt;montant&gt;€ d'achat</p>
-  <p><span class="pink-purple-txt">Then</span> il voit une remise de &lt;remise&gt;€.</p>
-  <pre>
+<app-callout-section title="Feature">
+    <p><span class="pink-purple-txt">Scenario Outline : </span>Remise par montant d'achat et status</p>
+    <p><span class="pink-purple-txt">Given</span> un client de status &lt;start&gt;</p>
+    <p><span class="pink-purple-txt">When</span> il commande pour &lt;montant&gt;€ d'achat</p>
+    <p><span class="pink-purple-txt">Then</span> il voit une remise de &lt;remise&gt;€.</p>
+    <pre>
     <code class="langage-c#">
       <p><span>Exemple :</span></p>
       | status  | montant | remise  |
@@ -108,7 +106,8 @@
       |   VIP   |   50    |    5    |
     </code>
   </pre>
-</div>
+</app-callout-section>
+
 <p><span class="pink-purple-txt">Attention</span> à ne pas abuser de ce format, il ne doit pas devenir le choix par
   défaut.</p>
 
@@ -137,11 +136,10 @@
 <p>La solution est d'admettre que nous restons capables, entre collègues, de parler de façon succincte de ce qui
   importe dans ces gros ensembles de données. En découvrant les termes que l'on utilise déjà dans nos conversations.</p>
 
-<div class="definition">
-  <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> EXEMPLE :</span>
-  <p><span class="pink-purple-txt">Étant donné </span>un historique de vente sur 24 mois constant à 25000€ par mois,</p>
-  <p><span class="pink-purple-txt">Alors ... </span></p>
-</div>
+<app-callout-section title="Exemple">
+    <p><span class="pink-purple-txt">Étant donné </span>un historique de vente sur 24 mois constant à 25000€ par mois,</p>
+    <p><span class="pink-purple-txt">Alors ... </span></p>
+</app-callout-section>
 
 <p>Dans les outils d'automatisation, ces approches deviennent des builders (pattern builder, appliqués aux test,
   c'est-à-dire des "test data builder") ou des chargements de fichier à partir des paramètres définis dans les clauses

@@ -6,71 +6,71 @@
 la réduction du nombre d'anomalies, l'accompagnement des équipiers face aux changements, ou encore le partage des
 connaissances.</p>
 
-<h3>Le binômage (pair programming)</h3>
-<p>Travailler à 2 sur une seule machine. Le travail d'équipe peut s'envisager de manière synchrone ou asynchrone.</p>
+<h3>1. Le binômage (pair programming)</h3>
+<p>Travailler à deux sur une seule machine. Le travail d'équipe peut s'envisager de manière synchrone ou asynchrone.</p>
 <p>Le partage des tâches pour travailler en parallèle est un travail asynchrone.</p>
 <p>Binômer est une manière de travailler synchrone. On utilise aussi les termes : pair programming, pairing, pairer.</p>
 <p>Le binômage est souvent confondu avec d'autres activités, comme : </p>
 <ul>
-  <li>travailler à 2 ou collaborer, lorsque l'on travaille ensemble mais sur des machines différentes ;</li>
-  <li>travailler en observant son partenaire sans toucher le clavier ni prendre part, même en oralement, à la
+  <li>Travailler à deux ou collaborer, lorsque l'on travaille ensemble mais sur des machines différentes ;</li>
+  <li>Travailler en observant son partenaire sans toucher le clavier ni prendre part, même en oralement, à la
     réalisation ;</li>
-  <li>être accompagné pour monter en compétence sur un sujet où tout a été déjà préparé, sans rôle d'exploitation ni
+  <li>Être accompagné pour monter en compétence sur un sujet où tout a été déjà préparé, sans rôle d'exploitation ni
     implication.</li>
 </ul>
-<p>On confond souvent binômer et travailler à 2, mais bibômer suppose un ensemble de compétences spécifiques.</p>
+<p>On confond souvent binômer et travailler à deux, mais bibômer suppose un ensemble de compétences spécifiques.</p>
 
-<h3>Comment binômer ? </h3>
+<h3>2. Comment binômer ? </h3>
 
 <p>Dans le binôme, chacun a son rôle à jouer.</p>
 
-<h4>Deux rôles classiques</h4>
+<h4>2.1 Deux rôles classiques</h4>
 <p>Le rôle du pilote, qui contrôle la machine.</p>
 <p>Le rôle du copilote, il doit prendre du recul sur ce que le binôme produit.</p>
 
-<h4>Une alternance fréquente </h4>
+<h4>2.2 Une alternance fréquente </h4>
 <p>Les itération durent 5 à 10 minutes pour garder un bon rythme et optimiser l'énergie du binôme.</p>
 <p>Privilégier des itérations courtes favorise une participation plus active des participants pour un rythme plus
   dynamique.</p>
 
-<h4>Savoir ralentir</h4>
+<h4>2.3 Savoir ralentir</h4>
 <p>Ralentir est important pour prendre le temps de comprendre en même temps.</p>
 <p>Si un équipier n'a pas prêté attention à une étape du travail en cours, cela peut lui prendre du temps pour
   resynchroniser sa compréhension, après ce décrochage.</p>
 <p>Il est recommandé que celui qui a le plus de maturité en binômage fasse l'effort de ralentir, d'expliquer, de
   s'adapter à l'autre</p>
 
-<h4>Des perspectives différentes</h4>
+<h4>2.4 Des perspectives différentes</h4>
 <p>Pour le pilote, le focus est d'ordre tactique : les détails de l'implémentation, la façon d'écrire le code
   correctement.</p>
-<p>Pour le copilote, le regard est plus stratégique, avec une vision plus abstraite et globale sur ce que notre binôme
+<p>Pour le copilote, le regard est plus stratégique, avec une vision plus abstraite et globale sur ce que le binôme
   écrit. Il garde en tête l'objectif final, prépare la prochaine étape, relit le code. Il gère la liste des todo pour
   ne pas interrompre la réalisation de la tâche en cours.</p>
 
-<h3>Styles de binômage</h3>
-<p>Les plis connus sont le ping-pong et la navigation strong style, d'autres moins connus sont davantage destinés à
+<h3>3. Styles de binômage</h3>
+<p>Les plus connus sont le ping-pong et la navigation strong style, d'autres moins connus sont davantage destinés à
   l'entraînement.</p>
 
-<h4>Le ping-pong</h4>
+<h4>3.1 Le ping-pong</h4>
 <p>Permet de couplet la pratique du binômage avec le TDD.</p>
 <p>Les itérations ne sont pas rythmées par le temps, mais par le cycle du TDD.</p>
 <p>Les rôles alternent à chaque fois qu'on termine une phase rouge du cycle de TDD.</p>
 
-<h4>La navigation strong style</h4>
+<h4>3.2 La navigation strong style</h4>
 <p>Peut s'appliquer quand un des deux participants à une idée et cherche à la mettre en place.</p>
 <p>Cette personne donne le clavier à son partenaire et lui expose son idée pour que le partenaire l'implémente.</p>
 <p>Cela permet de découpler la réflexion de l'écriture du code. Celui qui a l'idée est d'avantage impliqué dans la
   réalisation de la tâche, puisque c'est son idée. Celui qui a le clavier est impliqué car il transmet l'idée à la
   machine.</p>
-<p>Cette manière renforce l'implication des deux participants, notamment grâce à une meilleure synchronisation</p>
+<p>Cette manière renforce l'implication des deux participants, notamment grâce à une meilleure synchronisation.</p>
 <p>Le copilote a une idée et peut la décrire selon 3 niveau à utiliser dans l'ordre suivant :</p>
 <ul>
-  <li>Intention : Crée une variable que l'on appellera 'décompte'.</li>
-  <li>Emplacement : À la ligne 27 </li>
-  <li>Détail : Tae v,a,r espace 'décompte' égal 1</li>
+  <li><span class="pink-purple-txt">Intention</span> : Crée une variable que l'on appellera 'décompte';</li>
+  <li><span class="pink-purple-txt">Emplacement</span> : À la ligne 27;</li>
+  <li><span class="pink-purple-txt">Détail</span> : Tape v,a,r espace 'décompte' égal 1.</li>
 </ul>
 <p>Dans cette approche, la première étape pour le copilote est d'exprimer son intention. Si cela suffit pour que le
-  pilote implémente l'idée, il n'est pas nécessaire d'aller plus loin</p>
+  pilote implémente l'idée, il n'est pas nécessaire d'aller plus loin.</p>
 <p>Il est important que le copilote trouve le bon niveau auquel s'adresser au pilote. Si les attentes sont asymétriques,
 il peut en résulter de la frustration dans le binôme.</p>
 <ul>
@@ -80,52 +80,52 @@ il peut en résulter de la frustration dans le binôme.</p>
 </ul>
 <p>Dans tous ces cas, le binôme n'avance pas.</p>
 
-<h4>Silent pair programming</h4>
+<h4>3.4 Silent pair programming</h4>
 <p>Il fournit une technique pour s'entraîner au binômage. Il est utile quand les deux participants discute beaucoup et
   n'arrivent pas à converger, ou lorsque le code se lit avec difficulté.</p>
-<p>Règles : les deux participants ne sont pas autorisés à parler, écrire ou dessiner. Seul le code peut être utilisé
+<p><span class="pink-purple-txt">Règles</span> : les deux participants ne sont pas autorisés à parler, écrire ou dessiner. Seul le code peut être utilisé
   pour communiquer, mais il est interdit d'utiliser les commentaires de code à cet effet.</p>
 <p>Cet exercice doit permettre au binôme de :</p>
 <ul>
-  <li>converger plus rapidement;</li>
-  <li>rendre le code plus explicite, via un meilleur nommage de tous les éléments du code;</li>
-  <li>améliorer le nommage des tests;
-  <li>inciter au refactoring par les deux participants.</li>
+  <li>Converger plus rapidement;</li>
+  <li>Rendre le code plus explicite, via un meilleur nommage de tous les éléments du code;</li>
+  <li>Améliorer le nommage des tests;
+  <li>Inciter au refactoring par les deux participants.</li>
 </ul>
-<p>Conseils : </p>
+<p><span class="pink-purple-txt">Conseils</span> : </p>
 <ul>
   <li>L'exercice doit rester court, au risque de voir apparaître une certaine frustration à force de na pas pouvoir
-    communiquer.</li>
-  <li>Si on ne comprends pas une portion de code écrite par le partenaire, le surligner avec le curseur et lui rendre le
+    communiquer;</li>
+  <li>Si on ne comprend pas une portion de code écrite par le partenaire, le surligner avec le curseur et lui rendre le
     clavier. Il devra alors refactorer le code surligné pour le rendre plus lisible.</li>
 </ul>
 
-<h4>Evil twin pair programming</h4>
+<h4>3.5 Evil twin pair programming</h4>
 <p>C'est une variante du ping-pong. Elle est utile dans le cadre de l'enseignement du TDD et plus précisément sur le TDD
 as if you meant it.</p>
 <p>Les deux participants alternent le clavier à chaque étape du TDD, mais le pilote va endosser toute la "mauvaise foi"
 dont il est capable. Cette attitude doit permettre de "piéger" son partenaire, tout en mettant en avant les cas limites
 sur le code produit par le binôme.</p>
 
-<h3>Motivation pour choisir de binômer</h3>
+<h3>4. Motivation pour choisir de binômer</h3>
 
-<h4>Apprendre et progresser</h4>
+<h4>4.1 Apprendre et progresser</h4>
 <p>Dans certaines situations, on manque des connaissances nécessaires pour avancer sur certaines tâches. Pourtant il est
   impératif de pouvoir être autonome sur le sujet. Binômer est alors vital pour étendre ses connaissances et gagner en
   autonomie. On peut s'appuyer sur notre partenaire qui va : </p>
 <ul>
-  <li>nous faire profiter de son expertise en nous faisant découvrir l'état de l'art sur un sujet;</li>
-  <li>nous montrer un nouveau raccourcis clavier de l'IDE ou une nouvelle technique de programmation;</li>
-  <li>nous expliquer l'historique de l'application en cours de développement;</li>
-  <li>nous inciter à exploiter de nouvelle façon de faire.</li>
+  <li>Nous faire profiter de son expertise en nous faisant découvrir l'état de l'art sur un sujet;</li>
+  <li>Nous montrer un nouveau raccourcis clavier de l'IDE ou une nouvelle technique de programmation;</li>
+  <li>Nous expliquer l'historique de l'application en cours de développement;</li>
+  <li>Nous inciter à exploiter de nouvelle façon de faire.</li>
 </ul>
 <p>Lorsque ce savoir est partagé, on économise beaucoup de temps et d'énergie, car notre partenaire est à côté de nous
 et facilement accessible.</p>
 
-<h4>Partager et transmettre</h4>
+<h4>4.2 Partager et transmettre</h4>
 <ul>
-  <li>s'assurer que les connaissances perdurent et limiter le <span class="pink-purple-txt">truck factor</span>;</li>
-  <li>accroître la quantité de connaissances collectives et favoriser la connexion entre elles.</li>
+  <li>S'assurer que les connaissances perdurent et limiter le <span class="pink-purple-txt">truck factor</span>;</li>
+  <li>Accroître la quantité de connaissances collectives et favoriser la connexion entre elles.</li>
 </ul>
 
 <div class="definition">
@@ -140,87 +140,95 @@ et facilement accessible.</p>
 partenaire lorsqu'il est absent.</p>
 <p>Lorsque les participants sont trop désynchronisés, on prend moins de plaisir au binômage et on perd en efficacité.
 Si la motivation est équilibrée, la synchronisation est optimale et on vit les sessions de binômage les plus
-performante.</p>
+performantes.</p>
 
-<h4>Assurer et se rassurer</h4>
-<p>Quand on est 2 à réaliser une tâche on se sent plus fort, on partage la responsabilité.</p>
+<h4>4.3 Assurer et se rassurer</h4>
+<p>Quand on est deux à réaliser une tâche on se sent plus fort, on partage la responsabilité.</p>
 
-<h4>Se motiver et s'entraider</h4>
-<p>Parfois face à une tâche difficile ou fastidieuse, face à laquelle on est démotivé.</p>
-<p>Travailler en binôme permet alors de se remobiliser pour s'investir sur une telle tâche.</p>
+<h4>4.4 Se motiver et s'entraider</h4>
+<p>Parfois face à une tâche difficile ou fastidieuse, face à laquelle on est démotivé, travailler en binôme permet alors
+  de se remobiliser pour s'investir sur une telle tâche.</p>
 
-<h3>La vie à deux</h3>
+<h3>5. La vie à deux</h3>
 <p>Pour collaborer, il sera nécessaire de communiquer avec son binôme, le respecter et adapter sa posture pour écouter
 et se faire entendre.</p>
 
-<h4>Se détacher de son égo</h4>
+<h4>5.1 Se détacher de son égo</h4>
 <p>On a besoin de l'écosystème, mais on ne lui est pas indispensable. Si on est indispensable, c'est qu'il y a un
 problème de truck factor.</p>
 <p>Apprendre à se détacher de ses idées et à accepter les contributions des autres.</p>
 <p>Une des conséquences dans les équipes pratiquant le binômage à temps complet consiste en la prise de conscience que
 le travail fourni (le code) n'appartient pas à une seule personne, mais à toute l'équipe.</p>
 
-<h4>Le besoin ponctuel d'être seul</h4>
-<p>Binômer est une activité intense et fatigante pour tous les participants. Organiser sa journée, en alternant temps de
+<h4>5.2 Le besoin ponctuel d'être seul</h4>
+<p>Binômer est une activité intense et fatigante pour tous les participants. Organiser sa journée en alternant temps de
 travail soutenable et pause régulières, permet de maintenir un rythme efficace.</p>
 <ul>
-  <li>Traiter ses e-mails dans la routine de travail.</li>
-  <li>Répondre aux imprévus.</li>
+  <li>Traiter ses e-mails dans la routine de travail;</li>
+  <li>Répondre aux imprévus;</li>
   <li>Se ressourcer : quand un des participants sature et qu'une pause ne suffit pas à réamorcer correctement le binôme,
   l'un des deux partenaires peut faire usage de son droit de refuser de binômer. Il faut respecter ce droit, discuter de
   la situation et faire une retrospective. Puis s'organiser pour que chacun ait de quoi s'occuper et convenir d'un
-  rendez-vous pour se synchroniser. Si l'un des deux partenaires à besoin de se retrouver seul, en parle et faciliter au
-  maximum le retour au travail seul. Plus la transition binômage/travail solitaire est naturelle, plus il sera
+  rendez-vous pour se synchroniser. Si l'un des deux partenaires à besoin de se retrouver seul, en parler et faciliter
+    au maximum le retour au travail seul. Plus la transition binômage/travail solitaire est naturelle, plus il sera
     envisageable de faire du binômage à long terme.</li>
 </ul>
 
-<h4>Le droit de refuser de binômer</h4>
+<h4>5.4 Le droit de refuser de binômer</h4>
 <p>Parmi les raisons valables : </p>
 <ul>
-  <li>être fatigué, ne pas être de bonne humeur, être malade</li>
-  <li>avoir d'autres préoccupation en tête</li>
-  <li>avoir envie de binômer, mais pas avec une certaine personne</li>
-  <li>ne pas être inspiré ou intéressé par le sujet</li>
+  <li>Être fatigué, ne pas être de bonne humeur, être malade;</li>
+  <li>Avoir d'autres préoccupations en tête;</li>
+  <li>Avoir envie de binômer, mais pas avec une certaine personne;</li>
+  <li>Ne pas être inspiré ou intéressé par le sujet.</li>
 </ul>
 
 <p>Ce droit de ne pas binômer est valable dans les équipes où le binômage est possible et fait partie des pratiques
   adoptées par l'équipe.</p>
 <p>Il existe deux autres situations où le contexte pourrait être différent : </p>
 <ul>
-  <li>les équipes où le binômage ne fait pas partie des pratiques adoptées par l'équipe</li>
-  <li>les équipes où le binômage est la règle et se fait à temps complet (tous les développements se font en binôme).</li>
+  <li>Les équipes où le binômage ne fait pas partie des pratiques adoptées par l'équipe;</li>
+  <li>Les équipes où le binômage est la règle et se fait à temps complet (tous les développements se font en binôme).</li>
 </ul>
 
-<h4>Conseils pratiques</h4>
+<h4>5.5 Conseils pratiques</h4>
 <ul>
-  <li>Charte de travail, respect du partenaire et ponctualité</li>
-  <li>Transparence : plus la communication est saine, plus le travail sera efficace</li>
-  <li>Retrospective : permet d'améliorer les sessions.</li>
-  <li>Objectif partagé : commencer une session avec un objectif</li>
-  <li>Agenda : savoir quand s'arrête la session facilite son bon déroulement</li>
-  <li>Faire des pauses : permet de mieux répartir les efforts et permet au cerveaux de chacun de s'aérer et d'intégrer
-    les sujets abordés dans la session. Permet aussi de prendre du recul si besoin</li>
-  <li>Règle du oui : consiste à prendre en considération ce qui a été fait avant votre intervention. Vous venez mutuellement
-   vous enrichir avec votre partenaire et vous ne pouvez pas ignorer ses interventions au profit des vôtres.</li>
-  <li>Savoir dire non</li>
-  <li>Astuces pratiques face au code : en cas de divergence (fais moi confiance pendant 5 minutes) ; (faire les 2
-    solutions puis décider)</li>
-  <li>Finir sur une victoire</li>
+  <li><span class="pink-purple-txt">Charte de travail</span>, respect du partenaire et ponctualité;</li>
+  <li><span class="pink-purple-txt">Transparence</span> : plus la communication est saine, plus le travail sera efficace;</li>
+  <li><span class="pink-purple-txt">Retrospective</span> : permet d'améliorer les sessions;</li>
+  <li><span class="pink-purple-txt">Objectif partagé</span> : commencer une session avec un objectif;</li>
+  <li><span class="pink-purple-txt">Agenda</span> : savoir quand s'arrête la session facilite son bon déroulement;</li>
+  <li><span class="pink-purple-txt">Faire des pauses</span> : permet de mieux répartir les efforts et permet au cerveau
+    de chacun de s'aérer et d'intégrer
+    les sujets abordés dans la session. Permet aussi de prendre du recul si besoin;</li>
+  <li><span class="pink-purple-txt">Règle du oui</span> : consiste à prendre en considération ce qui a été fait avant
+    votre intervention. Vous venez mutuellement
+   vous enrichir avec votre partenaire et vous ne pouvez pas ignorer ses interventions au profit des vôtres;</li>
+  <li><span class="pink-purple-txt">Savoir dire non</span>;</li>
+  <li><span class="pink-purple-txt">Astuces pratiques face au code</span> : en cas de divergence :
+    <ul>
+      <li>Fais moi confiance pendant 5 minutes ;</li>
+      <li>Faire les deux solutions puis décider;</li>
+    </ul>
+   </li>
+  <li><span class="pink-purple-txt">Finir sur une victoire</span>.</li>
 </ul>
 
-<h4>Smells ou signaux d'alerte</h4>
+<h4>5.6 Smells ou signaux d'alerte</h4>
 <ul>
-  <li><span class="pink-purple-txt">Le silence :</span> indique un manque de collaboration, un désaccord ou qu'un des partenaires a décroché</li>
-  <li><span class="pink-purple-txt">Rôles figés :</span> se produit lorsqu'un participant est plus expérimenté qu'un autre. Le novice se contente d'observer
-  l'expert réaliser la majorité des tâches de développement, généralement sans apprendre efficacement. Synchroniser les
-  participants pour éviter ce comportement : la navigation en strong style est idéale pour résoudre ce genre de problèmes.</li>
-  <li><span class="pink-purple-txt">Différentes machines :</span> on perd l'intérêt de bénéficier de deux cerveaux et de deux paires d'yeux pour analyser
-  et produire du code. Effectuer des recherches ensemble fait parti du binômage et permet de rester synchronisé et de
-  partager les mêmes informations (quelles pistes ont été exploré ...)</li>
-  <li><span class="pink-purple-txt">Désengagement</span></li>
+  <li><span class="pink-purple-txt">Le silence :</span> indique un manque de collaboration, un désaccord ou qu'un des
+    partenaires a décroché;</li>
+  <li><span class="pink-purple-txt">Rôles figés :</span> se produit lorsqu'un participant est plus expérimenté qu'un
+    autre. Le novice se contente d'observer l'expert réaliser la majorité des tâches de développement, généralement
+    sans apprendre efficacement. Synchroniser les participants pour éviter ce comportement : la navigation en strong
+    style est idéale pour résoudre ce genre de problèmes;</li>
+  <li><span class="pink-purple-txt">Différentes machines :</span> on perd l'intérêt de bénéficier de deux cerveaux et de
+    deux paires d'yeux pour analyser et produire du code. Effectuer des recherches ensemble fait parti du binômage et
+    permet de rester synchronisé et de partager les mêmes informations (quelles pistes ont été exploré ...);</li>
+  <li><span class="pink-purple-txt">Désengagement</span>.</li>
 </ul>
 
-<h3>Le mob programming</h3>
+<h3>6. Le mob programming</h3>
 <p>Avec la présence de toute l'équipe et en particulier de la personne dans le rôle du Product Owner, cette approche
  accélère la prise de décision et renforce la résistance aux perturbations.</p>
 <p>Pour être efficace, il faut apprendre à faire preuve de retenue et à réagir moins fréquemment, en laissant le temps

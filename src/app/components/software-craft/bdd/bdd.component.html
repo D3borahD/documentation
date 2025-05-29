@@ -8,9 +8,9 @@
 
 <h3>2. Automatisation des scénarios</h3>
 
-<p>Les scénarios concrets dans le langage métier ont l'avantage de bien se prêter à l'automatisation dans les outils</p>
+<p>Les scénarios concrets dans le langage métier ont l'avantage de bien se prêter à l'automatisation dans les outils.</p>
 
-<h4>La syntaxe de Gherkin</h4>
+<h4>2.1 La syntaxe de Gherkin</h4>
 <p>Les scénarios clés et les scénarios additionnels peuvent être rédigés de façon plus formelle dans la syntaxe de
   Gherkin (= cornichon) dans un fichier txt nommé "fichier de features".</p>
 <p>Chaque fichier a un thème précis, exemple : "Comportement concernant les remises client sur les livres en Europe."</p>
@@ -20,41 +20,41 @@
   <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> FEATURE :</span>
   <p><span class="pink-purple-txt">FEATURE : </span>Offrir des remises aux clients fidèles</p>
   <p><span class="pink-purple-txt">AFIN</span> d'encourager les clients à revenir acheter,</p>
-  <p><span class="pink-purple-txt">EN TANT QUE</span> vendeur de livres</p>
-  <p><span class="pink-purple-txt">JE SOUHAITE</span> offrir des remises de prix aux clients fidèles</p>
+  <p><span class="pink-purple-txt">EN TANT QUE</span> vendeur de livres,</p>
+  <p><span class="pink-purple-txt">JE SOUHAITE</span> offrir des remises de prix aux clients fidèles.</p>
 </div>
 
 <p>La feature a pour but de documentation, elle est complétée des règles métiers.</p>
 
 <p><span class="pink-purple-txt">Reste du fichier</span></p>
-<p>Une succession d'exemple</p>
-<p>Attention, les deux points font parti des mots-clés</p>
+<p>Une succession d'exemple.</p>
+<p>Attention, les deux points font parti des mots-clés.</p>
 
 <div class="definition">
   <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> Exemple :</span>
   <p><span class="pink-purple-txt">Exemple : </span>Aucune remise avec 2 articles en deçà de 50€ d'achat.</p>
-  <p><span class="pink-purple-txt">GIVEN </span>Un panier avec 2 articles pour un total de 49€</p>
-  <p><span class="pink-purple-txt">WHEN </span>Le client consulte son panier</p>
-  <p><span class="pink-purple-txt">THEN </span>Le total n'inclut aucune remise.</p>
+  <p><span class="pink-purple-txt">GIVEN </span>un panier avec 2 articles pour un total de 49€;</p>
+  <p><span class="pink-purple-txt">WHEN </span>le client consulte son panier;</p>
+  <p><span class="pink-purple-txt">THEN </span>le total n'inclut aucune remise.</p>
 </div>
 <p>Les mots clés sont : GIVEN, WHEN, THEN, AND, BUT</p>
 <p>Ces features files sont ajoutés au contrôle de source (GIT) dans la même version que le code correspondant à la même
   fonction.</p>
 
-<h4>Les outils</h4>
+<h4>2.2 Les outils</h4>
 
 <p>Cucumber, Specflow, Behat et Robot Framework.</p>
 <p>Ils analysent chaque ligne de chaque fichier de feature, et pour chaque ligne ils déclenchent des portions de code
   correspondants,
-  que l'on appelle <span class="pink-purple-txt">step definition</span></p>
+  que l'on appelle <span class="pink-purple-txt">step definition</span>.</p>
 <p>Chaque step definition est une fonction.</p>
 
-<h4>Living documentation</h4>
+<h4>2.3 Living documentation</h4>
 
 <p>Les fichiers de features sont regroupés dans des répertoires par zone fonctionnelle. Exemple : /VENTE/REMISES.</p>
 <p>L'intention de chaque feature est exprimée en langage métier.</p>
 <p>Les répertoires et sous répertoires constituent ainsi les chapitres d'une documentation rédigée en langage métier.</p>
-<p>L'automatisation des exemples directement comme des tests avec des assertions permet de détecter aussitôt que le
+<p>L'automatisation des exemples directement comme des tests avec des assertions, permet de détecter aussitôt que le
   comportement
   du code ne correspond plus au comportement attendu.</p>
 <p>Certaines régressions signalent alors aussitôt, l'oubli de mise à jour des exemples correspondants dans le fichier de
@@ -74,9 +74,9 @@
   en langage métier, avec des exemples concrets et auto-suffisants, complétée de son automatisation, apporte à l
   'équipe : </p>
 <ul>
-  <li>la compréhension partagée entre tous;</li>
-  <li>les critères d'acceptation pour déterminer l'avancement des développements;</li>
-  <li>les tests de non-régression avec une bonne couverture et garantie toujours à jour si les tests sont en succès.</li>
+  <li>La compréhension partagée entre tous;</li>
+  <li>Les critères d'acceptation pour déterminer l'avancement des développements;</li>
+  <li>Les tests de non-régression avec une bonne couverture et garantie toujours à jour si les tests sont en succès.</li>
 </ul>
 <p>C'est donc une pratique avec un retour sur investissement attractif. Le temps investi dans la mise en oeuvre et dans
   le soin appliqué aux scénarios
@@ -87,7 +87,7 @@
 <p>Les intentions mentionnées jusqu'à présent butent parfois sur des difficultés lors de la mise en oeuvre. Plutôt que
   de céder, il convient au contraire de trouver des solutions parfois originales, pour concilier tous les objectifs.</p>
 
-<h4>Scénarios tabulaires</h4>
+<h4>4.1 Scénarios tabulaires</h4>
 <p>Parfois, certains scénarios sont très répétitifs, avec pour seules variations quelques changements de valeurs.</p>
 <p>Il est possible de les regrouper dans un scénario unique qui sert de gabarit, avec des variables à la place des
   détails concrets,
@@ -98,7 +98,7 @@
   <p><span class="pink-purple-txt">Scenario Outline : </span>Remise par montant d'achat et status</p>
   <p><span class="pink-purple-txt">Given</span> un client de status &lt;start&gt;</p>
   <p><span class="pink-purple-txt">When</span> il commande pour &lt;montant&gt;€ d'achat</p>
-  <p><span class="pink-purple-txt">Then</span> il voit une remise de &lt;remise&gt;€</p>
+  <p><span class="pink-purple-txt">Then</span> il voit une remise de &lt;remise&gt;€.</p>
   <pre>
     <code class="langage-c#">
       <p><span>Exemple :</span></p>
@@ -110,15 +110,15 @@
   </pre>
 </div>
 <p><span class="pink-purple-txt">Attention</span> à ne pas abuser de ce format, il ne doit pas devenir le choix par
-  défaut</p>
+  défaut.</p>
 
-<h4>Section background</h4>
+<h4>4.2 Section background</h4>
 <p>Il arrive que plusieurs exemples partagent les mêmes pré-requis. Il est possible de les regrouper dans une rubrique
   qui s'applique à tous les scénarios. Cette rubrique de préambule signifie : "Sauf mention contraire, nous supposons
   dans tout ce qui suit que ... (liste des prérequis).</p>
-<p>Les outils d'automatisation supportent cette syntaxe sous la forme d'une section de type "background.</p>
+<p>Les outils d'automatisation supportent cette syntaxe sous la forme d'une section de type "background".</p>
 
-<h4>Persona</h4>
+<h4>4.3 Persona</h4>
 <p>Il est fréquent de manipuler des concepts avec de nombreux attributs (utilisateurs, clients, ...).
   Le concept peut parfois avoir jusqu'à 240 attributs.</p>
 <p>La plupart du temps, seuls quelques-uns de ces attributs sont importants pour un scénario donnée.</p>
@@ -131,31 +131,31 @@
   pour décrire des comportements de façon précise et concise.</p>
 <p>Le persona s'applique également à des concepts non humain : "dossier prêt-à-porter", "dossier sur mesure".</p>
 
-<h4>Datasets et test data builders</h4>
+<h4>4.4 Datasets et test data builders</h4>
 <p>Parfois, définir explicitement la totalité de ce qui est prérequis pour un scénario semble insurmontable (calculer
-  des statistiques ou un reporting sur de grands volume de données.</p>
+  des statistiques ou un reporting sur de grands volume de données).</p>
 <p>La solution est d'admettre que nous restons capables, entre collègues, de parler de façon succincte de ce qui
   importe dans ces gros ensembles de données. En découvrant les termes que l'on utilise déjà dans nos conversations.</p>
 
 <div class="definition">
   <span class="underline"><i class="fa-solid fa-circle-info pink-purple-txt"></i> EXEMPLE :</span>
   <p><span class="pink-purple-txt">Étant donné </span>un historique de vente sur 24 mois constant à 25000€ par mois,</p>
-  <p><span class="pink-purple-txt">alors ... </span></p>
+  <p><span class="pink-purple-txt">Alors ... </span></p>
 </div>
 
 <p>Dans les outils d'automatisation, ces approches deviennent des builders (pattern builder, appliqués aux test,
   c'est-à-dire des "test data builder") ou des chargements de fichier à partir des paramètres définis dans les clauses
   de type Given des scénarios.</p>
 
-<p>Dans chacun des cas, c'est bien l'utilisation du langage métier sui est la clé, pour rendre facilement manipulables
-  les concepts qui ne le sont pas toujours pas leur taille ou leur complexité.</p>
+<p>Dans chacun des cas, c'est bien l'utilisation du langage métier qui est la clé, pour rendre facilement manipulable
+  les concepts qui ne le sont pas toujours par leur taille ou leur complexité.</p>
 
 <h3>5. Démarrer BDD</h3>
-<p>BDD est une pratique qui nécessite pour démarrer que de rassembler des personnes de bonne volonté dans un atelier de
+<p>BDD est une pratique qui nécessite pour démarrer, que de rassembler des personnes de bonne volonté dans un atelier de
   spécifications et en essayant d'appliquer les pratiques.</p>
 <p>Dans un contexte de systèmes hérités (legacy), où le code n'est souvent plus lisible et où les comportements métiers
   sont parfois obscurs, alors introduire des scénarios automatisés en langage métier permet de documenter les
   comportements.</p>
-<p>On appelle ces scénarios des "tests de caractérisation", car ils décrivent le comportement existant du système.</p>
+<p>On appelle ces scénarios des <span class="pink-purple-txt">"tests de caractérisation"</span>, car ils décrivent le comportement existant du système.</p>
 <p>Ces scénarios ou tests sont précieux car ils permettront le cas échéant de réécrire le système dans une nouvelle
   technologie tout en étant capables de retrouver la couverture fonctionnelle originale, et cela à moindre risque.</p>

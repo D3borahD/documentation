@@ -49,37 +49,30 @@ export const routes: Routes = [
       },
       {
         path: 'introduction',
-        title: 'Introduction',
         component: AngularIntroductionComponent
       },
       {
         path: 'tutorial',
-        title: 'Tutorial',
         component: TutorialComponent
       },
       {
         path: 'component',
-        title: 'Component',
         component: ComponentComponent
       },
       {
         path: 'template',
-        title: 'Template',
         component: TemplatesComponent
       },
       {
         path: 'directives',
-        title: 'Directives',
         component: DirectivesComponent
       },
       {
         path: 'pipes',
-        title: 'Pipes',
         component: PipesComponent
       },
       {
         path: 'services',
-        title: 'Services',
         component: ServicesComponent
       },
       {
@@ -88,19 +81,16 @@ export const routes: Routes = [
       },
       {
         path: 'observables',
-        title: 'Observables',
         component: ObservablesComponent
       },
       {
         path: 'exercices',
-        title: 'Exercices',
         component: AngularExercicesComponent
       },
     ]
   },
   {
     path: 'github',
-    title: 'Github',
     component: GithubComponent,
     children:[
       {
@@ -110,7 +100,6 @@ export const routes: Routes = [
       },
       {
         path: 'introduction',
-        title: 'Introduction',
         component: GithubPageComponent
       }
     ]
@@ -118,7 +107,6 @@ export const routes: Routes = [
   },
   {
     path: 'algorithms',
-    title: 'Algorithms',
     component: AlgorithmsComponent,
     children:[
       {
@@ -134,12 +122,10 @@ export const routes: Routes = [
   },
   {
     path: 'english',
-    title: 'English',
     component: EnglishComponent
   },
   {
     path: 'softwareCraft',
-    title: 'Software Craft',
     component: SoftwareCraftComponent,
     children:[
       {
@@ -149,37 +135,30 @@ export const routes: Routes = [
       },
       {
         path: 'introduction',
-        title: 'Introduction',
         component: IntroductionSoftwareCraftComponent
       },
       {
         path: 'tdd',
-        title: 'TDD',
         component: TddComponent
       },
       {
         path: 'clean-code',
-        title: 'Clean code',
         component: CleanCodeComponent
       },
       {
         path: 'bdd',
-        title: 'BDD',
         component: BddComponent
       },
       {
         path: 'pair-programming',
-        title: 'Pair programming',
         component: PairProgrammingComponent
       },
       {
         path: 'refactoring',
-        title: 'Refactoring',
         component: RefactoringComponent
       },
       {
         path: 'legacy-code',
-        title: 'Code legacy',
         component: LegacyCodeComponent
       },
     ]

@@ -1,91 +1,95 @@
-<h3>Transformer le code pour l'améliorer</h3>
-<p>Le rendre plus  lisible, plus facile à maintenir et propice à accueillir des évolutions.</p>
-<p>Il est étroitement lié à la présence d'une couverture de tests suffisamment solide pour garantir que les amélioration
+<h2>L'importance des techniques de refactoring</h2>
+
+<h3>1. Transformer le code pour l'améliorer</h3>
+<p>Rendre le code plus lisible, plus facile à maintenir et propice à accueillir des évolutions.</p>
+<p>C'est étroitement lié à la présence d'une couverture de tests suffisamment solide pour garantir que les amélioration
   du code se feront en toute sécurité.</p>
 
-<h3>Le code : une matière en perpétuelle transformation</h3>
+<h3>2. Le code : une matière en perpétuelle transformation</h3>
 <p>Au fur et à mesure que nous renforçons nos connaissances, qu'elles soient propres au métier ou techniques, nous pouvons
-les mettre à profit pour des améliorations successives du code. C'esr donc un processus itératif de raffinage du code.</p>
+les mettre à profit pour des améliorations successives du code. C'est donc un processus itératif de raffinage du code.</p>
 <p>Ne jamais laisser du code dans un moins bon état que celui dans lequel on l'a récupéré.</p>
 <p>Un développeur est plus utile pour trouver des solutions nouvelles et à veiller à la qualité de son propre code, plutôt
 qu'à s'acharner à décrypter le code de ses prédécesseurs.</p>
 
-<h3>Le refactoring comme antidote de la dette technique</h3>
+<h3>3. Le refactoring comme antidote de la dette technique</h3>
 <p>Le terme de dette technique emprunte au domaine de la finance, comme toute dette, elle doit être remboursée, dans le
 cas contraire, on court progressivement à la faillite du projet. Plus on tarde à rembourser, plus les intérêts coûtent
 cher.</p>
 
-<h3>Les freins au refactoring</h3>
+<h3>4. Les freins au refactoring</h3>
 <ul>
-  <li>Il est considéré comme un poste de coût par le client. Mais c'est une vision à court-termiste.</li>
-  <li>Les développeurs ont peur de provoquer des régressions.</li>
-  <li>Les équipes peuvent s'interdire d'en faire afin de ne pas perdre de temps invisible pour le client.</li>
-  <li>Dans certaines équipes, la culture  de la qualité de code est absente.</li>
-  <li>Manque d'envie de faire des efforts, manque de connaissances ou de savoir faire</li>
+  <li>Il est considéré comme un poste de coût par le client. Mais c'est une vision court-termiste;</li>
+  <li>Les développeurs ont peur de provoquer des régressions;</li>
+  <li>Les équipes peuvent s'interdire d'en faire afin de ne pas perdre de temps invisible pour le client;</li>
+  <li>Dans certaines équipes, la culture  de la qualité de code est absente;</li>
+  <li>Manque d'envie de faire des efforts, manque de connaissances ou de savoir faire.</li>
 </ul>
 
-<h3>Un principe fondateur : exprimer l'intention</h3>
+<h3>5. Un principe fondateur : exprimer l'intention</h3>
 <p>A la lecture du code, on ne devrait pas avoir à deviner ce que les contributeurs ont cherché à faire. Si c'est le cas,
 c'est un déficit d'expression de l'intention. Il faut alors la renforcer au moyen du refactoring.</p>
 <p>L'impression que tout est mélangé, que le code fait plein de choses en même temps, ou que chaque morceau de code est
 trop lié aux autres, constitue également une difficulté majeure dans la compréhension d'une base de code.</p>
 
-<h3>Principes méthodologiques de refactoring</h3>
+<h3>6. Principes méthodologiques de refactoring</h3>
 <p>Une pratique efficace et pertinente du refactoring nécessite de :</p>
 <ul>
-  <li> <span class="pink-purple-txt">savoir reconnaître quand un refactoring est nécessaire :</span> cela passe par une
+  <li> <span class="pink-purple-txt">Savoir reconnaître quand un refactoring est nécessaire :</span> cela passe par une
   maîtrise des principes du Clean Code (SOLIDE, loi Demeter, KISS, YAGNI, ...) et une capacité à identifier leurs
-  violations, ainsi qu'à reconnaître les "code smells" les plus fréquents.</li>
+  violations, ainsi qu'à reconnaître les "codes smells" les plus fréquents;</li>
   <li><span class="pink-purple-txt">Connaître les patterns de refactoring les plus courants :</span> renommage, extraction
   (classes, méthodes, variables, ...) pour le découpage, inline et combinaison extract-inline, déplacement, changement
-    de signature ; à l'inverse, savoir reconnaître quand un refactoring peut se montrer contre-productif ou prématuré.</li>
-  <li><span class="pink-purple-txt">maîtriser les outils et notamment l'IDE : </span>connaître ses possibilités et
+    de signature ;</li>
+    <li><span class="pink-purple-txt">A l'inverse</span>, savoir reconnaître quand un refactoring peut se montrer contre-productif ou prématuré;</li>
+  <li><span class="pink-purple-txt">Maîtriser les outils et notamment l'IDE : </span>connaître ses possibilités et
     différentes astuces offertes pour gagner en fluidité, en productivité et en robustesse de la pratique.</li>
 </ul>
 
-<h3>Les tests comme prérequis à tous refactoring</h3>
+<h4>6.1 Les tests comme prérequis à tous refactoring</h4>
 
-<h3>Transformer par petits pas sûrs</h3>
+<h4>6.2 Transformer par petits pas sûrs</h4>
 <p>Les bénéfices sont multiples</p>
 <ul>
-  <li>les étapes sont petites, ce qui libère de la charge mentale;</li>
-  <li>en cas d'échec, signalé grâce aux tests, on peut défaire facilement ce qu'on vient de modifier.</li>
+  <li>Les étapes sont petites, ce qui libère de la charge mentale;</li>
+  <li>En cas d'échec, signalé grâce aux tests, on peut défaire facilement ce qu'on vient de modifier.</li>
 </ul>
 <p>Pour travailler de cette façon, il est important de comprendre et de maîtriser les différents patterns de refactoring.
  <span class="pink-purple-txt">Martin Fowler : Livre Refactoring</span></p>
-<p>Connaître les raccourcis de l'IDE, ses capacités en terme de refactoring et les gains de productivité offerts constitue
+<p>Connaître les raccourcis de l'IDE, ses capacités en terme de refactoring et les gains de productivité offerts constituent
 un atout indispensable.</p>
 <p>Pour progresser dans une pratique fluide et efficace du refactoring, il est important de s'imposer la règle essentielle
 des <span class="pink-purple-txt">changements non cassants</span>, c'est-à-dire tout changement qui permet au code de
 continuer à fonctionner.</p>
 
-<h3>Patterns de refactoring : La boîte à outils</h3>
-<h4>Renommage :</h4>
-<p>Il peut s'appliquer à l'ensemble des éléments nommés du code : Classes, variables, constantes, attributs, méthodes,
+<h3>7. Patterns de refactoring : La boîte à outils</h3>
+
+<h4>7.1 Renommage :</h4>
+<p>Il peut s'appliquer à l'ensemble des éléments nommés du code : classes, variables, constantes, attributs, méthodes,
   paramètres.</p>
 <p>Les éléments non nommés : les expressions, les blocs de code, les fonctions anonymes ou lambda ne sont pas directement
 éligibles à ce patterns, il faudra au préalable faire une extraction.</p>
 <ul>
-  <li>Identifier l'élément à renommer ;</li>
-  <li>Chercher toutes les occurrences dans le code ;</li>
-  <li>Modifier le nom de l'élément et de toutes ces occurrences ;</li>
-  <li>Relancer les tests.</li>
+  <li><span class="pink-purple-txt">Identifier</span> l'élément à renommer;</li>
+  <li><span class="pink-purple-txt">Chercher</span> toutes les occurrences dans le code;</li>
+  <li><span class="pink-purple-txt">Modifier</span> le nom de l'élément et de toutes ces occurrences;</li>
+  <li><span class="pink-purple-txt">Relancer</span> les tests.</li>
 </ul>
 <p>Il faut s'assurer que l'élément renommé n'est pas référencé à l'intérieur d'une chaîne de caractères (par exemple
 lorsqu'on pratique l'invocation dynamique) ou dans un commentaire.</p>
 
-<h4>Extraction</h4>
+<h4>7.2 Extraction</h4>
 <p>L'Extraction du code répond à de multiple besoins :</p>
 <ul>
-  <li>Découper le code en unités plus petites ;</li>
-  <li>Offrir une opportunité de nommer un bloc de code ;</li>
-  <li>Renforcer les abstractions ;</li>
+  <li>Découper le code en unités plus petites;</li>
+  <li>Offrir une opportunité de nommer un bloc de code;</li>
+  <li>Renforcer les abstractions;</li>
   <li>Réduire la duplication (lorsque le code extrait apparaît à de multiples reprises.</li>
 </ul>
 <p>L'ensemble contribue à améliorer l'expression de l'intention et à rendre le code plus évolutif.</p>
 <p>L'extraction se décline sous les formes suivantes : fonctions/méthodes, variables, attributs, constantes.</p>
 <p>Ce pattern s'applique de façon progressive : une expression qui en premier lieu est extraite en variable, puis en
-méthode, puis en classe. Cela contribue au respect du Principe de Responsabilité unique : d'abord on réduit la taille
+méthode, puis en classe. Cela contribue au respect du <span class="pink-purple-txt">Principe de Responsabilité unique</span> : d'abord on réduit la taille
 de la méthode, puis de la classe initiale en créant une nouvelle classe.</p>
 <ul>
   <li><span class="pink-purple-txt">Cas de code dupliqué :</span></li>
@@ -94,12 +98,12 @@ de la méthode, puis de la classe initiale en créant une nouvelle classe.</p>
   <p>Si la réponse est oui, alors il faut probablement refactorer le code.</p>
   <p>Le refactoring Extract avec l'option de remplacer toutes les occurrences permet de retirer cette duplication
   instantanément.</p>
-  <p>Tout règle métier ne doit être écrite qu'une seule fois.</p>
+  <p>Toute règle métier ne doit être écrite qu'une seule fois.</p>
   <p>A l'inverse, refactorer du code technique, est souvent utile, mais il faut veiller à ne pas pousser l'abstraction
-  trop loin : trop de généricité peut, rendre le code moins facile à comprendre, et le rendre moins évolutif parce qu'il
+  trop loin : trop de généricité peut rendre le code moins facile à comprendre, et le rendre moins évolutif parce qu'il
   devient utilisé par beaucoup de monde.</p>
   <p>Il est important de faire attention à ce qui ressemble à de la duplication mais qui n'en est pas. Parfois, deux
-  morceau de code ne sont pas identique, mais similaire. D'autres fois, les codes sont identiques, mais opèrent dans des
+  morceaux de code ne sont pas identiques, mais similaires. D'autres fois, les codes sont identiques, mais opèrent dans des
    contextes ou à des niveaux d'abstraction différents.</p>
   <li><span class="pink-purple-txt">Cas particulier : magic value (string/number)</span></li>
   <p>Le code ne devrait pas utiliser directement des littéraux numériques ou textuels pour lesquels on risque de perdre
@@ -121,32 +125,32 @@ de la méthode, puis de la classe initiale en créant une nouvelle classe.</p>
 <p>On pourrait également extraire la valeur magique dans une variable ou une méthode, en fonction de la portée et la
 réutilisabilité souhaitée.</p>
 
-<h4>Inversion de lignes</h4>
+<h4>7.3 Inversion de lignes</h4>
 <p>Remplace avantageusement le copier/coller et facilite : </p>
 <ul>
-  <li>le découpage en regroupant les lignes de code par unité logiques, préalablement à l'extraction par exemple</li>
-  <li>le renommage en affinant la compréhension du rôle de certaines variables.</li>
+  <li>Le découpage en regroupant les lignes de code par unité logiques, préalablement à l'extraction par exemple;</li>
+  <li>Le renommage en affinant la compréhension du rôle de certaines variables.</li>
 </ul>
 <p>L'inversion de méthodes permet de réorganiser l'ordre des méthodes dans une classe, pour en faciliter la lecture
 (clean code).</p>
 
-<h4>Réécriture d'instructions conditionnelles</h4>
+<h4>7.4 Réécriture d'instructions conditionnelles</h4>
 <ul>
-  <li>en inversant la condition et les deux branches du if;</li>
-  <li>en transformant un if/else en ternaire, ou inversement;</li>
-  <li>en s'appuyant sur l'algèbre de Boole (notamment des lois de De Morgan) pour améliorer les conditions complexes;</li>
-  <li>en fusionnant plusieurs if en un seul, en cas de duplication dans les blocs de if/else;</li>
-  <li>en faisant évoluer une succession de if vers un switch lorsque c'est possible.</li>
+  <li>En inversant la condition et les deux branches du if;</li>
+  <li>En transformant un if/else en ternaire, ou inversement;</li>
+  <li>En s'appuyant sur l'algèbre de Boole (notamment des lois de De Morgan) pour améliorer les conditions complexes;</li>
+  <li>En fusionnant plusieurs if en un seul, en cas de duplication dans les blocs de if/else;</li>
+  <li>En faisant évoluer une succession de if vers un switch lorsque c'est possible.</li>
 </ul>
 <p>Ces transformations automatique de l'IDE, sont motivées par le gain en lisibilité et plus spécifiquement pour les
 raisons suivantes :</p>
 <ul>
-  <li>maintenir un seul niveau d'indentation;</li>
-  <li>échouer ou renvoyer une valeur le plus tôt possible (principe de fail fast);</li>
-  <li>réduire la duplication.</li>
+  <li>Maintenir un seul niveau d'indentation;</li>
+  <li>Echouer ou renvoyer une valeur le plus tôt possible (principe de fail fast);</li>
+  <li>Réduire la duplication.</li>
 </ul>
 
-<h4>Réécriture de boucles</h4>
+<h4>7.5 Réécriture de boucles</h4>
 <p>Les algorithmes de traitement des collections, lorsqu'ils sont écrits dans un style procédural, offrent peu de lisibilité :</p>
 <pre>
  <span class="label">C#</span>
@@ -174,80 +178,80 @@ suivant : </p>
       .collect(Collectors.toList());
   </code>
 </pre>
-<p>On exprime ce qui doit être fait (filtrer les étudiants titulaire d'un master et projeter leur nom). Plutôt que
+<p>On exprime ce qui doit être fait (filtrer les étudiants titulaires d'un master et projeter leur nom). Plutôt que
 comment on le fait (avec la boucle for)</p>
-<p>Dans certaines situation, le code impératif d'une boucle ne se prête pas à une réécriture plus déclarative : le code
+<p>Dans certaines situations, le code impératif d'une boucle ne se prête pas à une réécriture plus déclarative : le code
 peut être trop long et provoquer des effets de bord.</p>
 <p>La présence d'une boucle reste une indication sur la nécessité d'extraire le bloc à l'intérieur de la boucle dans une
 nouvelle méthode : on distingue l'opération unitaire de l'opération sur un ensemble. A noter que le code d'une boucle
 ne s'y prête pas toujours, notamment lorsque chaque itération modifie plusieurs états (on cherchera alors à renforcer
 la cohésion d'ensemble en les regroupant dans un seul objet).</p>
 
-<h4>Changement de signature</h4>
+<h4>7.6 Changement de signature</h4>
 <p>Les opérations les plus courantes :</p>
 <ul>
-  <li>Revoir l'ordre des paramètres : du plus essentiel au plus optionnel, du plus significatif au moins important;</li>
-  <li>Homogénéiser l'ordre des paramètres sur plusieurs appels imbriqués pour réduire la charge mentale à la lecture;</li>
-  <li>Regrouper les paramètres en fonction de la cohésion fonctionnelle, en créant si nécessaire des abstractions sous
+  <li><span class="pink-purple-txt">Revoir l'ordre des paramètres</span> : du plus essentiel au plus optionnel, du plus significatif au moins important;</li>
+  <li><span class="pink-purple-txt">Homogénéiser l'ordre des paramètres</span> sur plusieurs appels imbriqués pour réduire la charge mentale à la lecture;</li>
+  <li><span class="pink-purple-txt">Regrouper les paramètres</span> en fonction de la cohésion fonctionnelle, en créant si nécessaire des abstractions sous
   la forme de nouveaux types.</li>
 </ul>
 
-<h4>Déplacement</h4>
+<h4>7.7 Déplacement</h4>
 <p>Son rôle est de redéfinir les responsabilités des classes en déplaçant certaines de leurs méthodes et propriétés. Si
 une classe à plusieurs responsabilités, on peut la séparer en deux classes et déplacer les méthodes d'une classe à l'autre.</p>
 <p>On peut aussi définir une classe mère qui pourra être réutilisée et déplacer les propriétés de la classe fille vers
 la classe mère.</p>
 
-<h4>Inlining</h4>
+<h4>7.8 Inlining</h4>
 <p>Consiste à réinsérer un morceau de code référencé aux endroits qui y font référence. Ainsi les occurrences de la
 référence au code seront substituées directement par le code référencé.</p>
 
-<h3>Refactoring vers des design patterns</h3>
+<h3>8. Refactoring vers des design patterns</h3>
 <p>Une succession de conditions suffisamment nombreuses (if ou switch) peut se refactorer vers le pattern Stratégie.</p>
 <p>Des boucles peuvent se refactorer vers le pattern Composite.</p>
 <p>Des vérifications de non-null peuvent se refactorer vers le pattern Null Object.</p>
 
-<h3>Combinaison de patterns</h3>
-<h4>Un refactoring pour préparer le suivant</h4>
-<p>Extraire des variables locales, nommés, permet de préparer le terrain pour l'IDE qui va proposer d'emblée la signature
+<h3>9. Combinaison de patterns</h3>
+<h4>9.1 Un refactoring pour préparer le suivant</h4>
+<p>Extraire des variables locales, nommés, permet de préparer le terrain pour l'IDE qui va proposer la signature
 la plus pertinente pour une extraction de méthode.</p>
 <p>Rassembler tous les return d'une méthode dans une variable locale temporaire afin de permettre un Extract Method par
 l'IDE, avant de finalement effacer cette variable locale.</p>
 
-<h4>Dégrader pour améliorer</h4>
+<h4>9.2 Dégrader pour améliorer</h4>
 <p>Permet de le considérer sous une autre perspective avec une compréhension nouvelle.</p>
 <ul>
   <li><span class="pink-purple-txt">Inline + extract method</span></li>
   <p>L'étape inline dégrade le code, en rassemblant tous le code dans un même fragment trop gros et avec trop de
-    responsabilité, mais cela permet de faire facilement l'inventaire de toutes ces responsabilités afin de mieux les
+    responsabilités, mais cela permet de faire facilement l'inventaire de toutes ces responsabilités afin de mieux les
   extraire dans les étapes "extract".</p>
   <li><span class="pink-purple-txt">Extraction de fonction/inlining</span></li>
   <p>Lorsqu'il faut réécrire des occurrences multiples d'un même code, cette combinaison offre une alternative plus
   sécurisée et efficace que le rechercher/remplacer. Elle consiste à : </p>
   <ul>
-    <li>Identifier le code à remplacer;</li>
-    <li>Extraire toutes les occurrences de ce code dans une méthode;</li>
-    <li>Retravailler le code dans la méthode ainsi extraite; </li>
-    <li>Une fois terminé, "inliner" la méthode en remplaçant toutes les occurrences.</li>
+    <li><span class="pink-purple-txt">Identifier</span> le code à remplacer;</li>
+    <li><span class="pink-purple-txt">Extraire</span> toutes les occurrences de ce code dans une méthode;</li>
+    <li><span class="pink-purple-txt">Retravailler</span> le code dans la méthode ainsi extraite; </li>
+    <li>Une fois terminé, <span class="pink-purple-txt">"inliner"</span> la méthode en remplaçant toutes les occurrences.</li>
   </ul>
   <p>L'extraction fournit un buffer temporaire de réécriture du code plus sûr que le rechercher/remplacer qui travaille
   directement au niveau textuel, ce qui peut se révéler dangereux. Avec une combinaison "extraction + inline", on travail
   au niveau du modèle logique du code, ce qui garantit une réécriture correcte d'un point de vue sémantique.</p>
 </ul>
 
-<h3>Situations nécessitant du refactoring </h3>
+<h3>10. Situations nécessitant du refactoring </h3>
 <p>Méthode trop longue, code trop complexe, trop de paramètres d'une méthode ou trop de données membres d'une classe, ...</p>
 
-<h4>Code dans le code</h4>
+<h4>10.1 Code dans le code</h4>
 <p>Présence de script SQL (Linq) dans le code objet (C#).</p>
-<p>L'IDE n'est pas à l'aise avec cet autre langage et considère son code comme du vulgaire texte, excluant toute possibilité
+<p>L'IDE n'est pas à l'aise avec cet autre langage et considère son code comme du texte, excluant toute possibilité
 de refactoring automatique. S'ajoute à cette difficulté l'absence fréquente de tests (code qui mobilise des ressources
-  externes comme la bdd et par nature difficile à mocker.</p>
+  externes comme la bdd et par nature difficile à mocker).</p>
 <p>On essaiera dans la mesure du possible de limiter au strict nécessaire les inclusions d'autres langages, en se
 tournant vers les possibilités offertes par le langage principal (utilisation des fonctionnalités de mapping
   objet-relationnel)</p>
 
-<h4>Code avec modification d'état</h4>
+<h4>10.2 Code avec modification d'état</h4>
 <p>Un code qui modifie une ou plusieurs variables extérieures (paramètres d'entrée, attributs d'une classe, variables
  globales) peut être considéré comme un code avec modification d'état.</p>
 <p>Ce code ayant des intéractions avec l'extérieur, il est plus difficile de prévoir les impacts d'une réécriture.</p>
@@ -260,16 +264,16 @@ utilisées. On pourra aussi rendre leur périmètre plus local, en en faisant un
 regrouper les variables dans un objet de contexte qui pourra être passé en paramètre. L'objectif est de rendre ce code plus
 propice à l'extraction de méthodes.</p>
 
-<h3>Refactorer aussi le code de test</h3>
-<p>C'est le point d'entrée pour un nouvel arrivant, il peut offrir une valeur documentaire élevée. Si il est bien fait
+<h3>11. Refactorer aussi le code de test</h3>
+<p>Le code de test est le point d'entrée pour un nouvel arrivant, il peut offrir une valeur documentaire élevée. Si il est bien fait
 on arrive à comprendre facilement les fonctionnalités de l'application.</p>
 <ul>
   <li>Renforcer la clarté de l'intention du test;</li>
   <li>Délimiter des parties du test suivant le pattern AAA;</li>
   <li>Faciliter la maintenabilité du test.</li>
 </ul>
-<p>D'une manière générale, une User Storie est représenté dans le nom de la classe de test, alors que les noms de méthodes
-décrivent la règle de gestion voire l'exemple testé.</p>
+<p>D'une manière générale, une User Storie est représentée dans le nom de la classe de test, alors que les noms de méthodes
+décrivent la règle de gestion, voire l'exemple testé.</p>
 <ul>
   <li>Bien nommer les tests;</li>
   <li>Ne pas faire de tests trop gros;</li>

@@ -112,6 +112,9 @@ export class SidebarComponent implements OnInit{
         {
           path:'softwareCraft/refactoring',
           title : 'Refactoring'},
+        {
+          path:'softwareCraft/legacy-code',
+          title : 'Code legacy'},
       ]},
     {
       id: 5,

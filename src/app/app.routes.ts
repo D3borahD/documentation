@@ -26,6 +26,7 @@ import {CleanCodeComponent} from "@app/components/software-craft/clean-code/clea
 import {PairProgrammingComponent} from "@app/components/software-craft/pair-programming/pair-programming.component";
 import {RefactoringComponent} from "@app/components/software-craft/refactoring/refactoring.component";
 import {BddComponent} from "@app/components/software-craft/bdd/bdd.component";
+import {LegacyCodeComponent} from "@app/components/software-craft/legacy-code/legacy-code.component";
 
 export const routes: Routes = [
   {
@@ -175,6 +176,11 @@ export const routes: Routes = [
         path: 'refactoring',
         title: 'Refactoring',
         component: RefactoringComponent
+      },
+      {
+        path: 'legacy-code',
+        title: 'Code legacy',
+        component: LegacyCodeComponent
       },
     ]
   },

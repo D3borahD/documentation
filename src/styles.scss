@@ -210,14 +210,15 @@ pre {
   left: -25px;
   z-index: -1;
 }
-
-.definition {
-  background-color: $light2;
-  padding: 1em;
-  border-radius: 10px;
-  color: $dark;
-  a {
+app-callout-section{
+  div {
+    background-color: $light2;
+    padding: 1em;
+    border-radius: 10px;
     color: $dark;
+    a {
+      color: $dark;
+    }
   }
 }
 

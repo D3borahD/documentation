@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './legacy-code.component.html',
+  styleUrls: ['./legacy-code.component.scss']
 })
 export class LegacyCodeComponent {
 

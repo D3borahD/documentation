@@ -4,7 +4,76 @@
 
 <h3>1. Apprivoiser le code legacy</h3>
 
+<!--TODO : graph -->
+<div class="graph ">
+    <div class="box-graph pink-purple">
+        <p>Avoir le bon état d'esprit</p>
+    </div>
+    <i class="fa-solid fa-arrow-down"></i>
+    <div class="box-graph pink-purple">
+        <p>Réaliser un état des lieux</p>
+    </div>
+    <div class="box-graph pink-purple">
+        <p>Présence de tests ?</p>
+    </div>
+    <div class="d-flex">
+        <div class="box-graph pink-purple">
+            <p>Enrichir les tests</p>
+        </div>
+        <div class="box-graph pink-purple">
+            <p>Le code est-il testable ?</p>
+        </div>
+    </div>
+</div>
+
+<h4>1.1 Méthodologie globale</h4>
+
+<h4>1.2 Adopter le bon état d'esprit</h4>
+<ul>
+    <li><span class="pink-purple-txt">Garder son calme.</span></li>
+    <li><span class="pink-purple-txt">Rester focus.</span>
+        <p>Si l'application n'a pas besoin d'évoluer, le code existant est certainement suffisant pour tourner en
+            production.</p>
+        <p><span class="pink-purple-txt">Question à se poser : </span>quel objectif on poursuit ?</p>
+        <ul>
+            <li>Fournir une évolution ?</li>
+            <li>Corriger une anomalie ?</li>
+            <li>Réduire un aspect de dette technique encombrant pour des fonctionnalités à venir ?</li>
+        </ul>
+        <p>Le remaniement de code legacy étant risqué et onéreux, il est important de se concentrer sur les réécritures
+        <span class="pink-purple-txt">qui apportent une réelle valeur.</span></p>
+        <p>Rester focalisé sur un problème à la fois, procéder par petites itérations.</p>
+    </li>
+</ul>
+
+<h4>1.3 S'imprégner du code</h4>
+<p>Faire un état des lieux.</p>
+<ul>
+    <li><span class="pink-purple-txt">Le code est-il exécutable ?</span>
+        <p>Quels sont les moyens d'intéragir avec l'application et d'observer les effets ?</p>
+        <p>Une documentation est-elle fournie ?</p>
+    </li>
+    <li><span class="pink-purple-txt">Des tests sont-ils présents ?</span>
+        <p>Peut-on lancer les tests ? Sont-ils annotés ignorés ou commentés ? Ce sont de vrais tests, avec assertions
+            sensées ?</p>
+        <p>Quand les tests peuvent-être exécutés, certains passent, d'autres non.</p>
+        <p>Pour les tests qui ne passent pas, on ne peut pas en déterminer grand chose, il faudra probablement prendre
+        la décision de les jeter. Ils ne sont plus en phase avec la réalité du code.</p>
+    </li>
+    <li><span class="pink-purple-txt">Se faire une idée générale du code.</span>
+        <p>Identifier le périmètre d'intervention sur le code.</p>
+        <p>Recenser les structures de données, les concepts qui sont manipulés, pour commencer à construire un modèle
+        mental.</p>
+        <p>Noter ce qui ne va pas, amélioration et refactoring à prévoir. S'entraîner à remarquer les patterns (des if
+        qui reviennent souvent), repérer la duplication. Sans toucher au code. On peut éventuellement mettre des TODO et
+        FIXME</p>
+    </li>
+    <li><span class="pink-purple-txt">Écrire les tests qui manquent.</span></li>
+</ul>
+
 <h3>2. Tester le code legacy</h3>
+
+<p>en cours ... </p>
 
 <h3>3. Rendre testable le code legacy</h3>
 

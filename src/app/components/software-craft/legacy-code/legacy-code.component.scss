@@ -1,0 +1,13 @@
+@import "colors";
+
+.graph {
+
+}
+
+.box-graph {
+  display: block;
+  background-color: linear-gradient(90deg, $pink 0%, $purple 60%);;
+  width: 150px;
+  text-align: center;
+  padding: 5px;
+}

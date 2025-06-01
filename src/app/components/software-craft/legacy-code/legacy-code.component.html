@@ -73,6 +73,62 @@
 
 <h3>2. Tester le code legacy</h3>
 
+<h4>Poser un premier test</h4>
+<app-callout-section title="Citation">
+  <p>"Ce qui est important n'est pas ce que le code est supposé faire mais ce qu'il fait vraiment."</p>
+  <p>Arnaud Lemaire <a href="https://www.youtube.com/live/LSqbXorkyfQ?si=W2TRPdEVJC4AUWbP">Youtube tutorial : kata trip
+  Service.</a></p>
+</app-callout-section>
+
+<p>Contrairement au TDD, dans le code legacy, c'est au code de test de se conformer au comportement du code de production.</p>
+
+<h4>Approche par compréhension du code</h4>
+<p>Face à un code plutôt clair, on peut essayer d'identifier les règles de gestion qui serviront de fondation aux tests.</p>
+<app-callout-section title="Conseil">
+  <P>Tester en premier les branches les moins profondes du code (les plus directement accessibles), refactorer en premier
+    les branches les plus profondes.</P>
+</app-callout-section>
+
+<pre>
+  <span class="label">c#</span>
+  <code class="c#">
+    public List&lt;Trip&gt; getTripsByUser(User user) throws UserNotLeggedInException &#123;
+      List&lt;Trip&gt; tripList = new ArrayList&lt;Trip&gt;();
+      User loggedUser = UserSession.getInstance().getLoggedUser();
+      boolean isFriend = false;
+      if(loggedUser != null) &#123;
+        // ...
+      &#125; else &#123;
+      throw new UserNotLoggedInException();
+      &#125;
+    &#125;
+  </code>
+</pre>
+
+<p>On remarque que la ligne "isFriend" n'est pas utilisé à ce niveau, c'est une indication que  le scope de définition
+de cette variable est certainement trop large (la déplacer à l'intérieur du bloc if serait plus pertinent).</p>
+
+<h4>Approche par observation du code</h4>
+<p>Le code est trop énigmatique, on se tourne vers une approche "boîte noire", en stimulant le code, c'est-à-dire qu'on
+  le force à produire un comportement et en capturant son comportement réel.</p>
+<a href="https://github.com/emilybache/GildedRose-Refactoring-Kata">Kata Gilded Rose</a>
+
+<ul>
+  <li><span class="pink-purple-txt">Construction d'un golden master</span> : Avec un code si cryptique, il est nécessaire
+  de partir sur une approche contre-intuitive. Il faut se baser sur l'idée que le code tourne en production, fait ce qui
+  est attendu et représente donc un vérité absolue. On va chercher à observer et tracer son comportement. Pour cela on
+  va stimuler le code et enregistrer les effets produits (par exemple dans un fichier de référence). C'est cet enregistrement
+  qu'on désigne par le terme de <span class="pink-purple-txt">golden master</span>.
+  <p>Le golder master est comme une forme de tests de caractérisation, c'est-à-dire, des tests qui appellent le code
+  existant sans le modifier pour observer comment il se comporte. Le golden master enregistre tous les résultats attendus
+  pour chacun des jeux de valeur en entrée.</p>
+  <p>Plus il est étoffé, plus il offre un filet de sécurité efficace contre d'éventuelles régressions.</p></li>
+  <li><span class="pink-purple-txt">Choix des données de test en entrée.</span></li>
+  <li><span class="pink-purple-txt">Construction itérative du golder master.</span></li>
+</ul>
+
+<p>Parfois, il est nécessaire au préalable de réorganiser le code de production.</p>
+
 <p>en cours ... </p>
 
 <h3>3. Rendre testable le code legacy</h3>

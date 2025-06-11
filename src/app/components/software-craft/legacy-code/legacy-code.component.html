@@ -116,7 +116,7 @@ de cette variable est certainement trop large (la déplacer à l'intérieur du b
 <ul>
   <li><span class="pink-purple-txt">Construction d'un golden master</span> : Avec un code si cryptique, il est nécessaire
   de partir sur une approche contre-intuitive. Il faut se baser sur l'idée que le code tourne en production, fait ce qui
-  est attendu et représente donc un vérité absolue. On va chercher à observer et tracer son comportement. Pour cela on
+  est attendu et représente donc une vérité absolue. On va chercher à observer et tracer son comportement. Pour cela on
   va stimuler le code et enregistrer les effets produits (par exemple dans un fichier de référence). C'est cet enregistrement
   qu'on désigne par le terme de <span class="pink-purple-txt">golden master</span>.
   <p>Le golder master est comme une forme de tests de caractérisation, c'est-à-dire, des tests qui appellent le code
@@ -125,13 +125,200 @@ de cette variable est certainement trop large (la déplacer à l'intérieur du b
   <p>Plus il est étoffé, plus il offre un filet de sécurité efficace contre d'éventuelles régressions.</p></li>
   <li><span class="pink-purple-txt">Choix des données de test en entrée.</span></li>
   <li><span class="pink-purple-txt">Construction itérative du golder master.</span></li>
+  <li><span class="pink-purple-txt">Exhaustivité du golder master</span> : la question à se poser : à partir de quand
+  on peut s'estimer confiant et arrêter d'écrire des tests ?
+    <ul>
+      <li><span class="pink-purple-txt">Principe de couverture de test</span> : tout nouveau test augmentant le score de
+        couverture se montrera pertinent.</li>
+      <li><span class="pink-purple-txt">Importance des assertions</span> : vérifier quelles sont pertinentes et s'assurer
+        qu'elles échouent au moins une fois en écrivant le test (en apportant volontairement une régression sur le code testé.</li>
+      <li><span class="pink-purple-txt">Couverture des tests et approche TDD</span> : les tests étant écrit avant le code,
+      le code est forcément couvert par les tests.</li>
+      <li><span class="pink-purple-txt">Fiabilité de la couverture de test</span> : face à un code très linéaire, il est
+      facile d'obtenir une couverture à 100% avec un seul test, pourtant il ne faudrait pas avoir confiance en ce seul
+      test. Il existe des techniques permettant d'éprouver davantage la robustesse des tests. En particulier, les outils
+      de mutation testing utilisent des algorithmes pour modifier (provoquer des mutations) à la volée certaines lignes
+      du code testé. Si au moins un test échoue, cela veut dire que le comportement de la ligne modifiée était suffisamment
+      testé. Si les mutations ne provoquent aucun échec des tests : la ligne peut être soit incorrectement testée, soit
+      complétement inutile.</li>
+    </ul>
+  </li>
+  <li><span class="pink-purple-txt">Aspect fastidieux du golder master</span> : Outiller la génération du golden master :
+  Au lieu d'écrire toute les assertions à la main, on peut décomposer l'écriture du golden master en deux étapes :
+    <ul>
+      <li>Enregistrer les comportements observés du code initial dans un fichier, qui sera inclus dans les ressources de
+      test ;</li>
+      <li>Exécuter le code et rechercher les valeurs attendues dans le fichier de référence avant de les appliquer sur une
+      assertion générique.</li>
+    </ul>
+    Cette approche est asymétrique : une fois le fichier de référence construit, on pourra rejouer le code de test autant
+    de fois qu'on le souhaite, à mesure que le refactoring progresse.
+    Certains frameworks, <a href="https://github.com/approvals/ApprovalTests.Net">ApprovalTests</a> génère automatiquement
+    l'enregistrement du golden master et son intégration des tests.
+  </li>
+  <li><span class="pink-purple-txt">L'exécution parallèle, une alternative du golden master</span> : Ce qui est important,
+  c'est que le code refactoré continuer à avoir un code identique au code initial.
+  <p>Au lieu de générer un fichier de référence, on va garder une copie du code initial, qui sera exécutée en parallèle
+  du code en cours de refactoring. Les assertions de test n'auront plus qu'à vérifier à la volée que les résultats obtenus
+  pour la version legacy et pour la version refactorée sont identique. De fait, c'est la version legacy du code qui devient
+  le golden master.</p>
+    <p>On s'assure que la version legacy du code ne soit jamais livré en production. Pour éviter cela, on isole cette
+    version legacy en la déplaçant dans le code de test. Cette approche est plus facile à mettre en place lorsque le code
+     à refactorer est très regroupé et ne s'étale pas sur plusieurs composants; dans le cas contraire, on est obligé de
+    dupliqué de nombreux composants, ce qui multiplie les risques d'erreurs d'inattention et de confusion, et complexifie la
+    configuration des tests.</p>
+  </li>
+  <li><span class="pink-purple-txt">Le caractère éphémère du golden master</span> : il est juste présent ke temps de
+  procéder au refactoring du code. Dès que possible, il faut le remplacer par des tests qui représentent réellement le
+  comportement du métier.</li>
 </ul>
+
+<h4>Les tests en tant que filet de sécurité</h4>
 
 <p>Parfois, il est nécessaire au préalable de réorganiser le code de production.</p>
 
-<p>en cours ... </p>
+
 
 <h3>3. Rendre testable le code legacy</h3>
+
+<p>Les problématiques :</p>
+<ul>
+  <li>Le code dépend d'un accès à une ressource externe;</li>
+  <li>Le code dépend d'une certaine configuration de l'environnement;</li>
+  <li>Le code dépend de conditions changeantes et difficile à prévoir;</li>
+  <li>Le comportement du code n'est pas facilement observable au capturable.</li>
+</ul>
+
+<h4>3.1 Dépendances retorses</h4>
+<p>Elles entrainent des configurations compliquées voire impossibles.</p>
+<p>Les dépendances gênent fortement le maintien des caractéristiques FIRST des tests.</p>
+<p>Il est donc indispensable de minimiser l'impact des dépendances sur les tests.</p>
+
+<app-callout-section title="Remarque">
+<p>Si le test est répétable dans un environnement local, c'est déjà une bonne chose. C'est un point de départ acceptable
+  pour commencer le refactoring, à condition d'atteindre une couverture correcte. Il faudra par la suite s'astreindre à
+faire le nécessaire pour que les tests respectent les caractéristiques FIRST.</p>
+</app-callout-section>
+
+<ul>
+  <li><span class="pink-purple-txt">Identification des dépendances</span> :
+    <ul>
+      <li><span class="pink-purple-txt">Dépendance vers une ressource externe</span> : système extérieur avec lequel notre
+      application intéragit. (BDD, gestionnaire d'authentification, service distant). En général, on travaille sur des
+      copies de tests des dépendances, parfois sous forme de conteneurs, mais leurs mise en place peut se montrer assez
+      lourde. On manque généralement de maîtrise sur leur comportement dans la mesure où ces copies peuvent évoluer dans le
+      temps, aves les données qu'elles contiennent, et peuvent faire échouer des tests de manière imprévue ;</li>
+      <li><span class="pink-purple-txt">Dépendances multiples.</span></li>
+      <li><span class="pink-purple-txt">Dépendances vers des calculs non déterministes </span>: il s'agit essentiellement
+      des appels à des fonctions dont le retour peut varier, même si les paramètres d'entrée ne changent pas. (Récupération
+      de la date et heure, l'accès à des données pouvant être mises en cache, car le comportement du premier appel sera
+        différent des suivants.</li>
+      <li><span class="pink-purple-txt">Dépendance vers un état global partagé </span>: l'état d'un singleton survit au test
+      qui l'utilise, ce qui fait que n'importe quel test en dépendant a un impact potentiel sur les tests suivants : le
+      comportement peut être différent selon l'ordre dans lesquels ils s'exécutent, et on perd le côté indépendant de
+      FIRST. Cette problématique n'est pas spécifique au singleton et se rencontre dès lors qu'on manipule un état global
+      partagé entre différents composants.</li>
+    </ul>
+
+  <li><span class="pink-purple-txt">Isolation des dépendances </span>: une fois la dépendance repérée, on peut chercher
+      à minimiser son existence en l'isolant. L'idée est d'introduire une abstraction entre le code à tester et la dépendance,
+      pour faire tampon entre notre code et la dépendance réelle. Ainsi, la dépendance est repoussée en marge du code à
+      tester, ce qui limite fortement ses effets néfastes sur notre capacité à tester.</li>
+      <pre>
+        <span class="label">C#</span>
+        <code class="C#">
+          User loggedUser = UserSession.getInstance().getLoggedUser();
+
+          devient :
+
+          User loggedUser = getLoggedInUser();
+
+          avec la méthode :
+
+          protected User getLoggedInUser()&#123;
+            return UserSession.getInstance().getLoggedUser();
+          &#125;
+        </code>
+      </pre>
+
+    <p>Autre possibilité, introduire la valeur fournie par la dépendance sous forme de paramètre</p>
+    <pre>
+      <span class="label">C#</span>
+      <code class="C#">
+        public List&lt;Trip&gt; getTripsByUser (User user) throws UserNotLoggedInException &#123;
+        &#125;
+
+        Peut se réécrire
+
+        public List&lt;Trip&gt; getTripsByUser (User user, User loggedUser) throws UserNotLoggedInException &#123;
+        &#125;
+
+        Ceci permet de supprimer la ligne suivante :
+
+        User loggedUser = UserSession.getInstance().getLoggedUser();
+
+      </code>
+    </pre>
+    On ne se contente pas de déplacer le problème, ces transformations offrent des possibilités nouvelles pour écrire
+    les tests.
+  <ul>
+    <li><span class="pink-purple-txt">Les seams </span>: lorsqu'il n'existe pas d'autre possibilité viable, on peut s'octroyer
+      la permission d'effectuer les modifications minimales sur le code de production pour le rendre testable. Les endroits
+      sur lesquels on peut intervenir sont ceux que Michael Feathers appelle des seams
+      <app-callout-section title="Michael Feathers">
+        A Seam is a place to alter program behavior without changing the code.
+      </app-callout-section>
+      On cherche à identifier des coutures dans le code, c'est-à-dire des points précis où on peut intervenir sans modifier
+      significativement le code de production.
+      <p>Dans l'exemple avec le Singleton, le seam, c'est-à-dire le point d'incision, réside dans la possibilité d'extraire
+        l'appel statique dans un appel non statique par extraction de méthode. Cette modification mineure offre la possibilité
+        de surcharger cette méthode dans un fake de test, et donc de ne plus être embêté par cet appel singleton.</p>
+      <p>Une autre approche consiste à introduire un nouveau paramètre dans la méthode appelant le singleton : ainsi on
+        déplace l'appel au singleton vers une méthode de plus haut niveau, et on définit directement la valeur souhaitée d
+        ans le test. Cette approche est plus impactante dans la mesure où elle concerne tous les appelants de la méthode
+        que l'on souhaite tester, et est donc à manier avec davantage de précautions.</p>
+    </li>
+  </ul>
+  <li><span class="pink-purple-txt">Substitution des dépendances dans les tests </span>: le travail d'isolation des
+  dépendances donne beaucoup plus d'autonomie et de possibilités pour l'écriture des tests, en particulier dans la mise
+  en oeuvre de la panoplie de doublure de tests. Ces derniers vont permettre de contrôler le comportement des dépendances
+  dans chacun des tests.
+  <p>Si la dépendance a été isolée sous forme de paramètre, on peut aisément fournir la valeur souhaitée depuis le code
+  de test.</p>
+  <p>Dans le cas où une méthode a été extraite, on peut s'appuyer sur les tests doubles, en proposant par exemple un stub,
+  c'est-à-dire une classe dédiée aux tests proposant une implémentation factice pour la méthode extraite : </p>
+    <pre>
+      <span class="label">C#</span>
+      <code class="C#">
+        private class TestableTripService extends TripService &#123;
+
+          &commat;Override
+          protected User getLeggedInUser()&#123;
+            return loggedInUser;
+          &#125;
+        &#125;
+      </code>
+    </pre>
+Cette implémentation est ensuite utilisée par le test plutôt que l'implémentation réelle se TripService.
+  </li>
+  <li><span class="pink-purple-txt">Injection de dépendance </span>: lorsque la couverture de tests devient satisfaisante,
+  il convient de gérer les dépendances plus proprement. Encapsuler les dépendances extraites dans des composants injectables
+  (en se basant sur le principe d'inversion de dépendance) est une bonne solution pour y parvenir.</li>
+</ul>
+
+<h4>3.2 Effets difficilement observables</h4>
+
+
+
+
+
+
+
+<p>en cours ... </p>
+
+
+
+
 
 <h3>4. Refactorer le code legacy</h3>
 

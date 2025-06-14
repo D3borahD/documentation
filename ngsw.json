@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1748503683184,
+  "timestamp": 1749880169868,
   "index": "/documentation/index.html",
   "assetGroups": [
     {
@@ -12,11 +12,11 @@
       },
       "urls": [
         "/documentation/index.html",
-        "/documentation/main.fc6c59f5679b2be8.js",
+        "/documentation/main.19be2f55486e47eb.js",
         "/documentation/manifest.webmanifest",
         "/documentation/polyfills.9922939526cf25de.js",
         "/documentation/runtime.4136917a75eca587.js",
-        "/documentation/styles.64818d72d99b05c8.css"
+        "/documentation/styles.4579ce9f407a63c3.css"
       ],
       "patterns": []
     },
@@ -86,12 +86,12 @@
     "/documentation/assets/images/tdd/refactor.png": "799edc7544734946a77ad4b1b9ef36d40bb8fea0",
     "/documentation/assets/kitsuneIcon.png": "465a81988b418908a9a17317bb9f45d2ad4bc170",
     "/documentation/background.1f54cc06728697c5.png": "6f611647fe0cc76c6e6b16a75c75c6c90f5ad769",
-    "/documentation/index.html": "46f094a7da766b9de27a9b1216120651462a7c8d",
-    "/documentation/main.fc6c59f5679b2be8.js": "c39904746967c91dddecbdc9856162e96bf8403e",
+    "/documentation/index.html": "f484a3c6dbbb251d30227c03ecaf2bcd8dedb0d6",
+    "/documentation/main.19be2f55486e47eb.js": "539a15ce3f1f430169096009842eaea64b83fc3c",
     "/documentation/manifest.webmanifest": "24433896c7cc16f117b043a370827a7e9b519fa2",
     "/documentation/polyfills.9922939526cf25de.js": "116f280f4e19d0a58980c56f360f4290af8605b0",
     "/documentation/runtime.4136917a75eca587.js": "b85b5a37fdb229fc0a9e58e4bce5989a9d1e3f51",
-    "/documentation/styles.64818d72d99b05c8.css": "f7a98f9fa7a070ff0cd77b284e7238dca1ce89d7"
+    "/documentation/styles.4579ce9f407a63c3.css": "b5e18062bcdbd336ab85514a13692d1642322044"
   },
   "navigationUrls": [
     {

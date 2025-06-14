@@ -26,9 +26,7 @@
     </div>
 </div>
 
-<h4>1.1 Méthodologie globale</h4>
-
-<h4>1.2 Adopter le bon état d'esprit</h4>
+<h4>1.1 Adopter le bon état d'esprit</h4>
 <ul>
     <li><span class="pink-purple-txt">Garder son calme.</span></li>
     <li><span class="pink-purple-txt">Rester focus.</span>
@@ -46,7 +44,7 @@
     </li>
 </ul>
 
-<h4>1.3 S'imprégner du code</h4>
+<h4>1.2 S'imprégner du code</h4>
 <p>Faire un état des lieux.</p>
 <ul>
     <li><span class="pink-purple-txt">Le code est-il exécutable ?</span>
@@ -131,7 +129,7 @@ de cette variable est certainement trop large (la déplacer à l'intérieur du b
       <li><span class="pink-purple-txt">Principe de couverture de test</span> : tout nouveau test augmentant le score de
         couverture se montrera pertinent.</li>
       <li><span class="pink-purple-txt">Importance des assertions</span> : vérifier quelles sont pertinentes et s'assurer
-        qu'elles échouent au moins une fois en écrivant le test (en apportant volontairement une régression sur le code testé.</li>
+        qu'elles échouent au moins une fois en écrivant le test (en apportant volontairement une régression sur le code testé).</li>
       <li><span class="pink-purple-txt">Couverture des tests et approche TDD</span> : les tests étant écrit avant le code,
       le code est forcément couvert par les tests.</li>
       <li><span class="pink-purple-txt">Fiabilité de la couverture de test</span> : face à un code très linéaire, il est
@@ -162,13 +160,13 @@ de cette variable est certainement trop large (la déplacer à l'intérieur du b
   du code en cours de refactoring. Les assertions de test n'auront plus qu'à vérifier à la volée que les résultats obtenus
   pour la version legacy et pour la version refactorée sont identique. De fait, c'est la version legacy du code qui devient
   le golden master.</p>
-    <p>On s'assure que la version legacy du code ne soit jamais livré en production. Pour éviter cela, on isole cette
+    <p>On s'assure que la version legacy du code ne soit jamais livrée en production. Pour éviter cela, on isole cette
     version legacy en la déplaçant dans le code de test. Cette approche est plus facile à mettre en place lorsque le code
      à refactorer est très regroupé et ne s'étale pas sur plusieurs composants; dans le cas contraire, on est obligé de
     dupliqué de nombreux composants, ce qui multiplie les risques d'erreurs d'inattention et de confusion, et complexifie la
     configuration des tests.</p>
   </li>
-  <li><span class="pink-purple-txt">Le caractère éphémère du golden master</span> : il est juste présent ke temps de
+  <li><span class="pink-purple-txt">Le caractère éphémère du golden master</span> : il est juste présent le temps de
   procéder au refactoring du code. Dès que possible, il faut le remplacer par des tests qui représentent réellement le
   comportement du métier.</li>
 </ul>
@@ -207,7 +205,7 @@ faire le nécessaire pour que les tests respectent les caractéristiques FIRST.<
       application intéragit. (BDD, gestionnaire d'authentification, service distant). En général, on travaille sur des
       copies de tests des dépendances, parfois sous forme de conteneurs, mais leurs mise en place peut se montrer assez
       lourde. On manque généralement de maîtrise sur leur comportement dans la mesure où ces copies peuvent évoluer dans le
-      temps, aves les données qu'elles contiennent, et peuvent faire échouer des tests de manière imprévue ;</li>
+      temps, avec les données qu'elles contiennent, et peuvent faire échouer des tests de manière imprévue ;</li>
       <li><span class="pink-purple-txt">Dépendances multiples.</span></li>
       <li><span class="pink-purple-txt">Dépendances vers des calculs non déterministes </span>: il s'agit essentiellement
       des appels à des fonctions dont le retour peut varier, même si les paramètres d'entrée ne changent pas. (Récupération
@@ -274,8 +272,8 @@ faire le nécessaire pour que les tests respectent les caractéristiques FIRST.<
         l'appel statique dans un appel non statique par extraction de méthode. Cette modification mineure offre la possibilité
         de surcharger cette méthode dans un fake de test, et donc de ne plus être embêté par cet appel singleton.</p>
       <p>Une autre approche consiste à introduire un nouveau paramètre dans la méthode appelant le singleton : ainsi on
-        déplace l'appel au singleton vers une méthode de plus haut niveau, et on définit directement la valeur souhaitée d
-        ans le test. Cette approche est plus impactante dans la mesure où elle concerne tous les appelants de la méthode
+        déplace l'appel au singleton vers une méthode de plus haut niveau, et on définit directement la valeur souhaitée dans
+        le test. Cette approche est plus impactante dans la mesure où elle concerne tous les appelants de la méthode
         que l'on souhaite tester, et est donc à manier avec davantage de précautions.</p>
     </li>
   </ul>
@@ -308,24 +306,95 @@ Cette implémentation est ensuite utilisée par le test plutôt que l'implément
 
 <h4>3.2 Effets difficilement observables</h4>
 
+<p>Il arrive que les effets produits par le code que nous souhaitons tester ne soient pas facilement accessibles
+ou observables.</p>
+<ul>
+  <li>Ecriture dans une base de données;</li>
+  <li>Envoi de messages asynchrones sur un bus d'évènements;</li>
+  <li>Gestion d'interface graphique; </li>
+  <li>Modification d'un état interne non accessible (comme l'état interne d'un objet non exposé publiquement);</li>
+  <li>Ecriture dans la sortie standard.</li>
+</ul>
+<p>Dans ces cas, on a des effets de bord provoqués par le code : les fonctions testée modifient autre chose que les paramètres
+d'entrée et ne renvoient pas de valeur.</p>
+<p>Il faut donc trouver un moyen d'intercepter la modification et de récupérer la valeur écrite (qui servira dans les
+assertions). Une possibilité consiste à introduire une abstraction  en façade de l'effet de bord.</p>
+<p>Exemple : Kata Trivia Game</p>
 
+<pre>
+      <span class="label">C#</span>
+      <code class="C#">
+        purses[currentPlayer]++;
+        System.out.prinln(players.get(currentPlayer)
+          + "now has "
+          + purses[currentPlayer]
+          + "Gold Coins."
+      </code>
+    </pre>
 
+<p>Cet effet, visible dans la console, n'est pas vraiment exploitable dans les tests unitaires.</p>
+<p>Néanmoins, on peut introduire une abstraction, GameLog, dédiée à recevoir, stocker et restituer à la demande tous
+les évènements de la partie.</p>
+<p>On apporte également un peu de métier en représentant la notion de joueur et de pièce d'or de façon plus concrète :</p>
 
+<pre>
+      <span class="label">C#</span>
+      <code class="C#">
+        gameLog.addEvent(new PlayerEarnedGoldCoinEvent(player));
+      </code>
+    </pre>
 
-
-
-<p>en cours ... </p>
-
-
-
-
+<p>En tant qu'abstraction nouvellement introduite sous forme de dépendance maîtrisée, l'objet gameLog est plus facilement
+accessible, mockable et vérifiable.</p>
 
 <h3>4. Refactorer le code legacy</h3>
 
+<h4>4.1 Se méfier des optimums locaux</h4>
+
+<p>Quand on observe du code legacy, il est fréquent de voir beaucoup de duplication, ou encore des blocs de code qui pourraient
+être extraits dans des méthodes ou des classes dédiées.</p>
+<p>Il est tentant de réduire la duplication prématurément, ou de découper trop vite. Le risque est de se couper des opportunités
+pour faire apparaître de la duplication à plus haut niveau.</p>
+
+<h4>4.2 Accepter de dégrader temporairement le code</h4>
+
+<p>Il est préférable de chercher à augmenter la duplication pour mieux faire apparaître les structures communes, quitte
+à faire augmenter le volume de code. Souvent la duplication est déjà là, mais pas suffisamment explicite. Pour la mettre
+en évidence :</p>
+<ul>
+  <li>Nommer le formatage du code (par exemple mettre systématiquement des accolades pour les instructions conditionnelles);</li>
+  <li>Désextraire certaines portions de codes (certains refactorings ont pu être faits trop tôt dans la version initial du code);</li>
+  <li>Réduire la complexité des conditions.</li>
+</ul>
+
+<h4>4.3 Commencer par les branches les plus profondes</h4>
+
+<p>Les branches profondes vont représenter un volume de code plus réduit, et pourront normalement être extraites plus facilement.</p>
+
+<h4>4.4 Savoir s'arrêter</h4>
+
+<p>Ne pas rechercher la réécriture parfaite, on obtient à minima : </p>
+<ul>
+  <li>Un code plus lisible, avec des concepts et des abstractions claires et bien identifiées;</li>
+  <li>Un code plus évolutif et maintenable;</li>
+  <li>La présence de tests fournissant un filet de sécurité.</li>
+</ul>
+
 <h3>5. L'approche Scratch refactoring</h3>
+ <p>Pour des systèmes hérités vastes ou d'une certaine complexité, il est difficile d'anticiper les étapes à suivre pour
+ améliorer le code.</p>
+<p>L'approche de <span class="pink-purple-txt">scratch refactoring</span>, décrite pas Michael Feathers dans son livre
+<span class="pink-purple-txt">Working Effectively with Legacy Code</span> consiste à modifier le code avec une certaine
+liberté pour esquisser vite les étapes de façon concrète, tout en sachant que <span class="pink-purple-txt">le résultat ne sera jamais livré en
+  production</span>. Cela permet d'avancer sans se soucier d'introduire des régressions, à seule fin de mieux se projeter
+dans le travail nécessaire.</p>
+<p>En pratique le scratch refactoring se termine par la prise de notes des étapes nécessaires, qui deviendront des tâches
+ultérieures, avant d'annuler les modifications (ou de les garder sur une branche dédiée du contrôle de sources qui n'est
+pas destinée à être livrée).</p>
 
 <h3>6. L'approche d'amélioration marginale</h3>
 
-<h3>Conclusion</h3>
+<p>Il est facile de se décourager face à un système hérité de grande taille et de qualité faible, en réalisant qu'il ne
+sera jamais possible de le réparer entièrement.</p>
+<p>Pourtant, il reste possible d'améliorer son quotidien avec le principe "à partir de maintenant on fait mieux"</p>
 
-<p>En cours ... </p>

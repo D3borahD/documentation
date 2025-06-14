@@ -27,6 +27,7 @@ import {PairProgrammingComponent} from "@app/components/software-craft/pair-prog
 import {RefactoringComponent} from "@app/components/software-craft/refactoring/refactoring.component";
 import {BddComponent} from "@app/components/software-craft/bdd/bdd.component";
 import {LegacyCodeComponent} from "@app/components/software-craft/legacy-code/legacy-code.component";
+import {KataFractionComponent} from "@app/components/software-craft/kata-fraction/kata-fraction.component";
 
 export const routes: Routes = [
   {
@@ -160,6 +161,10 @@ export const routes: Routes = [
       {
         path: 'legacy-code',
         component: LegacyCodeComponent
+      },
+      {
+        path: 'kata-fraction',
+        component: KataFractionComponent
       },
     ]
   },

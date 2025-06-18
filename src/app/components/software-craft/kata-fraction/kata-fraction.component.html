@@ -1,1 +1,243 @@
-<p>kata-fraction works!</p>
+<h2>Pourquoi les fractions ? </h2>
+<a href="https://github.com/khmarbaise/kata-fraction">Kata fraction</a>
+<p>Ce kata est adapté pour introduire les concepts : TDD, baby steps, immutabilité, builders, design simple, ...</p>
+
+<h3>1 Présentation du kata</h3>
+
+<p>Le kata Fraction consiste à écrire une application qui permet d’effectuer les quatre opérations mathématiques de base sur les fractions : </p>
+<ul>
+  <li>l’addition,</li>
+  <li>la soustraction,</li>
+  <li>la multiplication,</li>
+  <li>la division.</li>
+</ul>
+ <p>Le programme doit donner le résultat sous forme de fraction irréductible et donc si besoin simplifiée.
+   Exemples de fractions :</p>
+<ul>
+  <li>4/7 + 2/7 = 6/7</li>
+  <li>4/7 − 2/7 = 2/7</li>
+  <li>4/7 * 2/7 = 8/49</li>
+  <li>4/7 ÷ 2/7 = 2</li>
+</ul>
+
+<h3>2 Premier exercice</h3>
+<p>Pratiquer ce kata sans contrainte, commencer par donner une estimation du temps nécessaire pour développer l'application.
+  S'allouer par exemple 25 minutes. Cela permet à simuler des situations où le client requière un nombre infini de besoins
+  et souhaite qu'on lui livre tout dans des délais qui sont souvent trop sérrés.</p>
+
+<h4>Evaluation de ce premier exercice</h4>
+<ul>
+  <li>Avez-vous commencé par écrire du code au lancement du chronomètre ?</li>
+  <li>Pas quelle opération on a commencé ? Pourquoi ce choix ?</li>
+  <li>Avez-vous réussi à aller jusqu'au bout et à implémenter les 4 opérations ? </li>
+  <li>Est-ce que la fraction représentant le résultat final est représentée sous sa forme simplifiée ?</li>
+  <li>Avez-vous pensé aux cas limites comme une fraction avec le dénominateur 0 ou la division par une fraction 0 ?</li>
+  <li>Est-ce que le code à la fin était livrable en production ? (il n'y avait plus d'amélioration à faire en disposant
+  de davantage de temps.</li>
+  <li>Avez-vous la garantie que tout ce qui a été livré fonctionne correctement ?</li>
+</ul>
+
+<p>Souvent, les participants commencent directement par écrire du code. Certains vont poser des questions au fur et à
+mesure qu'ils avancent sur le sujet. Mais la majorité choisi de partir sur des suppositions plutôt que de poser les
+questions directement. Ce comportement est assez proche de ce qu'on peut observer sur de vrais projets durant lesquels
+l'équipe de développement va souvent avancer seule avec des suppositions, sans prendre le temps de se renseigner davantage
+ou de se rapprocher du métier. Il est alors courant de découvrir des anomalies lors des phases de qualification, voire
+  en production.</p>
+
+<h3>3 Décomposition</h3>
+
+<p>En décomposant, on divise le problème en sous-problème plus simples pouvant chacun être traité à part. </p>
+<p>Le premier avantage est de nous permettre d'avancer sur une partie du problème dans avoir à nous préoccuper de toute
+  la complexité du sujet.</p>
+<p>Le second bénéfice est lié à la gestion des délais. Souvent, les clients expriment des besoins considérables et ils
+souhaitent qu'on leur livre le résultat dans des délais assez serréz. Il est primordial d'entamer un dialogue avec le
+client pour hiérarchiser les priorités et négocier les délais de livraison.</p>
+
+<p>Pour ce kata, on le décompose en 4 parties, une par opération arithmétique.</p>
+<p>Pour rendre cette décomposition efficace, il faut appliquer le principe de l'abstraction ou, d'une manière plus précise,
+s'intéresser aux détails qui correspondent à un seul niveau d'abstraction.</p>
+
+<p>Le niveau d'abstraction le plus haut est la vue d'ensemble des 4 opérations ainsi que leurs corrélations. En travaillant
+sur ce niveau, nous ne devons pas nous intéresser aux détails de chaque opération car ces détails sont situés à un autre
+niveau.</p>
+
+<p>Quand on change de niveau, et qu'on s'intéresse à une opération en particulier, il faut faire l'effort d'oublier les
+3 autres.</p>
+<p>Ces 2 principes de décomposition et d'abstraction vont de pair et peuvent être appliqué dans tous les domaines.</p>
+<p>Echanger avec le métier pour savoir quelle opération est prioritaire, celle qui lui offre le plus de valeur.</p>
+
+<h3>4 Exploration</h3>
+<p>Explorer pour comprendre en détail le besoin sous-jacent de chaque opération en demandant au client des exemples, les
+cas limites.</p>
+
+<h3>5 Découpage</h3>
+<p>Les échanges avec le client va permettre de collecter à minima les connaissances suivantes sur les fractions : </p>
+<ul>
+  <li>Une fraction est constituée d'un dénominateur et d'un numérateur.</li>
+  <li>Numérateur et dénominateur sont des entier relatifs.</li>
+  <li>Si un numérateur vaut 0, alors la fraction vaut 0, quelle que soit la valeur du dénominateur.</li>
+  <li>Si le numérateur et le dénominateur sont identiques alors la fraction vaut 1.</li>
+  <li>Le dénominateur d'une fraction ne peut pas valoir 0. On parle d'une fraction infinie le cas échéant.</li>
+  <li>Certaines fraction se comportent comme un élément neutre vis-à-vis de certaines opérations : toute opération d'une
+  fraction avec l'élément neutre donne cette fraction elle-même.</li>
+  <li>Toute fraction valant 0 est l'élément neutre pour l'addition et la soustraction.</li>
+  <li>Toute fraction valant 1 est l'élément neutre pour la multiplication et la division.</li>
+  <li>Pour représenter n'importe quel entier naturel, on utilisera une dénominateur valant 1.</li>
+  <li>La commutativité est vérifiée pour les opérations d'addition et de multiplication mais elle ne l'est pas pour les
+  opérations de soustraction et de division.
+  <p>La commutativité est une propriété d'une opération qui permet de changer l'ordre des termes sans en changer le
+    résultat. Par exemple, l'addition et la multiplication de nombres naturels sont des opérations commutatives.</p></li>
+</ul>
+<p>Afin de clarifier les règles, il est indispensable de les accompagner d'exemples. Voici quelques exemples, dont certains
+font émerger de nouvelles règles :</p>
+<ul>
+  <li>3/5 + 1/3 = (3*3 + 1*5)/(5*3) = 14/15 (les dénominateurs sont différents)</li>
+  <li>1/7 + 4/7 = 5/7 (les dénominateurs sont identiques)</li>
+  <li>1/-7 + 3/7 = 2/7 (un des nombre est négatif)</li>
+  <li>3/1 + 4/1 = 7/1 (addition des entiers naturels sous forme de fraction)</li>
+  <li>1/7 + 0/1 = 1/7 (élément neutre à droite)</li>
+  <li>0/1 + 1/3 = 1/3 (élément neutre à gauche)</li>
+  <li>0+0 = 0 (élément neutre ajouté à lui-même)</li>
+  <li>1/0 + 3/7 = infini (un des dénominateurs vaut 0)</li>
+  <li>1/4 + 3/4 = 4/4 (simplification de la fraction)</li>
+</ul>
+<p>A ce stade, on dispose de suffisamment de cas pour découper l'opération de l'addition en tranches assez fines, on nous
+basant sur les différentes règles métiers.</p>
+<p>L'idée est d'ordonner les règles de façon à construire l'addition de manière incrémentale, chaque étape apportant de
+la valeur. Ainsi, on est capable à tout moment de fournir un livrable déployable en production et répondant à un certain
+nombre de cas.</p>
+<p>Proposition de découpage : </p>
+<ul>
+  <li>Gestion de l'élément neutre :
+    <ul>
+      <li>Elément neutre + élément neutre (0+0=0)</li>
+      <li>Elément neutre + fraction (0+F=F)</li>
+      <li>Fraction + élément neutre (F+0=F)</li>
+    </ul>
+  </li>
+  <li>Addition des 2 entiers naturels représentés par une fraction :
+    <ul>
+      <li>Addition des numérateurs avec dénominateur à 1 : 3/1 + 4/1 = 7/1</li>
+    </ul>
+  </li>
+  <li>Addition de 2 fractions avec le même dénominateur</li>
+  <li>Addition de 2 fractions avec des dénominateurs différents</li>
+  <li>Gestion des fractions négatives :
+    <ul>
+      <li>Cas où l'une des 2 fractions est négative</li>
+      <li>Cas des 2 fractions négatives</li>
+    </ul>
+  </li>
+  <li>Gestion de cas d'in dénominateur égal à 0 (la fraction infinie)</li>
+  <li>Cas nécessitant une simplification</li>
+</ul>
+
+<p>Avec ce découpage, l'opération de l'addition est prête à être développée.</p>
+<p>En fonction du contexte et des contraintes temporelles, on a 2 options :</p>
+<ul>
+  <li>Passer directement à la partie implémentation, </li>
+  <li>ou continuer à faire le même travail de décomposition avec les 2 autres opération.</li>
+</ul>
+
+<h3>6 Second exercice : implémentation avec l'approche TDD</h3>
+
+<p>Appliquer les principes : TDD, Clean Code et refactoring.</p>
+
+<h4>6.1 Phase d'implémentation en TDD</h4>
+ <p>Premier test à écrire : l'addition de 2 fractions.</p>
+<p class="pink-purple-txt">Cas de l'addition de l'élément neutre 0</p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    &commat;test
+    public void zero_plus_zero_should_return_zero()&lbrace;
+      Fraction zero = new Fraction(0);
+
+      Fraction sum = zero.add(zero);
+
+    Assert.assertEquals(zero, sum);
+    &rbrace;
+  </code>
+</pre>
+
+<app-callout-section title="Remarque">
+  <p>Commencer par écrire l'assertion. Le test sera rouge car le compilateur ne reconnaîtra pas les différentes classes
+  et méthodes, et pour compléter le test, on se sert de l'IDE pour extraire les parties Arrange et Act.</p>
+</app-callout-section>
+
+<p>Pour faire passer le test au vert, il suffit de retourner l'objet passé en paramètre.</p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    public class Fraction()&lbrace;
+      public Fraction(int value)&lbrace;
+
+      &rbrace;
+
+      public Fraction add(Fraction fraction)&lbrace;
+        return fraction;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p class="pink-purple-txt">Cas de test de l'addition avec élément neutre à droite</p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    &commat;test
+    public void not_zero_plus_zero_should_return_not_zero_fraction()&lbrace;
+      Fraction zero = new Fraction(0);
+      Fraction not_zero = new Fraction(3);
+
+      Fraction sum = not_zero.add(zero);
+
+    Assert.assertEquals(not_zero, sum);
+    &rbrace;
+  </code>
+</pre>
+
+<p>Pour passer le test au vert :</p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    public class Fraction()&lbrace;
+      public Fraction(int value)&lbrace;
+        this.value = value
+      &rbrace;
+
+      public Fraction add(Fraction fraction)&lbrace;
+        if(fraction.value==0)&lbrace;
+          return this;
+        &rbrace;
+        return fraction;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>On ajoute le dernier test correspondant au cas de l'élément neutre à gauche :</p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    &commat;test
+    public void zero_plus_not_zero_should_return_not_zero_fraction()&lbrace;
+      Fraction zero = new Fraction(0);
+      Fraction not_zero = new Fraction(1);
+
+      Fraction sum = not_zero.add(zero);
+
+    Assert.assertEquals(not_zero, sum);
+    &rbrace;
+  </code>
+</pre>
+
+<p>Le test passe au vert sans avoir besoin d'ajouter du code. On peut tolérer cela car le test implémente une règle
+fonctionnelle nécessaire pour la documentation.</p>
+
+<h4>6.2 Cas de l'ajout de 2 fractions entières</h4>

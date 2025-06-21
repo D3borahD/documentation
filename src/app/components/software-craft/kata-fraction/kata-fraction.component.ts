@@ -7,8 +7,7 @@ import {CalloutSectionComponent} from "@app/shared/callout-section/callout-secti
   imports: [
     CalloutSectionComponent
   ],
-  templateUrl: './kata-fraction.component.html',
-  styleUrl: './kata-fraction.component.scss'
+  templateUrl: './kata-fraction.component.html'
 })
 export class KataFractionComponent {
 

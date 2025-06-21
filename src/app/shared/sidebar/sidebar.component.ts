@@ -118,6 +118,9 @@ export class SidebarComponent implements OnInit{
         {
           path:'softwareCraft/kata-fraction',
           title : 'Kata fraction'},
+        {
+          path:'softwareCraft/principes-et-outils',
+          title : 'Principes et outils'},
       ]},
     {
       id: 5,

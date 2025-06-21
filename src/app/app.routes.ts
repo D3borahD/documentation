@@ -28,6 +28,9 @@ import {RefactoringComponent} from "@app/components/software-craft/refactoring/r
 import {BddComponent} from "@app/components/software-craft/bdd/bdd.component";
 import {LegacyCodeComponent} from "@app/components/software-craft/legacy-code/legacy-code.component";
 import {KataFractionComponent} from "@app/components/software-craft/kata-fraction/kata-fraction.component";
+import {
+  PrincipesEtOutilsComponent
+} from "@app/components/software-craft/principes-et-outils/principes-et-outils.component";
 
 export const routes: Routes = [
   {
@@ -165,6 +168,10 @@ export const routes: Routes = [
       {
         path: 'kata-fraction',
         component: KataFractionComponent
+      },
+      {
+        path: 'principes-et-outils',
+        component: PrincipesEtOutilsComponent
       },
     ]
   },

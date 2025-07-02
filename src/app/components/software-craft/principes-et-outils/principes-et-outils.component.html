@@ -1,3 +1,468 @@
 <h2>Les caractéristiques des tests : les tests unitaires F.I.R.S.T</h2>
 
 <p>Les tests viennent en premier.</p>
+<ul>
+  <li><span class="pink-purple-txt">F</span>ast : soit rapide;</li>
+  <li><span class="pink-purple-txt">I</span>solate/Independent : soit isolé, indépendant;</li>
+  <li><span class="pink-purple-txt">R</span>eteaptable : soit répétable, reproductible;</li>
+  <li><span class="pink-purple-txt">S</span>elf verifying : soit auto validant;</li>
+  <li><span class="pink-purple-txt">T</span>imely/Thorough : soit opportun, précis;</li>
+</ul>
+
+<h3>Le test doit être auto validant</h3>
+
+<p>Le résultat doit être outillé et sauter aux yeux, sans requérir une intervention humaine pour comprendre ou interpréter
+le statut du test. (Si on doit vérifier et analyser un fichier de log pour savoir si le test a réussi ou échoué, le
+test n'est pas auto validant). L'utilisation d'assertions pertinentes contribue à rendre les tests auto-validants.</p>
+
+<h3>Le test doit être opportun et précis</h3>
+
+<p>Opportun = le moment idéal pour l'écrire (avant le code).</p>
+<p>Précis = couvrir un seul cas.</p>
+
+<h2>Doublures de tests (test double)</h2>
+
+<p>En réalisant des tests unitaires, on est souvent confronté à des dépendances qui viennent se mettre en travers de
+notre chemin. Pour s'en sortir, on se retrouve à substituer le composant qui nous gêne par un composant équivalent (et
+compatible) au comportement plus docile et que l'on peut contrôler. On peut ainsi se concentrer uniquement sur le
+comportement du composant testé, et non plus sur les comportements des composants dont il dépend.</p>
+<p>Lorsque l'on remplace une dépendance, on parle parfois de substitut (mock).</p>
+
+<h3>1. Historique et terminologie</h3>
+
+<p>Le terme anglophone originel est celui de <span class="pink-purple-txt">test double</span> par analogie avec le monde
+du cinéma et sa notion de doublure réalisant les cascades à la place de l'acteur principal.</p>
+<p>Le terme <span class="pink-purple-txt">mock</span> désigne un type de substitut particulier, parmi d'autres tels que
+le dummy, le stub, le spy et le fake. Par abus de langage, on les appelle tous mock.</p>
+<p>Mock, peut dont désigner un cas particulier de doublure ou n'importe quelle doublure.</p>
+
+<h3>2. Mise en oeuvre des doublures</h3>
+
+<p>Les doublures de tests peuvent être réparties en 5 types qui sont présentés dans le livre de Gérard Meszaros,
+  <a href="http://xunitpatterns.com/">xUnit Test Patterns: Refactoring Test Code</a>.</p>
+<ul>
+  <li>Dummy Object;</li>
+  <li>Test Stub;</li>
+  <li>Test Spy;</li>
+  <li>Mock Object;</li>
+  <li>Fake Object;</li>
+</ul>
+
+<p>Librairie C# : <a href="https://nsubstitute.github.io/">NSubstitue</a></p>
+
+<h4>2.1 Doublure de type dummy</h4>
+<p>Par exemple, une méthode de division d'un numérateur par un dénominateur. </p>
+<p>Dans le cas où le dénominateur est égal à 0, une erreur doit être levée.</p>
+
+<h5>Sans librairie : </h5>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    [TestMethod]
+    public void Should_throw_an_exception_when_Divide_by_zero()&lbrace;
+      Calculator calculator = new Calculator();
+      int numerator = 3;
+      int denominator = 0;
+
+      Assert.ThrowsException&lt;InvalidOperationException&gt(() =>
+      &lbrace;
+        calculator.Divide(numerator, denominator);
+      &rbrace;)
+    &rbrace;
+  </code>
+</pre>
+
+<p>Quelque soit la valeur du numérateur, le comportement attendu du test ne change pas. On pourrait même générer
+  aléatoirement cette valeur.</p>
+<p>Le numérateur est exprimé par une variable fantoche (marionette), d'où le nom de dummy. </p>
+
+<h5>Avec librairie : </h5>
+<p>Pas de méthode de type Arg.Any() permettant de générer une valeur aléatoire. Donc le code ne changera pas, à moins
+d'utiliser d'autres techniques comme la PBT (Property Based Testing).</p>
+
+<h4>2.2 Doublure de type stub</h4>
+
+<p>En présence d'un service d'authentification, on a besoin de tester le comportement de Calculator :</p>
+<ul>
+  <li>quand on est authentifié et que le calcule peut se poursuivre;</li>
+  <li>quand on ne l'est pas, et qu'une exception appropriée se déclenche.</li>
+</ul>
+
+<h5>Sans librairie :</h5>
+
+<p>Nous avons besoin de stubs, c'est-à-dire d'objets qui se substituent aux implémentations réelles et dont la raison
+d'être est de simplement observer le comportement souhaité pour un test. Nous aurons donc un premier stub correspondant
+à une authentification réussie et un second qui permettra de simuler une authentification refusée.</p>
+
+<p>Cas d'authentification réussie : </p>
+<p>Nous avons besoin d'une implémentation qui retourne true tout le temps.</p>
+<p>Introduire un stub n'est possible que si la dépendance de la classe Calculator vers l'authentificateur existe à travers
+une interface faisant office de contrat.</p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    [TestMethod]
+    public void Should_divide_a_numerator_by_a_denominator_when_authorization_is_accepted()&lbrace;
+      IAuthorizer authorizer = new AllowAccessAuthorizer();
+      Calculator calculator = new Calculator(authorizer);
+      int numerator = 4;
+      int denominator = 2;
+
+      var result = calculator.Divide(numerator, denominator);
+
+      Assert.AreEqual(2, result);
+    &rbrace;
+
+    // avec le stub simulant l'authentification acceptée
+    public class AllowAccessAuthorizer : IAuthorizer
+    &lbrace;
+      public bool Authorize()
+      &lbrace;
+        return true;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+<p>Proposition d'implémentation de la class Calculator</p>
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    public class Calculator
+    &lbrace;
+      private readonly IAuthorizer authorizer;
+
+      public Calculator(IAuthorizer authorizer)
+      &lbrace;
+        this.authorizer = authorizer;
+      &rbrace;
+
+      public double Divide(int numerator, int denominator)
+      &lbrace;
+        if(!authorizer.Authorize())
+        &lbrace;
+          throw new UnauthorizedAccessException();
+        &rbrace;
+        if(denominator == 0)
+        &lbrace;
+          throw new InvalidOperationException("Can't divide by zero!");
+        &rbrace;
+        return numerator/denominator;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Cas d'authentification échouée</p>
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    [TestMethod]
+    public void Should_throw_an_exception_when_unauthorized_Division()&lbrace;
+      IAuthorizer authorizer = new DenyAccessAuthorizer();
+      Calculator calculator = new Calculator(authorizer);
+      int numerator = 4;
+      int denominator = 2;
+
+      Assert.ThrowsException&lt;UnauthorizedAccessException&gt;(() =>
+      &lbrace;
+        calculator.Divide(numerator, denominator);
+      &rbrace;);
+    &rbrace;
+
+    // le stub simulant l'authentification refusée
+    public class DenyAccessAuthorizer : IAuthorizer
+    &lbrace;
+      public bool Authorize()
+      &lbrace;
+        return false;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<h4>Avec librairie :</h4>
+<p>Il suffit de créer un objet substitut basé sur l'interface IAuthorizer et de le programmer pour qu'il renvoie true</p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    [TestMethod]
+    public void Should_throw_an_exception_when_unauthorized_Division()&lbrace;
+      IAuthorizer authorizer = Substitute.For&lt;IAuthorizer&gt;();
+      authorizer.Authorize().Returns(true);
+      Calculator calculator = new Calculator(authorizer);
+      int numerator = 4;
+      int denominator = 2;
+
+      Assert.ThrowsException&lt;UnauthorizedAccessException&gt;(() =>
+      &lbrace;
+        calculator.Divide(numerator, denominator);
+      &rbrace;);
+    &rbrace;
+  </code>
+</pre>
+
+<h4>2.3 Doublure de type spy</h4>
+
+<p>On test une fonctionnalité sur une application de commerce, qui s'appuie sur un service dont le rôle est de : </p>
+<ul>
+  <li>d'appliquer une réduction sur un article;</li>
+  <li>de prévenir les utilisateurs de l'application de la réduction.</li>
+</ul>
+<p>On veut s'assurer qu'il y a autant d'appels au service notification que d'utilisateurs à notifier. Il faut donc espionner
+les appels à ce service pendant le test et les comptabiliser, à travers une doublure de test de type spy.</p>
+
+<p>Sans librairie : </p>
+<p>On crée un class spy "CounterNotifier" qui va compter le nombre d'appels à la méthode Notify() :</p>
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    [TestMethod]
+    public void Should_Notify_twice_when_having_two_users_to_notify()&lbrace;
+
+      List&lt;User&gt; users = new List&lt;User&gt;()&lbrace;
+        new User(),
+        new User()
+      &rbrace;;
+
+      var notifier = new CounterNotifier();
+      DiscountApplier discountApplier = new DiscountApplier(notifier, users);
+      var item = new Item();
+      discountApplier.Apply(item, 20);
+
+      Assert.AreEqual(users.Count, notifier.CallCount);
+    &rbrace;
+
+    public class CounterNotifier : INotifier
+    &lbrace;
+      public int CallCount &lbrace; get; private set; &rbrace;;
+
+      public void Notify(User userToNotify)&lbrace;
+        CallCount++;
+      &rbrace;;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Le spy CounterNotifier se substitue bien à l'implémentation réelle du Notifier. Au lieu de produire de vraies
+notifications, la méthode <span class="pink-purple-txt">Notify()</span> se contente de compter le nombre de fois où elle est
+  appelée. Elle remonte aussi le nombre total d'appels, ce qui sert les besoins de notre test.</p>
+<p>Il est possible de définir des spys plus évolués, pour par exemple observer : </p>
+<ul>
+  <li>les valeurs des attributs d'une classe après un appel de méthode;</li>
+  <li>la valeur des arguments au moment de l'appel de la méthode.</li>
+</ul>
+
+<p>Avec librairie :</p>
+
+<p>NSubstitute : le substitut récupéré va compter automatiquement le nombre d'appels, il suffit à la fin du test de
+vérifier qur le compte est bon avec la méthode <span class="pink-purple-txt">Reveived()</span></p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    [TestMethod]
+    public void Should_Notify_twice_when_having_two_users_to_notify()&lbrace;
+
+      List&lt;User&gt; users = new List&lt;User&gt;()&lbrace;
+        new User(),
+        new User()
+      &rbrace;;
+
+      var notifier = new verifyNotifier();
+      DiscountApplier discountApplier = new DiscountApplier(notifier, users);
+      var item = new Item();
+
+      discountApplier.Apply(item, 20);
+
+      notifier.Received(user.Count);
+    &rbrace;
+  </code>
+</pre>
+
+<p>Il est également possible d'être plus précis en spécifiant quelle méthode est concernée par le nombre d'appels : </p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+      notifier.Received(user.Count).Notify(Arg.Any&lt;User&gt;());
+  </code>
+</pre>
+
+<h4>2.4 Doublure de type mock</h4>
+
+<p>Compter les notifications avec le spy n'est pas suffisant, on veut vérifier que les utilisateurs recevant la
+notification sont bien ceux qui sont connus du service de réduction.</p>
+
+<p class="pink-purple-txt">Sans librairie : </p>
+<p>On construit une classe de mock qui permet de garder en mémoire les utilisateurs notifiés, afin de vérifier que les
+utilisateurs sont les mêmes que ceux passés au service de réduction.</p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    [TestMethod]
+    public void Should_Notify_user_when_apply_discount()&lbrace;
+
+      List&lt;User&gt; users = new List&lt;User&gt;()&lbrace;new User()&rbrace;;
+
+      var notifier = new verifyNotifier();
+      DiscountApplier discountApplier = new DiscountApplier(notifier, users);
+      var item = new Item();
+
+      discountApplier.Apply(item, 20);
+
+      Assert.IsTrue(notifier.IsCalledForAll(users));
+    &rbrace;
+
+    public class VerifierNotifier : INotifier
+    &lbrace;
+      private readonly  List&lt;User&gt; notifierUsers = new List&lt;User&gt;();
+
+      public void Notify (User userToNotify)
+      &lbrace;
+        notifiedUsers.Add(userToNotify):
+      &rbrace;;
+
+      public bool IsCalledForAll(List&lt;User&gt; users)&lbrace;
+        return notifiedUsers.TrueForAll(user => users.Contains(user));
+      &rbrace;;
+  </code>
+</pre>
+
+<p>L'implémentation du mock est à peine plus complexe que celle du spy, au lieu d'incrémenter un compteur, on stock la liste
+des utilisateurs notifiés.</p>
+<p>Un mock est donc un objet préprogrammé avec le comportement attendu. Il a détrôné le terme test double car il vérifie
+que les attentes de la spécification sont bien réalisées en termes de comportement.</p>
+
+<p class="pink-purple-txt">Avec librairie : </p>
+<p>Avec NSubstitute, pour vérifier que chaque utilisateur a été notifié, on itère sur les utilisateurs et on appelle la
+méthode <span class="pink-purple-txt">Reveived()</span> du mock à chaque tour.</p>
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    [TestMethod]
+    public void Should_Notify_user_when_apply_discount()&lbrace;
+
+      List&lt;User&gt; users = new List&lt;User&gt;()&lbrace;new User()&rbrace;;
+
+      var notifier = new verifyNotifier();
+      DiscountApplier discountApplier = new DiscountApplier(notifier, users);
+      var item = new Item();
+
+      discountApplier.Apply(item, 20);
+
+      users.ForEach(user => notifier.Reveived().Notify(user));
+    &rbrace;
+  </code>
+</pre>
+
+<h4>2.5 Doublure de type fake</h4>
+
+<p>Les notifications aux utilisateurs se font par mail, en se basant sur le protocole SMTP. </p>
+<p>On veut faire un test d'intégration et vérifier qur le contenu du message est bien conforme à l'attendu.</p>
+<p>Il faut donc un composant factice qui génère le contenu des messages, sans les envoyer réellement (il pourrait
+écrire dans un fichier de log).</p>
+<p>Un fake est une implémentation réelle mais simplifiée de la vraie classe, une sorte de simulateur.</p>
+
+
+
+<pre>
+  <span class="label">C#</span>
+  <code class="C#">
+    public interface INotifier
+    &lbrace;
+      void Notify(User userToNotify);
+    &rbrace;
+
+    public classe Notifier : INotifier
+    &lbrace;
+      public void Notify(User userToNotify)&lbrace;
+        // Send an email to user
+      &rbrace;
+    &rbrace;
+
+    // L'implémentation du fake :
+    public classe FileNotifier : INotifier
+    &lbrace;
+      public void Notify(User userToNotify)&lbrace;
+        // Write un a file
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p class="pink-purple-txt">Avec librairie : </p>
+
+<p>Le fake est le seul test double qui nécessite une vraie implémentation mais qui ne doit pas s'exécuter en production</p>
+
+<h4>2.6 Limites et dangers de l'utilisation excessive des doublures de tests</h4>
+
+<p>Il faut veiller à ce que le substitut ne change pas le comportement du composant originel.</p>
+<p>Il est plus prudent de substituer uniquement des objets que l'on maîtrise. C'est le concept
+  <span class="pink-purple-txt">Only mock code you own</span>. En substituant un objet externe, on risque de se confronter
+à une modification majeure si l'objet externe est amené à changer. Il est conseillé de créer une couche intermédiaire
+entre notre application et le système externe, sour la forme d'un adaptateur par exemple.</p>
+
+<h4>2.7 Astuces</h4>
+
+<p>Plusieurs types peuvent se côtoyer dans un test : </p>
+<ul>
+  <li>Un dummy pour valoriser un paramètre nécessaire mais dont la valeur importe peu;</li>
+  <li>Un stub pour programmer le retour d'une dépendance (il s'agit en quelque sorte des paramètres d'entrée indirects);</li>
+  <li>Un spy pour vérifier que la dépendance est appelée le nombre de fois requis.</li>
+</ul>
+
+<h3>3. Types de test, au delà des tests unitaires</h3>
+
+<p>Un test est un essai d'un produit ou appareil pour vérifier la conformité de son action ou de son fonctionnement.  Il
+sert également à vérifier qu'un livrable répond bien au besoin métier. Ils fournissent également une documentation efficace.</p>
+
+<h4>3.1 La pyramide des tests</h4>
+
+<img src="assets/images/automated-tests.png">
+
+<ul>
+  <li><span class="pink-purple-txt">Test unitaire</span> : Règles de gestion. Évalue une méthode, une classe.
+    Il doit respecter les critères <span class="pink-purple-txt">FRIST</span>;</li>
+  <li><span class="pink-purple-txt">Test d'intégration</span> : Use cases. Permet d'évaluer si des composants
+    testés unitairement fonctionnent ensemble;
+    <ul>
+      <li><span class="pink-purple-txt">Narrow integration tests </span>: (tests d'intégration étroits) la portée de ces
+        tests se limite à quelques composants. Ces tests ressemblent à des tests unitaires au niveau de l'utilisation des
+      frameworks et de la façon de les écrire.
+      <p>Exemple : le convertisseur appelle l'implémentation réelle d'Amount, mais on crée un substitut au fournisseur
+      des taux</p>
+        <pre>
+          <span class="label">C#</span>
+          <code class="C#">
+            [TestMethod]
+            public void Should_convert_the_amount_when_the_target_currency_is_different()&lbrace;
+              var usdCurrency = new Currency("USD");
+              var uerCurrency = new Currency("EUR");
+
+              var eurAmount = new Amount(10, eurCurrency);
+              IRates rates = Substitute.For&lt;IRates&gt;();
+
+              var eurUsdRate = new Rate(1.14);
+              rates.GetRateOf(usdCurrency).Returns(eurUsdRate);
+
+              var convert = new Converter(rates);
+              var convertAmount = converter.Convert(eurAmount, usdCurrency);
+
+              var expectedAmount = new Amount(11.4, usdCurrency);
+              Check.That(convertedAmount).IsEqualTo(expectedAmount);
+            &rbrace;
+          </code>
+        </pre>
+      </li>
+      <li><span class="pink-purple-txt">Broad integration tests </span>: (tests d'intégration de grande envergure). </li>
+    </ul>
+  </li>
+  <li><span class="pink-purple-txt">Test end to end</span> : Parcours utilisateur (User story)</li>
+</ul>
+
+

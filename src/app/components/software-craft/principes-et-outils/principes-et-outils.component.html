@@ -425,6 +425,8 @@ sert également à vérifier qu'un livrable répond bien au besoin métier. Ils 
 
 <img src="assets/images/automated-tests.png">
 
+<h4>3.2 Les niveaux de tests</h4>
+
 <ul>
   <li><span class="pink-purple-txt">Test unitaire</span> : Règles de gestion. Évalue une méthode, une classe.
     Il doit respecter les critères <span class="pink-purple-txt">FRIST</span>;</li>
@@ -459,10 +461,120 @@ sert également à vérifier qu'un livrable répond bien au besoin métier. Ils 
           </code>
         </pre>
       </li>
-      <li><span class="pink-purple-txt">Broad integration tests </span>: (tests d'intégration de grande envergure). </li>
+      <li><span class="pink-purple-txt">Broad integration tests </span>: (tests d'intégration de grande envergure).
+      <p>Ils utilisent des instances réelles de services (par exemple une base de donnée). Le scénario doit être plus
+      concret que celui utilisant les substituts. Ainsi on s'assure qur l'intégration des composants se prépare au mieux
+      et soit suffisamment réaliste pour éviter les mauvaises surprises lors des tests utilisateurs.</p>
+        <pre>
+          <span class="label">C#</span>
+          <code class="C#">
+            [TestMethod]
+            public void Should_convert_the_amount_when_the_target_currency_is_different()&lbrace;
+              Currency usdCurrency = new Currency("USD");
+              Currency uerCurrency = new Currency("EUR");
+
+              Amount eurAmount = new Amount(10, eurCurrency);
+              IRates rates = Substitute.For&lt;IRates&gt;();
+              Converter converter = new Converter(rates);
+
+              Amount convertedAmount = converter.Convert(eurAmount, usdCurrency);
+
+              Amount expectedAmount = new Amount(11.4, usdCurrency);
+              Check.That(convertedAmount).IsEqualTo(expectedAmount);
+            &rbrace;
+          </code>
+        </pre>
+        <p>La différence réside dans l'utilisation d'un substitut pour le test étroit et de l'implémentation réelle pour
+        le test de grande envergure, ce qui fait que le deuxième test est plus profond que le premier.</p>
+        <p>Le format de Gherkin sur le BDD, se prête bien à l'écriture des tests d'intégration. Le formalisme en
+        given/when/then, proche des langages naturels, facilites l'écriture des tests avec le PO ou avec les utilisateurs
+        et permet de produire un scénario proche d'une spécification ou d'une documentation.</p>
+        <pre>
+          <span class="label">C#</span>
+          <code class="C#">
+            [En Gherkin]
+            Scenario : Convert amount if the rate is found
+            Given I have 10 EUR
+            And I have entered USD as target currency
+            And the rate is 1.14
+            When I convert amount
+            Then the converted amount should be 11.4 USD
+          </code>
+        </pre>
+        <p>Les tests d'intégrations s'écrivent finalement avec les mêmes outils que les tests unitaires (et à l'inverse,
+        rien n'empêche de décrire des tests unitaires au format Gherkin).</p>
+        <p>Il est possible de mélanger des substituts pour un ou plusieurs composants et des implémentations réelles pour
+        d'autres. Parfois, on dépend d'une ressource externe, et plusieurs cas de figures peuvent se présenter.</p>
+        <ul>
+          <li>On dépend d'une API externe : on a besoin d'un environnement hors production avec une version compatible
+          du service;</li>
+          <li>On accède à une base de données : il faut une base de données pour les tests, celle-ci pouvant être mise à
+          jour périodiquement.</li>
+        </ul>
+        <p>L'utilisation d'une base de donnée pour les tests nécessite de définir une stratégie au niveau de l'équipe et
+        se montre relativement coûteuse et complexe : il ne faut pas oublier que le schéma de la base évolue, ainsi que
+        les données. Ceci rend les tests potentiellement fragiles. De plus pour garder la base de test dans un état
+        correct, il faudra penser à nettoyer les données insérées lors des tests afin que les tests restent reproductibles.
+        Si les données en base ne sont pas identiques d'une exécution à l'autre, le comportement peut être altéré.</p>
+        <p>Il existe des solutions moins lourdes pour lancer des tests nécessitant une base, sans besoin de déployer une
+        base en dur. On peut utiliser les bases in-memory. C'est une base en mémoire dont la durée de vie est limitée à
+        l'exécution d'un test. Elle est recréée à chaque exécution du test, et supprimée en fin d'exécution. Cela impose
+        de réinitialiser les jeux de données à chaque test, ce qui nécessite plus de travail mais donne aussi plus de
+        maîtrise. Cela rend moins dépendants des altérations de données sur une base de données partagée.</p>
+        <p>En plus des données utiles pour les tests, on peut choisir de prévoir des donnes qu'on appelle des
+          <span class="pink-purple-txt">données parasites</span>. Les tests n'ont pas besoin de ces données pour être
+        exécutés, mais leur présence permet de simuler au plus près la production.</p>
+      </li>
     </ul>
   </li>
-  <li><span class="pink-purple-txt">Test end to end</span> : Parcours utilisateur (User story)</li>
+  <li><span class="pink-purple-txt">Test end to end</span>. Ils permettent de vérifier que l'ensemble des composants d'une
+  fonctionnalité fonctionnent de bout en bout, de la partie IHM aux dépendances externes (base de données, ou service API,... ).
+  Ils sont utilisés pour les scénarios critiques.
+  <p>Plusieurs outils permettent d'automatiser les tests E2E. Selenium fait partie des plus populaire du marché.</p></li>
+  <li><span class="pink-purple-txt">Test exploratoire</span>. Ce sont les tests exécutés manuellement. Leur rôle est de
+  trouver les bugs qui ne sont pas détectés par les autres tests afin d'améliorer la stabilité et l'utilisabilité de
+  l'application. Ils permettent aussi l'apprentissage et la compréhension du produit, et de trouver de nouvelles fonctionnalités.
+  Généralement ils ne sont pas basés sur des documents et sont donc non dirigés, et leur durée d'exécution peut s'étaler.</li>
+  <li><span class="pink-purple-txt">Visualisation des niveaux de test</span>
+    <img class="niveauTest" src="assets/images/niveauDeTest.jpeg">
+  </li>
 </ul>
 
+<h4>3.3 Viser plus de qualité</h4>
 
+<p>Quand on veut viser plus de qualité, on peut réaliser d'autres types de tests qui pourront se greffer à divers niveaux
+de la pyramide. Il s'agit plus d'une particularité ajoutée aux tests comme : </p>
+<ul>
+  <li><span class="pink-purple-txt">Les tests automatiques: </span>automatiser leur exécution en local en utilisant le
+  live-testing de l'IDE ou dans un terminal à côté. On peut configurer le processus d'intégration continue pour exécuter
+  les tests après la compilation, lors de chaque publication du code;</li>
+  <li><span class="pink-purple-txt">Les tests de performances ou de charges: </span>permettent de s'assurer que l'application
+    supporte bien une certaine charge (en termes de volume de données, de sollicitations par le nombre d'appels simultanés, ...)
+  en restant réactive et stable. Il faut commencer par définir les objectifs et pourquoi on en a besoin en répondant à
+  certaines questions métier comme :
+    <ul>
+      <li>Quel est le temps de réponse maximal attendu en secondes ou millisecondes (temps de réponse serveur et temps
+      d'affichage)?</li>
+      <li>Quels sont les modules ou composants qui rentrent dans le périmètre des tests de performance ?</li>
+      <li>Quelle est l'affluence en nombre d'utilisateurs attendus ? Il faut distinguer le cas nominal du cas critique.</li>
+    </ul>
+    <p>Les tests de performance peuvent être automatisé et lancé depuis l'usine d'intégration continue. On peut utiliser
+    l'outil DevTools du navigateur pour calculer le temps de réponse. L'IDE peut aider en intégrant un outil de diagnostique
+     lors du débug de l'application (les évènements lancés et l'état de l'utilisation de la mémoire et du CPU)</p>
+    <p>Pour des tests plus poussés, on peut utiliser des outils tels que Apache Bench ou Siege pour la partie serveur.</p>
+    <p>Côté client, SiteSpeed qui analyse les sites pas rapport aux bonnes pratiques en matière de métrique et de
+    performance, ou WebPageTest, qui est gratuit et qui teste une page sur le navigateur choisi et remonte les informations
+    précises sur les performances de la page.</p>
+    <p>Les librairies telles que QuickPerf en Java, permettent d'établir des critères de performance sous forme d'assertions
+     dans les tests d'intégration, en mesurant par exemple, le nombre d'appels vers la base de données.</p>
+  </li>
+  <li><span class="pink-purple-txt">Les tests de vérification en service régulier : </span>Une fois que l'application
+  est livrée dans un environnement de recette ou en production, il est important de vérifier qu'elle est fonctionnelle.
+  <p>La vérification peut se faire manuellement en testant lors de la livraison, ou plus régulièrement en testant quelques
+  parcours critiques : on parle alors de <span class="pink-purple-txt">smoke tests</span>.</p>
+    <p>On peut également l'automatiser avec des tests end to end type Selenium, pour s'assurer qu'une page se charge bien.</p>
+    <p>On peut effectuer régulièrement des health checks de nos API, en vérifiant que le service est toujours actif et répond
+     bien avec un statut HTTP 200 par exemple.</p>
+  </li>
+
+</ul>

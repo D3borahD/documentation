@@ -3,9 +3,9 @@
 <p>Le code legacy est un code qui ne dispose pas de tests.</p>
 
 <h3>1. Apprivoiser le code legacy</h3>
-
+<img class="legacyImage" src="assets/images/codeLegacyMethodologie.jpeg" alt="">
 <!--TODO : graph -->
-<div class="graph ">
+<!--<div class="graph ">
     <div class="box-graph pink-purple">
         <p>Avoir le bon état d'esprit</p>
     </div>
@@ -24,7 +24,7 @@
             <p>Le code est-il testable ?</p>
         </div>
     </div>
-</div>
+</div>-->
 
 <h4>1.1 Adopter le bon état d'esprit</h4>
 <ul>
@@ -297,7 +297,7 @@ faire le nécessaire pour que les tests respectent les caractéristiques FIRST.<
         &#125;
       </code>
     </pre>
-Cette implémentation est ensuite utilisée par le test plutôt que l'implémentation réelle se TripService.
+Cette implémentation est ensuite utilisée par le test plutôt que l'implémentation réelle de TripService.
   </li>
   <li><span class="pink-purple-txt">Injection de dépendance </span>: lorsque la couverture de tests devient satisfaisante,
   il convient de gérer les dépendances plus proprement. Encapsuler les dépendances extraites dans des composants injectables
@@ -315,7 +315,7 @@ ou observables.</p>
   <li>Modification d'un état interne non accessible (comme l'état interne d'un objet non exposé publiquement);</li>
   <li>Ecriture dans la sortie standard.</li>
 </ul>
-<p>Dans ces cas, on a des effets de bord provoqués par le code : les fonctions testée modifient autre chose que les paramètres
+<p>Dans ces cas, on a des effets de bord provoqués par le code : les fonctions testées modifient autre chose que les paramètres
 d'entrée et ne renvoient pas de valeur.</p>
 <p>Il faut donc trouver un moyen d'intercepter la modification et de récupérer la valeur écrite (qui servira dans les
 assertions). Une possibilité consiste à introduire une abstraction  en façade de l'effet de bord.</p>
@@ -375,7 +375,7 @@ en évidence :</p>
 
 <p>Ne pas rechercher la réécriture parfaite, on obtient à minima : </p>
 <ul>
-  <li>Un code plus lisible, avec des concepts et des abstractions claires et bien identifiées;</li>
+  <li>Un code plus lisible, avec des concepts et des abstractions clairs et bien identifiés;</li>
   <li>Un code plus évolutif et maintenable;</li>
   <li>La présence de tests fournissant un filet de sécurité.</li>
 </ul>
@@ -383,7 +383,7 @@ en évidence :</p>
 <h3>5. L'approche Scratch refactoring</h3>
  <p>Pour des systèmes hérités vastes ou d'une certaine complexité, il est difficile d'anticiper les étapes à suivre pour
  améliorer le code.</p>
-<p>L'approche de <span class="pink-purple-txt">scratch refactoring</span>, décrite pas Michael Feathers dans son livre
+<p>L'approche de <span class="pink-purple-txt">scratch refactoring</span>, décrite par Michael Feathers dans son livre
 <span class="pink-purple-txt">Working Effectively with Legacy Code</span> consiste à modifier le code avec une certaine
 liberté pour esquisser vite les étapes de façon concrète, tout en sachant que <span class="pink-purple-txt">le résultat ne sera jamais livré en
   production</span>. Cela permet d'avancer sans se soucier d'introduire des régressions, à seule fin de mieux se projeter

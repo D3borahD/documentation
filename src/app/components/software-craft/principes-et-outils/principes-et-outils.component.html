@@ -4,7 +4,7 @@
 <ul>
   <li><span class="pink-purple-txt">F</span>ast : soit rapide;</li>
   <li><span class="pink-purple-txt">I</span>solate/Independent : soit isolé, indépendant;</li>
-  <li><span class="pink-purple-txt">R</span>eteaptable : soit répétable, reproductible;</li>
+  <li><span class="pink-purple-txt">R</span>epeatable : soit répétable, reproductible;</li>
   <li><span class="pink-purple-txt">S</span>elf verifying : soit auto validant;</li>
   <li><span class="pink-purple-txt">T</span>imely/Thorough : soit opportun, précis;</li>
 </ul>
@@ -34,7 +34,7 @@ comportement du composant testé, et non plus sur les comportements des composan
 du cinéma et sa notion de doublure réalisant les cascades à la place de l'acteur principal.</p>
 <p>Le terme <span class="pink-purple-txt">mock</span> désigne un type de substitut particulier, parmi d'autres tels que
 le dummy, le stub, le spy et le fake. Par abus de langage, on les appelle tous mock.</p>
-<p>Mock, peut dont désigner un cas particulier de doublure ou n'importe quelle doublure.</p>
+<p>Mock, peut donc désigner un cas particulier de doublure ou n'importe quelle doublure.</p>
 
 <h3>2. Mise en oeuvre des doublures</h3>
 
@@ -85,7 +85,7 @@ d'utiliser d'autres techniques comme la PBT (Property Based Testing).</p>
 
 <p>En présence d'un service d'authentification, on a besoin de tester le comportement de Calculator :</p>
 <ul>
-  <li>quand on est authentifié et que le calcule peut se poursuivre;</li>
+  <li>quand on est authentifié et que le calcul peut se poursuivre;</li>
   <li>quand on ne l'est pas, et qu'une exception appropriée se déclenche.</li>
 </ul>
 
@@ -206,7 +206,7 @@ une interface faisant office de contrat.</p>
 
 <h4>2.3 Doublure de type spy</h4>
 
-<p>On test une fonctionnalité sur une application de commerce, qui s'appuie sur un service dont le rôle est de : </p>
+<p>On test une fonctionnalité sur une application de commerce, qui s'appuie sur un service dont le rôle est : </p>
 <ul>
   <li>d'appliquer une réduction sur un article;</li>
   <li>de prévenir les utilisateurs de l'application de la réduction.</li>
@@ -215,7 +215,7 @@ une interface faisant office de contrat.</p>
 les appels à ce service pendant le test et les comptabiliser, à travers une doublure de test de type spy.</p>
 
 <p>Sans librairie : </p>
-<p>On crée un class spy "CounterNotifier" qui va compter le nombre d'appels à la méthode Notify() :</p>
+<p>On crée une class spy "CounterNotifier" qui va compter le nombre d'appels à la méthode Notify() :</p>
 <pre>
   <span class="label">C#</span>
   <code class="C#">
@@ -258,7 +258,7 @@ notifications, la méthode <span class="pink-purple-txt">Notify()</span> se cont
 <p>Avec librairie :</p>
 
 <p>NSubstitute : le substitut récupéré va compter automatiquement le nombre d'appels, il suffit à la fin du test de
-vérifier qur le compte est bon avec la méthode <span class="pink-purple-txt">Reveived()</span></p>
+vérifier que le compte est bon avec la méthode <span class="pink-purple-txt">Received()</span></p>
 
 <pre>
   <span class="label">C#</span>
@@ -339,7 +339,7 @@ que les attentes de la spécification sont bien réalisées en termes de comport
 
 <p class="pink-purple-txt">Avec librairie : </p>
 <p>Avec NSubstitute, pour vérifier que chaque utilisateur a été notifié, on itère sur les utilisateurs et on appelle la
-méthode <span class="pink-purple-txt">Reveived()</span> du mock à chaque tour.</p>
+méthode <span class="pink-purple-txt">Received()</span> du mock à chaque tour.</p>
 
 <pre>
   <span class="label">C#</span>
@@ -355,7 +355,7 @@ méthode <span class="pink-purple-txt">Reveived()</span> du mock à chaque tour.
 
       discountApplier.Apply(item, 20);
 
-      users.ForEach(user => notifier.Reveived().Notify(user));
+      users.ForEach(user => notifier.Received().Notify(user));
     &rbrace;
   </code>
 </pre>
@@ -363,7 +363,7 @@ méthode <span class="pink-purple-txt">Reveived()</span> du mock à chaque tour.
 <h4>2.5 Doublure de type fake</h4>
 
 <p>Les notifications aux utilisateurs se font par mail, en se basant sur le protocole SMTP. </p>
-<p>On veut faire un test d'intégration et vérifier qur le contenu du message est bien conforme à l'attendu.</p>
+<p>On veut faire un test d'intégration et vérifier que le contenu du message est bien conforme à l'attendu.</p>
 <p>Il faut donc un composant factice qui génère le contenu des messages, sans les envoyer réellement (il pourrait
 écrire dans un fichier de log).</p>
 <p>Un fake est une implémentation réelle mais simplifiée de la vraie classe, une sorte de simulateur.</p>
@@ -463,7 +463,7 @@ sert également à vérifier qu'un livrable répond bien au besoin métier. Ils 
       </li>
       <li><span class="pink-purple-txt">Broad integration tests </span>: (tests d'intégration de grande envergure).
       <p>Ils utilisent des instances réelles de services (par exemple une base de donnée). Le scénario doit être plus
-      concret que celui utilisant les substituts. Ainsi on s'assure qur l'intégration des composants se prépare au mieux
+      concret que celui utilisant les substituts. Ainsi on s'assure que l'intégration des composants se prépare au mieux
       et soit suffisamment réaliste pour éviter les mauvaises surprises lors des tests utilisateurs.</p>
         <pre>
           <span class="label">C#</span>
@@ -521,7 +521,7 @@ sert également à vérifier qu'un livrable répond bien au besoin métier. Ils 
         l'exécution d'un test. Elle est recréée à chaque exécution du test, et supprimée en fin d'exécution. Cela impose
         de réinitialiser les jeux de données à chaque test, ce qui nécessite plus de travail mais donne aussi plus de
         maîtrise. Cela rend moins dépendants des altérations de données sur une base de données partagée.</p>
-        <p>En plus des données utiles pour les tests, on peut choisir de prévoir des donnes qu'on appelle des
+        <p>En plus des données utiles pour les tests, on peut choisir de prévoir des données qu'on appelle des
           <span class="pink-purple-txt">données parasites</span>. Les tests n'ont pas besoin de ces données pour être
         exécutés, mais leur présence permet de simuler au plus près la production.</p>
       </li>
@@ -530,7 +530,7 @@ sert également à vérifier qu'un livrable répond bien au besoin métier. Ils 
   <li><span class="pink-purple-txt">Test end to end</span>. Ils permettent de vérifier que l'ensemble des composants d'une
   fonctionnalité fonctionnent de bout en bout, de la partie IHM aux dépendances externes (base de données, ou service API,... ).
   Ils sont utilisés pour les scénarios critiques.
-  <p>Plusieurs outils permettent d'automatiser les tests E2E. Selenium fait partie des plus populaire du marché.</p></li>
+  <p>Plusieurs outils permettent d'automatiser les tests E2E. Selenium fait partie des plus populaires du marché.</p></li>
   <li><span class="pink-purple-txt">Test exploratoire</span>. Ce sont les tests exécutés manuellement. Leur rôle est de
   trouver les bugs qui ne sont pas détectés par les autres tests afin d'améliorer la stabilité et l'utilisabilité de
   l'application. Ils permettent aussi l'apprentissage et la compréhension du produit, et de trouver de nouvelles fonctionnalités.

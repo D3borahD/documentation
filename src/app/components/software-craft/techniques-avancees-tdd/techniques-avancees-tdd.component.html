@@ -1,0 +1,64 @@
+<h2>Baby steps et ordonnancement des tests</h2>
+
+<p>Il s'agit de décomposer la fonctionnalité en une suite de plusieurs évolutions incrémentales, chacune étant la plus
+petite possible, et de façon que cette suite permette d'atteindre la fonctionnalité entière. Ensuite, les baby steps sont
+ordonnés en une séquence progressive qui deviendra la séquence des cas de tests qui vont guider le développement. Il est
+donc important de prioriser.</p>
+
+<app-callout-section title="Critères INVEST">
+<p>La notion de baby steps se retrouve dans la progression des tests qui guident le développement en TDD, mais aussi dans
+les incréments de découpage fonctionnel au niveau des Users Stories. Au niveau d'une application, le découpage fonctionnel
+donne naissance à des Users Stories qui doivent répondre aux critères INVEST :</p>
+  <ul>
+    <li><span class="pink-purple-txt">I</span>ndépendant : chaque incrément du découpage doit être indépendant des autres
+    incréments décidés. Si un incrément est dépendant d'un autre, on peut utiliser un substitut pour la dépendance. Ainsi
+    on peut quand même livrer l'incrément en question sans soucis particuliers.</li>
+    <li><span class="pink-purple-txt">N</span>égociable : Un incrément est décrit par une phrase qui peut correspondre à une
+    règle de gestion. On s'intéresse moins aux détails d'implémentation, qui ne doivent pas être mentionnés dedans. Ainsi
+    ces détails techniques peuvent être négociables pour ajuster le périmètre en cas de délai réduit par rapport à la
+    complexité de la tâche.</li>
+    <li><span class="pink-purple-txt">V</span>aluable : qui a de la valeur. Chaque incrément doit apporter de la valeur
+    à l'utilisateur. Si ce n'est pas le cas, il faut repenser le découpage. Ne pas faire des découpages techniques au
+    risque de mettre du temps avec de délivrer la valeur au métier.</li>
+    <li><span class="pink-purple-txt">E</span>stimable : l'incrément doit être suffisamment petit pour rentrer dans une
+    itération de développement. C'est pourquoi il est important de noter les critères d'acceptation de l'incrément.</li>
+    <li><span class="pink-purple-txt">S</span>mall : pour rentrer dans une itération de développement.</li>
+    <li><span class="pink-purple-txt">T</span>estable : tout incrément doit être associé à un test automatisé de préférence.
+     On peut ainsi facilement le valider pour vérifier que la valeur est bien apportée à l'utilisateur.</li>
+  </ul>
+</app-callout-section>
+
+<h2>Styles de TDD</h2>
+
+<p>Une façon de préparer le développement d'une nouvelle fonctionnalité est d'esquisser des boîtes au tableau pour représenter
+les fonctionnalités à créer et les dépendances entre elles. On imagine ainsi la première fonctionnalité à mettre en place,
+avec son point d'entrée, puis la deuxième, ... Une fois le diagramme fini, au moment de débuter le développement, une question
+se pose : "Par où commencer ?"</p>
+<img class="img" alt="" src="assets/images/arbre.jpeg">
+<p>Dans cet arbre de fonctionnalités, qui deviendra un arbre d'appels entre composants à terme, on peut commencer par les
+feuilles C, D ou E, ou bien la racine A. Ce sont les 2 principales approches de TDD.</p>
+<p>Le choix entre ces 2 approches est une question d'affinité et de contexte.</p>
+
+<h3>1. Style de TDD inside-out (Chicago school ou bottom up)</h3>
+<p>Consiste à développer les fonctionnalités dont les dépendent des fonctionnalités plus complexes, jusqu'à arriver à la
+  racine de l'arbre.</p>
+<img class="img" alt="" src="assets/images/chicagoSchool.jpeg">
+
+<p>Si l'application comprend un service qui applique une réduction sur un article puis qui notifie les clients par mail
+de la réduction appliquée : </p>
+
+<img class="img" alt="" src="assets/images/fonctionnaliteChicagoSchool.jpeg">
+
+<p>En inside-out, on implémenterait d'abord le Notifier, puis le DiscountApplier. Pour tester le Notifier, il faut utiliser
+un mock qui remplace la classe collaborative (qui pourrait être un SMTPUtils), soit avec un framework de mocks, soit avec
+un mock avec une sous-classe qui va vérifier qu'elle est appelée comme désirée.</p>
+<p>Le service d'envoi de mails peut aussi être implémenté en un second temps. Dans ce cas, pour développer le service
+d'application de réduction qui doit utiliser le service d'envoi de mails, on va utiliser un mock qui le remplace.</p>
+
+<h3>1. Style de TDD outside-in (London school ou top  down)</h3>
+
+<p>Met l'accent sur le besoin utilisateur. ... </p>
+
+
+
+<h2>L'idée du TDD poussée au maximum : TDD as if you meant it</h2>

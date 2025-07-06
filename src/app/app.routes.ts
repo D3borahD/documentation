@@ -31,6 +31,9 @@ import {KataFractionComponent} from "@app/components/software-craft/kata-fractio
 import {
   PrincipesEtOutilsComponent
 } from "@app/components/software-craft/principes-et-outils/principes-et-outils.component";
+import {
+  TechniquesAvanceesTddComponent
+} from "@app/components/software-craft/techniques-avancees-tdd/techniques-avancees-tdd.component";
 
 export const routes: Routes = [
   {
@@ -172,6 +175,10 @@ export const routes: Routes = [
       {
         path: 'principes-et-outils',
         component: PrincipesEtOutilsComponent
+      },
+      {
+        path: 'techniques-avancees-tdd',
+        component: TechniquesAvanceesTddComponent
       },
     ]
   },

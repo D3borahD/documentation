@@ -121,6 +121,9 @@ export class SidebarComponent implements OnInit{
         {
           path:'softwareCraft/principes-et-outils',
           title : 'Principes et outils'},
+        {
+          path:'softwareCraft/techniques-avancees-tdd',
+          title : 'Outils et techniques avancées de TDD'},
       ]},
     {
       id: 5,

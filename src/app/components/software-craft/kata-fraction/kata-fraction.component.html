@@ -22,13 +22,13 @@
 
 <h3>2 Premier exercice</h3>
 <p>Pratiquer ce kata sans contrainte, commencer par donner une estimation du temps nécessaire pour développer l'application.
-  S'allouer par exemple 25 minutes. Cela permet à simuler des situations où le client requière un nombre infini de besoins
+  S'allouer par exemple 25 minutes. Cela permet de simuler des situations où le client requière un nombre infini de besoins
   et souhaite qu'on lui livre tout dans des délais qui sont souvent trop sérrés.</p>
 
 <h4>Evaluation de ce premier exercice</h4>
 <ul>
   <li>Avez-vous commencé par écrire du code au lancement du chronomètre ?</li>
-  <li>Pas quelle opération on a commencé ? Pourquoi ce choix ?</li>
+  <li>Par quelle opération on a commencé ? Pourquoi ce choix ?</li>
   <li>Avez-vous réussi à aller jusqu'au bout et à implémenter les 4 opérations ? </li>
   <li>Est-ce que la fraction représentant le résultat final est représentée sous sa forme simplifiée ?</li>
   <li>Avez-vous pensé aux cas limites comme une fraction avec le dénominateur 0 ou la division par une fraction 0 ?</li>
@@ -47,10 +47,10 @@ ou de se rapprocher du métier. Il est alors courant de découvrir des anomalies
 <h3>3 Décomposition</h3>
 
 <p>En décomposant, on divise le problème en sous-problème plus simples pouvant chacun être traité à part. </p>
-<p>Le premier avantage est de nous permettre d'avancer sur une partie du problème dans avoir à nous préoccuper de toute
+<p>Le premier avantage est de nous permettre d'avancer sur une partie du problème sans avoir à nous préoccuper de toute
   la complexité du sujet.</p>
 <p>Le second bénéfice est lié à la gestion des délais. Souvent, les clients expriment des besoins considérables et ils
-souhaitent qu'on leur livre le résultat dans des délais assez serréz. Il est primordial d'entamer un dialogue avec le
+souhaitent qu'on leur livre le résultat dans des délais assez serrés. Il est primordial d'entamer un dialogue avec le
 client pour hiérarchiser les priorités et négocier les délais de livraison.</p>
 
 <p>Pour ce kata, on le décompose en 4 parties, une par opération arithmétique.</p>
@@ -74,11 +74,11 @@ cas limites.</p>
 <p>Les échanges avec le client va permettre de collecter à minima les connaissances suivantes sur les fractions : </p>
 <ul>
   <li>Une fraction est constituée d'un dénominateur et d'un numérateur.</li>
-  <li>Numérateur et dénominateur sont des entier relatifs.</li>
+  <li>Numérateur et dénominateur sont des entiers relatifs.</li>
   <li>Si un numérateur vaut 0, alors la fraction vaut 0, quelle que soit la valeur du dénominateur.</li>
   <li>Si le numérateur et le dénominateur sont identiques alors la fraction vaut 1.</li>
   <li>Le dénominateur d'une fraction ne peut pas valoir 0. On parle d'une fraction infinie le cas échéant.</li>
-  <li>Certaines fraction se comportent comme un élément neutre vis-à-vis de certaines opérations : toute opération d'une
+  <li>Certaines fractions se comportent comme un élément neutre vis-à-vis de certaines opérations : toute opération d'une
   fraction avec l'élément neutre donne cette fraction elle-même.</li>
   <li>Toute fraction valant 0 est l'élément neutre pour l'addition et la soustraction.</li>
   <li>Toute fraction valant 1 est l'élément neutre pour la multiplication et la division.</li>
@@ -101,7 +101,7 @@ font émerger de nouvelles règles :</p>
   <li>1/0 + 3/7 = infini (un des dénominateurs vaut 0)</li>
   <li>1/4 + 3/4 = 4/4 (simplification de la fraction)</li>
 </ul>
-<p>A ce stade, on dispose de suffisamment de cas pour découper l'opération de l'addition en tranches assez fines, on nous
+<p>A ce stade, on dispose de suffisamment de cas pour découper l'opération de l'addition en tranches assez fines, en nous
 basant sur les différentes règles métiers.</p>
 <p>L'idée est d'ordonner les règles de façon à construire l'addition de manière incrémentale, chaque étape apportant de
 la valeur. Ainsi, on est capable à tout moment de fournir un livrable déployable en production et répondant à un certain
@@ -246,7 +246,7 @@ fonctionnelle nécessaire pour la documentation.</p>
 <p class="pink-purple-txt">Cas de simplification de 2 fractions</p>
 <p class="pink-purple-txt">Cas limite : dénominateur à zéro</p>
 
-<h3>7 Les 4 règles du design simple appliquée au kata</h3>
+<h3>7. Les 4 règles du design simple appliquée au kata</h3>
 
 <app-callout-section title="Rappel">
   4 règles simples pour un design simple :

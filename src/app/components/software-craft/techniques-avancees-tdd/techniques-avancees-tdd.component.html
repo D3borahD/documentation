@@ -55,10 +55,115 @@ un mock avec une sous-classe qui va vérifier qu'elle est appelée comme désir�
 <p>Le service d'envoi de mails peut aussi être implémenté en un second temps. Dans ce cas, pour développer le service
 d'application de réduction qui doit utiliser le service d'envoi de mails, on va utiliser un mock qui le remplace.</p>
 
-<h3>1. Style de TDD outside-in (London school ou top  down)</h3>
+<h3>2. Style de TDD outside-in (London school ou top  down)</h3>
 
-<p>Met l'accent sur le besoin utilisateur. ... </p>
+<p>Met l'accent sur le besoin utilisateur. Elle nécessite une décomposition préalable du problème en éléments plus simples,
+qui seront rémplacés temporairement par des substituts, avant d'être enfin construits. Le développement est guidé par le
+besoin, ainsi la construction de la solution se fait de l'extérieur vers l'intérieur.</p>
+<p>Avec un usage aussi intensif de doublure de tests, il faut vérifier à la fin qu'il existe bien une implémentation de
+chaque substitut utilisé. Un moyen rapide et sûr est la méthode ATDD (Acceptance Test Driven Development)</p>
 
+<p class="pink-purple-txt">Exemple : </p>
+<p>Pour le relevé de compte, la fonctionnalité complète peut se représenter en un seul scénario métier, qui est le point
+de départ en TDD outside-in</p>
+<app-callout-section title="User Story">
+  <p>Etant donné un solde initial de 200,</p>
+  <p>Avec un débit de 50 à la date du 03/03/2022</p>
+  <p>Et un crédit de 10 à la date du 04/03/2022</p>
+  <p>Alors quand on demande le relevé</p>
+  <p>Il affiche :</p>
+  <p>03/03/2022 | -50 | 150 </p>
+  <p>04/03/2022 | 10 | 160 </p>
+</app-callout-section>
+<p>MAIS, il ne faut pas implémenter un tel scénario en une seule boucle de TDD, cela reviendrait à tout coder en un seul
+incrément de grande taille, donc sans bénéficier de TDD. Il faut donc décomposer la fonctionnalité en sous-fonctionnalités.</p>
+<p>On commencerait par exemple à implémenter l'affichage de relevé avec 2 substituts de tests correspondant à l'accès à
+la liste des mouvements du mois, et au calcul du solde correspondant à chaque ligne.</p>
+<p>Une fois le scénario principal passé au vert avec les substituts, on s'intéresse à chaque doublure pour en faire une
+véritable implémentation, par exemple en commençant par le calcul du nouveau sold, et ainsi de suite jusqu'à implémenter
+la totalité du problème.</p>
 
+<h3>3. ATDD et double boucle</h3>
+
+<p>Dans l'approche ATDD (Acceptance Test Driver Development), on commence par écrire un test d'acceptation couvrant
+la fonctionnalité à ajouter. Les tests d'acceptations sont écrits d'un point de vue utilisateur du système. Il peuvent
+servir comme documentation et ensuite comme tests de non-régression. Généralement, on n'utilise pas de substituts (mock)
+pour ce test ou on minimise leur utilisation aux frontières de notre système (les services externes ou infrastructure ...).
+Ce test restera rouge tout au long du développement du nouveau besoin. C'est notre indicateur de fin de développement.
+Il passera vert quand toutes les briques seront finalisées. Comme en TDD, on vérifie que le test d'acceptation commence
+en échec. Puis on démarre des petites boucles TDD. On parle alors de 2 boucles imbriquées (double loop).</p>
+
+<img src="./assets/images/ATDD.jpg" alt="">
+
+<p>En TDD, les tests ne doivent jamais rester rouge pour une longue période. En ATDD, la boucle est plus grande car on
+a pas fini la fonctionnalité, le test d'acceptation reste rouge. Certains frameworks permettent de les marquer "pending"
+(en cours) pour ne pas créer d'alertes inutiles.</p>
 
 <h2>L'idée du TDD poussée au maximum : TDD as if you meant it</h2>
+
+<p>L'approche de TDD strict consiste à se retenir dans ses réflexes d'implémentation. On s'oblige à commencer par mettre
+tout le code, y compris le code destiné à être livré en production à terme, dans le corps de la méthode de test. L'idée
+est de progresser au vu du code strictement nécessaire, rassemblé en un seul endroit pour avoir tout sous les yeux. La
+seule façon d'introduire une méthode, une classe, ou une constante est de le faire par refactoring à partir du code qui
+fonctionne déjà dans la méthode de test. Il s'agit d'éviter de concevoir des classes, enums, interfaces ou méthodes dès
+le début, afin de laisser TDD faire émerger la conception sans l'influencer de nos anticipations.</p>
+<p>Quand on débute un cycle de TDD, le code fait l'objet de nombreux refactoring à un rythme rapide, de l'ordre de quelques
+ secondes ou minutes, et avoir tout le code dans une même méthode, ou un même fichier, aide à refactorer plus vite.
+  Mais au fil du développement et des cas de tests, le code tend à grossir et à changer un peu moins radicalement. C'est
+  donc le moment d'extraire les éléments de conception de plus en plus englobants tels que les méthodes, les classes, puis
+  à terme les modules, qui vont progressivement former la structure du code. On introduit les éléments de conception tels
+  que les packages, classes et méthodes, qui tendent à rendre le code plus difficile à changer, au moment le plus opportun,
+  c'est-à-dire quand le code a déjà prouvé qu'il fonctionne après avoir passé plusieurs tests.</p>
+<p>La démarche consiste à ne pas penser au design de la solution, et à y aller sans idée pré-conçue. </p>
+
+<h3>1. Qu'est ce que le TDD strict ? </h3>
+
+<p>Le TDD strict n'autorise pas à créer une classe, une méthode ou même une constante sauf si les éléments sont crées à
+partir d'un refactoring. A la phase rouge du TDD, on va créer le code directement dans la classe de test. Et à la phase
+de refactor, on peut bouger la méthode dans une classe.</p>
+
+<h3>2. Triangulation</h3>
+
+<p>La première implémentation de la méthode peut contenir des constantes. Il arrive qu'on passe à un nouveau cas de test
+tout en oubliant de variabiliser la constante créée. Afin de vérifier qu'on n'a rien oublié, on crée un test de
+  <span class="pink-purple-txt">triangulation</span>. C'est un test qui correspond au dernier écrit, mais on change une
+seule valeur d'entrée. Le but est de vérifier qu'on a rien laissé en dur dans le code.</p>
+<p>Robert C. Martin énumère plusieurs transformations possibles pour améliorer la lisibilité du code. </p>
+
+<h3>3. A l'extrême : transformation priority premise (TPP)</h3>
+
+<p>En appliquant le TDD, on enrichi le code de production au fur et à mesure des ajouts de nouveaux tests. C'est lors de
+la phase de refactoring qu'on améliore la lisibilité du code en changeant sa structure sans changer son comportement.
+Quand on ajoute un nouveau test, on va potentiellement changer le comportement sans changer de façon significative la
+structure du code.</p>
+<p>Souvent, quand on commence à appliquer le TDD, on oublie les baby steps. Pour ne pas les oublier, on applique les
+transformation priorisées par Robert C. Martin.</p>
+<p>Alors que les actions de refactoring consistent à changer la structure du code sans changer le comportement, les
+  <span class="pink-purple-txt">transformation</span> sont des modifications de code simples qui changent le comportement.</p>
+<p>Il propose de ne changer le code qu'en appliquant des transformations simples, et en s'imposant toujours de commencer
+par <span class="pink-purple-txt">la plus simple possible</span> avant de devoir recourir à des transformations
+  <span class="pink-purple-txt">moins simples</span>. Comme les transformations sont ordonnées par priorités, il a donné
+<span class="pink-purple-txt">Transformation Priority Premise</span> à cette approche :</p>
+<ul>
+  <li><span class="pink-purple-txt">(&lbrace;&rbrace; -> null) </span>: partir sans code vers un code qui emploie ou retourne null;</li>
+  <li><span class="pink-purple-txt">(null -> constante) </span>: transformer le null en utilisant une constante;</li>
+  <li><span class="pink-purple-txt">(constante -> constante+) </span>: d'une constante simple vers une constante plus complexe;</li>
+  <li><span class="pink-purple-txt">(constante -> scalaire) </span>: remplacer une constante par une variable ou un argument;</li>
+  <li><span class="pink-purple-txt">(instruction -> instructions) </span>: ajouter des instructions sans condition;</li>
+  <li><span class="pink-purple-txt">(unconditional -> if) </span>: introduire une condition;</li>
+  <li><span class="pink-purple-txt">(scalaire -> tableau) </span>;</li>
+  <li><span class="pink-purple-txt">(tableau -> conteneur) </span>;</li>
+  <li><span class="pink-purple-txt">(instruction -> recursion) </span>;</li>
+  <li><span class="pink-purple-txt">(if -> while) </span>;</li>
+  <li><span class="pink-purple-txt">(expression -> fonction) </span>: remplacer une expression par une fonction ou un algorithme;</li>
+  <li><span class="pink-purple-txt">(variable -> affectation) </span>;</li>
+</ul>
+
+<p>Ces transformation vont du spécifique au générique.</p>
+<p>Sur le kata FizzBuzz, au premier test, on peut retourner directement la valeur 1. Puis avec le test de triangulation,
+on a transformé la constante par une variable "number", qui est passée en paramètre. On a utilisé la 4ème transformation
+d'une constante à une variable dans cette évolution.</p>
+<p>Quand on voulait faire passer le test avec le nombre 3, pour retourner "Fizz", on a ajouté une condition
+  <span class="pink-purple-txt">if (number % 3 == 0)</span>. C'est l'application de la 6ème transformation
+  <span class="pink-purple-txt">(unconditional -> if)</span>. Le conseil de respecter l'ordre des priorités des transformations
+permet de se retenir de faire du code complexe superflu.</p>

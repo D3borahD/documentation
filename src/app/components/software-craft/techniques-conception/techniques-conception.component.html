@@ -1,0 +1,421 @@
+<h2>Techniques de conception</h2>
+
+<h3>1. Principes essentiels de conception</h3>
+
+<h4>1.1 Les principes SOLID</h4>
+
+<ul>
+  <li><span class="pink-purple-txt">Single responsibility principle </span>: une classe ne doit avoir qu'une seule
+  responsabilité.</li>
+  <li><span class="pink-purple-txt">Open close principle </span>: ouvert aux extensions, fermé à la modification. Penser
+  l'évolution d'un système composé de plusieurs éléments par ajout, suppression ou remplacement d'un élément à la fois
+  (non par la modification quelconque des éléments).
+  <p>exemple : un ordinateur est composé d'une carte mère et d'un ensemble de composants, et évolue par ajout, suppression
+  ou remplacement des composants, et non par changement d'un composant qui nécessiterait de souder.</p>
+  <p>C'est l'idée des architectures de plugins, d'un grand nombre de design patterns et des microservices.</p></li>
+  <li><span class="pink-purple-txt">Liskov substitution principle </span>: principe de substitution, pour pouvoir
+  remplacer un composant par un autre, il est nécessaire que le remplaçant vérifie au moins toutes les propriétés de
+  l'original (un sous-type doit vérifier toutes les propriétés du super type ou de l'interface implémentée, par exemple,
+  ne pas lever de nouvelle exception.</li>
+  <li><span class="pink-purple-txt">Interface segregation principle </span>: principe de ségrégation d'interfaces, encourage
+  à séparer les méthodes d'une classe dans plusieurs interfaces distinctes, pour que le code qui utilise la classe ne
+  voie que les méthodes dont il a besoin. Si un code n'utilise que des méthodes de consultation d'une classe, les éventuelles
+  méthodes de mutation de la classe ne devraient pas être dans l'interface référencée pas ce code. Cela amène donc souvent
+  à des classes qui implémentent plusieurs interfaces, chacune sur un sous-ensemble de leurs méthodes publiques.</li>
+  <li><span class="pink-purple-txt">Dependency inversion principle </span>: principe d'inversion des dépendances, consiste
+  à inverser la direction d'une dépendance entre un code appelant la classe et une classe appelée. L'astuce consiste à
+  introduire une interface référencée par le code appelant et implémenter par la classe appelée.</li>
+</ul>
+
+<p>Il est possible d'utiliser ces principes également dans les architectures distribuées, où les interfaces deviennent des
+contrats REST/JSON et où les classes deviennent des services.</p>
+
+<h4>1.2 Le principe "Composition over inhéritance"</h4>
+
+<p>Ce principe décourage l'usage de l'héritage des langages objets, au profit de la composition.</p>
+<p>Exemple : plutôt que de regrouper du code en commun dans une classe de base, on met ce code dans une classe dédiée
+qu'on inclut dans chaque classe qui en a besoin.</p>
+<p>L'usage des interfaces reste encouragé, le polymorphisme n'étant pas de l'héritage.</p>
+
+<h4>1.3 Les principes de faible couplage et de forte cohésion</h4>
+
+<p>Ce principe stipule que l'organisation du code doit regrouper les responsabilités similaires dans une zone à forte
+cohésion, avec le moins de couplage possible avec les zones de code. </p>
+
+<h4>1.4 Le principe de dépendance du spécifique vers le générique</h4>
+
+<p>Ce principe provient du raisonnement sur la stabilité relative des classes, modules ou services en termes de changements
+de leur code. L'idée est que le code le plus stable ne doit pas dépendre de code moins stable, sous peine de devenir
+instable. A défaut de pouvoir mesurer la stabilité des éléments du code, on peut l'estimer en comparant les fonctionnalités
+des plus spécifiques aux plus génériques, les plus spécifiques étant considérées plus propices aux changements, donc moins
+stables que celles qui sont génériques.</p>
+<p>On peut donc dire : <span class="pink-purple-txt">le générique ne doit jamais dépendre du spécifique</span>.</p>
+
+<h4>1.5 La loi de Demeter : pour être heureux, vivons cachés</h4>
+
+<p>Principe de la connaissance minimale.</p>
+<p>Un objet devrait faire aussi peu d'hypothèse que possible quant à la structure et aux détails internes de fonctionnement
+de quoi que ce soit d'autre, y compris ses propres composants.</p>
+
+<h5>Exemple : </h5>
+
+<p>Un site de vente en ligne souhaite déterminer le pays d'expédition pour chaque commande afin d'appliquer les règles
+douanière en vigueur : </p>
+
+<pre>
+  <code class="c#">
+    order.Customer().getShippingAddress().getCountry().getCode();
+  </code>
+</pre>
+
+<p>Avec la loi Demeter, on obtient :</p>
+
+<pre>
+  <code class="c#">
+    order.getCustomsCountryCode();
+  </code>
+</pre>
+
+<p>Les bénéfices sont multiples :</p>
+<ul>
+  <li>L'intension est exprimée clairement : on sait que le code pays renvoyé est utilisé pour des raisons douanières</li>
+  <li>La logique de calcul du code pays pour les questions de douanes est encapsulée : si elle vient à évoluer, le changement
+  se fera seulement dans Order.getCustomsCountryCode() et non partout où on pourrait avoir besoin de ce calcul.
+  <p>C'est une façon de respecter DRY et de réduire le couplage.</p></li>
+  <li>Côté lisibilité on va directement à l'essentiel.</li>
+  <li>En limitant l'exposition du fonctionnement interne, la sécurité des composants est renforcée.</li>
+  <li>On limite aussi le couplage entre le fonctionnement interne d'une composant et ceux qui l'utilisent. Modifier
+  l'implémentation, occasionne très peu d'impacts. On peut le voir comme une réduction de la surface de contact entre les
+  composants.</li>
+</ul>
+
+<p>La loi de Demeter va dans le sens de limiter ce qu'on expose, notamment les détails d'implémentation. Plus on les expose,
+plus on crée de couplage, multipliant ainsi les impactes en cas de modification. On doit plutôt raisonner en termes de
+services fournis par un composant, et des problèmes qu'il aide à résoudre. La loi de Demeter offre un moyen efficace
+d'augmenter l'encapsulation (contrôler ce qui est accessible ou non) et de renforcer les abstractions.</p>
+
+<app-callout-section title="Attention">
+  <p>La forme a().b().c() ne veut pas forcément dire qu'on est en présence d'une violation de la loi de Demeter. On peut
+  être face à une API fluent ou un pattern de type Builder, et ces approches sont à encourager.</p>
+</app-callout-section>
+
+<h4>1.6 Principe du "Tell, don't ask"</h4>
+
+<p>Dans l'approche objet, un objet ne consiste pas seulement en de la donnée. Il est préférable de chercher à incorporer
+de la logique à côté des données, au sein de la classe. Ainsi au lien de demander les données à l'objet pour les manipuler
+et les modifier, il est préférable de fournir directement les abstractions qui permettre d'effectuer des actions de plus
+haut niveau. On peut le combiner avec l'effort de limiter des accesseurs au strict minimum.</p>
+<p>Cela contribue à :</p>
+<ul>
+  <li>Renforcer l'encapsulation en masquant des détails d'implémentation qui les composants extérieurs n'ont pas besoin
+  de connaître ;</li>
+  <li>Limiter l'accès sur les données, on renforce la sécurité des objets en empêchant des utilisations imprévues, on évite
+  que chaque composant client fournissent se propre interprétation du traitement à effectuer ;</li>
+  <li>Eviter de multiplier les objets anémiques (qui ne servent qu'à stocker de la donnée, aussi appelés DTO ou POxO, mais
+  qui sont en fait des structures clé-valeur de luxe) ;</li>
+  <li>Eviter de la duplication lorsque de multiples composants extérieurs vont avoir besoin de la même logique.</li>
+</ul>
+
+<p>Exemple : on veut calculer la montant total d'une commande. Au lieu de demander à l'objet Order la liste des articles
+commendés et de faire le calcul ensuite : </p>
+
+<pre>
+  <code class="c#">
+    double orderAmount = 0.0;
+    for(OrderLine orderLine : order.getOrderLines())&lbrace;
+      orderAmount += orderLine.getItemPrice() * orderLine.getQuantity;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Cette logique pourrait directement être fournie dans la classe Order, le client n'ayant alors qu'à l'appeler :</p>
+
+<pre>
+  <code class="c#">
+    double orderAmount = order.getOrderAmount();
+  </code>
+</pre>
+
+<p>Ainsi, l'appelant n'a pas besoin de savoir comment une commande est structurée. Si par la suite la classe Order évolue
+dans sa logique métier, pour intégrer par exemple le calcul des taxes, ou dans sa façon de structurer ses éléments OrderLine,
+le client ne sera pas impacté.</p>
+
+<h4>1.7 Principe d'Hollywood : "Don't call us, we'll call you"</h4>
+
+<p>Ce principe est fortement lié à ceux d'inversion de contrôle (IoC) et d'inversion de dépendance (DIP). Plutôt que de
+s'insérer dans un flux de contrôle, une portion de code doit décrire un comportement qui se déclenche en réponse à des
+évènement extérieurs (clic sur un bouton, chargement d'une page,...)</p>
+<p>On parle d'évènements, de hooks, de call backs, et la plupart des frameworks reposent fortement sur ces principes. Par
+exemple : lambdas, patterns tels que Observer ou Template Method.</p>
+<p>La notion de déclarativité est importante, opposée au style impératif. le style fonctionnel aide ainsi à renforcer le
+principe d'Hollywood.</p>
+
+<h3>2. Le jeu de contraintes "object calisthenics"</h3>
+
+<p>Les règles suivantes permettent d'améliorer la lisibilité du code pour le rendre plus maintenable et plus facilement
+testable :</p>
+<ul>
+  <li><span class="pink-purple-txt">Only one level of indentation per method</span>;</li>
+  <li><span class="pink-purple-txt">Don't use the else keyword</span> : Ne pas utiliser le mot-clé else;</li>
+  <li><span class="pink-purple-txt">Wrap all primitives and strings</span> : Encapsuler tous les types primitifs et toutes
+  les chaînes de caractères;</li>
+  <li><span class="pink-purple-txt">First class collections </span>: Créer des classes encapsulant les collections;</li>
+  <li><span class="pink-purple-txt">One dot per ligne</span>;</li>
+  <li><span class="pink-purple-txt">Don't abbreviate</span> : Ne pas abréger;</li>
+  <li><span class="pink-purple-txt">Keep all entities small</span>;</li>
+  <li><span class="pink-purple-txt">No classes with more than two instance variables</span> : Pas de classe avec plus de 2
+  attributs;</li>
+  <li><span class="pink-purple-txt">No getters/setters/properties </span>: Pas de getter, ni de setter, ni de propriété.</li>
+</ul>
+
+<h4>2.1 Un seul niveau d'indentation par méthode</h4>
+
+<p>Plus il y a d'indentation dans une méthode, moins elle est lisible et plus elle est complexe.
+Réduire le nombre d'indentations permet de favoriser le découpage et de réduire l'éparpillement du contexte (variable,
+données en entrée et en sortie). De plus, plus le nombre d'indentation est élevé, plus la complexité cyclomatique de la
+méthode est élevée. La complexité cyclomatique correspond au nombre de chemins de la méthode.</p>
+<p>Exemple : Ici, 4 indentations représentent une complexité cyclomatique de 4 au minimum à cause des 3 if imbriqués :</p>
+
+<pre>
+  <code class="c#">
+    public bool WasCorrectlyAnswered()
+    &lbrace;
+      if(_inPenaltyBox[_currentPlayer])
+      &lbrace;
+        if(_isGettingOutOfPenaltyBox)
+        &lbrace;
+          [...]
+          if(_currentPlayer == _players.Count)
+            _currentPlayer = 0;
+
+          return winner;
+        &rbrace;
+        [...]
+      &rbrace;
+      [...]
+    &rbrace;
+  </code>
+</pre>
+
+<p>Pour améliorer cette méthode, on peut extraire des méthodes ou inverser certains if pour sortir au plus tôt et reduire
+la complexité. Il est possible dans certains cas, d'extraire du code dans d'autres classes et les composer pour garder le
+même fonctionnement.</p>
+
+<h4>2.2 Ne plus utiliser le mot-clé else</h4>
+
+<p>Le présence du mot-clé else oblige à faire un effort intellectuel supplémentaire pour la lecture du code. En le supprimant,
+on est amené à sortir plus tôt de la méthode, ce qui facilite la lecture et la compréhension de la fonctionnalité.
+Plusieurs approches se résument en cette règle :</p>
+<ul>
+  <li><span class="pink-purple-txt">Return early </span>: sortir au plus tôt;</li>
+  <li><span class="pink-purple-txt">Fail fast</span></li>
+  <li><span class="pink-purple-txt">Happy path/sad path </span>: le code est linéaire et dès qu'il y a une validation
+  échouée on sort directement de la méthode.</li>
+</ul>
+
+<p>Exemple : la méthode retourne vrai si le nombre passé en paramètre est pair, autrement la valeur de retour est égale
+à faux. Pour cette méthode, on est obligé de la lire jusqu'à le fin pour s'assurer qu'il n'y a pas un autre traitement
+à part l'affectation de la variable isEvenNumber à vrai.</p>
+
+<pre>
+  <code class="c#">
+    public string IsEvenNumber(int number)
+    &lbrace;
+      bool isEventNumber;
+      if(number % 2 == 0)
+      &lbrace;
+        isEventNumber = true;
+      &rbrace;
+      else &lbrace;
+        isEventNumber = false;
+      &rbrace;
+      return isEventNumber;
+    &rbrace;
+  </code>
+</pre>
+
+<p>En appliquant la règle : </p>
+
+<pre>
+  <code class="c#">
+    public string IsEvenNumber(int number)
+    &lbrace;
+      if(number % 2 == 0)
+      &lbrace;
+        return true;
+      &rbrace;
+
+      return false;
+    &rbrace;
+  </code>
+</pre>
+
+<h4>2.3 Encapsuler tous les types primitifs et toutes les chaînes de caractères</h4>
+
+<p>L'encapsulation des types primitifs en objets sécurise le code en masquant les détails d'implémentation. En rapprochant
+les traitements appliqués aux données, on apporte une saveur métier au code. On s'affranchit ainsi de l'anti-pattern Primitive
+obsession. L'encapsulation est une façon d'introduire le DDD (Domain Driven Design) dans le code en utilisant les "value
+objects" pour représenter un concept métier.</p>
+<p>Exemple : Le montant et le taux sont présentés avec des types primitifs.</p>
+
+<pre>
+  <code class="c#">
+    public double Convert(double amount, double rate)
+    &lbrace;
+      return amount * rate;
+    &rbrace;
+  </code>
+</pre>
+
+<p>En les exposants sous forme d'objet, on ajoute une touche métier au code et on explicite le comportement voulu : </p>
+<pre>
+  <code class="c#">
+    public double Convert(double amount, double rate)
+    &lbrace;
+      return amount.MultiplyBy(rate);
+    &rbrace;
+  </code>
+</pre>
+<p>Cette règle invite à sécuriser le code en encapsulant les données dans des objets et à exposer des comportements.</p>
+
+<h4>2.4 Créer des classes encapsulant les collections</h4>
+
+<p>Cette règle permet de rapprocher le traitement des données qu'il manipule. Ainsi on définit un type plus orienté métier
+en frontal de la collection et on contrôle davantage les actions possibles sur la collection. On peut par exemple,
+rendre la suppression d'éléments impossible. Cette règle répond au principe de "Tell, don't ask" qui invite à regrouper
+les données et les méthodes qui les manipulent.</p>
+<img src="assets/images/tell-dont-ask.png" alt="">
+
+<h4>2.5 Un seul point par ligne</h4>
+
+<p>Avoir plusieurs points dans une même ligne montre qu'on a besoin d'accéder à une donnée dans un objet qui n'est pas
+référencé directement dans l'objet manipulé. Lorsque l'on respecte la loi de Demeter qui demande de ne pas parler aux
+étrangers et de parler uniquement aux amis immédiats (les objets référencés directement), il vaut mieux encapsuler le
+traitement voulu dans une méthode. Ainsi, le code devient plus fluide et plus facile à lire et à comprendre. On parle
+souvent d'interface fluide (Fluent interface) dans le cadre de la construction d'API avec une lisibilité du code proche
+du langage parlé. L'avantage est qu'on peut facilement substituer le comportement des objets amis ou voisins pour tester
+unitairement la fonctionnalité voulue.</p>
+<p>Dans le cas où on ne peut pas modifier le code pour appliquer les concepts de Fluent interface ou "Tell, don't ask", on
+peut retourner à la ligne à chaque utilisation de ce point pour améliorer la lisibilité du code : </p>
+
+<pre>
+  <code class="c#">
+    public bool CanEnter(User user)
+    &lbrace;
+      return user.GetAge().ToYear() <= 18;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Pour rendre le code plus fluide, on peut le refactorer pour extraire une méthode de la classe User. </p>
+
+<pre>
+  <code class="c#">
+    public bool CanEnter(User user)
+    &lbrace;
+      return user.IsAgeOver() <= 18;
+    &rbrace;
+  </code>
+</pre>
+
+<h4>2.6 Ne pas abréger</h4>
+
+<p>Il vaut mieux favoriser l'expression de l'intention en nommant explicitement les notions métier, plutôt que d'utiliser
+les acronymes ou abréviation. Cela permet une meilleure lisibilité pour les nouveaux développeurs.</p>
+<p>Dans certains cas, le code peut être très verbeux en supprimant les abréviations. Un meilleur découpage peut alors
+régler le problème.</p>
+
+<h4>2.7 Garder toutes les entités petites</h4>
+
+<p>Avoir des classes de 50 lignes maximum, des méthodes de 10 lignes maximum. Le meilleur moyen pour y arriver est de
+repenser le découpage et de simplifier le design. On invite souvent à utiliser la composition. On peut par exemple extraire
+dans des classes à une seule responsabilité et les composer entre elles pour obtenir le comportement attendu.</p>
+
+<h4>2.8 Pas de classe avec plus de 2 attributs</h4>
+
+<p>Le but de cette règle est de renforcer l'encapsulation. En se limitant à 2 attributs par classe, on tend vers une
+meilleure explication du rôle de classe.</p>
+
+<p>Exemple : Une période et une valeur sont représentées pas une classe Period : </p>
+
+<pre>
+  <code class="c#">
+    public class Period
+    &lbrace;
+      public DateTime Start &lbrace; get; set; &rbrace;
+      public DateTime End &lbrace; get; set; &rbrace;
+      public DateTime Value &lbrace; get; set; &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>En observant cette class et le code qui l'utilise, on peut se demander ce que représente cette période, pourquoi elle
+a une valeur et ce que représente cette valeur. Si on creuse le métier, on se rend compte qu'il s'agit d'une période à
+laquelle on associe un taux. La classe peut donc être représentée par 2 classes, voire 3 si on applique la règle
+"Encapsuler les types primitifs" en encapsulant la valeur dans une classe Rate.</p>
+
+<pre>
+  <code class="c#">
+    public class Period
+    &lbrace;
+      public DateTime Start &lbrace; get; set; &rbrace;
+      public DateTime End &lbrace; get; set; &rbrace;
+    &rbrace;
+
+    public class RatePeriod
+    &lbrace;
+      public Period period &lbrace; get; set; &rbrace;
+      public Rate rate &lbrace; get; set; &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<h4>2.9 Pas de getter ni de setter ni de propriété</h4>
+
+<p>En créant les accesseurs (get, set), on fini par avoir des objets anémiques dont le comportement est pauvre. En supprimant
+les accesseurs, on tend vers des objets immuables, ayant des comportements qu'on expose pour respecter le principe de
+"Tell, don't ask". L'immutabilité présente plusieurs avantages :</p>
+<ul>
+  <li><span class="pink-purple-txt">la simplicité</span> : vu qu'on maîtrise l'état de l'objet et son comportement;</li>
+  <li><span class="pink-purple-txt">la sécurité en cas d'exécution parallèle (thread-safety)</span> : parce que l'état
+    de l'objet ne peut pas être changé directement, aucune synchronisation entre les threads n'est nécessaire;</li>
+  <li><span class="pink-purple-txt">la robustesse du code</span> : écrire dans un style immuable réduit statistiquement
+    la quantité de bugs;</li>
+</ul>
+
+<h3>3. Principes de programmation fonctionnelle</h3>
+
+<p>Même sans utiliser de langage de programmation fonctionnelle, il reste avantageux de s'inspirer des principes issus
+des langages fonctionnels, tels que l'absence de mutation des données, la pureté des fonctions et d'idempotence.</p>
+<p>La pureté d'une fonction est aussi désignée comme l'absence d'effets de bords. Elle ne modifie pas son contexte
+extérieur, et notamment les paramètres en entrée ne sont pas mutés. Tous accès au disque, au réseau, à l'horloge ou au
+générateur aléatoire sont ainsi à proscrire dans une fonction pure. Comme un programme totalement pur est absolument
+inutile, l'idée est de séparer et de maximiser l'utilisation de fonctions pures, tout en sachant que quelques fonctions
+devront avoir des effets de bord.</p>
+
+<h3>4. Code smells courants</h3>
+
+<h4>4.1 Code omniscient, ou code complexe</h4>
+
+<p>Un code omniscient fait beaucoup trop de choses, c'est le cas par exemple des bloated classes :</p>
+<ul>
+  <li>qui génèrent trop de responsabilités, en violation évidente du Single Responsibility Principle;</li>
+  <li>qui nécessite des modifications dès qu'on introduit une évolution dans le système, en désaccord manifeste avec le
+  principe Open-Closed.</li>
+</ul>
+
+<p>Il est fréquent de rencontrer du code qui présente une complexité cyclomatique élevée, il y a plusieurs solutions pour
+les réduire. En présence de boucles, on peut découper le code en plus petites méthodes et s'orienter vers un style de parcours
+plus fonctionnel. Pour cela, on se pose la question : <span class="pink-purple-txt">quels traitements doit-on effectuer sur
+  cette collection ?</span> plutôt que "comment parcourt-on cette collection ? </p>
+<p>Dans le cas de l'accumulation de if/else ou switch dans une méthode, on est face à une violation potentielle du principe
+Open-Closed. Il arrive également que l'utilisation de variable s'étale trop dans le code; il est préférable de repenser
+le scope de déclaration en rendant la variable plus locale. On peut aussi limiter les effets de bords en faisant un effort
+sur l'immutabilité et la pureté des fonctions. </p>
+<p>Pour simplifier le code et en réduire la complexité, plusieurs patterns sont appropriés, notamment le déplacement de
+  lignes, l'extraction de méthode, le découpage en plusieurs classes avec déplacement de méthodes, la mise en place du
+design pattern Strategy ou encore le principe de fail fast.</p>
+
+<h4>4.2 Données globales partagées</h4>
+
+<p></p>

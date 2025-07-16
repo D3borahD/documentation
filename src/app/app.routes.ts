@@ -34,6 +34,9 @@ import {
 import {
   TechniquesAvanceesTddComponent
 } from "@app/components/software-craft/techniques-avancees-tdd/techniques-avancees-tdd.component";
+import {
+  TechniquesConceptionComponent
+} from "@app/components/software-craft/techniques-conception/techniques-conception.component";
 
 export const routes: Routes = [
   {
@@ -179,6 +182,10 @@ export const routes: Routes = [
       {
         path: 'techniques-avancees-tdd',
         component: TechniquesAvanceesTddComponent
+      },
+      {
+        path: 'techniques-conception',
+        component: TechniquesConceptionComponent
       },
     ]
   },

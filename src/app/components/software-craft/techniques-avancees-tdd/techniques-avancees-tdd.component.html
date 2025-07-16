@@ -1,4 +1,6 @@
-<h2>Baby steps et ordonnancement des tests</h2>
+<h2>Outils et techniques avancées de TDD</h2>
+
+<h3>Baby steps et ordonnancement des tests</h3>
 
 <p>Il s'agit de décomposer la fonctionnalité en une suite de plusieurs évolutions incrémentales, chacune étant la plus
 petite possible, et de façon que cette suite permette d'atteindre la fonctionnalité entière. Ensuite, les baby steps sont
@@ -28,7 +30,7 @@ donne naissance à des Users Stories qui doivent répondre aux critères INVEST 
   </ul>
 </app-callout-section>
 
-<h2>Styles de TDD</h2>
+<h3>Styles de TDD</h3>
 
 <p>Une façon de préparer le développement d'une nouvelle fonctionnalité est d'esquisser des boîtes au tableau pour représenter
 les fonctionnalités à créer et les dépendances entre elles. On imagine ainsi la première fonctionnalité à mettre en place,
@@ -39,7 +41,7 @@ se pose : "Par où commencer ?"</p>
 feuilles C, D ou E, ou bien la racine A. Ce sont les 2 principales approches de TDD.</p>
 <p>Le choix entre ces 2 approches est une question d'affinité et de contexte.</p>
 
-<h3>1. Style de TDD inside-out (Chicago school ou bottom up)</h3>
+<h4>1. Style de TDD inside-out (Chicago school ou bottom up)</h4>
 <p>Consiste à développer les fonctionnalités dont dépendent des fonctionnalités plus complexes, jusqu'à arriver à la
   racine de l'arbre.</p>
 <img class="img" alt="" src="assets/images/chicagoSchool.jpeg">
@@ -55,7 +57,7 @@ un mock avec une sous-classe qui va vérifier qu'elle est appelée comme désir�
 <p>Le service d'envoi de mails peut aussi être implémenté en un second temps. Dans ce cas, pour développer le service
 d'application de réduction qui doit utiliser le service d'envoi de mails, on va utiliser un mock qui le remplace.</p>
 
-<h3>2. Style de TDD outside-in (London school ou top  down)</h3>
+<h4>2. Style de TDD outside-in (London school ou top  down)</h4>
 
 <p>Met l'accent sur le besoin utilisateur. Elle nécessite une décomposition préalable du problème en éléments plus simples,
 qui seront rémplacés temporairement par des substituts, avant d'être enfin construits. Le développement est guidé par le
@@ -83,7 +85,7 @@ la liste des mouvements du mois, et au calcul du solde correspondant à chaque l
 véritable implémentation, par exemple en commençant par le calcul du nouveau sold, et ainsi de suite jusqu'à implémenter
 la totalité du problème.</p>
 
-<h3>3. ATDD et double boucle</h3>
+<h4>3. ATDD et double boucle</h4>
 
 <p>Dans l'approche ATDD (Acceptance Test Driver Development), on commence par écrire un test d'acceptation couvrant
 la fonctionnalité à ajouter. Les tests d'acceptations sont écrits d'un point de vue utilisateur du système. Il peuvent
@@ -99,7 +101,7 @@ en échec. Puis on démarre des petites boucles TDD. On parle alors de 2 boucles
 a pas fini la fonctionnalité, le test d'acceptation reste rouge. Certains frameworks permettent de les marquer "pending"
 (en cours) pour ne pas créer d'alertes inutiles.</p>
 
-<h2>L'idée du TDD poussée au maximum : TDD as if you meant it</h2>
+<h3>L'idée du TDD poussée au maximum : TDD as if you meant it</h3>
 
 <p>L'approche de TDD strict consiste à se retenir dans ses réflexes d'implémentation. On s'oblige à commencer par mettre
 tout le code, y compris le code destiné à être livré en production à terme, dans le corps de la méthode de test. L'idée
@@ -116,13 +118,13 @@ le début, afin de laisser TDD faire émerger la conception sans l'influencer de
   c'est-à-dire quand le code a déjà prouvé qu'il fonctionne après avoir passé plusieurs tests.</p>
 <p>La démarche consiste à ne pas penser au design de la solution, et à y aller sans idée pré-conçue. </p>
 
-<h3>1. Qu'est ce que le TDD strict ? </h3>
+<h4>1. Qu'est ce que le TDD strict ? </h4>
 
 <p>Le TDD strict n'autorise pas à créer une classe, une méthode ou même une constante sauf si les éléments sont crées à
 partir d'un refactoring. A la phase rouge du TDD, on va créer le code directement dans la classe de test. Et à la phase
 de refactor, on peut bouger la méthode dans une classe.</p>
 
-<h3>2. Triangulation</h3>
+<h4>2. Triangulation</h4>
 
 <p>La première implémentation de la méthode peut contenir des constantes. Il arrive qu'on passe à un nouveau cas de test
 tout en oubliant de variabiliser la constante créée. Afin de vérifier qu'on n'a rien oublié, on crée un test de
@@ -130,7 +132,7 @@ tout en oubliant de variabiliser la constante créée. Afin de vérifier qu'on n
 seule valeur d'entrée. Le but est de vérifier qu'on a rien laissé en dur dans le code.</p>
 <p>Robert C. Martin énumère plusieurs transformations possibles pour améliorer la lisibilité du code. </p>
 
-<h3>3. A l'extrême : transformation priority premise (TPP)</h3>
+<h4>3. A l'extrême : transformation priority premise (TPP)</h4>
 
 <p>En appliquant le TDD, on enrichi le code de production au fur et à mesure des ajouts de nouveaux tests. C'est lors de
 la phase de refactoring qu'on améliore la lisibilité du code en changeant sa structure sans changer son comportement.

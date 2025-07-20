@@ -102,15 +102,15 @@ d'augmenter l'encapsulation (contrôler ce qui est accessible ou non) et de renf
 <h4>1.6 Principe du "Tell, don't ask"</h4>
 
 <p>Dans l'approche objet, un objet ne consiste pas seulement en de la donnée. Il est préférable de chercher à incorporer
-de la logique à côté des données, au sein de la classe. Ainsi au lien de demander les données à l'objet pour les manipuler
-et les modifier, il est préférable de fournir directement les abstractions qui permettre d'effectuer des actions de plus
+de la logique à côté des données, au sein de la classe. Ainsi au lieu de demander les données à l'objet pour les manipuler
+et les modifier, il est préférable de fournir directement les abstractions qui permettent d'effectuer des actions de plus
 haut niveau. On peut le combiner avec l'effort de limiter des accesseurs au strict minimum.</p>
 <p>Cela contribue à :</p>
 <ul>
-  <li>Renforcer l'encapsulation en masquant des détails d'implémentation qui les composants extérieurs n'ont pas besoin
+  <li>Renforcer l'encapsulation en masquant des détails d'implémentation que les composants extérieurs n'ont pas besoin
   de connaître ;</li>
   <li>Limiter l'accès sur les données, on renforce la sécurité des objets en empêchant des utilisations imprévues, on évite
-  que chaque composant client fournissent se propre interprétation du traitement à effectuer ;</li>
+  que chaque composant client fournissent sa propre interprétation du traitement à effectuer ;</li>
   <li>Eviter de multiplier les objets anémiques (qui ne servent qu'à stocker de la donnée, aussi appelés DTO ou POxO, mais
   qui sont en fait des structures clé-valeur de luxe) ;</li>
   <li>Eviter de la duplication lorsque de multiples composants extérieurs vont avoir besoin de la même logique.</li>
@@ -144,10 +144,10 @@ le client ne sera pas impacté.</p>
 
 <p>Ce principe est fortement lié à ceux d'inversion de contrôle (IoC) et d'inversion de dépendance (DIP). Plutôt que de
 s'insérer dans un flux de contrôle, une portion de code doit décrire un comportement qui se déclenche en réponse à des
-évènement extérieurs (clic sur un bouton, chargement d'une page,...)</p>
+évènements extérieurs (clic sur un bouton, chargement d'une page,...)</p>
 <p>On parle d'évènements, de hooks, de call backs, et la plupart des frameworks reposent fortement sur ces principes. Par
 exemple : lambdas, patterns tels que Observer ou Template Method.</p>
-<p>La notion de déclarativité est importante, opposée au style impératif. le style fonctionnel aide ainsi à renforcer le
+<p>La notion de déclarativité est importante, opposée au style impératif. Le style fonctionnel aide ainsi à renforcer le
 principe d'Hollywood.</p>
 
 <h3>2. Le jeu de contraintes "object calisthenics"</h3>
@@ -336,7 +336,7 @@ dans des classes à une seule responsabilité et les composer entre elles pour o
 <p>Le but de cette règle est de renforcer l'encapsulation. En se limitant à 2 attributs par classe, on tend vers une
 meilleure explication du rôle de classe.</p>
 
-<p>Exemple : Une période et une valeur sont représentées pas une classe Period : </p>
+<p>Exemple : Une période et une valeur sont représentées par une classe Period : </p>
 
 <pre>
   <code class="c#">
@@ -349,7 +349,7 @@ meilleure explication du rôle de classe.</p>
   </code>
 </pre>
 
-<p>En observant cette class et le code qui l'utilise, on peut se demander ce que représente cette période, pourquoi elle
+<p>En observant cette classe et le code qui l'utilise, on peut se demander ce que représente cette période, pourquoi elle
 a une valeur et ce que représente cette valeur. Si on creuse le métier, on se rend compte qu'il s'agit d'une période à
 laquelle on associe un taux. La classe peut donc être représentée par 2 classes, voire 3 si on applique la règle
 "Encapsuler les types primitifs" en encapsulant la valeur dans une classe Rate.</p>
@@ -418,4 +418,586 @@ design pattern Strategy ou encore le principe de fail fast.</p>
 
 <h4>4.2 Données globales partagées</h4>
 
-<p></p>
+<p>On retrouve souvent ce code smell avec une variable globale ou un objet implémentant le design pattern Singleton.</p>
+<p>La donnée globale partagée induit une dépendance forte associée à un couplage élevé entre les composants qui l'utilisent.
+ Ces derniers sont difficiles à tester, notamment lorsque certains d'entre eux modifient l'état partagé. On se retrouve
+alors face à des tests qui interagissent (l'ordre d'exécution des tests impacte le résultat), même si on a la possibilité
+de réinitialiser les variables globales entre les scénarios de test.</p>
+<p>Parfois, il n'est pas possible de se séparer directement de l'état partagé. Du point de vue du composant qui l'utilise,
+on peut malgré tous le déplacer en périphérie : plutôt que d'accéder à l'état partagé dans le coeur de la méthode, cet
+état est passé en paramètre, ce qui donne beaucoup plus de contrôle dans les tests. D'autres techniques liées à l'inversion
+de dépendance peuvent également être d'un grand secours.</p>
+
+<h4>4.3 Primitive obsession</h4>
+
+<p>Il est fréquent de représenter dans le code des informations propres au métier directement par un type technique numérique
+(int, float) ou textuel (char, string). Ceci entraine des turpitudes :</p>
+<ul>
+  <li>Les utilisateurs d'une classe doivent connaître les détails de fonctionnements internes;</li>
+  <li>La logique métier n'est pas explicite;</li>
+  <li>Une partie de la logique n'est pas partageable parce que chaque utilisateur va interpréter les valeurs et recréer
+  une logique à sa façon;</li>
+  <li>Une partie de la logique technique va se retrouver dupliquée à plusieurs endroits dans le code.</li>
+</ul>
+<p>Un exemple courant concerne la représentation d'un taux, pour lequel nous pouvons utiliser une classe
+  <span class="pink-purple-txt">Taux</span> dédiée plutôt qu'un nombre flottant. Cette classe
+  <span class="pink-purple-txt">Taux</span> va gérer sa propre arithmétique, en garantissant le nombre de décimale appropriées
+et le calcul correct des arrondis. Ainsi, ce n'est plus aux classes ayant besoin d'utiliser des taux de se poser ce genre
+de question, le problème étant réglé une fois pour toutes dans la classe <span class="pink-purple-txt">Taux</span>.</p>
+<p>Par exemple : à l'origine les taux affichaient 2 décimales, mais le besoin métier évolue et il faut gagner en précision
+avec une 3ème décimale. Si les taux sont représentés sous une forme flottante à chaque usage, les impacts sur le code
+sont nombreux. Au contraire, s'ils sont gérés dans une classe Taux, les seules modifications nécessaires concernent cette
+classe et bénéficient à tous les composants l'utilisant.</p>
+<p>Un autre avantage est de pouvoir combiner la classe <span class="pink-purple-txt">Taux</span> avec d'autres abstractions
+venant du métier comme une classe <span class="pink-purple-txt">Montant</span>.</p>
+<p>Par exemple : un calcul d'intérêt combinerait un capital (représenté par un <span class="pink-purple-txt">Montant</span>)
+avec un taux (sous forme de <span class="pink-purple-txt">Taux</span> pour renvoyer les intérêts calculés (sous la forme
+d'un autre <span class="pink-purple-txt">Montant</span>).</p>
+<p>On peut ainsi construire notre propre arithmétique basée sur les règles du métier, qui a le mérite d'offrir un fort
+niveau d'abstraction et de sécuriser l'utilisation en limitant les possibilités et donc les causes de bugs. On peut même
+aller plus loin en proposant différent type de taux répondant à des spécificités du métier, chacun ayant sa propre logique
+d'arrondi et de précision, avec par exemple une classe <span class="pink-purple-txt">TauxInterets</span> et une autre classe
+<span class="pink-purple-txt">TauxTaxes</span>.</p>
+<p>Pour pallier à la <span class="pink-purple-txt">primitive obsession</span>, il est nécessaire d'introduire une
+nouvelle classe encapsulant le type primitif de départ. Les étapes suivantes permettent de refactorer progressivement :</p>
+<ul>
+  <li>Encapsuler la variable dont le type est primitif en extrayant une méthode en lecture et une en écriture;</li>
+  <li>Créer une classe qui englobe la valeur primitive;</li>
+  <li>Remplacer le type primitif dans les méthodes encapsulant la variable par la nouvelle classe;</li>
+  <li>Ré-inliner les méthodes d'encapsulation (c'est un raccourcis de refactoring pour remplacer les appels à une méthode
+  directement par le contenu de leur corps).</li>
+</ul>
+<p>Un autre code smell, <span class="pink-purple-txt">message obsession</span>, décrit la multiplication des méthodes
+relatives à une même problématique. On peut souvent le solutionner en introduisant un paramètre supplémentaire.</p>
+
+<h4>4.4 Commentaire honteux</h4>
+
+<p>Le besoin d'un commentaire pour décrire ce que fait un morceau de code est un bon révélateur du fait que ce code peut
+être amélioré, afin de mieux véhiculer l'intention. La boîte à outils des techniques de refactoring contient tout ce qui
+est utile pour se passer le plus possible des commentaires :</p>
+<ul>
+  <li>Lorsqu'un commentaire décrit une variable ou le comportement d'une méthode, on peut utiliser un renommage adéquat;</li>
+  <li>Lorsqu'un commentaire décrit un bloc de code, on peut extraire une méthode dont le nom est suffisamment descriptif.</li>
+</ul>
+<p>Les principes de clean code tels que <span class="pink-purple-txt">KISS</span> ou les 4 règles du design simple rendent
+rapidement caduque la présence de commentaires. Un code dont les éléments sont suffisamment petits, bien découpés et bien
+nommés se comprend assez facilement sans nécessiter d'explications supplémentaires.</p>
+
+<h4>4.5 Litanie de paramètres</h4>
+
+<p>Certaines méthodes doivent réaliser des calcules complexes, en prenant une pléthore de données en entrée, qui tend à se
+refléter dans le nombre de paramètre de la méthode. Cette situation pose des difficultés à l'utilisation : l'appel de la
+méthode n'est pas intuitive, obligeant systématiquement à se référer à la documentation. On risque d'oublier des paramètres,
+et de perdre du temps à identifier ceux qui manquent. Pire encore, on est susceptible d'intervertir des paramètres de même
+type, provoquant ainsi des anomalies difficiles à diagnostiquer. Plus on a de paramètres, plus on est amené à modifier
+fréquemment la signature de la méthode, avec tous les impacts que ça entraîne sur le code appelant.</p>
+<p>Cette multitude de paramètres peut être un indicateur de violation du principe de responsabilité unique. La méthode
+fait peut-être trop de choses : en mesurant sa longueur on pourra déterminer si un découpage est possible. On pourra
+aussi essayer de regrouper les paramètres de façon thématique : ils ont peut-être un lien fonctionnel entre eux (par
+exemple : certains paramètres détaillent un ordre de bourse) ou un lien technique (par exemple, certains paramètres sont
+liés à des options de performance ou décrivent un contexte d'exécution). On pourra alors les regrouper dans des classes
+dédiées. En plus de réduire le nombre de paramètres, les évolutions de la méthode seront facilitées : si on a besoin
+d'introduire une donnée supplémentaire dans le traitement, il suffira de modifier la classe regroupant les paramètres
+plutôt que de modifier la signature de la méthode.</p>
+
+<h5>Approche par API fluente</h5>
+
+<p>Plus on a de paramètres optionnels, et plus l'approche <span class="pink-purple-txt">API fluente</span> est pertinente.
+Une telle API permet de décomposer un seul gros appel en plusieurs petits appels, chacun gérant une thématique précise.
+On parle aussi d'approche de langage spécifique au domaine (Domain-Specific-Language, ou DSL). Par exemple :</p>
+
+<pre>
+  <code class="c#">
+    Order order = new Order ()
+      .withDish("Bibimbap", 2)
+      .withDish("Pho", 1)
+      .withDrink("Bubble Tea", 2)
+      .paid(PaymentOption.ONLINE)
+      .toTakeAway();
+  </code>
+</pre>
+
+<p>L'implémentation reprend beaucoup au design pattern Builder, l'idée est que chaque appel renvoie l'objet lui-même, ce
+qui permet de chaîner les appels.</p>
+
+<app-callout-section title="Remarque">
+  <p>Du point de vue de la structure du code, l'usage d'une API fluente ressemble à une violation de la
+    <span class="pink-purple-txt">loi de Demeter</span>. Ce n'est pas le cas, parce que ça a été conçu pour chaîner les
+    appels (et chaque appel renvoie le même objet), mais aussi parce qu'on n'expose pas les détails internes d'autres
+  objets.</p>
+</app-callout-section>
+
+<h4>4.6 Mutation des paramètres d'une méthode</h4>
+
+<p>En utilisant un paramètre en entrée dont la valeur est modifiée par l'exécution de la méthode, on génère la modification
+d'une entrée qui constitue un effet de bord. C'est comme si la méthode renvoyait plusieurs valeurs. Cela nécessite un effort
+lors des tests pour vérifier aussi les valeurs des paramètres après exécution de la méthode, et c'est clairement une source
+insidieuse de bugs.</p>
+<p>Une meilleure solution serait de retourner un objet plus complexe. Ainsi les paramètres en entrée ne sont plus modifiés
+  et une copie modifiée des paramètres d'entrée est mise dans l'objet de retour.</p>
+<p>D'une manière générale, il est préférable de s'assurer que les méthodes soient déterministes, avec, pour une combinaison
+des paramètres en entrée, toujours le même résultat en retour.</p>
+
+<h4>4.7 Données muables, et comment rendre une classe immuable</h4>
+
+<p>Des données muables sont par exemple des données membres dans une classe qui peuvent être réaffectées plusieurs fois.
+Bien que d'usage fréquent, c'est une forme de smell, dont le remède consiste à concevoir des classes immuables.</p>
+<p>Une classe immuable est une classe dont les données ne changent jamais une fois qu'elle est créée. Cela évite principalement
+de devoir suivre mentalement les changements de valeurs, ce qui réduit le nombre de bugs, et de réutiliser et partager
+librement une même instance, même entre threads, sans effort.</p>
+<p>En java : </p>
+
+<pre>
+  <code class="java">
+    public class LigneCommande &lbrace;
+      private final String reference;
+      private final int quantite;
+      private final int prixUnitaire;
+
+      // Constructeur à paramètres
+      public LigneCommande(String reference, int quantite, int prixUnitaire)&lbrace;
+        this.reference = reference;
+        this.quantite = quantite;
+        this.prixUnitaire = prixUnitaire;
+      &rbrace;
+
+      // Aucun setter
+
+      // getters seulement quand nécessaire
+      public String reference() &lbrace;
+        return reference;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Dans le cas des collections, mettre <span class="pink-purple-txt">final</span> sur le champ ne suffit pas à les rendre
+immuables, il convient de retourner une copie de la collection, ou une collection décorée pour être immuable, comme
+ci-dessous : </p>
+
+<pre>
+  <code class="java">
+    public class Commande &lbrace;
+      private final String numero;
+      private final List&lt;LigneCommande&gt; lignes;
+
+      public CommandeListe(String numero, List&lt;LigneCommande&gt; lignes)&lbrace;
+        this.numero = numero;
+        this.lignes = Collections.unmodifiableList(lignes); // protection
+      &rbrace;
+
+      public List&lt;LigneCommande&gt; lignes() &lbrace;
+        return lignes;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Usage de <span class="pink-purple-txt">Collections.unmodifiableList(lignes)</span> pour rendre immuable la collection
+passée en paramètre du constructeur. Une alternative fréquente et complémentaire dans un autre constructeur de confort,
+est d'utiliser les paramètres optionnels <span class="pink-purple-txt">LigneCommande... lignes</span> conjointement avec
+l'usage de la méthode utilitaire <span class="pink-purple-txt">Arrays.asList()</span> pour en faire une liste, qui se révèle
+dans ce cas être déjà non modifiable elle-même :</p>
+
+<pre>
+  <code class="java">
+    public class Commande &lbrace;
+      private final String numero;
+      private final List&lt;LigneCommande&gt; lignes;
+
+      public CommandeListe(String numero, List&lt;LigneCommande&gt; lignes)&lbrace;
+        this.numero = numero;
+        this.lignes = Array.asList(lignes); // liste non modifiable
+      &rbrace;
+
+      // déjà protégée
+      public List&lt;LigneCommande&gt; lignes() &lbrace;
+        return lignes;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<h5>Un builder comme compagnon</h5>
+
+<p>Si la construction d'une instance de classe nécessite plusieurs étapes successives, alors on peut introduire une autre
+classe <span class="pink-purple-txt">compagnon</span>, totalement muable, qui suit le pattern
+  <span class="pink-purple-txt">Builder (GoF)</span>, avec des méthodes pour chaque étapes :</p>
+
+<pre>
+  <code class="java">
+    public class Commande &lbrace;
+      private final String numero;
+      private final double tauxTVA;
+      private final String mentionsLegales;
+      private final List&lt;LigneCommande&gt; lignes;
+
+      /* package */ Commande(String numero, double tauxTVA, String mentionsLegales, List&lt;LigneCommande&gt; lignes)&lbrace;
+        this.numero = numero;
+        this.tauxTVA = tauxTVA;
+        this.mentionsLegales = mentionsLegales;
+        this.lignes = Collections.unmodifiableList(lignes);
+       &rbrace;
+
+      public static class CommandeBuilder&lbrace;
+        private String numero = "123";
+        private double tauxTVA = 18.6;
+        private String mentionsLegales = "legal : voir  notre site";
+        private List&lt;LigneCommande&gt; lignes = new ArrayList&lt;&gt;();
+      &rbrace;
+
+      // static factory method
+      public static CommandeBuilder uneCommande()&lbrace;
+        return new CommandBuilder();
+      &rbrace;
+
+      public CommandeBuilder avecNumero(String numeroCommande) &lbrace;
+        this.numero = numeroCommande;
+        return this;
+      &rbrace;
+
+      public CommandeBuilder avecTauxTva(double taux) &lbrace;
+        this.tauxTVA = taux;
+        return this;
+      &rbrace;
+
+      public CommandeBuilder avecMentionsLegales(String mentions) &lbrace;
+        this.mentionsLegales = mentions;
+        return this;
+      &rbrace;
+
+      public CommandeBuilder avecLigne1(String reference, int prixUnitaire) &lbrace;
+        this.lignes.add(new LigneCommande(reference, 1, prixUnitaire));
+        return this;
+      &rbrace;
+
+      public CommandeBuilder avecLigne2(String reference, int prixUnitaire) &lbrace;
+        this.lignes.add(new LigneCommande(reference, 2, prixUnitaire));
+        return this;
+      &rbrace;
+
+      public Commande obtenir() &lbrace;
+        return new Commande(numero, tauxTVA, mentionsLegales, lignes);
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Les méthodes de mutation des données retournent toutes <span class="pink-purple-txt">this</span> afin de pouvoir les
+  chaîner librement. Les données internes sont toutes initialisées par défaut à des valeurs typiques, ce qui peut largement
+améliorer le confort à l'usage.</p>
+<p>À l'usage, on importe le builder via un static import pour rendre le code plus lisible, puis on appelle la factory
+méthode statique pour récupérer une instance du builder, ensuite on appelle les méthodes en séquence pour définir ses
+valeurs, étape par étape : </p>
+
+<pre>
+  <code class="java">
+    import static kata.immutable.CommandeBuilder.uneCommande;
+
+    Commande commande = une commande() // static factory method
+    .avecNumero("456")
+    .avecTauxTva(21.6)
+    // mentions légales par défaut
+    .avecLigne1("SKU1", 990)
+    .avecLigne2("SKU3", 32)
+    .obtenir(); // retourne l'instance
+  </code>
+</pre>
+
+<p>Puis le dernier appel à la méthode <span class="pink-purple-txt">obtenir()</span> retourne l'instance immuable patiemment
+construite.</p>
+<p>Certains concepts ont un cycle de vie, par exemple une commande dont le statut évolue au fil du temps; quand on
+modélise cela avec des classes immuables, on modélise ainsi chaque version comme une instance distincte de la même classe
+immuable. Cela permet alors par exemple de lancer un traitement sur une version (pointeur sur l'instance v1), puis
+d'ajouter une nouvelle version (instance v2), tandis que le traitement déjà en cours continue de travailler sur l'instance
+v1, et l'ensemble reste donc parfaitement cohérent.</p>
+<p>Pour pouvoir accéder facilement à la version la plus récente, un pointeur muable, sur des instances immuables, peut se
+révéler utile :</p>
+
+<pre>
+  <code class="java">
+    AtomicReference&lt;Commande&gt; latest = new AtomicReference&lt;&gt;();
+    latest.set(objet_v1);
+    latest.get(); // V1
+    latest.set(objet_v2); // pas de souci de synchronisation entre threads
+    // les 2 instances v1 et v2 peuvent continuer de co-exister
+  </code>
+</pre>
+
+<p>La classe <span class="pink-purple-txt">AtomicReference</span> de Java garantit ainsi que tout changement de la référence
+vers les dernières versions est cohérent, même entre multiples threads.</p>
+
+<app-callout-section title="Pour aller plus loin" >
+  <p>Une classe immuable est probablement aussi un Value Object au sens de Domain-Driven Design.</p>
+</app-callout-section>
+
+<h3>5. Design patterns classiques comme destinations de refactorings</h3>
+
+<h4>5.1 Switchs multiples vers les design pattern Strategy</h4>
+
+<p>Il arrive que dans une base de code on rencontre des clauses <span class="pink-purple-txt">switch</span> très similaires,
+travaillant sur le même espace de valeurs mais pour des traitements différents. </p>
+<p> Par exemple, pour un programme travaillant sur des figures géométriques, on souhaite fournir différents calculs comme
+  le périmètre et la surface. Pour chacune de ces méthodes, nous avons un <span class="pink-purple-txt">switch en fonction
+  de la forme géométrique.</span></p>
+<p>Lorsqu'on ajoute une nouvelle forme géométrique, les impacts sur le code sont multiples : il faut ajouter une condition
+supplémentaire dans chacun des switch pour supporter cette nouvelle valeur, et ainsi modifier plusieurs endroits dans le
+code. On se retrouve face à une violation du principe <span class="pink-purple-txt">Open-Closed</span> : un code qui doit
+être ouvert à l'extension et fermé à la modification.</p>
+<p>Pour s'en sortir, on pourrait définir une hiérarchie de classes pour représenter les différentes formes, chacune des
+sous-classes implémentant les méthodes surface et périmètre. Lorsqu'on ajoute un nouvelle forme, il suffit de lui créer
+une sous-classe dédiée, sans toucher au code existant. Cette manière de faire est une application du design pattern Strategy.</p>
+<p>Par exemple : un calcul de costing, c'est-à-dire le prix à utiliser pour valoriser un inventaire. Ce calcul se fait sur
+la base des derniers prix d'achat des produits, au travers d'une méthode de costing.</p>
+<p>Dans l'implémentation initiale, un enum représente les différents types de costings et un switch effectue le calcul
+pour chaque valeur de l'enum :</p>
+
+<pre>
+  <code class="C#">
+    public static enum CostingType&lbrace;
+      MAX, AVERAGE, MIN_MAX
+    &rbrace;
+
+    public int costing(CostingType type, int[] costs)&lbrace;
+      switch (type)&lbrace;
+        case MAX:
+          return costs[costs.length -1];
+        case AVERAGE:
+          return Array.stream(costs).sum() / costs.length;
+        case MIN_MAX:
+          return (costs[0] + costs[costs.length - 1]) / 2;
+      &rbrace;
+      return 0;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Le code est compact, tout est au même endroit, ce qui peut être pratique tant que ça reste simple et avec un nombre
+  de cas limité.</p>
+
+<pre>
+  <code class="C#">
+    &commat;Test
+    public void testCostingSwitch()&lbrace;
+      final int[] costs = &lbrace; 5, 6, 6, 6, 7, 7, 8, 10 &rbrace;
+
+      assertEquals(10, costing(CostingType.MAX, costs))
+      assertEquals(6, costing(CostingType.AVERAGE, costs))
+      assertEquals(7 costing(CostingType.MIN_MAX, costs))
+    &rbrace;
+  </code>
+</pre>
+
+<p>Cependant, la présence de 3 cas similaires mais distincts, ainsi que l'anticipation de nouveaux cas à venir ultérieurement
+encouragent à considérer le design pattern Strategy. Celui-ci permet de séparer chaque cas dans sa propre classe, ce
+qui facilite l'extension de nouveaux cas :</p>
+
+<pre>
+  <code class="C#">
+    public interface CostingMethod &lbrace;
+      int costing(final int[] costs);
+    &rbrace;
+
+    public static class MaxCostingMethod implements CostingMethod &lbrace;
+      &commat;Override
+      public int costing(int[] costs)&lbrace;
+        return costs[costs.length - 1];
+      &rbrace;
+    &rbrace;
+
+    public static class AverageCostingMethod implements CostingMethod &lbrace;
+      &commat;Override
+      public int costing(int[] costs)&lbrace;
+        return Array.stream(costs).sum() / costs.length;
+      &rbrace;
+    &rbrace;
+
+    public static class MinMaxCostingMethod implements CostingMethod &lbrace;
+      &commat;Override
+      public int costing(int[] costs)&lbrace;
+        return (costs[0] + costs[costs.length - 1]) / 2;
+      &rbrace;
+    &rbrace;
+
+    // Il rest à instancier l'instance de cas choisi préalablement à son usage :
+
+    &commat;Test
+    public void testCostingStrategyPattern()&lbrace;
+      final int[] costs = &lbrace; 5, 6, 6, 6, 7, 7, 8, 10 &rbrace;
+
+      assertEquals(10, costing(new MaxCostingMethod().costing(costs))
+      assertEquals(6, costing(new AverageCostingMethod().costing(costs))
+      assertEquals(7 costing(new MinMaxCostingMethod().costing(costs))
+    &rbrace;
+  </code>
+</pre>
+
+<p>Les évolutions langages (par exemple les lambda) encouragent et simplifient l'usage du design pattern Strategy. Il est
+également possible d'utiliser un enum polymorphique pour implémenter les CostingMethod :</p>
+
+<pre>
+  <code class="C#">
+    public static enum CostingStrategy &lbrace;
+      int costing(final int[] costs);
+    &rbrace;
+
+    MAX()&lbrace;
+      &commat;override
+      public int costing(int[] costs)&lbrace;
+        return costs[costs.length - 1];
+      &rbrace;
+    &rbrace;,
+    AVERAGE()&lbrace;
+      &commat;override
+      public int costing(int[] costs)&lbrace;
+        return Array.stream(costs).sum() / costs.length;
+      &rbrace;
+    &rbrace;,
+    MIN_MAX()&lbrace;
+      &commat;override
+      public int costing(int[] costs)&lbrace;
+        return (costs[0] + costs[costs.length - 1]) / 2;
+      &rbrace;
+    &rbrace;;
+
+    public int costing(final int[] costs) &lbrace;
+        return 0;
+      &rbrace;
+  </code>
+</pre>
+
+<h4>5.2 Boucles visibles vers le design pattern Composite</h4>
+
+<p>Exemple : une application simple de dessin graphique, elle propose des formes simples, qui peuvent être combinées pour
+obtenir des graphiques plus complexes. La représentation se base sur les classes suivantes : </p>
+<ul>
+  <li>Forme, pour représenter les formes simples;</li>
+  <li>Graphique, pour représenter les graphiques, qui contient une collection de forme mais aussi, de façon récursive,
+  une collection de graphique.</li>
+</ul>
+
+<p>Pour calculer la surface d'un graphique, il faut parcourir les 2 collections (de Forme et de Graphique) pour ensuite
+faire la somme des surfaces calculées pour chacun des sous-éléments. Comme un graphique peut contenir d'autres graphiques,
+la gestion des sous-niveaux dans la boucle de parcours devient rapidement complexe.</p>
+<p>Pour simplifier le calcul, on peut considérer une interface Composant qui définit la méthode surface. Les classes Graphique
+et Forme l'implémentant et la classe Graphique ne contient qu'une collection de Composant (qui peuvent être soit des graphiques,
+soit des formes). Une forme retourne sa surface et un graphique retourne la somme des surfaces de ses composants. Ainsi
+la récursivité est créée simplement. Ce pattern s'appelle <span class="pink-purple-txt">Composite</span>.</p>
+<p>Sans le pattern Composite :</p>
+
+<pre>
+  <code class="C#">
+    public class Graphic &lbrace;
+      private List&lt;Graphic&gt; subGraphics;
+      private List&lt;Shape&gt; shapes;
+
+      public Graphic(List&lt;Graphic&gt; subGraphics, List&lt;Shape&gt; shapes)&lbrace;
+        this.subGraphics = subGraphics == null ? new List&lt;Graphic&gt;() : subGraphics;
+        this.shapes = shapes == null ? new List&lt;Shape&gt;() : shapes;
+      &rbrace;
+
+      public double CalculateArea()&lbrace;
+        double shapesAreaSum = shapes.Sum(s => s == null ? 0 : s.CalculateShapeArea());
+        double graphicAreaSum = subGraphics.Sum(g => g == null ? 0 : g.CalculateArea());
+        return shapesAreaSum + graphicsAreaSum;
+      &rbrace;
+
+      public interface Shape &lbrace;
+        double CalculateShapeArea();
+      &rbrace;
+
+      public class Rectangle : Shape&lbrace;
+        private int height;
+        private int width;
+
+        public Rectangle(int height, int width)&lbrace;
+          this.height = height;
+          this.width = width;
+        &rbrace;
+
+        public double CalculateShapeArea()&lbrace;
+          return this.height * this.width;
+        &rbrace;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>En utilisant le pattern Composite, le graphique ne contient qu'une collection de composants qui peuvent être des
+graphiques ou des formes(rectangle ou autre).</p>
+
+<pre>
+  <code class="C#">
+
+    public interface Component&lbrace;
+      double CalculateArea();
+    &rbrace;
+
+    public classe Graphic : Component&lbrace;
+      private List&lt;Component&gt; subGraphics;
+
+
+      public Graphic(List&lt;Graphic&gt; subGraphics)&lbrace;
+        this.subGraphics = subGraphics == null ? new List&lt;Graphic&gt;() : subGraphics;
+      &rbrace;
+
+      public double CalculateArea()&lbrace;
+        double graphicAreaSum = subGraphics.Sum(g => g == null ? 0 : g.CalculateArea());
+        return shapesAreaSum;
+      &rbrace;
+
+      public interface Shape &lbrace;
+      &rbrace;
+
+      public class Rectangle : Shape&lbrace;
+        private int height;
+        private int width;
+
+        public Rectangle(int height, int width)&lbrace;
+          this.height = height;
+          this.width = width;
+        &rbrace;
+
+        public double CalculateShapeArea()&lbrace;
+          return this.height * this.width;
+        &rbrace;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<h4>5.3 Vérification de nullité vers pattern Null Object</h4>
+
+<p>Lorsqu'on manipule un objet, il est fréquent de vérifier qu'il est bien initialisé (qu'il n'est pas null). Dans
+certains cas, si l'objet est nul, alors on procède à un traitement, et s'il n'est pas nul alors une autre méthode est
+appelée.</p>
+<p>Avec l'exemple des formes géométriques, avant d'appeler la méthode <span class="pink-purple-txt">surface</span> de l'objet,
+on vérifie la nullité de la forme. Si c'est le cas, la surface retourne est zéro par exemple. Cette vérification risque
+d'être un peu partout dans le code et rend le code moins fluide.</p>
+<p>Pour éviter cela, on peut créer une classe (PasForme par exemple) qui implémente l'interface Forme attendue et dont
+la méthode surface retourne 0. Ce type de classe s'appelle Null Object. Ainsi on n'a plus besoin de vérifier la nullité
+de l'objet puisqu'il a un comportement prévisible et n'a pas d'effet sur le reste du code.</p>
+
+<pre>
+  <code class="C#">
+    public class NotAComponent : Component &lbrace;
+      public double CalculateArea()&lbrace;
+        return 0;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>À l'utilisation, on peut simplifier le code de la classe Graphic :</p>
+
+<pre>
+  <code class="C#">
+    public class Graphic : Component &lbrace;
+      // ...
+      public double CalculateArea()&lbrace;
+        double graphicAreaSum = subGraphics.Sum(g => g.CalculateArea());
+        return shapesAreaSum;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>

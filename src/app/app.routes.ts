@@ -37,6 +37,11 @@ import {
 import {
   TechniquesConceptionComponent
 } from "@app/components/software-craft/techniques-conception/techniques-conception.component";
+import {ArchitectureComponent} from "@app/components/software-craft/architecture/architecture.component";
+import {IntroduireCraftComponent} from "@app/components/software-craft/introduire-craft/introduire-craft.component";
+import {EtatEspritComponent} from "@app/components/software-craft/etat-esprit/etat-esprit.component";
+import {Craft20Component} from "@app/components/software-craft/craft20/craft20.component";
+import {AnnexeComponent} from "@app/components/software-craft/annexe/annexe.component";
 
 export const routes: Routes = [
   {
@@ -187,6 +192,28 @@ export const routes: Routes = [
         path: 'techniques-conception',
         component: TechniquesConceptionComponent
       },
+
+      {
+        path: 'architecture',
+        component: ArchitectureComponent
+      },
+      {
+        path: 'introduire-craft',
+        component: IntroduireCraftComponent
+      },
+      {
+        path: 'etat-esprit',
+        component: EtatEspritComponent
+      },
+      {
+        path: 'craft-2',
+        component: Craft20Component
+      },
+      {
+        path: 'annexe',
+        component: AnnexeComponent
+      }
+
     ]
   },
 ];

@@ -127,6 +127,21 @@ export class SidebarComponent implements OnInit{
         {
           path:'softwareCraft/techniques-conception',
           title : 'Techniques de conception'},
+        {
+          path:'softwareCraft/architecture',
+          title : 'Transformation de code à caractère architectural'},
+        {
+          path:'softwareCraft/introduire-craft',
+          title : 'Introduire le craft'},
+        {
+          path:'softwareCraft/etat-esprit',
+          title : 'Un état esprit'},
+        {
+          path:'softwareCraft/craft-2',
+          title : 'Craft 2.0'},
+        {
+          path:'softwareCraft/annexe',
+          title : 'Annexe'}
       ]},
     {
       id: 5,

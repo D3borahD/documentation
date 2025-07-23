@@ -1,1 +1,313 @@
-<p>architecture works!</p>
+<h2>Transformation de code à caractère architectural</h2>
+
+<h3>1. Découpler un lien navigable par une méthode de recherche</h3>
+
+<p>Lorsqu'on cherche à enregistrer des données en base de données en succession rapide, il arrive d'observer des lenteurs,
+et parfois des blocages à l'exécution des requêtes. Cela peut provenir de plusieurs causes, par exemple des conflits sur
+les mêmes tables en base de données. Une approche de conception pour éviter ces problèmes est de réduire le nombre
+d'associations navigables entre les classes. Cela amène à des groupes de classes qui sont dans des transactions plus petites
+et surtout plus indépendantes.</p>
+
+<pre>
+  <code class="C#">
+    public class Contrat &lbrace;
+      private final String numero;
+      private final String date;
+      private final String texte;
+      // ... autres champs
+      private final Client client;
+
+      public Contrat(String numero, String date, String texte, Client client)&lbrace;
+        this.numero = numero;
+        this.date = date;
+        this.texte = texte;
+        this.client = client;
+      &rbrace;
+
+      public Client getClient()&lbrace;
+        return client;
+      &rbrace;
+
+      public String getClient()&lbrace;
+        return getClient().getId;
+      &rbrace;
+    &rbrace;
+
+    public class Client &lbrace;
+      private final String id;
+      private final String nom;
+      private final String adresseDeLivraison;
+      private final String adresseDeFacturation;
+      // ... autres champs
+
+      public Client(String id, String nom, String adresseDeLivraison, String adresseDeFacturation)&lbrace;
+        this.id = id;
+        this.nom = nom;
+        this.adresseDeLivraison = adresseDeLivraison;
+        this.adresseDeFacturation = adresseDeFacturation;
+      &rbrace;
+
+      public Client getId()&lbrace;
+        return id;
+      &rbrace;
+
+      public String getNom()&lbrace;
+        return nom
+      &rbrace;
+
+       // ... autres champs
+    &rbrace;
+  </code>
+</pre>
+
+<p>À l'utilisation, le code appelant peut naviguer directement, par transitivité, de la classe Contrat vers la classe
+Client en chaînant les accesseurs (cela semble fort pratique mais attache toutes les portions du code ensemble):</p>
+
+<pre>
+  <code class="C#">
+    // navigation transitive du contrat vers le client
+    Client client = new Client("client42", "&commat;cyriux", "au bureau", "à la maison");
+    final Contrat contrat = new Contrat("123", "11/12/13", "J'achète !", client);
+    assertEquals( "&commat;cyriux", contrat.getClient().getNom()); // navigation transitive
+  </code>
+</pre>
+
+<p>Pour éviter cette association qui couple les deux concepts, le lien navigable est remplacé par un simple identifiant
+dans la classe Contrat.</p>
+
+<pre>
+  <code class="C#">
+    public class Contrat &lbrace;
+      private final String numero;
+      private final String date;
+      private final String texte;
+      // ... autres champs
+      private final String clientId; // seulement l'id du client
+
+      public Contrat(String numero, String date, String texte, String clientId)&lbrace;
+        this.numero = numero;
+        this.date = date;
+        this.texte = texte;
+        this.clientId = clientId;
+      &rbrace;
+  </code>
+</pre>
+
+<p>Côté appelant de la fonctionnalité, la navigation Contrat vers Client est remplacée par une recherche explicite vers
+la base de données :</p>
+
+<pre>
+  <code class="C#">
+    Contrat contrat = new Contrat("123", "11/12/13", "J'achète !", client);
+    String clientId = contrat.getClientId();
+    assertEquals( "&commat;cyriux", new ListeClient().find(clientId).getNom()); // lookup
+  </code>
+</pre>
+
+<p>La classe ListeClients permet de trouver, accéder (et peut-être ajouter) des clients dans une base de données sous-jacente,
+souvent au travers d'un ORM.</p>
+<p>Cette transformation est essentielle pour éviter que toute l'application ne soit un enchevêtrement de classes qui se
+référencent toutes indirectement, ce qui à terme dégrade les performances et rend tout refactoring difficile.</p>
+<p>Les fonctionnalités de lazy loading des ORM encouragent à associer les classes entre elles pour pouvoir facilement
+accéder à toute information à partir de n'importe où. Mais cette apparente facilité est la cause de trop de problèmes de
+performances et de couplage de tout le code, il convient donc de réduire, voir éviter entièrement cet usage du lazy-loading.</p>
+
+<app-callout-section title="Pour aller plus loin ...">
+  <p>Cette démarche se rapporte au concept d'Aggregate au sens de DDD.</p>
+</app-callout-section>
+
+<h3>2. Refactorer vers une architecture hexagonale</h3>
+
+<p>Pouvoir changer un fragment de code sans impact sur le reste de la base de code est l'un des principaux objectifs des
+techniques de conception logicielle. À l'échelle des classes, on pense ainsi à l'encapsulation des données dans une
+classe, au principe de séparation des responsabilités, parmi tant d'autres. À plus grande échelle, celle des modules
+  qui regroupent un nombre de clauses, on suit une démarche similaire avec le pattern de l'architecture hexagonale.</p>
+<p>Par exemple : une classe d'étude d'un dossier de crédit pour approuver ou rejeter la demande d'emprunt selon les
+scorings des co-emprunteurs :</p>
+
+<pre>
+  <code class="C#">
+    public class EtudeCredit &lbrace;
+
+      public Decision evaluer(Dossier d)&lbrace;
+        int totalScore = 0;
+        int minScore = 100;
+        final List&lt;Emprunteur&gt; coEmprunteurs = d.coEmprunteurs();
+
+        for(Emprunter p : coEmprunteurs) &lbrace;
+          final int score = scoringPour(p); // appel à un web-service externe
+          totalScore += score;
+          minScore = min(minScore, score);
+        &rbrace;
+        int moyenne = totalScore / coEmprumteurs.size();
+        return minScore >= 20 && moyenne >= 40 ? APPROBATION : REJET;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>L'étude de crédit sert d'illustration à du code métier d'une certaine complexité. Dans l'exemple, il s'agit de calculer
+le score moyen et le score minimum sur l'ensemble de tous les co-emprunteurs. Pour cela le code doit appeler un
+web-service externe autant de fois qu'il y a d'emprunteurs.</p>
+<p>Le code d'origine mélange la complexité métier avec l'appel du web-service :</p>
+
+<pre>
+  <code class="C#">
+    // dans la classe EtudeCredit
+    private int scoringPour(Emprunteur p) &lbrace;
+      final String identity = p.identity();
+
+    // try
+    // HttpRequest request = HttpRequest.newBuilder().GET()...
+    // HttpResponse&lt;String&gt; response = httpClient.send(request, ... )
+    // ... parse response into variable score ...
+    // catch ... finally ...
+
+    return score;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Ce mélange de métier et de code d'intégration fait désordre ; cela rend difficile le test du calcul métier, qui n'est
+possible que sur un environnement avec accès au web-service externe.</p>
+<p>L'idéale serait de pouvoir facilement configurer les dépendances pour utiliser une doublure de test pour les tests
+unitaires, ou le véritable web-service externe en production ou en test de bout en bout.</p>
+<p>Pour cela, on commence par extraire la méthode d'appel au web-service externe dans sa propre classe ScoringWebService :</p>
+
+<pre>
+  <code class="C#">
+    // dans la classe ScoringWebService
+    public class ScoringWebService() &lbrace;
+      public int Score(String identite) &lbrace;
+         // try
+        // HttpRequest request = HttpRequest.newBuilder().GET()...
+        // HttpResponse&lt;String&gt; response = httpClient.send(request, ... )
+        // ... parse response into variable score ...
+        // catch ... finally ...
+
+        return score;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>On l'ajoute comme membre de la classe EtudeCredit, auquel on délègue les appels au scoring :</p>
+
+<pre>
+  <code class="C#">
+    // dans la classe EtudeCredit
+    private final ScoringWebService scoring = new ScoringWebService();
+    private int scoringPour(Emprunteur p) &lbrace;
+      final String identity = p.identity();
+      return scoring.score(identity);
+    &rbrace;
+  </code>
+</pre>
+
+<p>Afin de pouvoir remplacer le ScoringWebService par une doublure, il reste à extraire son interface Scoring : </p>
+
+<pre>
+  <code class="C#">
+    public interface Scoring&lbrace;
+      int score(String identite);
+    &rbrace;
+
+    public class ScoringWebService implements Scoring &lbrace;
+        ...
+    &rbrace;
+  </code>
+</pre>
+
+<p>Puis introduire une ou plusieurs doublures de tests (stubs) selon les besoins de tests :</p>
+
+<pre>
+  <code class="C#">
+    public class ConstantScoring implements Scoring &lbrace;
+       private final int score;
+
+      public ConstantScoring(int score)&lbrace;
+        this.score = score;
+      &rbrace;
+
+      &commat;Override
+      public int score(String identite)&lbrace;
+        return score;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Enfin, on doit permettre d'injecter l'instance de notre choix par le constructeur de la classe EtudeCredit :</p>
+
+<pre>
+  <code class="C#">
+    // dans la classe EtudeCredit
+    private final Scoring scoring;
+
+    public EtudeCredit(Scoring scoring;) &lbrace;
+      this.scoring = scoring;
+    &rbrace;
+  </code>
+</pre>
+
+<p>On peut désormais écrire des tests unitaire avec par exemple un scoring qui retourne toujours 100 (le score maximum)</p>
+
+<pre>
+  <code class="C#">
+    Scoring scoring = new ConstantScoring(100);
+    EtudeCredit etude = new EtudeCredit(scoring);
+    Dossier dossier = new Dossier(PERSONNE_1);
+    assertEquals(Decision.APPROBATION, etude.evaluer(dossier));
+  </code>
+</pre>
+
+<p>Le code de démarrage du service inject l'adapteur vers le web-service externe (renommons ScoringWebServive en ScoringWebServiceAdapter) : </p>
+
+<pre>
+  <code class="C#">
+    // au démarrage du service
+    Scoring scoring = new ScoringWebServiceAdapter();
+    EtudeCredit etude = new EtudeCredit(scoring);
+
+    // à chaque appel
+    Dossier dossier = new Dossier(PERSONNE_1);
+    assertEquals(Decision.APPROBATION, etude.evaluer(dossier));
+  </code>
+</pre>
+
+<p>La dépendance du scoring est désormais configurable. Cette idée de dépendance configurable est l'architecture hexagonale,
+aussi nommée ports et adaptateurs. L'idée est d'avoir le modèle du domaine métier qui ignore totalement ses dépendances.
+Ici, l'interface Scoring appartient au modèle du domaine mais ne connaît aucune autre classe ; ce sont l'adapteur et la
+doublure qui l'implémente, et qui par conséquent la connaissent.</p>
+<p>La classe EtudeCredit peut ainsi appeler la méthode de la classe ScoringWebServiceAdapter sans la connaître. En
+introduisant l'interface Scoring on a suivi le principe d'inversion de dépendance.</p>
+<p>Pour être véritablement en architecture hexagonale, il reste à organiser les classes dans des packages distincts :</p>
+
+<pre>
+  <code class="C#">
+    com.mybank.etudecredit.domain/
+      EtudeCredit
+      Emprunteur
+      Decision
+      Scoring&lt;&lt;interface&gt;&gt;
+    com.mybank.etudecredit.adapter/
+      ScoringWebServiceAdapter
+      ConstantScoring&lt;&lt;stub&gt;&gt;
+      RestController (exposition REST...)
+  </code>
+</pre>
+
+<p>Les classes du package com.mybank.etudecredit.domain ne doivent jamais connaître les classes extérieures.</p>
+<p>Toujours dans l'optique des tests unitaires, il est possible d'exprimer cette règle littéralement avec la librairie
+d'assertions ArchUnit</p>
+
+<pre>
+  <code class="C#">
+    noClasses().that()
+      .resideInAPackage("com.mybank.etudecredit.domain")
+      .should().dependOnClassesThat()
+      .resideInAPackage("com.mybank.etudecredit.adapter")
+  </code>
+</pre>
+
+<h3>3. Renommer une colonne de base de données, un champ d'une requête ou une réponse d'un service</h3>

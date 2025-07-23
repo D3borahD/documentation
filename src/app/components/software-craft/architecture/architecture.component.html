@@ -261,7 +261,7 @@ unitaires, ou le véritable web-service externe en production ou en test de bout
   </code>
 </pre>
 
-<p>Le code de démarrage du service inject l'adapteur vers le web-service externe (renommons ScoringWebServive en ScoringWebServiceAdapter) : </p>
+<p>Le code de démarrage du service inject l'adapteur vers le web-service externe (renommons ScoringWebService en ScoringWebServiceAdapter) : </p>
 
 <pre>
   <code class="C#">
@@ -311,3 +311,16 @@ d'assertions ArchUnit</p>
 </pre>
 
 <h3>3. Renommer une colonne de base de données, un champ d'une requête ou une réponse d'un service</h3>
+
+<p>Renommer directement une colonne dans une table en base de données pose problème : cela oblige à déployer le nouveau
+schéma de base et le nouveau code simultanément, ce qui amène souvent à devoir tout arrêter puis tout redémarrer plus tard.
+Si on souhaite assurer une continuité de service, il faut progresser par petits pas : </p>
+<ul>
+  <li>Ajouter la nouvelle colonne.</li>
+  <li>Modifier le code pour écrire dans cette colonne en plus d'écrire dans la colonne existante équivalente.</li>
+  <li>Attendre que tous les utilisateurs de l'ancienne colonne aient modifié leur code pour utiliser la nouvelle
+  colonne.</li>
+  <li>Optionnel : supprimer l'ancienne colonne.</li>
+</ul>
+
+<h3>4. Évoluer progressivement vers un style réactif orienté chorégraphie</h3>

@@ -324,3 +324,654 @@ Si on souhaite assurer une continuité de service, il faut progresser par petits
 </ul>
 
 <h3>4. Évoluer progressivement vers un style réactif orienté chorégraphie</h3>
+
+<p>Pour exemple : un système de distributions de billets de spectacles en ligne. Le processus de vente consiste à émettre
+une réservation (booking), puis à réduire l'inventaire en correspondance (inventory), puis à envoyer les billets (ticketing),
+ chacune de ces étapes étant un service distinct :</p>
+
+<pre>
+  <code class="C#">
+    public static class BookingService &lbrace;
+      private final OrchestrationService orchestration;
+
+      public BookingService(OrchestrationService orchestration) &lbrace;
+        this.orchestration = orchestration;
+      &rbrace;
+
+      public void bookTicket(int number) &lbrace;
+        System.out.println("Ticket booked");
+        orchestration.onTicketBooked(number);
+      &rbrace;
+    &rbrace;
+
+    public static class InventoryService &lbrace;
+      private int capacity;
+
+      public InventoryService(int initialCapacity) &lbrace;
+        this.capacity = initialCapacity;
+      &rbrace;
+
+      public int onTicketBooked(int number) &lbrace;
+        capacity -= number;
+        System.out.println("Capacity changed" + capacity);
+        return capacity;
+      &rbrace;
+
+      public int currentCapacity() &lbrace;
+        return capacity;
+      &rbrace;
+    &rbrace;
+
+     public static class TicketingService &lbrace;
+      public void onTicketBooked(int number) &lbrace;
+        System.out.println("Ticket printed for : " + number + "people");
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Dans une approche classique par orchestration, cela pourrait se coder avec un service dédié qui orchestre les deux autres,
+lui-même déclenché par le premier :</p>
+
+<pre>
+  <code class="C#">
+    public static class OrchestrationService &lbrace;
+      private final InventoryService inventory;
+      private final TicketingService ticketing;
+
+      public OrchestrationService(InventoryService inventory, TicketingService ticketing) &lbrace;
+        this.inventory = inventory;
+        this.ticketing = ticketing;
+      &rbrace;
+
+      public void onTicketBooked(int number) &lbrace;
+        int capacityLeft = inventory.onTicketBooked(number);
+        if(capacityLeft >= 0) &lbrace;
+          ticketing.onTicketBooked(number);
+        &rbrace;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Les services doivent être démarrés dans l'ordre inverse des appels, pour pouvoir injecter leurs références :</p>
+
+<pre>
+  <code class="C#">
+    &commat;Test
+    public void  orchestration() &lbrace;
+      InventoryService inventory = new InventoryService(3);
+      TicketingService ticketing = new TicketingService();
+      OrchestrationService orchestration = new OrchestrationService(inventory, ticketing);
+      BookingService booking = new BookingService(orchestration);
+
+      assertEquals(3, inventory.currentCapacity());
+      booking.bookTicket(1);
+      assertEquals(2, inventory.currentCapacity());
+  </code>
+</pre>
+
+<p>BookingService connaît le service Orchestrateur Service (injecté en donnée membre), qui lui-même connaît les 2 autres,
+  (injectés en donnée membre).</p>
+<p>Cette approche est simple et convient tant que la liste des services reste inchangée. Mais, si on souhaite régulièrement
+ajouter des services dans le processus, une telle orchestration doit changer à chaque fois.</p>
+<p>Par exemple, si on souhaite ajouter un service de notification en cas de capacité de places insuffisantes, on doit
+ajouter ce nouveau service mais aussi modifier le service OrchestrationService à plusieurs endroits pour qu'il appelle : </p>
+
+<pre>
+  <code class="C#">
+    public static class NotificationService&lbrace;
+      public void notifyAlert(Sting text)&lbrace;
+        System.out.println("Attention : " + texte)
+      &rbrace;
+    &rbrace;
+
+
+    public static class OrchestrationService &lbrace;
+      private final InventoryService inventory;
+      private final TicketingService ticketing;
+      private final NotificationService notification; // ajout
+
+
+      public OrchestrationService(InventoryService inventory, TicketingService ticketing, NotificationService notification) &lbrace;
+        this.inventory = inventory;
+        this.ticketing = ticketing;
+        this.notification = notification; // ajout
+      &rbrace;
+
+      public void onTicketBooked(int number) &lbrace;
+        int capacityLeft = inventory.onTicketBooked(number);
+        if(capacityLeft >= 0) &lbrace;
+          ticketing.onTicketBooked(number);
+        &rbrace;
+        else &lbrace;
+          notification.notifyAlert("Plus assez de places!") // ajout
+        &rbrace;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>L'alternative à l'orchestration est la chorégraphie, au travers d'un bus de messages qui permet d'informer tous les
+services de tout changement, sans jamais les connaître au sens des dépendances.</p>
+<p>L'idée est celle du pattern Observer (GoF). Exemple en représentant le bus de messages par un pattern Observer :</p>
+
+<pre>
+  <code class="C#">
+    /**The listener interface*/
+    public interface Listener &lbrace;
+      void onMessage(Object msg);
+    &rbrace;
+
+    /**
+    * A basic event with a name and one single integer value
+    */
+    public class Event &lbrace;
+      private final String name;
+      private final int value;
+
+      public Event (String name, int value)&lbrace;
+        this.name = name;
+        this.value = value;
+      &rbrace;
+
+      public String getName() &lbrace; return name &rbrace;
+      public int getValue() &lbrace; return value &rbrace;
+    &rbrace;
+
+    /**
+    * A simple in-memory, observer-pattern-based single-threaded message bus for designing architecture and testing using
+    unit tests before switching to using actual middleware
+    */
+    public class MessageBus&lbrace;
+      private List&lt;Listener&gt; subs = new ArrayList&lt;Listener&gt;
+
+      public void subscribe(Listener 1)&lbrace;
+        this.subs.add(1);
+      &rbrace;
+
+      public void send(String msg)&lbrace;
+        for(Listener l : subs)&lbrace;
+          l.onMessage(msg);
+        &rbrace;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Chaque service va s'inscrire au bus, pour être notifié de chaque changement, et prend en même temps une référence au
+bus pour pouvoir aussi lui envoyer des changements.</p>
+
+<pre>
+  <code class="C#">
+    public static class BookingService implements Listener &lbrace;
+      private final MessageBus bus;
+
+      public BookingService(MessageBus bus)&lbrace;
+        this.bus = bus;
+      &rbrace;
+
+      public void bookTicket(int number)&lbrace;
+        System.out.println("Ticket booked");
+        bus.send(new Event("TicketBooked", number));
+      &rbrace;
+
+     	&commat;Override
+      public void onMessage(Object msg)&lbrace;
+        // ignore all
+      &rbrace;
+    &rbrace;
+
+    public static class InventoryService implements Listener &lbrace;
+      private int capacity;
+      private final MessageBus bus;
+
+      public InventoryService(MessageBus bus, int initialCapacity)&lbrace;
+        this.bus = bus;
+        this.capacity = initialCapacity;
+      &rbrace;
+
+      &commat;Override
+      public void onMessage(Object msg)&lbrace;
+        Event event = (event) msg;
+        // ... implémentation à faire ...
+      &rbrace;
+
+      // implémentation
+
+      public int currentCapacity()&lbrace;
+        return capacity;
+      &rbrace;
+    &rbrace;
+
+    public static class TicketingService implements Listener &lbrace;
+      private final MessageBus bus;
+
+      public TicketingService(MessageBus bus)&lbrace;
+        this.bus = bus;
+      &rbrace;
+
+      public void onTicketBooked(int number)&lbrace;
+        System.out.println("Ticket printed for :" + number + "people");
+      &rbrace;
+
+
+      &commat;Override
+      public void onMessage(Object msg)&lbrace;
+        Event event = (event) msg;
+        // ... implémentation à faire ...
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Il est désormais temps d'implémenter le corps des méthodes onMessage() selon les évènements reçus. L'idée est que tout
+le code dans le service d'orchestration doit être fragmenté et déplacé dans les méthodes onMessage() de chaque service.
+ Puisque l'orchestration est désormais distribuée (au sens de "éparpillée") dans plusieurs services, on parle alors de
+chorégraphie.</p>
+
+<pre>
+  <code class="C#">
+    public static class InventoryService implements Listener &lbrace;
+      ...
+
+     	&commat;Override
+      public void onMessage(Object msg)&lbrace;
+        Event event = (Event) msg;
+        if(event.getName().equals("TickedBooked"))&lbrace;
+        Event event = (Event) msg;
+        if(event.getName().equals("TickedBooked"))
+          int number = event.getValue();
+          handleTickedBookedEvent(number);
+        &rbrace;
+      &rbrace;
+
+      private void handleTickedBookedEvent(final int number)&lbrace;
+        int left = onTickedBooked(number);
+        if(left >= 0)&lbrace;
+          bus.send(new Event("BookingConfirmed", number));
+          bus.send(new Event("InventoryChanged", left));
+        &rbrace;
+        else&lbrace;
+        Event event = (Event) msg;
+          bus.send(new Event("BookingCancelled", 0));
+        &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Une partie de la logique issue de l'orchestration est clairement reconnaissable, mais elle est cette fois concentrée
+dans le service inventory, qui ne connaît pas le service de notification (qui d'ailleurs n'existe pas encore).</p>
+<p>Lorsque nous décidons plus tard d'ajouter un service de notification, aucune modification au reste du système est
+nécessaire : </p>
+
+<pre>
+  <code class="C#">
+    public static class NotificationService implements Listener &lbrace;
+      private final MessageBus bus;
+
+      public NotificationService(MessageBus bus)&lbrace;
+        this.bus = bus;
+      &rbrace;
+
+      public void notifyAlert(String texte)&lbrace;
+        System.out.println("Attention :" + texte);
+      &rbrace;
+
+      &commat;Override
+      public void onMessage (Object msg)&lbrace;
+        Event event = (Event) msg;
+        if(event.getName().equals("BookingCancelled")&lbrace;
+          final int number = event .getValue();
+          notifyAlert("Plus assez de place!");
+        &rbrace;
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Le diagramme suivant résume cette approche de services qui se partagent un moyen de s'envoyer des évènements sans se
+connaître, pour avoir la possibilité d'ajouter, supprimer ou remplacer des services sans aucune autre modification.</p>
+
+<img src="assets/images/ObserverPattern.jpeg" alt="Observer pattern">
+
+<p>Voici un bus partagé par les services de l'exemple. Le dernier service est en pointillé pour suggérer qu'il peut
+être ajouté ou supprimé à volonté.</p>
+<p>C'est désormais de la responsabilité du service de notification de réagir à l'évènement signalant le manque de places
+dans l'inventaire en décidant d'émettre une notification.</p>
+<p>Autre avantage, les services peuvent se déclarer et s'abonner au bus dans n'importe quel ordre :</p>
+
+<pre>
+  <code class="C#">
+    &commat;Test
+    public void choreograph()&lbrace;
+      MessageBus bus = new MessageBus();
+
+      BookingService booking = new BookingService(bus);
+      InventoryService inventory = new InventoryService(bus, 3);
+      TicketingService ticketing = new TicketingService(bus);
+      NotificationService notification = new NotificationService(bus);
+
+      bus.subscribe(booking);
+      bus.subscribe(inventory);
+      bus.subscribe(ticketing);
+      bus.subscribe(notification);
+
+      assertEquals(3, inventory.currentCapacity());
+      booking.bookTicket(1);
+      assertEquals(2, inventory.currentCapacity());
+    &rbrace;
+  </code>
+</pre>
+
+<p>Et si le bus a la propriété d'être durable, alors les services peuvent être éteints puis redémarrés indépendamment,
+tandis que les évènements qu'ils doivent recevoir restent en attente sur le bus, prêts à être traités dès qu'un service
+redevient disponible.</p>
+<p>Avec cet exemple simpliste, les avantages et inconvénients respectifs des approches de chorégraphie ou d'orchestration
+apparaissent clairement :</p>
+<ul>
+  <li><span class="pink-purple-txt">Orchestration :</span> le processus complet est centralisé dans l'orchestrateur, qui
+  est donc facile à auditer, et qui offre des bonnes garanties sur l'intégrité du processus complet. Tout cela suppose
+  un changement d'orchestration à chaque ajout ou suppression d'un service.</li>
+  <li><span class="pink-purple-txt">Chorégraphie :</span> l'ajout, le remplacement ou la suppression des services peut
+  s'effectuer sans aucun changement à effectuer dans un autre endroit du système. Mais cela entraîne une plus grande
+  difficulté à comprendre ou vérifier le processus complet.</li>
+</ul>
+
+<p>Le style d'architecture orienté microservices avec son architecture "Event-Driver" sur un bus de message et la préférence
+pour la chorégraphie permettent fondamentalement d'appliquer le principe Open-Closed, à l'échelle des services que l'on
+peut ajouter et retirer sans aucun autre impact, conformément à l'idée de déploiement totalement indépendant des services.</p>
+
+<h3>Rendre un service stateless</h3>
+
+<p>Le terme <span class="pink-purple-txt">stateful</span> est le contraire du terme <span class="pink-purple-txt">stateless</span>,
+et qualifie un service qui conserve de l'état dans le service lui-même. Traditionnellement, cela consistait à stocker de
+  l'état dans une session conservée dans le service, ou bien en mémoire, ou sur le disque local, ou les deux. De nombreux
+frameworks web historiques offraient fièrement ces fonctionnalités de session stateful, et des générations de développeurs
+en ont profité par facilité. Certaines application allaient ainsi jusqu'à stocker le panier d'achat, un document en cours
+d'écriture ou des formulaires en cours de remplissage en session.</p>
+<p>Avec le développement du web, notamment à des échelles de plus en plus grandes, mais aussi avec l'importance croissante
+de pouvoir bookmarker des pages et de pouvoir revenir en arrière entre pages, les services stateful ont rapidement révélé
+leur nombreux inconvénients. Le consensus aujourd'hui, encore renforcé par les contraintes de cloud et des services à
+zéro-downtime (sans interruption de service), est que les services doivent être <span class="pink-purple-txt">stateless</span>
+ autant que possible. Mais il existe encore de nombreux service stateful dans les organisations, il est donc important
+de savoir les transformer en stateless quand le besoin s'en fait sentir.</p>
+<p>Par exemple, un existant fictif d'un web-service qui stocke des informations de langue et de devise dans la session de
+l'utilisateur, session elle-même stockée dans un champ statique pour la rendre accessible entre threads, à la manière des
+sessions en mémoire ou sur disque.</p>
+
+<app-callout-section title="Attention">
+  <p>Un service stateful est délicat à tester, car son état dépend des appels précédents.</p>
+</app-callout-section>
+
+<pre>
+  <code class="C#">
+    /**
+    * Web controller fictif pour illustrer la démarche de refactorer en
+    * web-service de stateful à stateless
+    */
+
+    public class WebController &lbrace;
+      private final static Map &lt;String, Session&gt; sessions = new HashMap&lt;&gt;();
+
+      // GET ...
+      public int getHome(String userId)&lbrace;
+        Session session = sessions.get(userId); // stateful session
+        if(session == null) &lbrace;
+          session = new Session();
+          sessions.put(userId, session);
+        &rbrace;
+
+        // stateful data storage directly in the session
+        Map&lt;String, Object&gt; data = session.getData();
+        Locale locale = (Locale) data.get("Local");
+        if(locale == null)&lbrace;
+          locale = Locale.FRENCH;
+          data.put("Locale", locale);
+        &rbrace;
+
+        Currency currency = (Currency) data.get("Currency");
+        if(currency == null)&lbrace;
+          currency = Currency.getInstance(locale);
+          data.put("Currency", currency);
+        &rbrace;
+
+        // ... display home page with locale and currency ...
+        return 200;
+      &rbrace;
+
+      // ... PUT, POST, ...
+    &rbrace;
+  </code>
+</pre>
+
+<p>Pour rendre ce web-service stateless, et non stateful, il faut donc déplacer l'état de session en dehors du service,
+avec le choix parmi les 2 côtés du service : </p>
+<ul>
+  <li><span class="pink-purple-txt">côté bases de données</span> : déplacer l'état dans une variable base de données,
+  SQL ou noSQL, qui sera partagée entre les multiples instances du service quand c'est le cas;</li>
+  <li><span class="pink-purple-txt">côté client </span>: déplacer l'état dans le client, qui doit ensuite passer cet état
+  de session par valeur dans la requête, par exemple dans des paramètres HTTP, ou par l'utilisation de token JWT.</li>
+</ul>
+
+<app-callout-section title="Astuce">
+  <p>Un service stateless est nettement plus facile à tester qu'un service stateful. Dans le cas d'une session base de
+  données, il faudra remplacer la base de données par une doublure de test, un simple "bouchon" qui retourne une session
+   prédéfinie et constante. Dans le cas d'une session côté client, c'est encore plus simple, il suffit de passer
+  l'état dans l'appel du cas de test.</p>
+</app-callout-section>
+
+<h4>5.1 Rendre stateless côté base de données</h4>
+
+<p>Déplacer l'état côté base de données consiste surtout à créer une table dans une base de données ou une nouvelle
+collection dans un datastore. On peut refactorer de la façon suivante : </p>
+<ul>
+  <li>Extraire la map clé-valeurs qui concerne les préférences utilisateurs dans une classe Preferences, avec le userId
+  comme clé, et avec une ou plusieurs instance(s) prédéfinie(s) par défaut; cette étape est optionnelle mais est une
+  amélioration de la conception.</li>
+  <li>Ajouter du code d'accès aux données qui se substitue à l'accès par la session, par exemple avec JPA/Hibernate ou
+  directement sur MongoDB, avec des méthodes load(userid):Preferences et update(Preference) :</li>
+</ul>
+
+<pre>
+  <code class="C#">
+    public class WebController &lbrace;
+      private final static Map &lt;String, Session&gt; sessions = new HashMap&lt;&gt;();
+
+      // GET ...
+      public int getHome(String userId)&lbrace;
+        final Preferences pref = loadBy(userId);
+        // display home page with locale and currency ...
+        return 200;
+      &rbrace;
+
+      // charge les préférences d'un datastore dédié
+      private Preference loadBy(String userId)&lbrace;
+        // load from a datastore, e.g. SQL DB, S3 ou Redis / MongoDB ...
+        return Preferences.DEFAULT; // préférence par défaut si absent du datastore
+      &rbrace;
+
+      // ... PUT, POST, ...
+    &rbrace;
+  </code>
+</pre>
+
+<p>Au passage, on a refactoré une session "fourre-tout" en session spécialisée dédiée aux préférences, avec une instance
+nommée DEFAULT qui représente les préférences par défaut, comme champs singleton statique.</p>
+<p>Cet objet est immuable, avec des méthodes de mutation qui retourne une nouvelle instance :</p>
+
+<pre>
+  <code class="C#">
+    public class Preference &lbrace;
+      private final Locale locale;
+      private final Currency currency;
+
+      private final static Locale DEFAULT_LOCALE = Locale.FRENCH;
+      private final static Currency DEFAULT_CURRENCY = Currency.getInstance(DEFAULT_LOCALE);
+
+      public final static Preferences DEFAULT = new Preferences(DEFAULT_LOCALE, DEFAULT_CURRENCY);
+
+      public Preferences (Locale locale; Currency currency) &lbrace;
+        this.locale = locales;
+        this.currency = currency:
+      &rbrace;
+
+      public Preferences with (Locale locale) &lbrace;
+        return new Preferences(locale, this.currency);
+      &rbrace;
+
+      public Locale locale()&lbrace;
+        return locale;
+      &rbrace;
+
+      public Preferences with (Currency currency) &lbrace;
+        return new Preferences(this.locale, currency);
+      &rbrace;
+
+      public Currency currency()&lbrace;
+        return currency;
+      &rbrace;
+
+      // ... toString() ...
+    &rbrace;
+  </code>
+</pre>
+
+<h4>5.2 Rendre stateless côté client</h4>
+
+<p>Déplacer l'état côté client consiste par exemple à renvoyer tout l'état de la session au client dans les réponses du
+  serveur HTTP, puis récupérer cet état depuis le client à partir des paramètres de la requête HTTP suivante : </p>
+
+<pre>
+  <code class="C#">
+    public class WebController &lbrace;
+      private final static Locale DEFAULT_LOCALE = Locale.FRENCH;
+      private final static Currency DEFAULT_CURRENCY = Currency.getInstance(DEFAULT_LOCALE);
+
+      // GET ... avec l'état de session an paramètres HTTP
+      public int getHome(String userId, String localeId, String currencyId) &lbrace;
+        final Locale locale = localeId == null ? DEFAULT_LOCALE : Locale.forLanguageTag(localeId);
+        final Currency currency = currencyId == null ? DEFAULT_CURRENCY : Currency.getInstance(currencyId);
+        // display home page with locale and currency
+        return 200;
+      &rbrace;
+
+      // ... PUT, POST, ...
+  </code>
+</pre>
+
+<p>Le choix entre les 2 approches dépend de nombreux facteurs, dont la taille de l'état, les questions de sécurité
+(passer un état peut tromper le service) et la simplicité de la solution.</p>
+
+<h3>6. Rendre un service idempotent naturellement</h3>
+
+<p>Imaginons un service qui reçoit des évènements d'un bus au travers d'une méthode onMessage et qui décrémente la capacité
+de places de théatre restantes du nombre de places réservées :</p>
+
+<pre>
+  <code class="C#">
+    private int capacity;
+
+    public void onMessage(String key, int value) &lbrace;
+      if(key.equals("TicketBooked"))&lbrace;
+        capacity -= value; // décrémente la capacité
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>Dans le cas normal, chaque évènement décrémente bien la capacité restante :</p>
+
+<pre>
+  <code class="C#">
+    &commat;Test
+    public void normalCase() &lbrace;
+      capacity = 10;
+      assertEquals(capacity, 10);
+      onMessage("TicketBooked", 2);
+      assertEquals(capacity, 8); // nouvelle capacité
+    &rbrace;
+  </code>
+</pre>
+
+<p>Mais, dans le cas d'un message qui arriverait en double, alors la capacité restante serait réduite également :</p>
+
+<pre>
+  <code class="C#">
+    &commat;Test
+    public void notIdempotent() &lbrace;
+      capacity = 10;
+      assertEquals(capacity, 10);
+      onMessage("TicketBooked", 2);
+      onMessage("TicketBooked", 2); // doublon
+      assertEquals(capacity, 6); // résultat incorrect
+    &rbrace;
+  </code>
+</pre>
+
+<p>Décrémenter la valeur d'un compteur 2 fois au lieu d'une donne un résultat erroné.</p>
+<p>Parfois, il suffit de changer la requête entre l'appelant et le service pour contourner ce problème, par exemple en
+remplaçant la décrémentation par une affectation de la nouvelle valeur cible.</p>
+
+<pre>
+  <code class="C#">
+    public void onCapacityChanged(String key, int value) &lbrace;
+      if(key.equals("CapacityChanged"))&lbrace;
+        capacity = value; // affectation
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>En effet affecter une nouvelle valeur plusieurs fois au lieu d'une, donne toujours le résultat correct :</p>
+
+<pre>
+  <code class="C#">
+    &commat;Test
+    public void naturallyIdempotent() &lbrace;
+      capacity = 10;
+      assertEquals(capacity, 10);
+      onCapacityChanged("CapacityChanged", 8);
+      onCapacityChanged("CapacityChanged", 8);
+      assertEquals(capacity, 8); // résultat correct
+    &rbrace;
+  </code>
+</pre>
+
+<p>Mais si modifier la requête n'est pas possible, alors il reste la possibilité d'ignorer les doublons par l'ajout d'un
+critère de corrélation et d'une mémoire côté service.</p>
+<p>Ajoutons un identifiant de corrélation comme paramètre de la requête, ainsi qu'un stockage des identifiants déjà traités
+côté service, pour reconnaître un identifiant déjà vu et pouvoir ainsi ignorer les appels répétés :</p>
+
+<pre>
+  <code class="C#">
+    public void onMessage(String correlationId, String key, int value) &lbrace;
+      if(memory.contains(correlationId))&lbrace;
+        return; // doublon détecté, abandon
+      &rbrace;
+      if(key.equals("TicketBooked"))&lbrace;
+        capacity -= value;
+        memory.add(correlationId); // mémoriser les ids déjà vus
+      &rbrace;
+    &rbrace;
+  </code>
+</pre>
+
+<p>L'ajout d'un critère de corrélation (unique) permet de connaître et donc d'ignorer les appels en doublons : </p>
+
+<pre>
+  <code class="C#">
+    &commat;Test
+    public void idempotentByCorrelationId() &lbrace;
+      capacity = 10;
+      assertEquals(capacity, 10);
+      onMessage("GUID123", "TicketBooked", 2);
+      onMessage("GUID123", "TicketBooked", 2); // doublon
+      assertEquals(capacity, 8); // résultat correct
+    &rbrace;
+  </code>
+</pre>
+
+<p>Cette approche ajoute une complexité réelle, car la mémoire doit en général être persistée dans une technologie de stockage
+comme une base de données, et les identifiants de corrélation doivent être strictement unique entre eux, ce qui nécessite
+d'utiliser des GUID ou des séquences partagées.</p>

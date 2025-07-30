@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1752037701572,
+  "timestamp": 1753857891709,
   "index": "/documentation/index.html",
   "assetGroups": [
     {
@@ -12,11 +12,11 @@
       },
       "urls": [
         "/documentation/index.html",
-        "/documentation/main.a87d58947f6646e9.js",
+        "/documentation/main.b9be08ae6910e747.js",
         "/documentation/manifest.webmanifest",
         "/documentation/polyfills.9922939526cf25de.js",
         "/documentation/runtime.4136917a75eca587.js",
-        "/documentation/styles.5d22fa23b0ae6ee8.css"
+        "/documentation/styles.3b84f56e5a2330dc.css"
       ],
       "patterns": []
     },
@@ -41,6 +41,8 @@
         "/documentation/assets/icons/icon-72x72.png",
         "/documentation/assets/icons/icon-92x92.png",
         "/documentation/assets/images/404-error-page.jpg",
+        "/documentation/assets/images/ATDD.jpg",
+        "/documentation/assets/images/ObserverPattern.jpeg",
         "/documentation/assets/images/algorithms_icon.png",
         "/documentation/assets/images/algorithms_icon2.png",
         "/documentation/assets/images/algorithms_icon3.png",
@@ -58,6 +60,7 @@
         "/documentation/assets/images/tdd/green.png",
         "/documentation/assets/images/tdd/red.png",
         "/documentation/assets/images/tdd/refactor.png",
+        "/documentation/assets/images/tell-dont-ask.png",
         "/documentation/assets/kitsuneIcon.png",
         "/documentation/background.1f54cc06728697c5.png"
       ],
@@ -79,6 +82,8 @@
     "/documentation/assets/icons/icon-72x72.png": "a41c86abcd02a134d2aefac7fe8a4cf45036a918",
     "/documentation/assets/icons/icon-92x92.png": "ea0904a17842659dbd2caf75b259994d56d1351d",
     "/documentation/assets/images/404-error-page.jpg": "b2affb565e55520cdb1c23e04072cb825fe119d7",
+    "/documentation/assets/images/ATDD.jpg": "36931a57c74f384c25be2dce406b597076171a3d",
+    "/documentation/assets/images/ObserverPattern.jpeg": "716da472658e4f1b77d0c91eebb757cc79895b86",
     "/documentation/assets/images/algorithms_icon.png": "eb4024b403031f78c06e1861ff5d3c2c16e4ff7d",
     "/documentation/assets/images/algorithms_icon2.png": "c263a2430e7dfd49cb57e88322f597fa72141a1e",
     "/documentation/assets/images/algorithms_icon3.png": "b0086fd3c3c8aea1dac87fd8e0c0e68ec58039a5",
@@ -96,14 +101,15 @@
     "/documentation/assets/images/tdd/green.png": "d55e6c95a709c6b5f0094df9b6ff2b7478e2875c",
     "/documentation/assets/images/tdd/red.png": "070a3223733b5ba8fa9a0f88fdc4ce7ab0ba6871",
     "/documentation/assets/images/tdd/refactor.png": "799edc7544734946a77ad4b1b9ef36d40bb8fea0",
+    "/documentation/assets/images/tell-dont-ask.png": "899712248a666fe684c909f59dd3111445878e34",
     "/documentation/assets/kitsuneIcon.png": "465a81988b418908a9a17317bb9f45d2ad4bc170",
     "/documentation/background.1f54cc06728697c5.png": "6f611647fe0cc76c6e6b16a75c75c6c90f5ad769",
-    "/documentation/index.html": "4c33e9b0018621cb4699fbc9f70a880e125c0de5",
-    "/documentation/main.a87d58947f6646e9.js": "81c1a6284e8acffcd7dda6b25268d77c7819a9e4",
+    "/documentation/index.html": "76f98d55877757d73f20ef2f7b72d615ead8169b",
+    "/documentation/main.b9be08ae6910e747.js": "ba8157617e46dfc578dcddc9f007183884d321d3",
     "/documentation/manifest.webmanifest": "24433896c7cc16f117b043a370827a7e9b519fa2",
     "/documentation/polyfills.9922939526cf25de.js": "116f280f4e19d0a58980c56f360f4290af8605b0",
     "/documentation/runtime.4136917a75eca587.js": "b85b5a37fdb229fc0a9e58e4bce5989a9d1e3f51",
-    "/documentation/styles.5d22fa23b0ae6ee8.css": "b7c281899b2d4d26ec31bdaac67f56420b0f8671"
+    "/documentation/styles.3b84f56e5a2330dc.css": "5d4e922912b3c8775e393f51ad86a4fbae4138e9"
   },
   "navigationUrls": [
     {
